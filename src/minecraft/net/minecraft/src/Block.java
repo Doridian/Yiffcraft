@@ -2,6 +2,8 @@ package net.minecraft.src;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import de.doridian.yiffcraft.Yiffcraft;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.BlockBed;
 import net.minecraft.src.BlockBookshelf;
@@ -393,6 +395,7 @@ public class Block {
 	}
 
 	public int getMixedBrightnessForBlock(IBlockAccess var1, int var2, int var3, int var4) {
+        /*@DORI*/ if(Yiffcraft.enableFullbright) return 1000;
 		// Spout start
 		int light = lightValue[this.blockID];
 		org.spoutcraft.spoutcraftapi.material.Block b = Spoutcraft.getWorld().getBlockAt(var2, var3, var4).getType();
@@ -655,7 +658,7 @@ public class Block {
 	}
 
 	public int getRenderBlockPass() {
-		return 0;
+		/*@DORI*/ return (Yiffcraft.enableWallhack && !Yiffcraft.valuableBlocks[this.blockID]) ? 1 : 0;
 	}
 
 	public boolean canPlaceBlockOnSide(World var1, int var2, int var3, int var4, int var5) {

@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import de.doridian.yiffcraft.Yiffcraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.BlockBed;
@@ -199,7 +200,24 @@ public class RenderBlocks {
 	public boolean renderBlockByRenderType(Block var1, int var2, int var3, int var4) {
 		int var5 = var1.getRenderType();
 		var1.setBlockBoundsBasedOnState(this.blockAccess, var2, var3, var4);
-		return var5 == 0 ? this.renderStandardBlock(var1, var2, var3, var4) : (var5 == 4 ? this.renderBlockFluids(var1, var2, var3, var4) : (var5 == 13 ? this.renderBlockCactus(var1, var2, var3, var4) : (var5 == 1 ? this.renderBlockReed(var1, var2, var3, var4) : (var5 == 19 ? this.renderBlockStem(var1, var2, var3, var4) : (var5 == 23 ? this.renderBlockLilyPad(var1, var2, var3, var4) : (var5 == 6 ? this.renderBlockCrops(var1, var2, var3, var4) : (var5 == 2 ? this.renderBlockTorch(var1, var2, var3, var4) : (var5 == 3 ? this.renderBlockFire(var1, var2, var3, var4) : (var5 == 5 ? this.renderBlockRedstoneWire(var1, var2, var3, var4) : (var5 == 8 ? this.renderBlockLadder(var1, var2, var3, var4) : (var5 == 7 ? this.renderBlockDoor(var1, var2, var3, var4) : (var5 == 9 ? this.renderBlockMinecartTrack((BlockRail) var1, var2, var3, var4) : (var5 == 10 ? this.renderBlockStairs(var1, var2, var3, var4) : (var5 == 27 ? this.func_41088_a((BlockDragonEgg) var1, var2, var3, var4) : (var5 == 11 ? this.renderBlockFence((BlockFence) var1, var2, var3, var4) : (var5 == 12 ? this.renderBlockLever(var1, var2, var3, var4) : (var5 == 14 ? this.renderBlockBed(var1, var2, var3, var4) : (var5 == 15 ? this.renderBlockRepeater(var1, var2, var3, var4) : (var5 == 16 ? this.renderPistonBase(var1, var2, var3, var4, false) : (var5 == 17 ? this.renderPistonExtension(var1, var2, var3, var4, true) : (var5 == 18 ? this.renderBlockPane((BlockPane) var1, var2, var3, var4) : (var5 == 20 ? this.renderBlockVine(var1, var2, var3, var4) : (var5 == 21 ? this.renderBlockFenceGate((BlockFenceGate) var1, var2, var3, var4) : (var5 == 24 ? this.renderBlockCauldron((BlockCauldron) var1, var2, var3, var4) : (var5 == 25 ? this.renderBlockBrewingStand((BlockBrewingStand) var1, var2, var3, var4) : (var5 == 26 ? this.renderBlockEndPortalFrame(var1, var2, var3, var4) : false))))))))))))))))))))))))));
+
+        /*@DORI*/
+		Tessellator tessellator = Tessellator.instance;
+
+		if(Yiffcraft.enableWallhack) {
+			renderAllFaces = Yiffcraft.valuableBlocks[var1.blockID];
+			if(!renderAllFaces) {
+				tessellator.opaqueAlpha = Yiffcraft.wallhackOpacity;
+			}
+		} else {
+			renderAllFaces = false;
+		}
+		boolean ret = /*@NOTCH*/var5 == 0 ? this.renderStandardBlock(var1, var2, var3, var4) : (var5 == 4 ? this.renderBlockFluids(var1, var2, var3, var4) : (var5 == 13 ? this.renderBlockCactus(var1, var2, var3, var4) : (var5 == 1 ? this.renderBlockReed(var1, var2, var3, var4) : (var5 == 19 ? this.renderBlockStem(var1, var2, var3, var4) : (var5 == 23 ? this.renderBlockLilyPad(var1, var2, var3, var4) : (var5 == 6 ? this.renderBlockCrops(var1, var2, var3, var4) : (var5 == 2 ? this.renderBlockTorch(var1, var2, var3, var4) : (var5 == 3 ? this.renderBlockFire(var1, var2, var3, var4) : (var5 == 5 ? this.renderBlockRedstoneWire(var1, var2, var3, var4) : (var5 == 8 ? this.renderBlockLadder(var1, var2, var3, var4) : (var5 == 7 ? this.renderBlockDoor(var1, var2, var3, var4) : (var5 == 9 ? this.renderBlockMinecartTrack((BlockRail) var1, var2, var3, var4) : (var5 == 10 ? this.renderBlockStairs(var1, var2, var3, var4) : (var5 == 27 ? this.func_41088_a((BlockDragonEgg) var1, var2, var3, var4) : (var5 == 11 ? this.renderBlockFence((BlockFence) var1, var2, var3, var4) : (var5 == 12 ? this.renderBlockLever(var1, var2, var3, var4) : (var5 == 14 ? this.renderBlockBed(var1, var2, var3, var4) : (var5 == 15 ? this.renderBlockRepeater(var1, var2, var3, var4) : (var5 == 16 ? this.renderPistonBase(var1, var2, var3, var4, false) : (var5 == 17 ? this.renderPistonExtension(var1, var2, var3, var4, true) : (var5 == 18 ? this.renderBlockPane((BlockPane) var1, var2, var3, var4) : (var5 == 20 ? this.renderBlockVine(var1, var2, var3, var4) : (var5 == 21 ? this.renderBlockFenceGate((BlockFenceGate) var1, var2, var3, var4) : (var5 == 24 ? this.renderBlockCauldron((BlockCauldron) var1, var2, var3, var4) : (var5 == 25 ? this.renderBlockBrewingStand((BlockBrewingStand) var1, var2, var3, var4) : (var5 == 26 ? this.renderBlockEndPortalFrame(var1, var2, var3, var4) : false))))))))))))))))))))))))));
+
+		tessellator.opaqueAlpha = 255;
+
+		return ret;
+		/*@DORI*/
 	}
 
 	private boolean renderBlockEndPortalFrame(Block var1, int var2, int var3, int var4) {

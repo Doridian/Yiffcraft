@@ -10,6 +10,8 @@ import java.awt.Graphics;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.List;
+
+import de.doridian.yiffcraft.Yiffcraft;
 import net.minecraft.client.MinecraftApplet;
 import net.minecraft.src.AchievementList;
 import net.minecraft.src.AxisAlignedBB;
@@ -368,6 +370,8 @@ public abstract class Minecraft implements Runnable {
 		SpoutClient.getInstance().loadAddons();
 		SpoutClient.getInstance().enableAddons(AddonLoadOrder.GAMESTART);
 		// Spout End
+
+        /*@DORI*/ Yiffcraft.init(this, mcApplet);
 	}
 
 	private void loadScreen() throws LWJGLException {

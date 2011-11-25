@@ -13,6 +13,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 //Spout start
+import de.doridian.yiffcraft.Chat;
+import de.doridian.yiffcraft.Yiffcraft;
+import de.doridian.yiffcraft.gui.ingame.Radar;
+import de.doridian.yiffcraft.overrides.YCPlayerControllerMP;
 import org.getspout.spout.client.SpoutClient;
 import org.getspout.spout.io.FileDownloadThread;
 //SPout end
@@ -159,7 +163,7 @@ public class NetClientHandler extends NetHandler {
 	}
 
 	public void handleLogin(Packet1Login var1) {
-		this.mc.playerController = new PlayerControllerMP(this.mc, this);
+        /*@DORI*/ this.mc.playerController = new YCPlayerControllerMP(this.mc, this);
 		this.mc.statFileWriter.readStat(StatList.joinMultiplayerStat, 1);
 		this.worldClient = new WorldClient(this, new WorldSettings(var1.mapSeed, var1.serverMode, false, false), var1.worldType, var1.difficultySetting);
 		this.worldClient.multiplayerWorld = true;
@@ -368,6 +372,7 @@ public class NetClientHandler extends NetHandler {
 
 		var10.setPositionAndRotation(var2, var4, var6, var8, var9);
 		this.worldClient.func_712_a(var1.entityId, var10);
+        /*@DORI*/ Radar.addPlayer(this, var1.entityId, var10, var1);
 	}
 
 	public void handleEntityTeleport(Packet34EntityTeleport var1) {
@@ -382,6 +387,7 @@ public class NetClientHandler extends NetHandler {
 			float var9 = (float)(var1.yaw * 360) / 256.0F;
 			float var10 = (float)(var1.pitch * 360) / 256.0F;
 			var2.setPositionAndRotation2(var3, var5, var7, var9, var10, 3);
+            /*@DORI*/ Radar.updatePosition(this, var1.entityId, var2);
 		}
 	}
 
@@ -397,11 +403,13 @@ public class NetClientHandler extends NetHandler {
 			float var9 = var1.rotating?(float)(var1.yaw * 360) / 256.0F:var2.rotationYaw;
 			float var10 = var1.rotating?(float)(var1.pitch * 360) / 256.0F:var2.rotationPitch;
 			var2.setPositionAndRotation2(var3, var5, var7, var9, var10, 3);
+            /*@DORI*/ Radar.updatePosition(this, var1.entityId, var2);
 		}
 	}
 
 	public void handleDestroyEntity(Packet29DestroyEntity var1) {
 		this.worldClient.removeEntityFromWorld(var1.entityId);
+        /*@DORI*/ Radar.removePlayer(this, var1.entityId);
 	}
 
 	public void handleFlying(Packet10Flying var1) {
@@ -543,7 +551,11 @@ public class NetClientHandler extends NetHandler {
 	}
 
 	public void handleChat(Packet3Chat var1) {
-		this.mc.ingameGUI.addChatMessage(var1.message);
+        /*@DORI*/
+        String msg = Chat.incoming(var1.message);
+        if(msg == null || msg.length() < 1) return;
+		this.mc.ingameGUI.addChatMessage(msg);
+        /*@DORI*/
 	}
 
 	public void handleArmAnimation(Packet18Animation var1) {
@@ -916,6 +928,7 @@ public class NetClientHandler extends NetHandler {
 	}
 
 	public void handleKeepAlive(Packet0KeepAlive var1) {
+        /*@DORI*/ Yiffcraft.lastPingPacket = System.currentTimeMillis();
 		this.addToSendQueue(new Packet0KeepAlive(var1.randomId));
 	}
 }

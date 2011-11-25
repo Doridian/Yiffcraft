@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.nio.FloatBuffer;
 import java.util.List;
 import java.util.Random;
+
+import de.doridian.yiffcraft.Renderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.ActiveRenderInfo;
 import net.minecraft.src.AxisAlignedBB;
@@ -997,6 +999,8 @@ public class EntityRenderer {
 			if (this.pointedEntity != null) {
 				;
 			}
+
+            /*@DORI*/ Renderer.renderEffects(var1);
 
 			if (this.mc.gameSettings.shouldRenderClouds()) {
 				Profiler.endStartSection("clouds");

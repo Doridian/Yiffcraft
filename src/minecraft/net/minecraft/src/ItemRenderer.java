@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import de.doridian.yiffcraft.Yiffcraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Block;
 import net.minecraft.src.EntityLiving;
@@ -453,6 +454,8 @@ public class ItemRenderer {
 	}
 
 	public void renderOverlays(float var1) {
+        /*@DORI*/ if(Yiffcraft.enableOutOfBody) return;
+
 		GL11.glDisable(3008 /* GL_ALPHA_TEST */);
 		int var2;
 		if (this.mc.thePlayer.isBurning()) {

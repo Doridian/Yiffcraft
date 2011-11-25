@@ -23,6 +23,7 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import de.doridian.yiffcraft.Yiffcraft;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityClientPlayerMP;
@@ -280,6 +281,8 @@ public class SpoutClient extends PropertyObject implements Client {
 		disableSandbox();
 		
 		MipMapUtils.onTick();
+
+        /*@DORI*/ Yiffcraft.onTick();
 		
 		if (Minecraft.theMinecraft.theWorld != null) {
 			Minecraft.theMinecraft.theWorld.doColorfulStuff();
