@@ -424,9 +424,9 @@ public abstract class Minecraft implements Runnable {
 	public static File getMinecraftDir() {
 		if (minecraftDir == null) {
 			// Spout Start
-			String workingDirName = "minecraft";
+			/*@DORI*/ String workingDirName = "yiffcraft";
 			if (spoutcraftLauncher)
-				workingDirName = "spoutcraft";
+				/*@DORI*/ workingDirName = "yiffcraft";
 			if (portable) {
 				File portableDir = new File(workingDirName);
 				if (portableDir.exists() || portableDir.mkdirs()) {
