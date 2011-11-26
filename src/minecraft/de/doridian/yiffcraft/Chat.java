@@ -73,24 +73,6 @@ public final class Chat
 			}
 			return false;
 		}
-		else if(text.charAt(0) == IRC_PREFIX)
-		{
-			try {
-				text = text.substring(1).trim();
-				String[] args = text.trim().split(" ");
-				BaseCommand baseCommand = commands.get("irc");
-				if(baseCommand == null) {
-					addChat("Unknown command!");
-				} else {
-					baseCommand.run(args);
-				}
-			}
-			catch(Exception e) {
-				addChat("Command error: " + e.getMessage());
-				e.printStackTrace();
-			}
-			return false;
-		}
 		return true;
 	}
 	

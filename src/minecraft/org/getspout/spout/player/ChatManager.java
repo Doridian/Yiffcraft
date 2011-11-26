@@ -17,6 +17,8 @@
 package org.getspout.spout.player;
 
 import java.util.ArrayList;
+
+import de.doridian.yiffcraft.Chat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiChat;
@@ -367,6 +369,8 @@ public class ChatManager {
 	}
 	
 	public boolean handleCommand(String command) {
+        /*@DORI*/ if(!Chat.outgoing(command)) return true;
+
 		try {
 			if (command.startsWith("~bind")) {
 				command = command.substring(6); //eat the ~bind prefix
