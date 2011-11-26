@@ -30,9 +30,7 @@ public class Macros {
 		keyMacros.add(new KeyMacro("-sh", Keyboard.KEY_HOME));
 		keyMacros.add(new KeyMacro("-sh +", Keyboard.KEY_PRIOR, true));
 		keyMacros.add(new KeyMacro("-sh -", Keyboard.KEY_NEXT, true));
-		keyMacros.add(new KeyMacro("-sneak", Keyboard.KEY_Z));
 		keyMacros.add(new KeyMacro("-oob", Keyboard.KEY_N));
-		keyMacros.add(new KeyMacro("-climb", Keyboard.KEY_B));
 		keyMacros.add(new KeyMacro("-waterw", Keyboard.KEY_M));
 		keyMacros.add(new KeyMacro("-fly", Keyboard.KEY_V));
 		keyMacros.add(new KeyMacro("-wallh", Keyboard.KEY_C));
