@@ -12,7 +12,6 @@ public final class Chat
 	public static HashMap<String,BaseCommand> commands = new HashMap<String,BaseCommand>();
 	
 	public static final char PREFIX = '-';
-	public static final char IRC_PREFIX = '.';
 	
 	public static void init()
 	{
@@ -38,6 +37,7 @@ public final class Chat
 		commands.put("c3d",         new de.doridian.yiffcraft.commands.Compass3D());
 		commands.put("abreak",  	new de.doridian.yiffcraft.commands.ABreak());
 		commands.put("arun",   		new de.doridian.yiffcraft.commands.AutoRun());
+        commands.put("waterw",   	new de.doridian.yiffcraft.commands.Waterwalk());
 		if(Yiffcraft.isSpecial) commands.put("cubeshot",	new de.doridian.yiffcraft.commands.CubeShot());
 	}
 

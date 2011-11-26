@@ -11,6 +11,18 @@ public class YCEntityClientPlayerMP extends EntityClientPlayerMP {
 	public YCEntityClientPlayerMP(Minecraft var1, World var2, Session var3, NetClientHandler var4) {
 		super(var1, var2, var3, var4);
 	}
+
+    @Override
+    public boolean handleLavaMovement() {
+        if(Yiffcraft.enableWaterwalk) return false;
+        return super.handleLavaMovement();
+    }
+
+    @Override
+    public boolean handleWaterMovement() {
+        if(Yiffcraft.enableWaterwalk) return false;
+        return super.handleWaterMovement();
+    }
 	
 	@Override
 	public boolean canBePushed() {

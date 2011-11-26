@@ -2,6 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 //Spout start
+import de.doridian.yiffcraft.Yiffcraft;
 import org.getspout.spout.config.ConfigReader;
 //Spout end
 import net.minecraft.src.AxisAlignedBB;
@@ -83,6 +84,7 @@ public abstract class BlockFluid extends Block {
 	}
 
 	public boolean canCollideCheck(int var1, boolean var2) {
+        /*@DORI*/ if(Yiffcraft.enableWaterwalk) return true;
 		return var2 && var1 == 0;
 	}
 
@@ -97,6 +99,7 @@ public abstract class BlockFluid extends Block {
 	}
 
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World var1, int var2, int var3, int var4) {
+        /*@DORI*/ if(Yiffcraft.enableWaterwalk) return super.getCollisionBoundingBoxFromPool(var1, var2, var3, var4);
 		return null;
 	}
 

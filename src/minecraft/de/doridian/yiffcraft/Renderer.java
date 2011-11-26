@@ -146,6 +146,8 @@ public class Renderer {
 			fontrenderer.drawStringWithShadow("AutoRun", 2, k+=10, 0x00ff00);
 		if(Yiffcraft.stepHeight != 0.5F)
 			fontrenderer.drawStringWithShadow("Step: " + (Yiffcraft.stepHeight), 2, k+=10, 0x00ff00);
+        if(Yiffcraft.enableWaterwalk)
+			fontrenderer.drawStringWithShadow("Waterwalk", 2, k+=10, 0x00ff00);
 		if(Yiffcraft.enableOutOfBody)
 		{
 			double x = (Yiffcraft.realLoc.posX - Yiffcraft.minecraft.thePlayer.posX);

@@ -23,7 +23,7 @@ public final class Yiffcraft
 	public static boolean[] valuableBlocks = new boolean[256];
 	private static boolean isInited = false;
 	public static Minecraft minecraft;
-	public static final String VERSION = "2.00";
+	public static final String VERSION = "2.10";
 	public static String licenseKey = "INVALID";
 	public static boolean isSpecial = false;
 	
@@ -134,6 +134,7 @@ public final class Yiffcraft
 	public static boolean compass3D = false;
 	public static int radarMode = 1;
 	public static boolean enableUnpushablePlayer = false; //TODO: Add mobs, damage knockback
+    public static boolean enableWaterwalk = false;
 	public static int chatMode = 1; 
 	public static float stepHeight = 0.5F;;
 	public static File configdir_server = null;
