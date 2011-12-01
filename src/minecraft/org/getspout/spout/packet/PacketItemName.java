@@ -56,6 +56,9 @@ public class PacketItemName implements SpoutPacket{
 
 	public void run(int PlayerId) {
 		Material material = MaterialData.getOrCreateMaterial(id, data);
+		if (material == null) {
+			material = MaterialData.getCustomItem(data);
+		}
 		if (name.equals("[resetall]")) {
 			MaterialData.reset();
 		}
@@ -63,6 +66,7 @@ public class PacketItemName implements SpoutPacket{
 			material.setName(material.getNotchianName());
 		}
 		else {
+			
 			material.setName(name);
 		}
 	}

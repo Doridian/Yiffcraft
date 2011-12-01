@@ -56,7 +56,7 @@ public class SpoutcraftWorld implements World{
 	}
 
 	public Block getBlockAt(int x, int y, int z) {
-		return getChunkAt(x >> 4, z >> 4).getBlockAt(x & 0xF, y & 0x7F, z & 0xF);
+		return getChunkAt(x >> 4, z >> 4).getBlockAt(x & 0xF, y & 0xFFFF, z & 0xF);
 	}
 
 	public Chunk getChunkAt(Block block) {
@@ -99,6 +99,14 @@ public class SpoutcraftWorld implements World{
 
 	public int getMaxHeight() {
 		return handle.field_35472_c;
+	}
+	
+	public int getXBitShifts() {
+		return handle.field_35471_b;
+	}
+	
+	public int getZBitShifts() {
+		return handle.field_35473_a;
 	}
 
 	public long getSeed() {
@@ -166,6 +174,14 @@ public class SpoutcraftWorld implements World{
 
 	public int getBlockTypeIdAt(FixedLocation location) {
 		return getBlockTypeIdAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+	}
+	
+	public int getBlockDataAt(int x, int y, int z) {
+		return handle.getBlockMetadata(x, y, z);
+	}
+
+	public int getBlockDataAt(FixedLocation location) {
+		return getBlockDataAt(location.getBlockX(), location.getBlockY(), location.getBlockZ());
 	}
 
 	public int getHighestBlockYAt(FixedLocation location) {
@@ -398,8 +414,7 @@ public class SpoutcraftWorld implements World{
 	}
 
 	public int getSeaLevel() {
-		// TODO Auto-generated method stub
-		return 0;
+		return handle.field_35470_e;
 	}
 
 	public boolean getKeepSpawnInMemory() {
