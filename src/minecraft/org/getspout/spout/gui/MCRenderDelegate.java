@@ -507,14 +507,26 @@ public class MCRenderDelegate implements RenderDelegate {
 		if (bar.isVisible()) {
 			int expCap = Minecraft.theMinecraft.thePlayer.xpBarCap();
 			if (expCap > 0) {
-				char c = '\266';
 				int x = (int) bar.getScreenX();
 				int y = (int) bar.getScreenY();
-				int exp = (int) ((Minecraft.theMinecraft.thePlayer.currentXP * (c + 1)) / expCap);
-				RenderUtil.drawTexturedModalRectangle(x, y, 0, 64, c, 5, 0f);
+				int exp = (int) (Minecraft.theMinecraft.thePlayer.currentXP * 183.0F);
+				RenderUtil.drawTexturedModalRectangle(x, y, 0, 64, 182, 5, 0f);
 				if (exp > 0) {
 					RenderUtil.drawTexturedModalRectangle(x, y, 0, 69, exp, 5, 0f);
 				}
+			}
+			
+			if (Minecraft.theMinecraft.playerController.func_35642_f() && Minecraft.theMinecraft.thePlayer.playerLevel > 0) {
+				int color = 8453920;
+				String level = "" + Minecraft.theMinecraft.thePlayer.playerLevel;
+				FontRenderer font = SpoutClient.getHandle().fontRenderer;
+				int x = (int) (bar.getScreenX() + (183 / 2) - (font.getStringWidth(level) / 2));
+				int y = (int) bar.getScreenY() - 6;
+				font.drawString(level, x + 1, y, 0);
+				font.drawString(level, x - 1, y, 0);
+				font.drawString(level, x, y + 1, 0);
+				font.drawString(level, x, y - 1, 0);
+				font.drawString(level, x, y, color);
 			}
 		}
 	}
@@ -623,9 +635,9 @@ public class MCRenderDelegate implements RenderDelegate {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV(0.0D, height, -90, tLeft, tTop); // draw corners
-		tessellator.addVertexWithUV(width, height, -90, tWidth, tTop);
-		tessellator.addVertexWithUV(width, 0.0D, -90, tWidth, tHeight);
-		tessellator.addVertexWithUV(0.0D, 0.0D, -90, tLeft, tHeight);
+		tessellator.addVertexWithUV(width, height, -90, tLeft + tWidth, tTop);
+		tessellator.addVertexWithUV(width, 0.0D, -90, tLeft + tWidth, tTop + tHeight);
+		tessellator.addVertexWithUV(0.0D, 0.0D, -90, tLeft, tTop + tHeight);
 		tessellator.draw();
 		GL11.glDepthMask(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);

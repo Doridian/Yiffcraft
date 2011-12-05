@@ -143,8 +143,7 @@ public class RenderBlocks {
 
 	}
 
-	public RenderBlocks() {
-	}
+	public RenderBlocks() {}
 
 	public void clearOverrideBlockTexture() {
 		this.overrideBlockTexture = -1;

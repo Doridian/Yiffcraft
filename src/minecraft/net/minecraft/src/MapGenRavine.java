@@ -1,224 +1,179 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode fieldsfirst 
-
 package net.minecraft.src;
 
 import java.util.Random;
+import net.minecraft.src.Block;
+import net.minecraft.src.MapGenBase;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.World;
 
-// Referenced classes of package net.minecraft.src:
-//            MapGenBase, World, MathHelper, Block, 
-//            BlockGrass, WorldChunkManager, BiomeGenBase
+public class MapGenRavine extends MapGenBase {
 
-public class MapGenRavine extends MapGenBase
-{
+	private float[] field_35627_a = new float[1024 * 4]; //Spout increased
 
-    private float field_35627_a[];
+	protected void func_35626_a(long var1, int var3, int var4, byte[] var5, double var6, double var8, double var10, float var12, float var13, float var14, int var15, int var16, double var17) {
+		Random var19 = new Random(var1);
+		double var20 = (double)(var3 * 16 + 8);
+		double var22 = (double)(var4 * 16 + 8);
+		float var24 = 0.0F;
+		float var25 = 0.0F;
+		if(var16 <= 0) {
+			int var26 = this.field_1306_a * 16 - 16;
+			var16 = var26 - var19.nextInt(var26 / 4);
+		}
 
-    public MapGenRavine()
-    {
-        field_35627_a = new float[1024];
-    }
+		boolean var54 = false;
+		if(var15 == -1) {
+			var15 = var16 / 2;
+			var54 = true;
+		}
 
-    protected void func_35626_a(long l, int i, int j, byte abyte0[], double d, 
-            double d1, double d2, float f, float f1, float f2, 
-            int k, int i1, double d3)
-    {
-        Random random = new Random(l);
-        double d4 = i * 16 + 8;
-        double d5 = j * 16 + 8;
-        float f3 = 0.0F;
-        float f4 = 0.0F;
-        if(i1 <= 0)
-        {
-            int j1 = field_1306_a * 16 - 16;
-            i1 = j1 - random.nextInt(j1 / 4);
-        }
-        boolean flag = false;
-        if(k == -1)
-        {
-            k = i1 / 2;
-            flag = true;
-        }
-        float f5 = 1.0F;
-        for(int k1 = 0; k1 < worldObj.field_35472_c; k1++)
-        {
-            if(k1 == 0 || random.nextInt(3) == 0)
-            {
-                f5 = 1.0F + random.nextFloat() * random.nextFloat() * 1.0F;
-            }
-            field_35627_a[k1] = f5 * f5;
-        }
+		float var27 = 1.0F;
 
-        for(; k < i1; k++)
-        {
-            double d6 = 1.5D + (double)(MathHelper.sin(((float)k * 3.141593F) / (float)i1) * f * 1.0F);
-            double d7 = d6 * d3;
-            d6 *= (double)random.nextFloat() * 0.25D + 0.75D;
-            d7 *= (double)random.nextFloat() * 0.25D + 0.75D;
-            float f6 = MathHelper.cos(f2);
-            float f7 = MathHelper.sin(f2);
-            d += MathHelper.cos(f1) * f6;
-            d1 += f7;
-            d2 += MathHelper.sin(f1) * f6;
-            f2 *= 0.7F;
-            f2 += f4 * 0.05F;
-            f1 += f3 * 0.05F;
-            f4 *= 0.8F;
-            f3 *= 0.5F;
-            f4 += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 2.0F;
-            f3 += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * 4F;
-            if(!flag && random.nextInt(4) == 0)
-            {
-                continue;
-            }
-            double d8a = d - d4;
-            double d9a = d2 - d5;
-            double d10a = i1 - k;
-            double d11 = f + 2.0F + 16F;
-            if((d8a * d8a + d9a * d9a) - d10a * d10a > d11 * d11)
-            {
-                return;
-            }
-            if(d < d4 - 16D - d6 * 2D || d2 < d5 - 16D - d6 * 2D || d > d4 + 16D + d6 * 2D || d2 > d5 + 16D + d6 * 2D)
-            {
-                continue;
-            }
-            int d8 = MathHelper.floor_double(d - d6) - i * 16 - 1;
-            int l1 = (MathHelper.floor_double(d + d6) - i * 16) + 1;
-            int d9 = MathHelper.floor_double(d1 - d7) - 1;
-            int i2 = MathHelper.floor_double(d1 + d7) + 1;
-            int d10 = MathHelper.floor_double(d2 - d6) - j * 16 - 1;
-            int j2 = (MathHelper.floor_double(d2 + d6) - j * 16) + 1;
-            if(d8 < 0)
-            {
-                d8 = 0;
-            }
-            if(l1 > 16)
-            {
-                l1 = 16;
-            }
-            if(d9 < 1)
-            {
-                d9 = 1;
-            }
-            if(i2 > worldObj.field_35472_c - 8)
-            {
-                i2 = worldObj.field_35472_c - 8;
-            }
-            if(d10 < 0)
-            {
-                d10 = 0;
-            }
-            if(j2 > 16)
-            {
-                j2 = 16;
-            }
-            boolean flag1 = false;
-            for(int k2 = d8; !flag1 && k2 < l1; k2++)
-            {
-                for(int i3 = d10; !flag1 && i3 < j2; i3++)
-                {
-                    for(int j3 = i2 + 1; !flag1 && j3 >= d9 - 1; j3--)
-                    {
-                        int k3 = (k2 * 16 + i3) * worldObj.field_35472_c + j3;
-                        if(j3 < 0 || j3 >= worldObj.field_35472_c)
-                        {
-                            continue;
-                        }
-                        if(abyte0[k3] == Block.waterMoving.blockID || abyte0[k3] == Block.waterStill.blockID)
-                        {
-                            flag1 = true;
-                        }
-                        if(j3 != d9 - 1 && k2 != d8 && k2 != l1 - 1 && i3 != d10 && i3 != j2 - 1)
-                        {
-                            j3 = d9;
-                        }
-                    }
+		for(int var28 = 0; var28 < this.worldObj.field_35472_c; ++var28) {
+			if(var28 == 0 || var19.nextInt(3) == 0) {
+			var27 = 1.0F + var19.nextFloat() * var19.nextFloat() * 1.0F;
+			}
 
-                }
+			this.field_35627_a[var28] = var27 * var27;
+		}
 
-            }
+		for(; var15 < var16; ++var15) {
+			double var53 = 1.5D + (double)(MathHelper.sin((float)var15 * 3.1415927F / (float)var16) * var12 * 1.0F);
+			double var30 = var53 * var17;
+			var53 *= (double)var19.nextFloat() * 0.25D + 0.75D;
+			var30 *= (double)var19.nextFloat() * 0.25D + 0.75D;
+			float var32 = MathHelper.cos(var14);
+			float var33 = MathHelper.sin(var14);
+			var6 += (double)(MathHelper.cos(var13) * var32);
+			var8 += (double)var33;
+			var10 += (double)(MathHelper.sin(var13) * var32);
+			var14 *= 0.7F;
+			var14 += var25 * 0.05F;
+			var13 += var24 * 0.05F;
+			var25 *= 0.8F;
+			var24 *= 0.5F;
+			var25 += (var19.nextFloat() - var19.nextFloat()) * var19.nextFloat() * 2.0F;
+			var24 += (var19.nextFloat() - var19.nextFloat()) * var19.nextFloat() * 4.0F;
+			if(var54 || var19.nextInt(4) != 0) {
+			double var34 = var6 - var20;
+			double var36 = var10 - var22;
+			double var38 = (double)(var16 - var15);
+			double var40 = (double)(var12 + 2.0F + 16.0F);
+			if(var34 * var34 + var36 * var36 - var38 * var38 > var40 * var40) {
+				return;
+			}
 
-            if(flag1)
-            {
-                continue;
-            }
-            for(int l2 = d8; l2 < l1; l2++)
-            {
-                double d12 = (((double)(l2 + i * 16) + 0.5D) - d) / d6;
-label0:
-                for(int l3 = d10; l3 < j2; l3++)
-                {
-                    double d13 = (((double)(l3 + j * 16) + 0.5D) - d2) / d6;
-                    int i4 = (l2 * 16 + l3) * worldObj.field_35472_c + i2;
-                    boolean flag2 = false;
-                    if(d12 * d12 + d13 * d13 >= 1.0D)
-                    {
-                        continue;
-                    }
-                    int j4 = i2 - 1;
-                    do
-                    {
-                        if(j4 < d9)
-                        {
-                            continue label0;
-                        }
-                        double d14 = (((double)j4 + 0.5D) - d1) / d7;
-                        if((d12 * d12 + d13 * d13) * (double)field_35627_a[j4] + (d14 * d14) / 6D < 1.0D)
-                        {
-                            byte byte0 = abyte0[i4];
-                            if(byte0 == Block.grass.blockID)
-                            {
-                                flag2 = true;
-                            }
-                            if(byte0 == Block.stone.blockID || byte0 == Block.dirt.blockID || byte0 == Block.grass.blockID)
-                            {
-                                if(j4 < 10)
-                                {
-                                    abyte0[i4] = (byte)Block.lavaMoving.blockID;
-                                } else
-                                {
-                                    abyte0[i4] = 0;
-                                    if(flag2 && abyte0[i4 - 1] == Block.dirt.blockID)
-                                    {
-                                        abyte0[i4 - 1] = worldObj.getWorldChunkManager().getBiomeGenAt(l2 + i * 16, l3 + j * 16).topBlock;
-                                    }
-                                }
-                            }
-                        }
-                        i4--;
-                        j4--;
-                    } while(true);
-                }
+			if(var6 >= var20 - 16.0D - var53 * 2.0D && var10 >= var22 - 16.0D - var53 * 2.0D && var6 <= var20 + 16.0D + var53 * 2.0D && var10 <= var22 + 16.0D + var53 * 2.0D) {
+				int var56 = MathHelper.floor_double(var6 - var53) - var3 * 16 - 1;
+				int var35 = MathHelper.floor_double(var6 + var53) - var3 * 16 + 1;
+				int var55 = MathHelper.floor_double(var8 - var30) - 1;
+				int var37 = MathHelper.floor_double(var8 + var30) + 1;
+				int var57 = MathHelper.floor_double(var10 - var53) - var4 * 16 - 1;
+				int var39 = MathHelper.floor_double(var10 + var53) - var4 * 16 + 1;
+				if(var56 < 0) {
+					var56 = 0;
+				}
 
-            }
+				if(var35 > 16) {
+					var35 = 16;
+				}
 
-            if(flag)
-            {
-                break;
-            }
-        }
+				if(var55 < 1) {
+					var55 = 1;
+				}
 
-    }
+				if(var37 > this.worldObj.field_35472_c - 8) {
+					var37 = this.worldObj.field_35472_c - 8;
+				}
 
-    protected void recursiveGenerate(World world, int i, int j, int k, int l, byte abyte0[])
-    {
-        if(rand.nextInt(50) != 0)
-        {
-            return;
-        }
-        double d = i * 16 + rand.nextInt(16);
-        double d1 = rand.nextInt(rand.nextInt(40) + 8) + 20;
-        double d2 = j * 16 + rand.nextInt(16);
-        int i1 = 1;
-        for(int j1 = 0; j1 < i1; j1++)
-        {
-            float f = rand.nextFloat() * 3.141593F * 2.0F;
-            float f1 = ((rand.nextFloat() - 0.5F) * 2.0F) / 8F;
-            float f2 = (rand.nextFloat() * 2.0F + rand.nextFloat()) * 2.0F;
-            func_35626_a(rand.nextLong(), k, l, abyte0, d, d1, d2, f2, f, f1, 0, 0, 3D);
-        }
+				if(var57 < 0) {
+					var57 = 0;
+				}
 
-    }
+				if(var39 > 16) {
+					var39 = 16;
+				}
+
+				boolean var58 = false;
+
+				int var41;
+				int var44;
+				for(var41 = var56; !var58 && var41 < var35; ++var41) {
+					for(int var42 = var57; !var58 && var42 < var39; ++var42) {
+						for(int var43 = var37 + 1; !var58 && var43 >= var55 - 1; --var43) {
+						var44 = (var41 * 16 + var42) * this.worldObj.field_35472_c + var43;
+						if(var43 >= 0 && var43 < this.worldObj.field_35472_c) {
+							if(var5[var44] == Block.waterMoving.blockID || var5[var44] == Block.waterStill.blockID) {
+								var58 = true;
+							}
+
+							if(var43 != var55 - 1 && var41 != var56 && var41 != var35 - 1 && var42 != var57 && var42 != var39 - 1) {
+								var43 = var55;
+							}
+						}
+						}
+					}
+				}
+
+				if(!var58) {
+					for(var41 = var56; var41 < var35; ++var41) {
+						double var59 = ((double)(var41 + var3 * 16) + 0.5D - var6) / var53;
+
+						for(var44 = var57; var44 < var39; ++var44) {
+						double var45 = ((double)(var44 + var4 * 16) + 0.5D - var10) / var53;
+						int var47 = (var41 * 16 + var44) * this.worldObj.field_35472_c + var37;
+						boolean var48 = false;
+						if(var59 * var59 + var45 * var45 < 1.0D) {
+							for(int var49 = var37 - 1; var49 >= var55; --var49) {
+								double var50 = ((double)var49 + 0.5D - var8) / var30;
+								if((var59 * var59 + var45 * var45) * (double)this.field_35627_a[var49] + var50 * var50 / 6.0D < 1.0D) {
+									byte var52 = var5[var47];
+									if(var52 == Block.grass.blockID) {
+									var48 = true;
+									}
+
+									if(var52 == Block.stone.blockID || var52 == Block.dirt.blockID || var52 == Block.grass.blockID) {
+									if(var49 < 10) {
+										var5[var47] = (byte)Block.lavaMoving.blockID;
+									} else {
+										var5[var47] = 0;
+										if(var48 && var5[var47 - 1] == Block.dirt.blockID) {
+											var5[var47 - 1] = this.worldObj.getWorldChunkManager().getBiomeGenAt(var41 + var3 * 16, var44 + var4 * 16).topBlock;
+										}
+									}
+									}
+								}
+
+								--var47;
+							}
+						}
+						}
+					}
+
+					if(var54) {
+						break;
+					}
+				}
+			}
+			}
+		}
+
+	}
+
+	protected void recursiveGenerate(World var1, int var2, int var3, int var4, int var5, byte[] var6) {
+		if(this.rand.nextInt(50) == 0) {
+			double var7 = (double)(var2 * 16 + this.rand.nextInt(16));
+			double var9 = (double)(this.rand.nextInt(this.rand.nextInt(40) + 8) + 20);
+			double var11 = (double)(var3 * 16 + this.rand.nextInt(16));
+			byte var13 = 1;
+
+			for(int var14 = 0; var14 < var13; ++var14) {
+			float var15 = this.rand.nextFloat() * 3.1415927F * 2.0F;
+			float var16 = (this.rand.nextFloat() - 0.5F) * 2.0F / 8.0F;
+			float var17 = (this.rand.nextFloat() * 2.0F + this.rand.nextFloat()) * 2.0F;
+			this.func_35626_a(this.rand.nextLong(), var4, var5, var6, var7, var9, var11, var17, var15, var16, 0, 0, 3.0D);
+			}
+
+		}
+	}
 }
