@@ -31,6 +31,9 @@ public class YCEntityClientPlayerMP extends EntityClientPlayerMP {
 
     @Override
     public void onUpdate2() {
+        this.capabilities.isFlying = false;
+        this.capabilities.allowFlying = false;
+
         Radar.updateLocalPlayerPosition();
 
         if(Yiffcraft.enableOutOfBody) {
