@@ -35,6 +35,7 @@ import net.minecraft.src.WorldClient;
 import org.getspout.spout.ClipboardThread;
 import org.getspout.spout.DataMiningThread;
 import org.getspout.spout.PacketDecompressionThread;
+import org.getspout.spout.addon.SimpleAddonStore;
 import org.getspout.spout.block.SpoutcraftChunk;
 import org.getspout.spout.config.ConfigReader;
 import org.getspout.spout.config.MipMapUtils;
@@ -123,6 +124,7 @@ public class SpoutClient extends PropertyObject implements Client {
 	private TexturePacksDatabaseModel textureDatabaseModel = new TexturePacksDatabaseModel();
 	private String addonFolder = Minecraft.getMinecraftDir() + File.separator + "addons";
 	private final ThreadGroup securityThreadGroup;
+	private final SimpleAddonStore addonStore = new SimpleAddonStore();
 	
 	
 	
@@ -130,11 +132,15 @@ public class SpoutClient extends PropertyObject implements Client {
 		instance = this;
 		securityKey = (new Random()).nextDouble();
 		securityThreadGroup = new ThreadGroup("Sandboxed Threads");
-		securityManager = new SimpleSecurityManager(securityKey, securityThreadGroup);
+		securityManager = new SimpleSecurityManager(securityKey, securityThreadGroup, Thread.currentThread());
+		if (!Thread.currentThread().getName().equals("Minecraft main thread")) {
+			throw new SecurityException("Main thread name mismatch");
+		}
 		addonManager = new SimpleAddonManager(this, commandMap, securityManager, securityKey);
 		//System.setSecurityManager(securityManager);
 		
 		((SimpleKeyBindingManager)bindingManager).load();
+		addonStore.load();
 		serverManager.init();
 	}
 	
@@ -162,12 +168,16 @@ public class SpoutClient extends PropertyObject implements Client {
 		return version;
 	}
 	
-	public static void enableSandbox() {
-		getInstance().securityManager.lock(getInstance().securityKey);
+	public static boolean enableSandbox() {
+		return getInstance().securityManager.lock(getInstance().securityKey);
 	}
 	
-	public static void disableSandbox() {
-		getInstance().securityManager.unlock(getInstance().securityKey);
+	public static boolean enableSandbox(boolean enable) {
+		return getInstance().securityManager.lock(enable, getInstance().securityKey);
+	}
+	
+	public static boolean disableSandbox() {
+		return getInstance().securityManager.unlock(getInstance().securityKey);
 	}
 	
 	public static boolean isSandboxed() {
@@ -598,5 +608,9 @@ public class SpoutClient extends PropertyObject implements Client {
 		}
 
 		return matchedPlayers;
+	}
+	
+	public SimpleAddonStore getAddonStore() {
+		return addonStore;
 	}
 }
