@@ -3,6 +3,8 @@ package net.minecraft.src;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+
+import de.doridian.yiffcraft.Yiffcraft;
 import net.minecraft.src.Entity;
 import net.minecraft.src.NetHandler;
 import net.minecraft.src.Packet;
@@ -44,7 +46,7 @@ public class Packet18Animation extends Packet {
 			SpoutClient.getInstance().setSpoutVersion(1);
 			((NetClientHandler)var1).addToSendQueue(this);
 			SpoutClient.getInstance().getPacketManager().sendSpoutPacket(new PacketRenderDistance((byte)Minecraft.theMinecraft.gameSettings.renderDistance));
-			SpoutClient.getInstance().getPacketManager().sendSpoutPacket(new PacketFullVersion(Long.toString(SpoutClient.getClientVersion())));
+			/*@DORI*/ SpoutClient.getInstance().getPacketManager().sendSpoutPacket(new PacketFullVersion(Yiffcraft.YCFULLVERSION));
 			System.out.println("Spout SP Enabled");
 		}
 		else {

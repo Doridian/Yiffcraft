@@ -24,6 +24,7 @@ public final class Yiffcraft
 	private static boolean isInited = false;
 	public static Minecraft minecraft;
 	public static final String VERSION = "2.10";
+    public static final String YCFULLVERSION = "YC_@GITREV@_@BUILDNUM@";
 	public static String licenseKey = "INVALID";
 	public static boolean isSpecial = false;
 	
