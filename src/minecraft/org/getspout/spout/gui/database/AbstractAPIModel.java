@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -89,12 +90,16 @@ public abstract class AbstractAPIModel extends AbstractListModel {
 			public void run() {
 				BufferedReader reader = null;
 				try {
+					System.setProperty("http.agent", "");
 					setLoading(true);
 					long start = System.currentTimeMillis();
 					URL url1 = new URL(url+"&page="+page);
 					System.out.println("Loading "+url1.toString());
+					URLConnection conn = url1.openConnection();
+					conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
 					
-					reader = new BufferedReader(new InputStreamReader(url1.openStream()));
+					
+					reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					
 					Yaml yaml = new Yaml();
 					ArrayList<Object> yamlObj = (ArrayList<Object>) yaml.load(reader);
@@ -106,12 +111,13 @@ public abstract class AbstractAPIModel extends AbstractListModel {
 					refreshList(clear);
 					
 				} catch (IOException e1) {
+					e1.printStackTrace();
 					//Put a fancy error message on the list!
 					clear();
 					effectiveCache = new LinkedList<ListWidgetItem>();
-					String error = e1.getClass().getSimpleName().replaceAll("Exception", "");
-					error = error.replaceAll("([A-Z])", " $1").trim();
-					effectiveCache.add(new GenericListWidgetItem(ChatColor.RED+"Could not load servers!", error, ""));
+					//String error = e1.getClass().getSimpleName().replaceAll("Exception", "");
+					//error = error.replaceAll("([A-Z])", " $1").trim();
+					effectiveCache.add(new GenericListWidgetItem(ChatColor.RED+"Could not load items!", e1.getMessage(), ""));
 					return;
 				} catch(Exception e) {}
 				finally {
