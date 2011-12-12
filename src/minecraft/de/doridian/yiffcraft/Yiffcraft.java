@@ -11,6 +11,7 @@ import net.minecraft.client.MinecraftApplet;
 import net.minecraft.src.*;
 import org.getspout.spout.config.MipMapUtils;
 import org.lwjgl.input.Keyboard;
+import wecui.WorldEditCUI;
 
 import java.io.*;
 import java.net.URL;
@@ -103,7 +104,12 @@ public final class Yiffcraft
 		minecraft.ingameGUI = new YCGuiIngame(minecraft);
 
 		guiNotice = new GuiNotice(minecraft);
+
+        wecui = new WorldEditCUI(minecraft);
+        wecui.initialize();
 	}
+
+    public static WorldEditCUI wecui;
 
 	/*public static void getNewSplash() {
 		new Thread() {
@@ -187,8 +193,6 @@ public final class Yiffcraft
 
 		Radar.reinit();
 		AutoBreak.reinit();
-
-		WorldeditCui.reinit();
 
 		loadConfig();
 	}
@@ -291,19 +295,6 @@ public final class Yiffcraft
 		stepHeight = 0.5F;
 		Speedhack.setSpeedMultiplier(1.0F);
 		enableUnpushablePlayer = false;
-	}
-
-	public static void disableVisibleHacks()
-	{
-		aura.smash.enable = false;
-		aura.destroy.enableDestroyAll = false;
-		aura.destroy.enableDestroyItems = false;
-		aura.kill.enableKillMobs = false;
-		aura.kill.enableKillAnimals = false;
-		aura.kill.enableKillPlayers = false;
-		enableFly = false;
-		AutoBreak.reinit();
-		Speedhack.setSpeedMultiplier(1.0F);
 	}
 
 	public static void placeOrUseAt(Location loc)

@@ -3,6 +3,8 @@ package de.doridian.yiffcraft;
 import de.doridian.yiffcraft.commands.BaseCommand;
 import net.minecraft.src.Packet3Chat;
 import org.getspout.spout.client.SpoutClient;
+import wecui.event.ChatCommandEvent;
+import wecui.event.ChatEvent;
 
 import java.util.HashMap;
 import java.util.regex.Pattern;
@@ -43,6 +45,17 @@ public final class Chat
 
 	public static boolean outgoing(String text)
 	{
+        ChatEvent chatevent = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.OUTGOING);
+        Yiffcraft.wecui.getEventManager().callEvent(chatevent);
+        if (!chatevent.isCancelled() && text.startsWith("/") && text.length() > 1) {
+            ChatCommandEvent commandevent = new ChatCommandEvent(Yiffcraft.wecui, text);
+            Yiffcraft.wecui.getEventManager().callEvent(commandevent);
+            if (commandevent.isHandled()) {
+                return false;
+            }
+        }
+        if(chatevent.isCancelled()) return false;
+
 		if(text.charAt(0) == PREFIX)
 		{
 			try {
@@ -83,7 +96,9 @@ public final class Chat
 	
 	public static String incoming(String text)
 	{
-		if(WorldeditCui.processChat(text)) return "";
+        ChatEvent event = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.INCOMING);
+        Yiffcraft.wecui.getEventManager().callEvent(event);
+        if(event.isCancelled()) return "";
 	
 		String noCC = Util.stripColorCodes(text);
 

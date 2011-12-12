@@ -8,6 +8,9 @@ import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiChat;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ScaledResolution;
+import wecui.WorldEditCUI;
+import wecui.event.WorldRenderEvent;
+import wecui.obfuscation.Obfuscation;
 
 import java.util.ArrayList;
 
@@ -15,6 +18,7 @@ public class Renderer {
 	public static ArrayList<IGuiIngame> guis = new ArrayList<IGuiIngame>();
 	
 	private static boolean openMenu = false;
+    private static WorldRenderEvent event;
 	
 	public static void openMenu() {
 		openMenu = true;
@@ -23,12 +27,17 @@ public class Renderer {
 	static {
 		guis.add(new Radar());
 		guis.add(new GuiCompass());
+        event = new WorldRenderEvent(Yiffcraft.wecui);
 	}
 	
 	public static void renderEffects(float f)
 	{
 		Yiffcraft.aura.render(f);
-		WorldeditCui.worldRender(Yiffcraft.minecraft, f);
+
+        Obfuscation.disableLighting();
+        event.setPartialTick(f);
+        Yiffcraft.wecui.getEventManager().callEvent(event);
+        Obfuscation.enableLighting();
 	}
 	
 	public static void renderGui()
