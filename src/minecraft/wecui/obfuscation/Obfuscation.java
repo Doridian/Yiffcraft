@@ -150,18 +150,4 @@ public class Obfuscation implements InitializationFactory {
     public static File getWorldEditCUIDir() {
         return new File(getMinecraftDir(), "config");
     }
-
-    /*
-                ChatEvent chatevent = new ChatEvent(controller, s, ChatEvent.Direction.OUTGOING);
-            controller.getEventManager().callEvent(chatevent);
-            if (!chatevent.isCancelled() && s.startsWith("/") && s.length() > 1) {
-                ChatCommandEvent commandevent = new ChatCommandEvent(controller, s);
-                controller.getEventManager().callEvent(commandevent);
-                if (commandevent.isHandled()) {
-                    cancelled = true;
-                }
-            }
-            ChatEvent chatevent = new ChatEvent(controller, a, ChatEvent.Direction.INCOMING);
-            controller.getEventManager().callEvent(chatevent);
-     */
 }
