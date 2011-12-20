@@ -8,6 +8,7 @@ import net.minecraft.src.FontRenderer;
 import net.minecraft.src.GuiChat;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ScaledResolution;
+import org.lwjgl.opengl.GL11;
 import wecui.WorldEditCUI;
 import wecui.event.WorldRenderEvent;
 import wecui.obfuscation.Obfuscation;
@@ -34,11 +35,30 @@ public class Renderer {
 	{
 		Yiffcraft.aura.render(f);
 
-        Obfuscation.disableLighting();
         event.setPartialTick(f);
+        Obfuscation.disableLighting();
+
+        GL11.glBlendFunc(770 /*GL_SRC_ALPHA*/, 771 /*GL_ONE_MINUS_SRC_ALPHA*/);
+        GL11.glLineWidth(2F);
+        GL11.glEnable(3042 /*GL_BLEND*/);
+        GL11.glDisable(3008 /*GL_ALPHA_TEST*/);
+        GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
+        GL11.glDepthMask(false);
+        //GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
+        GL11.glDepthFunc(GL11.GL_GEQUAL);
+
         Yiffcraft.wecui.getEventManager().callEvent(event);
+
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
+
+        GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
+        GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
+        GL11.glDisable(3042 /*GL_BLEND*/);
+        GL11.glEnable(3008 /*GL_ALPHA_TEST*/);
+
         Obfuscation.enableLighting();
-	}
+    }
 	
 	public static void renderGui()
 	{
