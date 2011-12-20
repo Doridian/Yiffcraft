@@ -11,6 +11,7 @@ import net.minecraft.client.MinecraftApplet;
 import net.minecraft.src.*;
 import org.lwjgl.input.Keyboard;
 import wecui.WorldEditCUI;
+import com.sk89q.worldedit.WorldEdit;
 
 import java.io.*;
 import java.net.URL;
@@ -106,6 +107,8 @@ public final class Yiffcraft
 
         wecui = new WorldEditCUI(minecraft);
         wecui.initialize();
+
+        wecui.getLocalPlugin().onVersionEvent(WorldEdit.getVersion());
 	}
 
     public static WorldEditCUI wecui;

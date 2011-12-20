@@ -12,6 +12,8 @@ import wecui.obfuscation.Obfuscation;
  * 
  * @author lahwran
  * @author yetanotherx
+ * 
+ * @obfuscated
  */
 public class RenderHooks extends Render {
 
@@ -23,7 +25,7 @@ public class RenderHooks extends Render {
         this.event = new WorldRenderEvent(controller);
     }    
 
-    public void render(float renderTick) {
+    private void render(float renderTick) {
         Obfuscation.disableLighting();
         event.setPartialTick(renderTick);
         controller.getEventManager().callEvent(event);

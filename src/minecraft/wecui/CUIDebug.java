@@ -26,7 +26,6 @@ public class CUIDebug implements InitializationFactory {
         this.controller = controller;
     }
 
-    @Override
     public void initialize() throws InitializationException {
 
         ConsoleLogFormatter formatter = new ConsoleLogFormatter();

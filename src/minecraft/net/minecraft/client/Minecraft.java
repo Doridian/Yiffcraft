@@ -43,6 +43,7 @@ import org.spoutcraft.spoutcraftapi.event.screen.ScreenOpenEvent;
 import org.spoutcraft.spoutcraftapi.gui.PopupScreen;
 import org.spoutcraft.spoutcraftapi.gui.Screen;
 import org.spoutcraft.spoutcraftapi.gui.ScreenType;
+import wecui.gui.WorldEditScreen;
 
 //Spout End
 
@@ -1365,7 +1366,7 @@ public abstract class Minecraft implements Runnable {
 			}
 
 			while (this.isMultiplayerWorld() && this.gameSettings.keyBindChat.isPressed()) {
-				this.displayGuiScreen(new GuiChat());
+				this.displayGuiScreen(new WorldEditScreen(Yiffcraft.wecui));
 			}
 			
 			//Spout start

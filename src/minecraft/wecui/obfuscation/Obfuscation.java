@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 import wecui.InitializationFactory;
 import wecui.WorldEditCUI;
-import wecui.render.RenderEntity;
 
 /**
  * Main obfuscation class
@@ -49,10 +48,10 @@ public class Obfuscation implements InitializationFactory {
         Chat.addChat(chat);
     }
 
-    public void showGuiScreenIfGuiChat(GuiScreen screen) {
-        GuiScreen currentScreen = minecraft.currentScreen;
+    public void showGuiScreen(GuiScreen screen) {
+        GuiScreen currentScreen = getCurrentScreen();
         if (currentScreen != null) {
-            minecraft.displayGuiScreen((GuiScreen)null);
+            minecraft.displayGuiScreen((GuiScreen) null);
         }
         minecraft.displayGuiScreen(screen);
     }
@@ -71,7 +70,7 @@ public class Obfuscation implements InitializationFactory {
         EntityPlayerSP plyr = minecraft.thePlayer;
         return plyr.prevPosZ + ((plyr.posZ- plyr.prevPosZ) * renderTick);
     }
-    
+
     public void startDrawing(int type) {
         tessellator.startDrawing(type);
     }
@@ -92,15 +91,8 @@ public class Obfuscation implements InitializationFactory {
         return getWorld(minecraft);
     }
 
-    public void spawnEntity(Entity entity) {
-        Minecraft mc = this.controller.getMinecraft();
-
-        entity = new RenderEntity(this.controller, getWorld(mc));
-        doSomethingWithEntityCoordinates(mc, entity);
-        getWorld(mc).entityJoinedWorld(entity);
-        doSomethingWithEntityCoordinates(mc, entity);
-        controller.getDebugger().debug("RenderEntity spawned");
-
+    public GuiScreen getCurrentScreen() {
+        return getCurrentScreen(minecraft);
     }
 
     public static double getPlayerX(EntityPlayerSP player) {
@@ -114,16 +106,20 @@ public class Obfuscation implements InitializationFactory {
     public static double getPlayerZ(EntityPlayerSP player) {
         return player.posZ;
     }
-    
+
     public static EntityPlayerSP getPlayer(Minecraft mc) {
         return mc.thePlayer;
     }
-    
+
     public static World getWorld(Minecraft mc) {
         return mc.theWorld;
     }
+    
+    public static GuiScreen getCurrentScreen(Minecraft mc) {
+        return mc.currentScreen;
+    }
 
-    public static void doSomethingWithEntityCoordinates(Minecraft mc, Entity entity) {
+    public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {
         entity.setPosition(getPlayerX(mc.thePlayer), getPlayerY(mc.thePlayer), getPlayerZ(mc.thePlayer));
     }
 
@@ -142,6 +138,10 @@ public class Obfuscation implements InitializationFactory {
     public static String getChatFromPacket(Packet3Chat packet) {
         return packet.message;
     }
+
+    /*public static void putToMCHash(MCHash hash, int first, Object second) {
+        hash.a(first, second);
+    }*/
 
     public static File getMinecraftDir() {
         return Minecraft.getMinecraftDir();

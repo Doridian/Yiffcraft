@@ -1,5 +1,6 @@
 package wecui;
 
+import wecui.plugin.LocalPlugin;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -15,14 +16,18 @@ import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
 import wecui.fevents.Order;
 import wecui.obfuscation.Obfuscation;
+import wecui.plugin.LocalPluginInitializer;
 import wecui.render.CUIRegion;
 import wecui.render.CuboidRegion;
 
 /**
  * Main controller class
  * 
- * TODO: Multiworld brekas it
- * TODO: Ensure that this works by putting into both mods/ and minecraft.jar/
+ * TODO: Add MultiWorld support
+ * TODO: Preview mode
+ * TODO: Command transactions
+ * TODO: MCPatcher
+ * TODO: SPC
  * 
  * @author lahwran
  * @author yetanotherx
@@ -30,14 +35,16 @@ import wecui.render.CuboidRegion;
 public class WorldEditCUI {
 
     public static final String VERSION = "1.0beta for Minecraft version 1.0";
-    public static final List<String> WEVERSIONS;
+    public static final List<String> WEVERSIONS; //List of compatible WorldEdit versions
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
     protected CUIRegion selection;
     protected CUIDebug debugger;
     protected CUISettings settings;
-    
+    protected LocalPlugin localPlugin;
+    protected LocalPluginInitializer localPluginInit;
+
     static {
         List<String> list = new ArrayList<String>();
         list.add("4.8");
@@ -55,6 +62,7 @@ public class WorldEditCUI {
         this.selection = new CuboidRegion(this);
         this.settings = new CUISettings(this);
         this.debugger = new CUIDebug(this);
+        this.localPluginInit = new LocalPluginInitializer(this);
 
         try {
             this.eventManager.initialize();
@@ -62,6 +70,7 @@ public class WorldEditCUI {
             this.selection.initialize();
             this.settings.initialize();
             this.debugger.initialize();
+            this.localPluginInit.initialize();
         } catch (InitializationException e) {
             e.printStackTrace(System.err);
             return;
@@ -74,15 +83,26 @@ public class WorldEditCUI {
         CUIEvent.handlers.register(new CUIListener(this), Order.Default);
         ChatEvent.handlers.register(new ChatListener(this), Order.Default);
         WorldRenderEvent.handlers.register(new WorldRenderListener(this), Order.Default);
-        
+
         //Register the individual /commands
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);
         ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
         ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
+
+        //ChatCommandEvent.getHandlers("/preview").register(new PreviewCommandListener(this), Order.Default);
+        //ChatCommandEvent.getHandlers("/commit").register(new CommitCommandListener(this), Order.Default);
     }
 
     public CUIDebug getDebugger() {
         return debugger;
+    }
+
+    public LocalPlugin getLocalPlugin() {
+        return localPlugin;
+    }
+
+    public void setLocalPlugin(LocalPlugin localPlugin) {
+        this.localPlugin = localPlugin;
     }
 
     public Minecraft getMinecraft() {
