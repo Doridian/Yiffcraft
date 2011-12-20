@@ -1,11 +1,13 @@
+/* Spout removed file
 package net.minecraft.src;
+
 
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
-import org.getspout.spout.gui.server.ServerSlot;
+import org.spoutcraft.client.gui.server.ServerSlot;
 
 import net.minecraft.src.GuiMultiplayer;
 import net.minecraft.src.GuiSlotServer;
@@ -114,3 +116,4 @@ public class ThreadPollServers extends Thread {
 //	}
 
 }
+*/

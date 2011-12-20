@@ -1,81 +1,65 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode fieldsfirst 
-
 package net.minecraft.src;
 
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityLiving;
+import net.minecraft.src.EntityVillager;
+import net.minecraft.src.ModelVillager;
+import net.minecraft.src.RenderLiving;
 import org.lwjgl.opengl.GL11;
 
-// Referenced classes of package net.minecraft.src:
-//            RenderLiving, ModelVillager, EntityVillager, EntityLiving, 
-//            Entity
+public class RenderVillager extends RenderLiving {
 
-public class RenderVillager extends RenderLiving
-{
+	protected ModelVillager field_40295_c;
+    
 
-    protected ModelVillager field_40295_c;
+	public RenderVillager() {
+		super(new ModelVillager(0.0F), 0.5F);
+		this.field_40295_c = (ModelVillager)this.mainModel;
+	}
 
-    public RenderVillager()
-    {
-        super(new ModelVillager(0.0F), 0.5F);
-        field_40295_c = (ModelVillager)mainModel;
-    }
+	protected int func_40293_a(EntityVillager var1, int var2, float var3) {
+		return -1;
+	}
 
-    protected int func_40293_a(EntityVillager entityvillager, int i, float f)
-    {
-        return -1;
-    }
+	public void func_40294_a(EntityVillager var1, double var2, double var4, double var6, float var8, float var9) {
+		super.doRenderLiving(var1, var2, var4, var6, var8, var9);
+	}
 
-    public void func_40294_a(EntityVillager entityvillager, double d, double d1, double d2, 
-            float f, float f1)
-    {
-        super.doRenderLiving(entityvillager, d, d1, d2, f, f1);
-    }
+	protected void func_40290_a(EntityVillager var1, double var2, double var4, double var6) {}
 
-    protected void func_40290_a(EntityVillager entityvillager, double d, double d1, double d2)
-    {
-    }
+	protected void func_40291_a(EntityVillager var1, float var2) {
+		super.renderEquippedItems(var1, var2);
+	}
 
-    protected void func_40291_a(EntityVillager entityvillager, float f)
-    {
-        super.renderEquippedItems(entityvillager, f);
-    }
+	protected void func_40292_b(EntityVillager var1, float var2) {
+		float var3 = 0.9375F;
+		GL11.glScalef(var3, var3, var3);
+	}
 
-    protected void func_40292_b(EntityVillager entityvillager, float f)
-    {
-        float f1 = 0.9375F;
-        GL11.glScalef(f1, f1, f1);
-    }
+	protected void passSpecialRender(EntityLiving var1, double var2, double var4, double var6) {
+		//Spout start
+        //this.func_40290_a((EntityVillager)var1, var2, var4, var6);
+        super.passSpecialRender(var1, var2, var4, var6);
+        //Spout end
+	}
 
-    protected void passSpecialRender(EntityLiving entityliving, double d, double d1, double d2)
-    {
-        func_40290_a((EntityVillager)entityliving, d, d1, d2);
-    }
+	protected void preRenderCallback(EntityLiving var1, float var2) {
+		this.func_40292_b((EntityVillager)var1, var2);
+	}
 
-    protected void preRenderCallback(EntityLiving entityliving, float f)
-    {
-        func_40292_b((EntityVillager)entityliving, f);
-    }
+	protected int shouldRenderPass(EntityLiving var1, int var2, float var3) {
+		return this.func_40293_a((EntityVillager)var1, var2, var3);
+	}
 
-    protected int shouldRenderPass(EntityLiving entityliving, int i, float f)
-    {
-        return func_40293_a((EntityVillager)entityliving, i, f);
-    }
+	protected void renderEquippedItems(EntityLiving var1, float var2) {
+		this.func_40291_a((EntityVillager)var1, var2);
+	}
 
-    protected void renderEquippedItems(EntityLiving entityliving, float f)
-    {
-        func_40291_a((EntityVillager)entityliving, f);
-    }
+	public void doRenderLiving(EntityLiving var1, double var2, double var4, double var6, float var8, float var9) {
+		this.func_40294_a((EntityVillager)var1, var2, var4, var6, var8, var9);
+	}
 
-    public void doRenderLiving(EntityLiving entityliving, double d, double d1, double d2, 
-            float f, float f1)
-    {
-        func_40294_a((EntityVillager)entityliving, d, d1, d2, f, f1);
-    }
-
-    public void doRender(Entity entity, double d, double d1, double d2, 
-            float f, float f1)
-    {
-        func_40294_a((EntityVillager)entity, d, d1, d2, f, f1);
-    }
+	public void doRender(Entity var1, double var2, double var4, double var6, float var8, float var9) {
+		this.func_40294_a((EntityVillager)var1, var2, var4, var6, var8, var9);
+	}
 }

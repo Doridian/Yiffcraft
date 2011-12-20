@@ -2,7 +2,7 @@ package de.doridian.yiffcraft;
 
 import de.doridian.yiffcraft.commands.BaseCommand;
 import net.minecraft.src.Packet3Chat;
-import org.getspout.spout.client.SpoutClient;
+import org.spoutcraft.client.SpoutClient;
 import wecui.event.ChatCommandEvent;
 import wecui.event.ChatEvent;
 
@@ -123,7 +123,7 @@ public final class Chat
 	public static void emitChatMsg(String msg)
 	{
 		if (!SpoutClient.getInstance().getChatManager().handleCommand(msg)) {
-			SpoutClient.getInstance().getChatManager().sendChat(msg);	
+			SpoutClient.getInstance().getChatManager().sendChat(msg);
 		}
 	}
 	

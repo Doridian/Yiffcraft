@@ -9,7 +9,6 @@ import de.doridian.yiffcraft.overrides.YCGuiIngame;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MinecraftApplet;
 import net.minecraft.src.*;
-import org.getspout.spout.config.MipMapUtils;
 import org.lwjgl.input.Keyboard;
 import wecui.WorldEditCUI;
 

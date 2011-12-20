@@ -19,8 +19,8 @@ import net.minecraft.src.Tessellator;
 
 //Spout Start
 import org.bukkit.ChatColor;
-import org.getspout.spout.config.ConfigReader;
-import org.getspout.spout.gui.addon.GuiAddonsLocal;
+import org.spoutcraft.client.config.ConfigReader;
+import org.spoutcraft.client.gui.addon.GuiAddonsLocal;
 import org.spoutcraft.spoutcraftapi.Spoutcraft;
 import org.spoutcraft.spoutcraftapi.addon.Addon;
 import org.spoutcraft.spoutcraftapi.gui.Button;
@@ -28,6 +28,7 @@ import org.spoutcraft.spoutcraftapi.gui.GenericButton;
 import org.spoutcraft.spoutcraftapi.gui.Screen;
 //Spout End
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
@@ -92,7 +93,7 @@ public class GuiMainMenu extends GuiScreen {
 		}
 		//Spout rewritten
 		else {
-			String text = org.getspout.spout.EasterEggs.getSplashTextEasterEgg();
+			String text = org.spoutcraft.client.EasterEggs.getSplashTextEasterEgg();
 			if (text != null) {
 				this.splashText = text;
 			}
@@ -156,19 +157,19 @@ public class GuiMainMenu extends GuiScreen {
 			mc.displayGuiScreen(new GuiSelectWorld(this));
 		}
 		if(btn == buttonMultiPlayer) {
-			mc.displayGuiScreen(new org.getspout.spout.gui.server.GuiFavorites(this));
+			mc.displayGuiScreen(new org.spoutcraft.client.gui.server.GuiFavorites(this));
 		}
 		if(btn == buttonAddons) {
 			this.mc.displayGuiScreen(new GuiAddonsLocal());
 		}
 		if(btn == buttonTextures) {
-			mc.displayGuiScreen(new org.getspout.spout.gui.texturepacks.GuiTexturePacks());
+			mc.displayGuiScreen(new org.spoutcraft.client.gui.texturepacks.GuiTexturePacks());
 		}
 		if(btn == buttonOptions) {
 			mc.displayGuiScreen(new GuiOptions(this, mc.gameSettings));
 		}
 		if(btn == buttonAbout) {
-			this.mc.displayGuiScreen(new org.getspout.spout.gui.about.GuiAbout());
+			this.mc.displayGuiScreen(new org.spoutcraft.client.gui.about.GuiAbout());
 		}
 		if(btn == buttonQuit) {
 			mc.shutdown();
@@ -376,6 +377,22 @@ public class GuiMainMenu extends GuiScreen {
 		GL11.glScalef(var8, var8, var8);
 		this.drawCenteredString(this.fontRenderer, this.splashText, 0, -8, 16776960);
 		GL11.glPopMatrix();
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_M)) {
+			mc.displayGuiScreen(new org.spoutcraft.client.gui.server.GuiFavorites(this));
+		}
+		else if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+			mc.displayGuiScreen(new GuiSelectWorld(new GuiMainMenu()));
+		}
+		else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+			mc.displayGuiScreen(new GuiAddonsLocal());
+		}
+		else if (Keyboard.isKeyDown(Keyboard.KEY_T)) {
+			mc.displayGuiScreen(new org.spoutcraft.client.gui.texturepacks.GuiTexturePacks());
+		}
+		else if (Keyboard.isKeyDown(Keyboard.KEY_O)) {
+			mc.displayGuiScreen(new GuiOptions(new GuiMainMenu(), mc.gameSettings));
+		}
 
 		//Spout Start
 		//this.drawString(this.fontRenderer, "Minecraft 1.0.0", 2, this.height - 10, 16777215); //Spout

@@ -1,7 +1,7 @@
 package de.doridian.yiffcraft;
 
 import net.minecraft.src.*;
-import org.getspout.spout.client.SpoutClient;
+import org.spoutcraft.client.SpoutClient;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

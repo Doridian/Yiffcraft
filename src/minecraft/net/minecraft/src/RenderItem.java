@@ -16,8 +16,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 //Spout start
-import org.getspout.spout.io.CustomTextureManager;
 import org.newdawn.slick.opengl.Texture;
+import org.spoutcraft.client.io.CustomTextureManager;
 import org.spoutcraft.spoutcraftapi.block.design.BlockDesign;
 import org.spoutcraft.spoutcraftapi.material.MaterialData;
 
@@ -102,7 +102,6 @@ public class RenderItem extends Render {
 		
 		if (design != null && custom) {
 			//GL11.glScalef(0.25F, 0.25F, 0.25F);
-			System.out.println("This right meow");
 			design.renderItemstack((org.spoutcraft.spoutcraftapi.entity.Item)itemEntity.spoutEntity, (float)x, (float)(yOffset + bounceAmmount), (float)z, rotation, 0.25F, random);
 		}
 		else{

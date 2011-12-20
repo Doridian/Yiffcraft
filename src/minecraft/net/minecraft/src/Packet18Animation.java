@@ -12,10 +12,9 @@ import net.minecraft.src.Packet;
 //Spout Start
 import net.minecraft.client.Minecraft;
 
-import org.getspout.spout.client.SpoutClient;
-import org.getspout.spout.packet.PacketFullVersion;
-import org.getspout.spout.packet.PacketRenderDistance;
-//Spout End
+import org.spoutcraft.client.SpoutClient;
+import org.spoutcraft.client.packet.PacketFullVersion;
+import org.spoutcraft.client.packet.PacketRenderDistance;
 
 public class Packet18Animation extends Packet {
 
@@ -47,7 +46,7 @@ public class Packet18Animation extends Packet {
 			((NetClientHandler)var1).addToSendQueue(this);
 			SpoutClient.getInstance().getPacketManager().sendSpoutPacket(new PacketRenderDistance((byte)Minecraft.theMinecraft.gameSettings.renderDistance));
 			/*@DORI*/ SpoutClient.getInstance().getPacketManager().sendSpoutPacket(new PacketFullVersion(Yiffcraft.YCFULLVERSION));
-			System.out.println("Spout SP Enabled");
+			System.out.println("Detected Spout server.");
 		}
 		else {
 			var1.handleArmAnimation(this);

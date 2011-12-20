@@ -1,6 +1,6 @@
 package de.doridian.yiffcraft;
 
-import org.getspout.spout.entity.EntityData;
+import org.spoutcraft.client.entity.EntityData;
 
 public class Speedhack {
 	public static double getSpeedMultiplier() {

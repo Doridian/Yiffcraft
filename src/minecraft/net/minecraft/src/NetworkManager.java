@@ -20,7 +20,7 @@ import net.minecraft.src.Packet;
 import net.minecraft.src.ThreadCloseConnection;
 
 
-import org.getspout.spout.chunkcache.ChunkCache; // Spout
+import org.spoutcraft.client.chunkcache.ChunkCache;
 
 public class NetworkManager {
 

@@ -43,9 +43,9 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.GLU;
 //Spout start
-import org.getspout.spout.client.SpoutClient;
-import org.getspout.spout.config.ConfigReader;
 import org.lwjgl.util.vector.*;
+import org.spoutcraft.client.SpoutClient;
+import org.spoutcraft.client.config.ConfigReader;
 
 //Spout end
 
@@ -906,13 +906,13 @@ public class EntityRenderer {
 			this.mc.renderGlobal.clipRenderersByFrustrum(var18, var1);
 			if (var19 == 0) {
 				Profiler.endStartSection("updatechunks");
-
-				while (!this.mc.renderGlobal.updateRenderers(var4, false) && var2 != 0L) {
-					long var21 = var2 - System.nanoTime();
-					if (var21 < 0L || var21 > 1000000000L) {
-						break;
-					}
-				}
+				this.mc.renderGlobal.updateRenderers(var4, false);
+				//while (!this.mc.renderGlobal.updateRenderers(var4, false) && var2 != 0L) {
+				//	long var21 = var2 - System.nanoTime();
+				//	if (var21 < 0L || var21 > 1000000000L) {
+				//		break;
+				//	}
+				//}
 			}
 
 			this.setupFog(0, var1);
@@ -972,7 +972,10 @@ public class EntityRenderer {
 				}
 
 				if (var16 > 0) {
+					//Spout start
 					var5.renderAllRenderLists(1, (double) var1);
+					//var5.renderAllSortedRenderers(1, (double) var1);
+					//Spout end
 				}
 
 				GL11.glShadeModel(7424 /* GL_FLAT */);

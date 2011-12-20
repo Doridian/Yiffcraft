@@ -1,4 +1,5 @@
-package net.minecraft.src;
+/*Spout removed file
+
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,16 +14,15 @@ import java.util.Collections;
 
 import net.minecraft.src.GuiButton;
 
-import org.getspout.spout.client.SpoutClient;
-import org.getspout.spout.gui.server.*;
-import org.getspout.spout.io.CustomTextureManager;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
+import org.spoutcraft.client.SpoutClient;
+import org.spoutcraft.client.gui.server.*;
+import org.spoutcraft.client.io.CustomTextureManager;
 
 public class GuiMultiplayer extends GuiScreen {
 
 	public static int pinglimit = 0;
-	public static final String version = "1.8.1";
 	private static Object synchronize = new Object();
 	public final ServerListInfo serverInfo = new ServerListInfo();
 	public String indexString = "";
@@ -177,7 +177,7 @@ public class GuiMultiplayer extends GuiScreen {
 	public void elementInfo(int id) {
 		synchronized(serverInfo) {
 			ServerSlot info = (ServerSlot)this.serverInfo.serverList.get(id);
-			this.mc.displayGuiScreen(new GuiServerInfo(info, this));
+			//this.mc.displayGuiScreen(new GuiServerInfo(info, this));
 		}
 	}
 
@@ -264,7 +264,7 @@ public class GuiMultiplayer extends GuiScreen {
 		}
 		GL11.glDepthMask(true);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glPopMatrix();
 	}
@@ -469,3 +469,4 @@ public class GuiMultiplayer extends GuiScreen {
 	}
 
 }
+*/

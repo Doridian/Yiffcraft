@@ -31,11 +31,13 @@ import net.minecraft.src.Vec3D;
 import net.minecraft.src.World;
 
 //Spout Start
-import org.getspout.spout.client.SpoutClient;
-import org.getspout.spout.entity.EntityData;
-import org.getspout.spout.io.CustomTextureManager;
 //Spout End
+import org.spoutcraft.client.SpoutClient;
+import org.spoutcraft.client.entity.CraftLivingEntity;
+import org.spoutcraft.client.entity.EntityData;
+import org.spoutcraft.client.io.CustomTextureManager;
 import org.spoutcraft.spoutcraftapi.Spoutcraft;
+import org.spoutcraft.spoutcraftapi.entity.EntitySkinType;
 import org.spoutcraft.spoutcraftapi.material.CustomBlock;
 import org.spoutcraft.spoutcraftapi.material.MaterialData;
 
@@ -108,7 +110,7 @@ public abstract class EntityLiving extends Entity {
 	protected int numTicksToChaseTarget = 0;
 
 	//Spout Start
-	private EntityData entityData = null;
+	private EntityData entityData = new EntityData();
 	public String displayName = null;
 	public int maxAir = 300;
 	//Spout End
@@ -122,6 +124,9 @@ public abstract class EntityLiving extends Entity {
 		this.field_9365_p = (float)Math.random() * 12398.0F;
 		this.rotationYaw = (float)(Math.random() * 3.1415927410125732D * 2.0D);
 		this.stepHeight = 0.5F;
+		//Spout start
+		this.spoutEntity = new CraftLivingEntity(this);
+		//Spout end
 	}
 
 	protected void entityInit() {
@@ -146,14 +151,6 @@ public abstract class EntityLiving extends Entity {
 //Spout Start
 	
 	public final EntityData getData() {
-		if (entityData == null) {
-			if (uuidValid){
-				entityData = SpoutClient.getInstance().getEntityManager().getData(uniqueId);
-			}
-			else {
-				return SpoutClient.getInstance().getEntityManager().getGenericData();
-			}
-		}
 		return entityData;
 	}
 	
@@ -165,11 +162,18 @@ public abstract class EntityLiving extends Entity {
 	}
 	
 	public String getCustomTexture(byte id){
-		if(getCustomTextureUrl(id) != null)
-		{
+		if(getCustomTextureUrl(id) != null ) {
 			return CustomTextureManager.getTexturePathFromUrl(getCustomTextureUrl(id));
 		}
 		return null;
+	}
+	
+	public String getCustomTexture(EntitySkinType type, String def) {
+		String tex = getCustomTexture(type.getId());
+		if (tex == null) {
+			tex = def;
+		}
+		return tex;
 	}
 
 	public void setCustomTexture(String url, byte id){

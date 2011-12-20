@@ -21,8 +21,8 @@ import net.minecraft.src.Session;
 import net.minecraft.src.StatBase;
 import net.minecraft.src.World;
 //Spout Start
-import org.getspout.spout.packet.*; // TODO: Remove * import
-import org.getspout.spout.client.SpoutClient;
+import org.spoutcraft.client.SpoutClient;
+import org.spoutcraft.client.packet.*;
 import org.spoutcraft.spoutcraftapi.gui.ScreenType;
 //Spout End
 
@@ -212,7 +212,6 @@ public class EntityClientPlayerMP extends EntityPlayerSP {
 		}
 		if (SpoutClient.getInstance().isSpoutEnabled()) {
 			SpoutClient.getInstance().getPacketManager().sendSpoutPacket(new PacketKeyPress((byte)i, keyReleased, (MovementInputFromOptions)movementInput, ScreenType.GAME_SCREEN));
-			SpoutClient.getInstance().getKeyBindingManager().pressKey(i, keyReleased, ScreenType.GAME_SCREEN.getCode());
 		}
 		
 		super.handleKeyPress(i, keyReleased);
