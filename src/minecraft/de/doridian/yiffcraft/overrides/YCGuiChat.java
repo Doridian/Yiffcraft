@@ -106,7 +106,7 @@ public class YCGuiChat extends GuiChat {
             boolean wasHighlighted = false;
             if(i == argToHighlight) {
                 if(cmdHintOptional[i]) {
-                    for(int j=i; j<cmdHintOptional.length; j++) {
+                    for(int j = i; j < cmdHintOptional.length; j++) {
                         if(!cmdHintOptional[j]) {
                             argToHighlight = j;
                             break;
