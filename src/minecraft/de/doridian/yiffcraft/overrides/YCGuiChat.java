@@ -8,6 +8,7 @@ import net.minecraft.src.GuiChat;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class YCGuiChat extends GuiChat {
@@ -27,6 +28,10 @@ public class YCGuiChat extends GuiChat {
     }
 
     public static void reloadCommands() {
+        reloadCommands(null);
+    }
+
+    public static void reloadCommands(HashMap<String, String> additionalCommands) {
         CharPrefixTree newCommands = new CharPrefixTree();
 
         Map<String, String> tmpCommands = Yiffcraft.wecui.getLocalPlugin().getPlugin().getCommands();
@@ -37,6 +42,10 @@ public class YCGuiChat extends GuiChat {
             tmpCommands.put(cmdEntry.getKey(), cmdEntry.getValue().getUsage() + " - " + cmdEntry.getValue().getHelp());
         }
         newCommands.addAll(tmpCommands, '-');
+
+        if(additionalCommands != null) {
+            newCommands.addAll(additionalCommands);
+        }
 
         commands = newCommands;
     }
