@@ -53,33 +53,44 @@ public class YCGuiChat extends GuiChat {
             } else if(node.desc == null) {
                 unsetCommandHint();
 
-                node = commands.getFirstEnd(command);
-                if(node != null && node.value != null) {
-                    StringBuilder sb = new StringBuilder(node.value);
-                    sb.insert(command.length(), "\u00a78");
-                    cmdHintDraw = (sb.toString() + " " + node.desc).trim();
+                if(this.message.length() <= command.length() || this.message.charAt(command.length()) != ' ') {
+                    node = commands.getFirstEnd(command);
+                    if(node != null && node.value != null) {
+                        StringBuilder sb = new StringBuilder(node.value);
+                        sb.insert(command.length(), "\u00a78");
+                        cmdHintDraw = (sb.toString() + " " + node.desc).trim();
+                    }
                 }
             } else {
                 setCommandHint(command, node.desc);
             }
+
+            oldCmd = command;
         } else {
+            oldCmd = null;
             unsetCommandHint();
         }
 
         refreshCommandHint();
     }
 
+    protected String oldCmd;
     protected void setCommandHint(String cmd, String cmdHint) {
-        String newCmdHintSet = (cmd + " " + cmdHint).trim();
-        if(newCmdHintSet.equals(cmdHintSet)) return;
-        cmdHintSet = newCmdHintSet;
+        if(oldCmd != null && oldCmd.equals(cmd)) return;
+
+        cmdHintSet = (cmd + " " + cmdHint).trim();
 
         int cmdUsageSplit = cmdHintSet.indexOf(" - ");
         if(cmdUsageSplit >= 0) {
             cmdHintAppend = cmdHintSet.substring(cmdUsageSplit);
             cmdHintSet = cmdHintSet.substring(0, cmdUsageSplit);
         } else {
-            cmdHintAppend = "";
+            cmdHintAppend = " " + cmdHint;
+            cmdHintSet = cmd;
+            cmdHintArgs = new String[] { cmd };
+            cmdHintOptional = new Boolean[] { false };
+            refreshCommandHint();
+            return;
         }
 
         ArrayList<String> argTmp = new ArrayList<String>();
