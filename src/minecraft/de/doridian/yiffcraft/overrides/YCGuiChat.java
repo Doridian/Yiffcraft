@@ -1,21 +1,35 @@
 package de.doridian.yiffcraft.overrides;
 
+import de.doridian.yiffcraft.CharPrefixTree;
 import de.doridian.yiffcraft.Chat;
 import de.doridian.yiffcraft.Yiffcraft;
 import de.doridian.yiffcraft.commands.BaseCommand;
 import net.minecraft.src.GuiChat;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class YCGuiChat extends GuiChat {
-    public YCGuiChat() {
-        super();
-    }
-    
     protected String cmdHintSet;
     protected String cmdHintDraw;
+
+    protected static CharPrefixTree commands;
+
+    public YCGuiChat() {
+        super();
+
+        if(commands == null) {
+            commands = new CharPrefixTree();
+            Map<String, String> tmpCommands = Yiffcraft.wecui.getLocalPlugin().getPlugin().getCommands();
+            commands.addAll(tmpCommands, '/');
+
+            tmpCommands.clear();
+            for(Map.Entry<String, BaseCommand> cmdEntry : Chat.commands.entrySet()) {
+                tmpCommands.put(cmdEntry.getKey(), cmdEntry.getValue().getUsage() + " - " + cmdEntry.getValue().getHelp());
+            }
+            commands.addAll(tmpCommands, '-');
+        }
+    }
 
     @Override
     public void drawScreen(int i, int i1, float f) {
@@ -30,32 +44,26 @@ public class YCGuiChat extends GuiChat {
     protected void keyTyped(char var1, int var2) {
         super.keyTyped(var1, var2);
 
-        if (!this.message.isEmpty()) {
-            char fChar = this.message.charAt(0);
+        if(!this.message.isEmpty()) {
+            String command = getCommand(this.message);
 
-            if(fChar == '/') {
-                if (Yiffcraft.wecui.getLocalPlugin().isEnabled()) {
-                    Map<String, String> commands = Yiffcraft.wecui.getLocalPlugin().getPlugin().getCommands();
-                    String command = getCommand(this.message);
+            CharPrefixTree.Node node = commands.get(command);
+            if(node == null) {
+                unsetCommandHint();
+            } else if(node.desc == null) {
+                unsetCommandHint();
 
-                    if (commands.containsKey(command)) {
-                        setCommandHint("/" + command, commands.get(command));
-                    } else {
-                        unsetCommandHint();
-                    }
-                }
-            } else if(fChar == '-') {
-                String command = getCommand(this.message);
-
-                if(Chat.commands.containsKey(command)) {
-                    BaseCommand cmd = Chat.commands.get(command);
-                    setCommandHint("-" + command, cmd.getUsage() + " - " + cmd.getHelp());
-                } else {
-                    unsetCommandHint();
+                node = commands.getFirstEnd(command);
+                if(node != null && node.value != null) {
+                    StringBuilder sb = new StringBuilder(node.value);
+                    sb.insert(command.length(), "\u00a78");
+                    cmdHintDraw = (sb.toString() + " " + node.desc).trim();
                 }
             } else {
-                unsetCommandHint();
+                setCommandHint(command, node.desc);
             }
+        } else {
+            unsetCommandHint();
         }
 
         refreshCommandHint();
@@ -166,6 +174,6 @@ public class YCGuiChat extends GuiChat {
             return "";
         }
 
-        return args[0].toLowerCase().substring(1);
+        return args[0].toLowerCase();
     }
 }
