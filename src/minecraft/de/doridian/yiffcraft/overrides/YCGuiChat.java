@@ -84,8 +84,10 @@ public class YCGuiChat extends GuiChat {
             } else if(c == '>') {
                 inBracket = false;
             } else if(c == ' ' && !inBracket) {
-                if(sb.length() > 0) argTmp.add(sb.toString());
-                sb = new StringBuilder();
+                if(sb.length() > 0) {
+                    argTmp.add(sb.toString());
+                    sb = new StringBuilder();
+                }
                 continue;
             }
             sb.append(c);
@@ -134,8 +136,8 @@ public class YCGuiChat extends GuiChat {
                     if(cmdHintOptional[i]) {
                         if(!hadOptional) {
                             sb.append("\u00a7b");
+                            hadOptional = true;
                         }
-                        hadOptional = true;
                     } else {
                         sb.append("\u00a7a");
                     }
