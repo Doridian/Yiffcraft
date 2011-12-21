@@ -22,16 +22,23 @@ public class YCGuiChat extends GuiChat {
         super();
 
         if(commands == null) {
-            commands = new CharPrefixTree();
-            Map<String, String> tmpCommands = Yiffcraft.wecui.getLocalPlugin().getPlugin().getCommands();
-            commands.addAll(tmpCommands, '/');
-
-            tmpCommands.clear();
-            for(Map.Entry<String, BaseCommand> cmdEntry : Chat.commands.entrySet()) {
-                tmpCommands.put(cmdEntry.getKey(), cmdEntry.getValue().getUsage() + " - " + cmdEntry.getValue().getHelp());
-            }
-            commands.addAll(tmpCommands, '-');
+            reloadCommands();
         }
+    }
+
+    public static void reloadCommands() {
+        CharPrefixTree newCommands = new CharPrefixTree();
+
+        Map<String, String> tmpCommands = Yiffcraft.wecui.getLocalPlugin().getPlugin().getCommands();
+        newCommands.addAll(tmpCommands, '/');
+
+        tmpCommands.clear();
+        for(Map.Entry<String, BaseCommand> cmdEntry : Chat.commands.entrySet()) {
+            tmpCommands.put(cmdEntry.getKey(), cmdEntry.getValue().getUsage() + " - " + cmdEntry.getValue().getHelp());
+        }
+        newCommands.addAll(tmpCommands, '-');
+
+        commands = newCommands;
     }
 
     @Override
