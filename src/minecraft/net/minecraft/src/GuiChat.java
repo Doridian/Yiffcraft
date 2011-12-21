@@ -26,9 +26,11 @@ public class GuiChat extends GuiScreen {
 	public void initGui() {
 		Keyboard.enableRepeatEvents(true);
 
+        /*@DORI*/
         if(!(Yiffcraft.minecraft.currentScreen instanceof YCGuiChat)) {
             Yiffcraft.minecraft.displayGuiScreen(new YCGuiChat());
         }
+        /*@DORI*/
 	}
 
 	public void onGuiClosed() {
