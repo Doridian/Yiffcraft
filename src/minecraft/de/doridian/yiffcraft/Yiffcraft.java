@@ -128,8 +128,7 @@ public final class Yiffcraft
 			}
 		}.start();
 	}*/
-	
-	public static boolean serverSpecial = false;
+
 	public static boolean enableWallhack = false;
 	public static boolean enableFullbright = false;
 	public static boolean enableFly = false;
@@ -146,18 +145,14 @@ public final class Yiffcraft
     public static boolean enableWaterwalk = false;
 	public static int chatMode = 1; 
 	public static float stepHeight = 0.5F;;
-	public static File configdir_server = null;
 	public static File configdir = null;
-	public static KeyMacro[] keyMacros;
 	public static int notifyMode = 1;
 	public static boolean enableAutoRun = false;
 	public static String currentIP;
 	public static int currentPort;
 	public static int serverPing = -1;
-	public static long pingAge = 0;
 	public static long lastPingPacket = 0;
 	public static long clientPing = 0;
-	public static boolean isCreative = false;
 	public static int nametagMode = 0;
 
 	public static void connectingTo(String world, int port)
@@ -178,10 +173,9 @@ public final class Yiffcraft
 					String check = buffre.readLine();
 					buffre.close();
 					if(check.equals("OK")) {
-						serverSpecial = false;
+
 					} else if(check.equals("SPECIAL")) {
-						serverSpecial = true;
-						Yiffcraft.SendPacket(new Packet3Chat("/yiffcraft"));
+
 					} else {
 						invalidKey();
 					}
