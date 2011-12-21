@@ -76,7 +76,7 @@ public class YCGuiChat extends GuiChat {
         cmdHintArgs = cmdHintSet.split(" ");
         cmdHintOptional = new Boolean[cmdHintArgs.length];
 
-        for(int i=0; i<cmdHintArgs.length; i++) {
+        for(int i = 0; i < cmdHintArgs.length; i++) {
             cmdHintOptional[i] = (cmdHintArgs[i].charAt(0) == '[');
         }
 
@@ -102,7 +102,7 @@ public class YCGuiChat extends GuiChat {
         }
 
         StringBuilder sb = new StringBuilder();
-        for(int i=0; i<cmdHintArgs.length; i++) {
+        for(int i = 0; i < cmdHintArgs.length; i++) {
             boolean wasHighlighted = false;
             if(i == argToHighlight) {
                 if(cmdHintOptional[i]) {
