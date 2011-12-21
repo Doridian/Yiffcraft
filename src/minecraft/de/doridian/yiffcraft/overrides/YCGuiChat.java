@@ -5,6 +5,7 @@ import de.doridian.yiffcraft.Chat;
 import de.doridian.yiffcraft.Yiffcraft;
 import de.doridian.yiffcraft.commands.BaseCommand;
 import net.minecraft.src.GuiChat;
+import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -12,6 +13,8 @@ import java.util.Map;
 public class YCGuiChat extends GuiChat {
     protected String cmdHintSet;
     protected String cmdHintDraw;
+    
+    protected String predictedCmd;
 
     protected static CharPrefixTree commands;
 
@@ -43,6 +46,11 @@ public class YCGuiChat extends GuiChat {
     @Override
     protected void keyTyped(char var1, int var2) {
         super.keyTyped(var1, var2);
+        
+        if(predictedCmd != null && Keyboard.isKeyDown(Keyboard.KEY_TAB)) {
+            this.message = predictedCmd + " ";
+            this.cursorPosition = this.message.length();
+        }
 
         if(!this.message.isEmpty()) {
             String command = getCommand(this.message);
@@ -56,7 +64,7 @@ public class YCGuiChat extends GuiChat {
                 if(this.message.length() <= command.length() || this.message.charAt(command.length()) != ' ') {
                     node = commands.getFirstEnd(command);
                     if(node != null && node.value != null) {
-                        StringBuilder sb = new StringBuilder(node.value);
+                        StringBuilder sb = new StringBuilder(predictedCmd = node.value);
                         sb.insert(command.length(), "\u00a78");
                         cmdHintDraw = (sb.toString() + " " + node.desc).trim();
                     }
@@ -76,6 +84,7 @@ public class YCGuiChat extends GuiChat {
 
     protected String oldCmd;
     protected void setCommandHint(String cmd, String cmdHint) {
+        predictedCmd = null;
         if(oldCmd != null && oldCmd.equals(cmd)) return;
 
         cmdHintSet = (cmd + " " + cmdHint).trim();
@@ -176,6 +185,7 @@ public class YCGuiChat extends GuiChat {
     protected void unsetCommandHint() {
         cmdHintSet = null;
         cmdHintDraw = null;
+        predictedCmd = null;
     }
 
     protected String getCommand(String text) {
