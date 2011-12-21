@@ -5,6 +5,7 @@ import de.doridian.yiffcraft.Yiffcraft;
 import de.doridian.yiffcraft.commands.BaseCommand;
 import net.minecraft.src.GuiChat;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,7 +74,26 @@ public class YCGuiChat extends GuiChat {
             cmdHintAppend = "";
         }
 
-        cmdHintArgs = cmdHintSet.split(" ");
+        ArrayList<String> argTmp = new ArrayList<String>();
+        StringBuilder sb = new StringBuilder();
+        boolean inBracket = false;
+        for(int i = 0; i < cmdHintSet.length(); i++) {
+            char c = cmdHintSet.charAt(i);
+            if(c == '<') {
+                inBracket = true;
+            } else if(c == '>') {
+                inBracket = false;
+            } else if(c == ' ' && !inBracket) {
+                if(sb.length() > 0) argTmp.add(sb.toString());
+                sb = new StringBuilder();
+                continue;
+            }
+            sb.append(c);
+        }
+
+        if(sb.length() > 0) argTmp.add(sb.toString());
+
+        cmdHintArgs = argTmp.toArray(new String[argTmp.size()]);
         cmdHintOptional = new Boolean[cmdHintArgs.length];
 
         for(int i = 0; i < cmdHintArgs.length; i++) {
@@ -97,24 +117,28 @@ public class YCGuiChat extends GuiChat {
         int argToHighlight = argc - 1;
 
         if(argToHighlight >= cmdHintArgs.length) {
-            cmdHintDraw = cmdHintSet;
+            cmdHintDraw = cmdHintSet + cmdHintAppend;
             return;
         }
 
+        int argsToHighlight = 1;
+        boolean hadOptional = false;
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < cmdHintArgs.length; i++) {
             boolean wasHighlighted = false;
-            if(i == argToHighlight) {
+            if(i < argToHighlight + argsToHighlight) {
                 if(cmdHintOptional[i]) {
-                    for(int j = i; j < cmdHintOptional.length; j++) {
-                        if(!cmdHintOptional[j]) {
-                            argToHighlight = j;
-                            break;
+                    argsToHighlight++;
+                }
+                if(i >= argToHighlight) {
+                    if(cmdHintOptional[i]) {
+                        if(!hadOptional) {
+                            sb.append("\u00a7b");
                         }
+                        hadOptional = true;
+                    } else {
+                        sb.append("\u00a7a");
                     }
-                    sb.append("\u00a7b");
-                } else {
-                    sb.append("\u00a7a");
                 }
                 wasHighlighted = true;
             }
