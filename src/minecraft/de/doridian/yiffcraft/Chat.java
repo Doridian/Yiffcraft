@@ -113,8 +113,8 @@ public final class Chat
         }
 
         if(text.startsWith("\u00a7f\u00a75\u00a7d")) {
-            final String ctext = text.substring(4);
-            switch(text.charAt(3)) {
+            final String ctext = text.substring(7);
+            switch(text.charAt(6)) {
                 case 'c':
                     new Thread() {
                         public void run() {
@@ -137,9 +137,12 @@ public final class Chat
 
                                 YCGuiChat.reloadCommands(additionalCommands);
                             }
-                            catch(Exception e) { }
+                            catch(Exception e) { e.printStackTrace(); }
                         }
                     }.start();
+                    break;
+                default:
+                    Chat.addChat("Wut: " + text.substring(3));
                     break;
             }
             return "";

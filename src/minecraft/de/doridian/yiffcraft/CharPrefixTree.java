@@ -75,12 +75,6 @@ public class CharPrefixTree {
 
         return node;
     }
-    
-    public String getDesc(final String s) {
-        Node node = get(s);
-        if(node == null) return null;
-        return node.desc;
-    }
 
     public boolean remove(final Object o) {
         if(!(o instanceof String)) {
