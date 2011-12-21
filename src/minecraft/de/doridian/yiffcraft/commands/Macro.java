@@ -108,10 +108,10 @@ public class Macro extends BaseCommand
 		}
 	}
 	
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Manipulate macro keybinds.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "[add/rem/save/reload/reset/list]";
 	}
 }

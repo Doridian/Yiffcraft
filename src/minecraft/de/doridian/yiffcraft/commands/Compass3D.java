@@ -13,10 +13,10 @@ public class Compass3D extends BaseCommand {
 		else
 			Chat.addChat("Compass is now in 2D mode.");
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles compass mode between 3D and 2D.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "[on/off]";
 	}
 }

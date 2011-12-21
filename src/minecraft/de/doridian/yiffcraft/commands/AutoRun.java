@@ -6,10 +6,10 @@ public class AutoRun extends BaseCommand {
 	public void run(String[] args) throws Exception {
 		Yiffcraft.enableAutoRun = !Yiffcraft.enableAutoRun;
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles auto run. Keeps you continuously running and removes the need to use the forward button.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import de.doridian.yiffcraft.Yiffcraft;
+import de.doridian.yiffcraft.overrides.YCGuiChat;
 import net.minecraft.src.ChatAllowedCharacters;
 import net.minecraft.src.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -23,6 +25,10 @@ public class GuiChat extends GuiScreen {
 
 	public void initGui() {
 		Keyboard.enableRepeatEvents(true);
+
+        if(!(Yiffcraft.minecraft.currentScreen instanceof YCGuiChat)) {
+            Yiffcraft.minecraft.displayGuiScreen(new YCGuiChat());
+        }
 	}
 
 	public void onGuiClosed() {

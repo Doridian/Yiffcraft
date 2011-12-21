@@ -7,10 +7,10 @@ public class Fullbright extends BaseCommand {
 		Yiffcraft.enableFullbright = !Yiffcraft.enableFullbright;
 		Yiffcraft.rerender();
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles fullbright mode.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

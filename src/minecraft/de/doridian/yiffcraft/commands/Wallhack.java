@@ -7,10 +7,10 @@ public class Wallhack extends BaseCommand {
 		Yiffcraft.enableWallhack = !Yiffcraft.enableWallhack;
 		Yiffcraft.rerender();
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles wallhack.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

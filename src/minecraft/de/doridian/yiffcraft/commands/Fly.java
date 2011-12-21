@@ -17,10 +17,10 @@ public class Fly extends BaseCommand {
 			Yiffcraft.flymodeSpecial = !Yiffcraft.flymodeSpecial;
 		}
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles fly hack or fly mode.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "[3d/planar/tog]";
 	}
 }

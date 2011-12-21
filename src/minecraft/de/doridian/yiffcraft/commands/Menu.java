@@ -6,10 +6,10 @@ public class Menu extends BaseCommand {
 	public void run(String[] args) throws Exception {
 		Renderer.openMenu();
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Displays main menu";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

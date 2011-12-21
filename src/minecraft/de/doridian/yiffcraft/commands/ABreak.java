@@ -8,10 +8,10 @@ public class ABreak extends BaseCommand {
 		if(!AutoBreak.enabled)
 			AutoBreak.reinit();
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles autobreak. Autobreak makes a queue of blocks and breaks one block right after the other with the best tool available on your hotbar.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

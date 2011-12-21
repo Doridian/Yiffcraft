@@ -19,10 +19,10 @@ public class Waterwalk extends BaseCommand {
         }
         Chat.addChat("Waterwalk is now " + (Yiffcraft.enableWaterwalk ? "ON" : "OFF"));
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles waterwalk.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "[on/off]";
 	}
 }

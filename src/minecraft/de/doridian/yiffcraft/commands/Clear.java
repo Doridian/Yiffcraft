@@ -6,10 +6,10 @@ public class Clear extends BaseCommand {
 	public void run(String[] args) throws Exception {
 		Yiffcraft.minecraft.ingameGUI.clearChatMessages();
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Clears all chat messages from the display.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

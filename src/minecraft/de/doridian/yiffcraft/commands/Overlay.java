@@ -9,10 +9,10 @@ public class Overlay extends BaseCommand {
 			Yiffcraft.guiMode = 1;
 		Yiffcraft.saveConfig();
 	}
-	public String getHelp() throws Exception {
-		return "Toggles YiffCraft interfaces.";
+	public String getHelp() {
+		return "Toggles Yiffcraft interfaces.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

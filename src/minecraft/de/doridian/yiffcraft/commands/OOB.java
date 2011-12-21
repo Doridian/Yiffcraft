@@ -7,10 +7,10 @@ public class OOB extends BaseCommand {
 		Yiffcraft.enableOutOfBody = !Yiffcraft.enableOutOfBody;
 		Yiffcraft.RefreshOutOfBody();
 	}
-	public String getHelp() throws Exception {
+	public String getHelp() {
 		return "Toggles out of body mode.";
 	}
-	public String getUsage() throws Exception {
+	public String getUsage() {
 		return "";
 	}
 }

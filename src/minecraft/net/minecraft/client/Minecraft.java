@@ -1366,7 +1366,7 @@ public abstract class Minecraft implements Runnable {
 			}
 
 			while (this.isMultiplayerWorld() && this.gameSettings.keyBindChat.isPressed()) {
-				this.displayGuiScreen(new WorldEditScreen(Yiffcraft.wecui));
+				this.displayGuiScreen(new GuiChat());
 			}
 			
 			//Spout start
