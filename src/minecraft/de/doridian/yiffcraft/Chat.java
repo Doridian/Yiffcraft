@@ -1,11 +1,16 @@
 package de.doridian.yiffcraft;
 
 import de.doridian.yiffcraft.commands.BaseCommand;
+import de.doridian.yiffcraft.overrides.YCGuiChat;
 import net.minecraft.src.Packet3Chat;
 import org.spoutcraft.client.SpoutClient;
 import wecui.event.ChatCommandEvent;
 import wecui.event.ChatEvent;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
@@ -93,12 +98,52 @@ public final class Chat
 	private static String reply = "";
 	private static String mustMatchStart = null;
 	private static String mustMatchEnd = null;
+
+    public static boolean ycchatinited = false;
 	
 	public static String incoming(String text)
 	{
         ChatEvent event = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.INCOMING);
         Yiffcraft.wecui.getEventManager().callEvent(event);
         if(event.isCancelled()) return "";
+
+        if(!ycchatinited) {
+            ycchatinited = true;
+            Chat.emitChatMsg("/yiffcraft getcommands");
+        }
+
+        if(text.startsWith("\u00a7f\u00a75\u00a7d")) {
+            final String ctext = text.substring(4);
+            switch(text.charAt(3)) {
+                case 'c':
+                    new Thread() {
+                        public void run() {
+                            try {
+                                HashMap<String, String> additionalCommands = new HashMap<String, String>();
+                                
+                                URL url = new URL(ctext);
+                                URLConnection conn = url.openConnection();
+                                conn.connect();
+                                BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                                String cline;
+                                while((cline = buffre.readLine()) != null) {
+                                    int splpos = cline.indexOf('|');
+                                    if(splpos <= 0) continue;
+                                    String cmd = cline.substring(0, splpos);
+                                    String cmdUsage = cline.substring(splpos + 1);
+                                    additionalCommands.put(cmd, cmdUsage);
+                                }
+                                buffre.close();
+
+                                YCGuiChat.reloadCommands(additionalCommands);
+                            }
+                            catch(Exception e) { }
+                        }
+                    }.start();
+                    break;
+            }
+            return "";
+        }
 	
 		String noCC = Util.stripColorCodes(text);
 

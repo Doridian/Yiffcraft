@@ -5,6 +5,7 @@ import de.doridian.yiffcraft.gui.ingame.GuiNotice;
 import de.doridian.yiffcraft.gui.ingame.Radar;
 import de.doridian.yiffcraft.gui.menu.GuiMain;
 import de.doridian.yiffcraft.gui.menu.GuiWallhacks;
+import de.doridian.yiffcraft.overrides.YCGuiChat;
 import de.doridian.yiffcraft.overrides.YCGuiIngame;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MinecraftApplet;
@@ -189,6 +190,10 @@ public final class Yiffcraft
 
 		Radar.reinit();
 		AutoBreak.reinit();
+
+        YCGuiChat.reloadCommands();
+
+        Chat.ycchatinited = false;
 
 		loadConfig();
 	}
