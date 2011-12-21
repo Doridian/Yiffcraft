@@ -34,10 +34,9 @@ public class YCGuiChat extends GuiChat {
     public static void reloadCommands(HashMap<String, String> additionalCommands) {
         CharPrefixTree newCommands = new CharPrefixTree();
 
-        Map<String, String> tmpCommands = Yiffcraft.wecui.getLocalPlugin().getPlugin().getCommands();
-        newCommands.addAll(tmpCommands, '/');
+        newCommands.addAll(Yiffcraft.wecui.getLocalPlugin().getPlugin().getCommands(), '/');
 
-        tmpCommands.clear();
+        Map<String, String> tmpCommands = new HashMap<String, String>();
         for(Map.Entry<String, BaseCommand> cmdEntry : Chat.commands.entrySet()) {
             tmpCommands.put(cmdEntry.getKey(), cmdEntry.getValue().getUsage() + " - " + cmdEntry.getValue().getHelp());
         }
@@ -157,7 +156,21 @@ public class YCGuiChat extends GuiChat {
     protected void refreshCommandHint() {
         if(cmdHintSet == null) return;
 
-        int argc = message.trim().split(" ").length;
+        String[] args = message.trim().split(" ");
+        int argc = args.length;
+        if(argc > 1) {
+            String arg = args[1];
+            if(arg.length() > 1 && arg.charAt(0) == '-') {
+                char c = arg.charAt(1);
+                if(c < '0' || c > '9') {
+                    argc--;
+                }
+            }
+        }
+        for(String arg : args) {
+            if(arg.isEmpty()) argc--;
+        }
+
         if(message.charAt(message.length() - 1) == ' ') argc++;
 
         int argToHighlight = argc - 1;
