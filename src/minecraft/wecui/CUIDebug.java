@@ -37,7 +37,7 @@ public class CUIDebug implements InitializationFactory {
         
         try {
             this.debugFile = new File(Obfuscation.getWorldEditCUIDir(), "WorldEditCUI-debug.txt");
-            this.debugMode = controller.getSettings().getProperty("debugMode").equals("true");
+            this.debugMode = controller.getConfiguration().isDebugMode();
             
             if (this.debugMode) {
                 FileHandler newHandler = new FileHandler(this.debugFile.getAbsolutePath());
@@ -52,9 +52,13 @@ public class CUIDebug implements InitializationFactory {
 
     }
 
+    /**
+     * Shows a message if debug mode is true
+     * @param message 
+     */
     public void debug(String message) {
         if (debugMode) {
-            this.info("WorldEditCUI Debug - " + message);
+            logger.info("WorldEditCUI Debug - " + message);
         }
     }
 

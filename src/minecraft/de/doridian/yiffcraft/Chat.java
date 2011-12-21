@@ -50,7 +50,7 @@ public final class Chat
         if (!chatevent.isCancelled() && text.startsWith("/") && text.length() > 1) {
             ChatCommandEvent commandevent = new ChatCommandEvent(Yiffcraft.wecui, text);
             Yiffcraft.wecui.getEventManager().callEvent(commandevent);
-            if (commandevent.isHandled()) {
+            if (commandevent.isHandled() || commandevent.isCancelled()) {
                 return false;
             }
         }
