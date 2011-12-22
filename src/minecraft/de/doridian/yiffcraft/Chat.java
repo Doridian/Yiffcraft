@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.regex.Pattern;
 
 public final class Chat
@@ -117,7 +118,10 @@ public final class Chat
             switch(text.charAt(6)) {
                 case 'c':
                     new Thread() {
+                        private HashSet<URL> loadedURLs;
+
                         public void run() {
+                            loadedURLs = new HashSet<URL>();
                             HashMap<String, String> additionalCommands = new HashMap<String, String>();
                             addToHashmap(additionalCommands, null, ctext);
                             YCGuiChat.reloadCommands(additionalCommands);
@@ -126,6 +130,8 @@ public final class Chat
                         private void addToHashmap(HashMap<String, String> additionalCommands, URL lastURL, String ctext) {
                             try {
                                 URL url = new URL(lastURL, ctext);
+                                if(loadedURLs.contains(url)) return;
+                                loadedURLs.add(url);
                                 URLConnection conn = url.openConnection();
                                 conn.connect();
                                 BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
