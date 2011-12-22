@@ -168,7 +168,7 @@ public class YCGuiChat extends GuiChat {
 
         String[] args = message.trim().split(" ");
         int argc = args.length;
-        if(argc > 1) {
+        if(argc > 2) {
             String arg = args[1];
             if(arg.length() > 1 && arg.charAt(0) == '-' && !cmdHintSet.contains(" " + arg + " ")) {
                 char c = arg.charAt(1);

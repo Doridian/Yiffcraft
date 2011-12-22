@@ -118,24 +118,37 @@ public final class Chat
                 case 'c':
                     new Thread() {
                         public void run() {
+                            HashMap<String, String> additionalCommands = new HashMap<String, String>();
+                            addToHashmap(additionalCommands, null, ctext);
+                            YCGuiChat.reloadCommands(additionalCommands);
+                        }
+                        
+                        private void addToHashmap(HashMap<String, String> additionalCommands, URL lastURL, String ctext) {
                             try {
-                                HashMap<String, String> additionalCommands = new HashMap<String, String>();
-                                
-                                URL url = new URL(ctext);
+                                URL url = new URL(lastURL, ctext);
                                 URLConnection conn = url.openConnection();
                                 conn.connect();
                                 BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                                 String cline;
                                 while((cline = buffre.readLine()) != null) {
-                                    int splpos = cline.indexOf('|');
-                                    if(splpos <= 0) continue;
-                                    String cmd = cline.substring(0, splpos);
-                                    String cmdUsage = cline.substring(splpos + 1);
-                                    additionalCommands.put(cmd, cmdUsage);
+                                    switch(cline.charAt(0)) {
+                                        case '@':
+                                            addToHashmap(additionalCommands, url, cline.substring(1));
+                                            break;
+                                        case ';':
+                                            //Ignore the line, its a comment!
+                                            break;
+                                        default:
+                                            int splpos = cline.indexOf('|');
+                                            if(splpos <= 0) break;
+                                            String cmd = cline.substring(0, splpos);
+                                            String cmdUsage = cline.substring(splpos + 1);
+                                            additionalCommands.put(cmd, cmdUsage);
+                                            break;
+                                    }
+
                                 }
                                 buffre.close();
-
-                                YCGuiChat.reloadCommands(additionalCommands);
                             }
                             catch(Exception e) { e.printStackTrace(); }
                         }
