@@ -85,6 +85,16 @@ public class YCGuiChat extends GuiChat {
                     }
                 }
             } else {
+                CharPrefixTree.Node tmpNode;
+                String tmpCommand = command;
+                while((tmpCommand = getCommand(this.message, tmpCommand.length() + 2, true)) != null) {
+                    tmpNode = commands.get(tmpCommand);
+                    if(tmpNode != null && tmpNode.desc != null) {
+                        node = tmpNode;
+                        command = tmpCommand;
+                    }
+                }
+
                 setCommandHint(command, node.desc);
             }
 
@@ -217,13 +227,22 @@ public class YCGuiChat extends GuiChat {
         predictedCmd = null;
     }
 
-    protected String getCommand(String text) {
-        String[] args = text.split(" ");
+    protected String getCommand(String text, int spacepos, boolean musthavespace) {
+        spacepos = text.indexOf(' ', spacepos);
 
-        if (args.length == 0) {
-            return "";
+        text = text.toLowerCase();
+
+        if(spacepos < 0) {
+            if(musthavespace)
+                return null;
+            else
+                return text;
         }
 
-        return args[0].toLowerCase();
+        return text.substring(0, spacepos);
+    }
+
+    protected String getCommand(String text) {
+        return getCommand(text, 0, false);
     }
 }
