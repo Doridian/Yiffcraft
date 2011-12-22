@@ -131,6 +131,7 @@ public final class Chat
                                 BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                                 String cline;
                                 while((cline = buffre.readLine()) != null) {
+                                    if(cline.isEmpty()) continue;
                                     switch(cline.charAt(0)) {
                                         case '@':
                                             addToHashmap(additionalCommands, url, cline.substring(1));
@@ -150,7 +151,7 @@ public final class Chat
                                 }
                                 buffre.close();
                             }
-                            catch(Exception e) { e.printStackTrace(); }
+                            catch(Exception e) { System.out.println("Error parsing: " + ctext); e.printStackTrace(); }
                         }
                     }.start();
                     break;
