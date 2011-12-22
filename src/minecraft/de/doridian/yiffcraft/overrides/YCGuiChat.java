@@ -18,6 +18,83 @@ public class YCGuiChat extends GuiChat {
     protected String predictedCmd;
 
     protected static CharPrefixTree commands;
+    
+    protected final HintingRefreshThread hintingRefreshThread;
+
+    private class HintingRefreshThread extends Thread {
+        private boolean gotNewMsg;
+        private String lastMsg;
+
+        public boolean running = true;
+
+        public void newMessage() {
+            synchronized (hintingRefreshThread) {
+                gotNewMsg = true;
+                this.notify();
+            }
+        }
+
+        public void run() {
+            while(running) {
+                try {
+                    synchronized (hintingRefreshThread) {
+                        while(!gotNewMsg) {
+                            wait();
+                        }
+                    }
+
+                    gotNewMsg = false;
+
+                    if(message.equals(lastMsg)) continue;
+
+                    lastMsg = message;
+                    gotNewMsg();
+                }
+                catch(Exception e) { }
+            }
+        }
+
+        private void gotNewMsg() {
+            if(!message.isEmpty()) {
+                String command = getCommand(message);
+
+                CharPrefixTree.Node node = commands.get(command);
+                if(node == null) {
+                    unsetCommandHint();
+                } else if(node.desc == null) {
+                    unsetCommandHint();
+
+                    if(message.length() <= command.length() || message.charAt(command.length()) != ' ') {
+                        node = commands.getFirstEnd(command);
+                        if(node != null && node.value != null) {
+                            StringBuilder sb = new StringBuilder(predictedCmd = node.value);
+                            sb.insert(command.length(), "\u00a78");
+                            cmdHintDraw = (sb.toString() + " " + node.desc).trim();
+                        }
+                    }
+                } else {
+                    CharPrefixTree.Node tmpNode;
+                    String tmpCommand = command;
+                    while((tmpCommand = getCommand(message, tmpCommand.length() + 2, true)) != null) {
+                        tmpNode = commands.get(tmpCommand);
+                        if(tmpNode != null && tmpNode.desc != null) {
+                            node = tmpNode;
+                            command = tmpCommand;
+                        }
+                    }
+
+                    setCommandHint(command, node.desc);
+                }
+
+                oldCmd = command;
+            } else {
+                oldCmd = null;
+                unsetCommandHint();
+            }
+
+            refreshCommandHint();
+        }
+    }
 
     public YCGuiChat() {
         super();
@@ -25,6 +102,9 @@ public class YCGuiChat extends GuiChat {
         if(commands == null) {
             reloadCommands();
         }
+        
+        hintingRefreshThread = new HintingRefreshThread();
+        hintingRefreshThread.start();
     }
 
     public static void reloadCommands() {
@@ -67,45 +147,10 @@ public class YCGuiChat extends GuiChat {
             this.cursorPosition = this.message.length();
         }
 
-        if(!this.message.isEmpty()) {
-            String command = getCommand(this.message);
-
-            CharPrefixTree.Node node = commands.get(command);
-            if(node == null) {
-                unsetCommandHint();
-            } else if(node.desc == null) {
-                unsetCommandHint();
-
-                if(this.message.length() <= command.length() || this.message.charAt(command.length()) != ' ') {
-                    node = commands.getFirstEnd(command);
-                    if(node != null && node.value != null) {
-                        StringBuilder sb = new StringBuilder(predictedCmd = node.value);
-                        sb.insert(command.length(), "\u00a78");
-                        cmdHintDraw = (sb.toString() + " " + node.desc).trim();
-                    }
-                }
-            } else {
-                CharPrefixTree.Node tmpNode;
-                String tmpCommand = command;
-                while((tmpCommand = getCommand(this.message, tmpCommand.length() + 2, true)) != null) {
-                    tmpNode = commands.get(tmpCommand);
-                    if(tmpNode != null && tmpNode.desc != null) {
-                        node = tmpNode;
-                        command = tmpCommand;
-                    }
-                }
-
-                setCommandHint(command, node.desc);
-            }
-
-            oldCmd = command;
-        } else {
-            oldCmd = null;
-            unsetCommandHint();
-        }
-
-        refreshCommandHint();
+        hintingRefreshThread.newMessage();
     }
+
+
 
     protected String oldCmd;
     protected void setCommandHint(String cmd, String cmdHint) {
