@@ -15,7 +15,7 @@ public class CharPrefixTree {
     Node root = null;
 
     public boolean isEmpty() {
-        return this.root != null;
+        return (this.root == null);
     }
 
     public Node add(final String s, final String d) {
@@ -23,10 +23,10 @@ public class CharPrefixTree {
         node.desc = d;
         return node;
     }
-    
+
     public Node add(String s) {
         s = s.toLowerCase();
-        
+
         Node node = this.root;
         if (node == null)
             node = this.root = new Node();
@@ -42,12 +42,12 @@ public class CharPrefixTree {
         node.value = s;
         return node;
     }
-    
+
     public Node get(String s) {
         if(s == null || s.isEmpty()) {
             return root;
         }
-        
+
         s = s.toLowerCase();
 
         Node node = this.root;
@@ -62,7 +62,7 @@ public class CharPrefixTree {
 
         return node;
     }
-    
+
     public Node getFirstEnd(final String s) {
         Node node = get(s);
         if(node == null) return null;
