@@ -26,10 +26,7 @@ import wecui.render.CuboidRegion;
  * TODO: Add MultiWorld support
  * TODO: Preview mode
  * TODO: Command transactions
- *
- * TODO: Look at pre-rewrite to make boxes prettier
  * 
- * @author lahwran
  * @author yetanotherx
  */
 public class WorldEditCUI {
