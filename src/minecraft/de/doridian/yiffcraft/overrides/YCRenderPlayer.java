@@ -51,8 +51,6 @@ public class YCRenderPlayer extends RenderPlayer {
             renderPlayerAsLiving.attackedAtYaw = var1.attackedAtYaw;
             renderPlayerAsLiving.attackTime = var1.attackTime;
 
-            renderPlayerAsLiving.fire = var1.fire;
-
             renderPlayerAsLiving.prevRenderYawOffset = var1.prevRenderYawOffset;
             renderPlayerAsLiving.renderYawOffset = var1.renderYawOffset;
         }
@@ -61,6 +59,8 @@ public class YCRenderPlayer extends RenderPlayer {
         renderPlayerAs.rotationPitch = var1.rotationPitch;
         renderPlayerAs.prevRotationYaw = var1.prevRotationYaw + yawOffset;
         renderPlayerAs.rotationYaw = var1.rotationYaw + yawOffset;
+
+        renderPlayerAs.fire = var1.fire;
 
         renderProcessor.doRender(renderPlayerAs, var2, (var4 - var1.yOffset) + yOffset, var6, var8 + yawOffset, var9);
     }
