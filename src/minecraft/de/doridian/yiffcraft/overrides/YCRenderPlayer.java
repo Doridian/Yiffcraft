@@ -60,7 +60,7 @@ public class YCRenderPlayer extends RenderPlayer {
         renderPlayerAs.prevRotationYaw = var1.prevRotationYaw + yawOffset;
         renderPlayerAs.rotationYaw = var1.rotationYaw + yawOffset;
 
-        renderPlayerAs.fire = var1.fire;
+        renderPlayerAs.fire = ((Entity)var1).fire;
 
         renderProcessor.doRender(renderPlayerAs, var2, (var4 - var1.yOffset) + yOffset, var6, var8 + yawOffset, var9);
     }
