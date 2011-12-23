@@ -33,6 +33,10 @@ public class YCEntityClientPlayerMP extends EntityClientPlayerMP {
     public void onUpdate() {
         super.onUpdate();
 
+        if(Yiffcraft.minecraft.gameSettings.thirdPersonView == 0) {
+            Yiffcraft.minecraft.entityRenderer.camRoll = 0.0F;
+        }
+
         Entity renderAs = YCRenderPlayer.instance.renderPlayerAs;
         if(renderAs != null) {
             renderAs.onUpdate();
