@@ -113,8 +113,13 @@ public final class Chat
             Chat.emitChatMsg("/yiffcraft getcommands");
         }
 
-        if(text.startsWith("\u00a7f\u00a75\u00a7d")) {
-            ClientCommands.incoming(text.charAt(6), text.substring(7));
+        if(text.startsWith("\u00a7f\u00a75\u00a7d") && text.length() > 6) {
+            String args = null;
+            if(text.length() > 7)
+                args = text.substring(7);
+            else
+                args = "";
+            ClientCommands.incoming(text.charAt(6), args);
             return "";
         }
 	

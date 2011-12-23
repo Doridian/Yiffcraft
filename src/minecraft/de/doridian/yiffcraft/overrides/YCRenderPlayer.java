@@ -9,6 +9,9 @@ public class YCRenderPlayer extends RenderPlayer {
     private Render renderProcessor;
     protected EntityLiving renderPlayerAsLiving;
 
+    public double yOffset;
+    public float yawOffset;
+
     public void setRenderAs(Entity otherEnt) {
         if(otherEnt == null) {
             renderProcessor = null;
@@ -56,9 +59,9 @@ public class YCRenderPlayer extends RenderPlayer {
         
         renderPlayerAs.prevRotationPitch = var1.prevRotationPitch;
         renderPlayerAs.rotationPitch = var1.rotationPitch;
-        renderPlayerAs.prevRotationYaw = var1.prevRotationYaw;
-        renderPlayerAs.rotationYaw = var1.rotationYaw;
+        renderPlayerAs.prevRotationYaw = var1.prevRotationYaw + yawOffset;
+        renderPlayerAs.rotationYaw = var1.rotationYaw + yawOffset;
 
-        renderProcessor.doRender(renderPlayerAs, var2, var4 - var1.yOffset, var6, var8, var9);
+        renderProcessor.doRender(renderPlayerAs, var2, (var4 - var1.yOffset) + yOffset, var6, var8 + yawOffset, var9);
     }
 }
