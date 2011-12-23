@@ -7,6 +7,7 @@ import de.doridian.yiffcraft.gui.menu.GuiMain;
 import de.doridian.yiffcraft.gui.menu.GuiWallhacks;
 import de.doridian.yiffcraft.overrides.YCGuiChat;
 import de.doridian.yiffcraft.overrides.YCGuiIngame;
+import de.doridian.yiffcraft.overrides.YCRenderPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MinecraftApplet;
 import net.minecraft.src.*;
@@ -194,6 +195,8 @@ public final class Yiffcraft
         YCGuiChat.reloadCommands();
 
         Chat.ycchatinited = false;
+
+        YCRenderPlayer.instance.setRenderAs(null);
 
 		loadConfig();
 	}

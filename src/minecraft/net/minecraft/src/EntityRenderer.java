@@ -64,7 +64,7 @@ public class EntityRenderer {
 	private MouseFilter mouseFilterDummy2 = new MouseFilter();
 	private MouseFilter mouseFilterDummy3 = new MouseFilter();
 	private MouseFilter mouseFilterDummy4 = new MouseFilter();
-	private float thirdPersonDistance = 4.0F;
+	public float thirdPersonDistance = 4.0F; /*@DORI*/ /* private -> public */
 	private float thirdPersonDistanceTemp = 4.0F;
 	private float debugCamYaw = 0.0F;
 	private float prevDebugCamYaw = 0.0F;
@@ -77,7 +77,7 @@ public class EntityRenderer {
 	private float smoothCamPartialTicks;
 	private float debugCamFOV = 0.0F;
 	private float prevDebugCamFOV = 0.0F;
-	private float camRoll = 0.0F;
+	public float camRoll = 0.0F; /*@DORI*/ /* private -> public */
 	private float prevCamRoll = 0.0F;
 	public int emptyTexture;
 	private int[] lightmapColors;
