@@ -3,6 +3,9 @@ package net.minecraft.src;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import de.doridian.yiffcraft.overrides.YCEntityClientPlayerMP;
+import de.doridian.yiffcraft.overrides.YCRenderPlayer;
 import net.minecraft.src.Block;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityArrow;
@@ -114,7 +117,7 @@ import org.spoutcraft.client.entity.RenderTexture;
 
 public class RenderManager {
 
-	private Map entityRenderMap = new HashMap();
+	public Map entityRenderMap = new HashMap(); /*@DORI: private -> public*/
 	public static RenderManager instance = new RenderManager();
 	private FontRenderer fontRenderer;
 	public static double renderPosX;
@@ -180,6 +183,7 @@ public class RenderManager {
 		this.entityRenderMap.put(EntityText.class, new RenderText());
 		this.entityRenderMap.put(EntityTexture.class, new RenderTexture());
 		//Spout End
+        /*@DORI*/ this.entityRenderMap.put(YCEntityClientPlayerMP.class, new YCRenderPlayer());
 		Iterator var1 = this.entityRenderMap.values().iterator();
 
 		while(var1.hasNext()) {

@@ -29,6 +29,16 @@ public class YCEntityClientPlayerMP extends EntityClientPlayerMP {
 		return !Yiffcraft.enableUnpushablePlayer;
 	}
 
+    /*@Override
+    public void onUpdate() {
+        super.onUpdate();
+
+        Entity renderAs = YCRenderPlayer.instance.renderPlayerAs;
+        if(renderAs != null) {
+            renderAs.onUpdate();
+        }
+    }*/
+    
     @Override
     public void onUpdate2() {
         this.capabilities.isFlying = false;

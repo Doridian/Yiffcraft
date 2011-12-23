@@ -114,57 +114,7 @@ public final class Chat
         }
 
         if(text.startsWith("\u00a7f\u00a75\u00a7d")) {
-            final String ctext = text.substring(7);
-            switch(text.charAt(6)) {
-                case 'c':
-                    new Thread() {
-                        private HashSet<URL> loadedURLs;
-
-                        public void run() {
-                            loadedURLs = new HashSet<URL>();
-                            HashMap<String, String> additionalCommands = new HashMap<String, String>();
-                            addToHashmap(additionalCommands, null, ctext);
-                            YCGuiChat.reloadCommands(additionalCommands);
-                        }
-                        
-                        private void addToHashmap(HashMap<String, String> additionalCommands, URL lastURL, String ctext) {
-                            try {
-                                URL url = new URL(lastURL, ctext);
-                                if(loadedURLs.contains(url)) return;
-                                loadedURLs.add(url);
-                                URLConnection conn = url.openConnection();
-                                conn.connect();
-                                BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                                String cline;
-                                while((cline = buffre.readLine()) != null) {
-                                    if(cline.isEmpty()) continue;
-                                    switch(cline.charAt(0)) {
-                                        case '@':
-                                            addToHashmap(additionalCommands, url, cline.substring(1));
-                                            break;
-                                        case ';':
-                                            //Ignore the line, its a comment!
-                                            break;
-                                        default:
-                                            int splpos = cline.indexOf('|');
-                                            if(splpos <= 0) break;
-                                            String cmd = cline.substring(0, splpos);
-                                            String cmdUsage = cline.substring(splpos + 1);
-                                            additionalCommands.put(cmd, cmdUsage);
-                                            break;
-                                    }
-
-                                }
-                                buffre.close();
-                            }
-                            catch(Exception e) { System.out.println("Error parsing: " + ctext); e.printStackTrace(); }
-                        }
-                    }.start();
-                    break;
-                default:
-                    Chat.addChat("Wut: " + text.substring(3));
-                    break;
-            }
+            ClientCommands.incoming(text.charAt(6), text.substring(7));
             return "";
         }
 	
