@@ -29,16 +29,36 @@ public class YCEntityClientPlayerMP extends EntityClientPlayerMP {
 		return !Yiffcraft.enableUnpushablePlayer;
 	}
 
+    public void setCamRoll(float roll) {
+        if(Yiffcraft.minecraft.entityRenderer.camRoll == roll) return;
+        
+        while(roll > 180F)
+            roll -= 360F;
+
+        while(roll < -180F)
+            roll += 360F;
+
+        if(roll > 90F)
+            roll = 90F;
+        else if(roll < -90F)
+            roll = -90F;
+
+        Yiffcraft.minecraft.entityRenderer.camRoll = roll;
+    }
+
     @Override
     public void onUpdate() {
         super.onUpdate();
 
-        if(Yiffcraft.minecraft.gameSettings.thirdPersonView == 0) {
-            Yiffcraft.minecraft.entityRenderer.camRoll = 0.0F;
-        }
-
         Entity renderAs = YCRenderPlayer.instance.renderPlayerAs;
         if(renderAs != null) {
+            YCRenderPlayer.instance.refreshVariablesStuff(this);
+            if(YCRenderPlayer.instance.renderPlayerAsLiving != null && YCRenderPlayer.instance.renderPlayerAsLiving instanceof EntityDragon) {
+                EntityDragon dragonLiving = (EntityDragon)YCRenderPlayer.instance.renderPlayerAsLiving;
+                setCamRoll((float)(dragonLiving.func_40160_a(1, 0)[0] - dragonLiving.func_40160_a(10, 0)[0]));
+            } else {
+                setCamRoll(0.0F);
+            }
             renderAs.onUpdate();
         }
     }
