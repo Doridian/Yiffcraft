@@ -7,13 +7,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Socket;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
+import java.net.*;
 
+import de.doridian.yiffcraft.SSLConnector;
 import org.spoutcraft.client.SpoutClient;
 import org.spoutcraft.spoutcraftapi.packet.PacketUtil;
 
@@ -155,9 +151,19 @@ public class PollResult {
 			DataOutputStream output = null;
 			try {
 				long start = System.currentTimeMillis();
-				sock = new Socket();
+
+                /*@DORI*/
+                String connip = ip;
+                if(connip.charAt(0) == '+') {
+                    sock = SSLConnector.allTrustingSocketFactory.createSocket();
+                    connip = connip.substring(1);
+                } else {
+                    sock = new Socket();
+                }
+                /*@DORI*/
+
 				sock.setSoTimeout(10000);
-				sock.connect(new InetSocketAddress(ip, port), 10000);
+				/*@DORI*/ sock.connect(new InetSocketAddress(connip, port), 10000);
 				sock.setTcpNoDelay(true);
 				sock.setTrafficClass(18);
 
