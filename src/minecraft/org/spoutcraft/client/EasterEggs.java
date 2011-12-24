@@ -54,6 +54,7 @@ public final class EasterEggs {
 
 	@SuppressWarnings("unchecked")
 	private static void buildEasterEggs() {
+        if(map == null) return;
 		for (String key : map.keySet()) {
 			EasterEgg egg = new EasterEgg(key);
 			Map<String, Object> eggmap = null;
