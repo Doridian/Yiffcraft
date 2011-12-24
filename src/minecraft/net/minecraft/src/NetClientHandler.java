@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Random;
 //Spout start
 import de.doridian.yiffcraft.Chat;
+import de.doridian.yiffcraft.SSLConnector;
 import de.doridian.yiffcraft.Yiffcraft;
 import de.doridian.yiffcraft.gui.ingame.Radar;
 import de.doridian.yiffcraft.overrides.YCPlayerControllerMP;
@@ -129,6 +130,11 @@ import net.minecraft.src.World;
 import net.minecraft.src.WorldClient;
 import net.minecraft.src.WorldSettings;
 
+import javax.net.ssl.HandshakeCompletedListener;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
+
 public class NetClientHandler extends NetHandler {
 
 	private boolean disconnected = false;
@@ -146,7 +152,16 @@ public class NetClientHandler extends NetHandler {
 
 	public NetClientHandler(Minecraft var1, String var2, int var3) throws UnknownHostException, IOException {
 		this.mc = var1;
-		Socket var4 = new Socket(InetAddress.getByName(var2), var3);
+
+        /*@DORI*/
+        Socket var4;
+        if(var2.charAt(0) == '+') {
+            var4 = SSLConnector.allTrustingSocketFactory.createSocket(InetAddress.getByName(var2.substring(1)), var3);
+        } else {
+            var4 = new Socket(InetAddress.getByName(var2), var3);
+        }
+        /*@DORI*/
+
 		this.netManager = new NetworkManager(var4, "Client", this);
 		//Spout start
 		org.spoutcraft.client.gui.error.GuiConnectionLost.lastServerIp = var2;
