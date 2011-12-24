@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.*;
@@ -14,6 +13,8 @@ import org.spoutcraft.client.SpoutClient;
 import org.spoutcraft.spoutcraftapi.packet.PacketUtil;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
+
+import javax.net.ssl.SSLSocket;
 
 public class PollResult {
 	protected int ping;
@@ -155,7 +156,9 @@ public class PollResult {
                 /*@DORI*/
                 String connip = ip;
                 if(connip.charAt(0) == '+') {
-                    sock = SSLConnector.allTrustingSocketFactory.createSocket();
+                    SSLSocket tmp = (SSLSocket)SSLConnector.allTrustingSocketFactory.createSocket();
+                    tmp.setUseClientMode(false);
+                    sock = tmp;
                     connip = connip.substring(1);
                 } else {
                     sock = new Socket();
