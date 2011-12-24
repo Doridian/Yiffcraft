@@ -1,5 +1,6 @@
 package de.doridian.yiffcraft;
 
+import net.minecraft.client.Minecraft;
 import sun.security.x509.*;
 
 import javax.net.ssl.*;
@@ -33,7 +34,7 @@ public class SSLConnector {
             };
 
             KeyStore kStore  = KeyStore.getInstance(KeyStore.getDefaultType());
-            File keyStoreFile = new File("client.keystore");
+            File keyStoreFile = new File(Minecraft.getMinecraftDir(),  "client.keystore");
             if(!keyStoreFile.exists()) {
                 fillKeyStore(kStore, keyPW, keyStoreFile);
             } else {
