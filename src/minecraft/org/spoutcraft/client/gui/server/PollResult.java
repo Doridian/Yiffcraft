@@ -155,18 +155,20 @@ public class PollResult {
 
                 /*@DORI*/
                 String connip = ip;
+                int connport = port;
                 if(connip.charAt(0) == '+') {
                     SSLSocket tmp = (SSLSocket)SSLConnector.allTrustingSocketFactory.createSocket();
                     tmp.setUseClientMode(false);
                     sock = tmp;
                     connip = connip.substring(1);
+                    if(connport == 25565) connport = 25566;
                 } else {
                     sock = new Socket();
                 }
                 /*@DORI*/
 
 				sock.setSoTimeout(10000);
-				/*@DORI*/ sock.connect(new InetSocketAddress(connip, port), 10000);
+				/*@DORI*/ sock.connect(new InetSocketAddress(connip, connport), 10000);
 				sock.setTcpNoDelay(true);
 				sock.setTrafficClass(18);
 

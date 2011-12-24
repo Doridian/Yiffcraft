@@ -156,7 +156,7 @@ public class NetClientHandler extends NetHandler {
         /*@DORI*/
         Socket var4;
         if(var2.charAt(0) == '+') {
-            SSLSocket tmp = (SSLSocket)SSLConnector.allTrustingSocketFactory.createSocket(InetAddress.getByName(var2.substring(1)), var3);
+            SSLSocket tmp = (SSLSocket)SSLConnector.allTrustingSocketFactory.createSocket(InetAddress.getByName(var2.substring(1)), (var3 == 25565) ? 25566 : var3);
             tmp.setUseClientMode(false);
             var4 = tmp;
         } else {
