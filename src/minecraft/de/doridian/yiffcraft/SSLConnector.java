@@ -33,16 +33,6 @@ public class SSLConnector {
                 }
             };
 
-            //Temporary fixup for fuckup >.<
-            try {
-                File tmpFile = new File("client.keystore");
-                if(tmpFile.exists()) {
-                    tmpFile.delete();
-                }
-            }
-            catch(Exception e) { }
-            //END Temporary fixup for fuckup >.<
-
             KeyStore kStore  = KeyStore.getInstance(KeyStore.getDefaultType());
             File keyStoreFile = new File(Minecraft.getMinecraftDir(),  "client.keystore");
             if(!keyStoreFile.exists()) {
