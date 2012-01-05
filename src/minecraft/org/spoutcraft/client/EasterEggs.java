@@ -38,7 +38,7 @@ public final class EasterEggs {
 	private static long colorUpdate = 0;
 	private static int titleColor = -1;
 	private static String lastColor = "WHITE";
-	
+
 	@SuppressWarnings("unchecked")
 	private static Map<String, Object> getMap() {
 		if (!file.exists())
@@ -54,78 +54,79 @@ public final class EasterEggs {
 
 	@SuppressWarnings("unchecked")
 	private static void buildEasterEggs() {
-        if(map == null) return;
-		for (String key : map.keySet()) {
-			EasterEgg egg = new EasterEgg(key);
-			Map<String, Object> eggmap = null;
-			try {
-				eggmap = (Map<String, Object>) map.get(key);
-			} catch (Exception e) {
-				e.printStackTrace();
-				continue;
-			}
-
-			if (eggmap.containsKey("start")) {
+		if (map != null) {
+			for (String key : map.keySet()) {
+				EasterEgg egg = new EasterEgg(key);
+				Map<String, Object> eggmap = null;
 				try {
-					long start = (Long) eggmap.get("start");
-					egg.setStart(start);
+					eggmap = (Map<String, Object>) map.get(key);
 				} catch (Exception e) {
 					e.printStackTrace();
 					continue;
 				}
-			}
 
-			if (eggmap.containsKey("end")) {
-				try {
-					long end = (Long) eggmap.get("end");
-					egg.setEnd(end);
-				} catch (Exception e) {
-					e.printStackTrace();
-					continue;
+				if (eggmap.containsKey("start")) {
+					try {
+						long start = (Long) eggmap.get("start");
+						egg.setStart(start);
+					} catch (Exception e) {
+						e.printStackTrace();
+						continue;
+					}
 				}
-			}
 
-			if (eggmap.containsKey("titlecolor")) {
-				try {
-					List<String> titlecolor = (ArrayList<String>) eggmap.get("titlecolor");
-					egg.setTitlecolor(titlecolor);
-				} catch (Exception e) {
-					e.printStackTrace();
-					continue;
+				if (eggmap.containsKey("end")) {
+					try {
+						long end = (Long) eggmap.get("end");
+						egg.setEnd(end);
+					} catch (Exception e) {
+						e.printStackTrace();
+						continue;
+					}
 				}
-			}
 
-			if (eggmap.containsKey("splash")) {
-				try {
-					String splash = (String) eggmap.get("splash");
-					egg.setSplash(splash);
-				} catch (Exception e) {
-					e.printStackTrace();
-					continue;
+				if (eggmap.containsKey("titlecolor")) {
+					try {
+						List<String> titlecolor = (ArrayList<String>) eggmap.get("titlecolor");
+						egg.setTitlecolor(titlecolor);
+					} catch (Exception e) {
+						e.printStackTrace();
+						continue;
+					}
 				}
-			}
 
-			if (eggmap.containsKey("skin")) {
-				try {
-					String skin = (String) eggmap.get("skin");
-					egg.setSkin(skin);
-				} catch (Exception e) {
-					e.printStackTrace();
-					continue;
+				if (eggmap.containsKey("splash")) {
+					try {
+						String splash = (String) eggmap.get("splash");
+						egg.setSplash(splash);
+					} catch (Exception e) {
+						e.printStackTrace();
+						continue;
+					}
 				}
-			}
 
-			if (eggmap.containsKey("cape")) {
-				try {
-					String cape = (String) eggmap.get("cape");
-					egg.setCape(cape);
-				} catch (Exception e) {
-					e.printStackTrace();
-					continue;
+				if (eggmap.containsKey("skin")) {
+					try {
+						String skin = (String) eggmap.get("skin");
+						egg.setSkin(skin);
+					} catch (Exception e) {
+						e.printStackTrace();
+						continue;
+					}
 				}
-			}
 
-			eggs.add(egg);
+				if (eggmap.containsKey("cape")) {
+					try {
+						String cape = (String) eggmap.get("cape");
+						egg.setCape(cape);
+					} catch (Exception e) {
+						e.printStackTrace();
+						continue;
+					}
+				}
+
+				eggs.add(egg);
+			}
 		}
 	}
 
@@ -181,7 +182,7 @@ public final class EasterEggs {
 		}
 		return -1;
 	}
-	
+
 	private static int getNewTitleColor(EasterEgg egg) {
 		String result = "";
 		int tries = 0;
@@ -197,7 +198,7 @@ public final class EasterEggs {
 			if (!result.equals(lastColor) || tries > 10) {
 				stop = true;
 			}
-			tries ++;
+			tries++;
 		}
 		lastColor = result;
 		try {
@@ -206,7 +207,7 @@ public final class EasterEggs {
 		} catch (Exception e) {
 			titleColor = -1;
 		}
-		
+
 		return titleColor;
 	}
 
