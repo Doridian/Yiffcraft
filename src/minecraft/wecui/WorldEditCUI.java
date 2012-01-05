@@ -1,23 +1,22 @@
 package wecui;
 
+import net.minecraft.client.Minecraft;
 import wecui.plugin.LocalPlugin;
 import wecui.config.CUIConfiguration;
-import net.minecraft.client.Minecraft;
 import wecui.event.CUIEvent;
 import wecui.event.ChatCommandEvent;
 import wecui.event.listeners.CUIListener;
 import wecui.event.ChatEvent;
 import wecui.event.listeners.ChatListener;
 import wecui.event.WorldRenderEvent;
-import wecui.event.listeners.DeselectCommandListener;
 import wecui.event.listeners.WorldEditCommandListener;
 import wecui.event.listeners.WorldRenderListener;
 import wecui.exception.InitializationException;
 import wecui.fevents.EventManager;
 import wecui.fevents.Order;
 import wecui.obfuscation.Obfuscation;
-import wecui.render.CUIRegion;
-import wecui.render.CuboidRegion;
+import wecui.render.region.BaseRegion;
+import wecui.render.region.CuboidRegion;
 
 /**
  * Main controller class. Uses a pseudo-JavaBeans paradigm. The only real
@@ -31,11 +30,13 @@ import wecui.render.CuboidRegion;
  */
 public class WorldEditCUI {
 
-    public static final String VERSION = "1.0 for Minecraft version 1.0";
+    public static final String VERSION = "1.1beta";
+    public static final String MCVERSION = "1.0";
+    public static final int protocolVersion = 1;
     protected Minecraft minecraft;
     protected EventManager eventManager;
     protected Obfuscation obfuscation;
-    protected CUIRegion selection;
+    protected BaseRegion selection;
     protected CUIDebug debugger;
     protected CUIConfiguration configuration;
     protected LocalPlugin localPlugin;
@@ -44,7 +45,6 @@ public class WorldEditCUI {
         this.minecraft = minecraft;
     }
 
-	@SuppressWarnings("unchecked")
     public void initialize() {
         this.eventManager = new EventManager(this);
         this.obfuscation = new Obfuscation(this);
@@ -76,17 +76,6 @@ public class WorldEditCUI {
         WorldEditCommandListener commListener = new WorldEditCommandListener(this);
         ChatCommandEvent.getHandlers("worldedit").register(commListener, Order.Default);
         ChatCommandEvent.getHandlers("we").register(commListener, Order.Default);
-
-        DeselectCommandListener desel = new DeselectCommandListener(this);
-        ChatCommandEvent.getHandlers("/deselect").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/desel").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/clearsel").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/unselect").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/unsel").register(desel, Order.Default);
-        ChatCommandEvent.getHandlers("/sel").register(desel, Order.Default);
-        
-        //ChatCommandEvent.getHandlers("/preview").register(new PreviewCommandListener(this), Order.Default);
-        //ChatCommandEvent.getHandlers("/commit").register(new CommitCommandListener(this), Order.Default);
     }
 
     public CUIConfiguration getConfiguration() {
@@ -137,12 +126,15 @@ public class WorldEditCUI {
         this.obfuscation = obfuscation;
     }
 
-    public CUIRegion getSelection() {
+    public BaseRegion getSelection() {
         return selection;
     }
 
-    public void setSelection(CUIRegion selection) {
+    public void setSelection(BaseRegion selection) {
         this.selection = selection;
     }
 
+    public static String getVersion() {
+        return VERSION + " for Minecraft version " + MCVERSION;
+    }
 }

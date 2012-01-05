@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 import wecui.WorldEditCUI;
 import wecui.event.WorldRenderEvent;
 import wecui.obfuscation.Obfuscation;
+import wecui.obfuscation.RenderObfuscation;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class Renderer {
 		Yiffcraft.aura.render(f);
 
         event.setPartialTick(f);
-        Obfuscation.disableLighting();
+        RenderObfuscation.disableLighting();
 
         GL11.glBlendFunc(770 /*GL_SRC_ALPHA*/, 771 /*GL_ONE_MINUS_SRC_ALPHA*/);
         GL11.glLineWidth(2F);
@@ -57,7 +58,7 @@ public class Renderer {
         GL11.glDisable(3042 /*GL_BLEND*/);
         GL11.glEnable(3008 /*GL_ALPHA_TEST*/);
 
-        Obfuscation.enableLighting();
+        RenderObfuscation.enableLighting();
     }
 	
 	public static void renderGui()

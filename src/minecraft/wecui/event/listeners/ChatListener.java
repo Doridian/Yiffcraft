@@ -4,6 +4,7 @@ import wecui.fevents.Listener;
 import wecui.WorldEditCUI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import wecui.Updater;
 import wecui.event.CUIEvent;
 import wecui.event.ChatEvent;
 
@@ -45,6 +46,13 @@ public class ChatListener implements Listener<ChatEvent> {
                 }
 
                 event.setCancelled(cuievent.isHandled());
+            }
+            
+            //Check for new WE version. If this is the message, send the protocol version.
+            if (event.getMessage().contains("\u00a74\u00a75\u00a73\u00a74")) {
+                controller.getObfuscation().sendChat("u00a74u00a75u00a73u00a74v|" + WorldEditCUI.protocolVersion);
+                controller.getLocalPlugin().onVersionEvent("");
+                new Updater(controller).start();
             }
         }
     }

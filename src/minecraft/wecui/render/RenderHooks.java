@@ -4,7 +4,7 @@ import net.minecraft.src.Entity;
 import net.minecraft.src.Render;
 import wecui.event.WorldRenderEvent;
 import wecui.WorldEditCUI;
-import wecui.obfuscation.Obfuscation;
+import wecui.obfuscation.RenderObfuscation;
 
 
 /**
@@ -26,10 +26,10 @@ public class RenderHooks extends Render {
     }    
 
     private void render(float renderTick) {
-        Obfuscation.disableLighting();
+        RenderObfuscation.disableLighting();
         event.setPartialTick(renderTick);
         controller.getEventManager().callEvent(event);
-        Obfuscation.enableLighting();
+        RenderObfuscation.enableLighting();
     }
 
     @Override

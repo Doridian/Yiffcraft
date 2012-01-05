@@ -22,7 +22,6 @@ public class Obfuscation implements InitializationFactory {
 
     protected WorldEditCUI controller;
     protected Minecraft minecraft;
-    protected Tessellator tessellator = Tessellator.instance;
 
     public Obfuscation(WorldEditCUI controller) {
         this.controller = controller;
@@ -70,19 +69,7 @@ public class Obfuscation implements InitializationFactory {
         EntityPlayerSP plyr = minecraft.thePlayer;
         return plyr.prevPosZ + ((plyr.posZ- plyr.prevPosZ) * renderTick);
     }
-
-    public void startDrawing(int type) {
-        tessellator.startDrawing(type);
-    }
-
-    public void addVertex(double x, double y, double z) {
-        tessellator.addVertex(x, y, z);
-    }
-
-    public void finishDrawing() {
-        tessellator.draw();
-    }
-
+	
     public EntityPlayerSP getPlayer() {
         return getPlayer(minecraft);
     }
@@ -121,14 +108,6 @@ public class Obfuscation implements InitializationFactory {
 
     public static void setEntityPositionToPlayer(Minecraft mc, Entity entity) {
         entity.setPosition(getPlayerX(mc.thePlayer), getPlayerY(mc.thePlayer), getPlayerZ(mc.thePlayer));
-    }
-
-    public static void disableLighting() {
-        RenderHelper.disableStandardItemLighting();
-    }
-
-    public static void enableLighting() {
-        RenderHelper.enableStandardItemLighting();
     }
 
     public NetClientHandler getNetClientHandler(EntityClientPlayerMP player) {
