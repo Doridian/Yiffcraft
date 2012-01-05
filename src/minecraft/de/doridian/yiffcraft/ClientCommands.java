@@ -30,7 +30,7 @@ public class ClientCommands {
                     transmute(args);
                     break;
                 case 'd':
-                    datawatcherPut(args);
+                    dataValue(args);
                     break;
                 default:
                     Chat.addChat("Unknown YCC command: " + cmd + "|" + args);
@@ -42,26 +42,33 @@ public class ClientCommands {
         }
     }
     
-    private static void datawatcherPut(String args) throws Exception {
+    private static void dataValue(String args) throws Exception {
         String[] argArr = args.split("\\|");
         if(argArr.length != 3) {
             throw new ClientCommandException("Invalid argc");
         }
-        Integer index = Integer.valueOf(argArr[0]);
 
-        if(index < 0) {
-            //TODO: Reserved for future use
-            return;
+        Entity renderAs = YCRenderPlayer.instance.getRenderAs();
+        if(renderAs == null) {
+            throw new ClientCommandException("EntData command while not being transmuted?!");
         }
 
+        Integer index = Integer.valueOf(argArr[0]);
         Class cls = Class.forName(argArr[1]);
         Object value = cls.getConstructor(String.class).newInstance(argArr[2]);
 
-
-        Entity renderAs = YCRenderPlayer.instance.getRenderAs();
-        if(renderAs != null) {
+        if(index >= 0) {
             renderAs.getDataWatcher().updateObject(index, value);
-        } //We do NOT want to update the actual player's data watcher!
+            return;
+        }
+
+        switch(index) {
+            case -1:
+                renderAs.handleHealthUpdate((Byte)value);
+                break;
+            default:
+                throw new ClientCommandException("Unknown special index: " + index);
+        }
     }
     
     private static HashMap<String, Class> simpleTransmutes = new HashMap<String, Class>();
