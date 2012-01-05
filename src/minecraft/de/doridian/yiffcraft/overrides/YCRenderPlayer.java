@@ -15,6 +15,10 @@ public class YCRenderPlayer extends RenderPlayer {
     public double yOffset;
     public float yawOffset;
 
+    public Entity getRenderAs() {
+        return renderPlayerAs;
+    }
+
     public void setRenderAs(Entity otherEnt) {
         if(thirdPersonDistanceDefault <= 0.0F) {
             thirdPersonDistanceDefault = Yiffcraft.minecraft.entityRenderer.thirdPersonDistance;

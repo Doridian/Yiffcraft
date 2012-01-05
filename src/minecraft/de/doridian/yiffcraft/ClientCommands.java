@@ -13,6 +13,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class ClientCommands {
+    static class ClientCommandException extends Exception {
+        public ClientCommandException(String message) {
+            super(message);
+        }
+    }
+
     public static void incoming(char cmd, final String args)
     {
         try {
@@ -23,11 +29,39 @@ public class ClientCommands {
                 case 't':
                     transmute(args);
                     break;
+                case 'd':
+                    datawatcherPut(args);
+                    break;
                 default:
                     Chat.addChat("Unknown YCC command: " + cmd + "|" + args);
                     break;
             }
-        } catch(Exception e) { e.printStackTrace(); }
+        } catch(Exception e) {
+            Chat.addChat("Error in YCC command " + cmd + ": " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private static void datawatcherPut(String args) throws Exception {
+        String[] argArr = args.split("\\|");
+        if(argArr.length != 3) {
+            throw new ClientCommandException("Invalid argc");
+        }
+        Integer index = Integer.valueOf(argArr[0]);
+
+        if(index < 0) {
+            //TODO: Reserved for future use
+            return;
+        }
+
+        Class cls = Class.forName(argArr[1]);
+        Object value = cls.getConstructor(String.class).newInstance(argArr[2]);
+
+
+        Entity renderAs = YCRenderPlayer.instance.getRenderAs();
+        if(renderAs != null) {
+            renderAs.getDataWatcher().updateObject(index, value);
+        } //We do NOT want to update the actual player's data watcher!
     }
     
     private static HashMap<String, Class> simpleTransmutes = new HashMap<String, Class>();
