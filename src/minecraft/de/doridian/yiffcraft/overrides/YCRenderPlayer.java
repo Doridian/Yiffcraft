@@ -36,7 +36,7 @@ public class YCRenderPlayer extends RenderPlayer {
             renderPlayerAs = otherEnt;
             if(otherEnt instanceof EntityLiving) {
                 renderPlayerAsLiving = (EntityLiving)renderPlayerAs;
-
+                renderPlayerAsLiving.isMultiplayerEntity = true;
                 if(otherEnt instanceof EntityDragon) {
                     Yiffcraft.minecraft.entityRenderer.thirdPersonDistance = 14.0F;
                 } else if(otherEnt instanceof EntityGhast) {
@@ -63,6 +63,9 @@ public class YCRenderPlayer extends RenderPlayer {
             renderPlayerAsLiving.prevRenderYawOffset = var1.prevRenderYawOffset;
             renderPlayerAsLiving.renderYawOffset = var1.renderYawOffset;
         }
+
+        renderPlayerAs.setPositionAndRotation(var1.posX, var1.posY + var1.yOffset, var1.posZ, var1.rotationPitch, var1.rotationYaw);
+        renderPlayerAs.noClip = true;
 
         renderPlayerAs.prevRotationPitch = var1.prevRotationPitch;
         renderPlayerAs.rotationPitch = var1.rotationPitch;
