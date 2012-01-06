@@ -34,7 +34,7 @@ public class SSLConnector {
             };
 
             KeyStore kStore  = KeyStore.getInstance(KeyStore.getDefaultType());
-            File keyStoreFile = new File(Minecraft.getMinecraftDir(),  "client.keystore");
+            File keyStoreFile = new File(Minecraft.getMinecraftDir(), "client.keystore");
             if(!keyStoreFile.exists()) {
                 fillKeyStore(kStore, keyPW, keyStoreFile);
             } else {
@@ -42,12 +42,13 @@ public class SSLConnector {
                     kStore.load(new FileInputStream(keyStoreFile), keyPW);
                     if(!kStore.containsAlias("ycclientauth")) throw new Exception("Key missing!");
                 } catch(Exception e) {
+                    e.printStackTrace();
                     fillKeyStore(kStore, keyPW, keyStoreFile);
                 }
             }
 
-            Certificate cert = kStore.getCertificate("ycclientauth");
-            System.out.println(cert.getPublicKey().toString());
+            //Certificate cert = kStore.getCertificate("ycclientauth");
+            //System.out.println(cert.getPublicKey().toString());
 
             KeyManagerFactory kmfac = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
             kmfac.init(kStore, keyPW);
@@ -63,6 +64,8 @@ public class SSLConnector {
 
     static void fillKeyStore(KeyStore kStore, char[] keyPW, File keyStoreFile) throws Exception
     {
+        keyStoreFile.delete();
+        
         KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA");
         kpGen.initialize(1024);
         KeyPair keyPair = kpGen.generateKeyPair();
