@@ -64,7 +64,11 @@ public class YCRenderPlayer extends RenderPlayer {
             renderPlayerAsLiving.renderYawOffset = var1.renderYawOffset;
         }
 
-        renderPlayerAs.setPositionAndRotation(var1.posX, var1.posY + var1.yOffset, var1.posZ, var1.rotationPitch, var1.rotationYaw);
+        if(renderPlayerAs instanceof EntityWolf) {
+            renderPlayerAs.setPositionAndRotation(var1.posX, var1.posY + var1.yOffset + yOffset, var1.posZ, var1.rotationPitch, var1.rotationYaw);
+        } else {
+            renderPlayerAs.setPositionAndRotation(var1.posX, (var1.posY - var1.yOffset) + yOffset, var1.posZ, var1.rotationPitch, var1.rotationYaw);
+        }
         renderPlayerAs.noClip = true;
 
         renderPlayerAs.prevRotationPitch = var1.prevRotationPitch;

@@ -41,6 +41,15 @@ public class ClientCommands {
             e.printStackTrace();
         }
     }
+
+    static class ShapeYCData {
+    	public static final int ENTITY_STATUS = -1;
+    	public static final int VEHICLE_TYPE = -2;
+    	public static final int ITEM_TYPE = -3;
+    	public static final int ITEM_DATA = -4;
+    	public static final int ITEM_COUNT = -5;
+    	public static final int PAINTING_NAME = -6;
+    }
     
     private static void dataValue(String args) throws Exception {
         String[] argArr = args.split("\\|");
@@ -63,21 +72,40 @@ public class ClientCommands {
         }
 
         switch(index) {
-            case -1:
+            case ShapeYCData.ENTITY_STATUS:
                 renderAs.handleHealthUpdate((Byte)value);
                 break;
-            case -2:
-                if(renderAs instanceof EntityMinecart) {
-                    EntityMinecart minecart = (EntityMinecart)renderAs;
-                    int val = (Integer)value;
-                    switch(val) {
-                        case 10:
-                        case 11:
-                        case 12:
-                            minecart.minecartType = val - 10;
-                            break;
-                    }
+            case ShapeYCData.VEHICLE_TYPE:
+                if(!(renderAs instanceof EntityMinecart)) break;
+                EntityMinecart minecart = (EntityMinecart)renderAs;
+                int val = (Integer)value;
+                switch(val) {
+                    case 10:
+                    case 11:
+                    case 12:
+                        minecart.minecartType = val - 10;
+                        break;
                 }
+                break;
+            case ShapeYCData.ITEM_TYPE:
+                if(!(renderAs instanceof EntityItem)) break;
+                EntityItem item = (EntityItem)renderAs;
+                item.item.itemID = (Integer)value;
+                break;
+            case ShapeYCData.ITEM_DATA:
+                if(!(renderAs instanceof EntityItem)) break;
+                EntityItem item2 = (EntityItem)renderAs;
+                item2.item.setItemDamage((Integer)value);
+                break;
+            case ShapeYCData.ITEM_COUNT:
+                if(!(renderAs instanceof EntityItem)) break;
+                EntityItem item3 = (EntityItem)renderAs;
+                item3.item.stackSize = (Integer)value;
+                break;
+            case ShapeYCData.PAINTING_NAME:
+                if(!(renderAs instanceof EntityPainting)) break;
+                EntityPainting painting = (EntityPainting)renderAs;
+                painting.art = EnumArt.valueOf((String)value);
                 break;
             default:
                 throw new ClientCommandException("Unknown special index: " + index);
@@ -117,6 +145,11 @@ public class ClientCommands {
             catch(Exception e) { e.printStackTrace(); }
         } else {
             ent = EntityList.createEntityInWorld(args, Yiffcraft.minecraft.theWorld);
+            if(ent instanceof EntityItem) {
+                ent = new EntityItem(Yiffcraft.minecraft.theWorld, Yiffcraft.minecraft.thePlayer.posX, Yiffcraft.minecraft.thePlayer.posY, Yiffcraft.minecraft.thePlayer.posZ, new ItemStack(Block.stone));
+            } else if(ent instanceof EntityPainting) {
+                ((EntityPainting)ent).art = EnumArt.Alban;
+            }
         }
 
         if(ent == null) return;
