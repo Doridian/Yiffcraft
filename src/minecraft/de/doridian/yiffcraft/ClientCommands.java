@@ -2,6 +2,7 @@ package de.doridian.yiffcraft;
 
 import de.doridian.yiffcraft.overrides.YCGuiChat;
 import de.doridian.yiffcraft.overrides.YCRenderPlayer;
+import de.doridian.yiffcraft.overrides.YCWorldProxyThirdPerson;
 import net.minecraft.src.*;
 
 import java.io.BufferedReader;
@@ -140,13 +141,13 @@ public class ClientCommands {
             try {
                 Class cls = simpleTransmutes.get(args);
                 Constructor cnst = cls.getConstructor(World.class);
-                ent = (Entity)cnst.newInstance(Yiffcraft.minecraft.theWorld);
+                ent = (Entity)cnst.newInstance(YCWorldProxyThirdPerson.instance);
             }
             catch(Exception e) { e.printStackTrace(); }
         } else {
-            ent = EntityList.createEntityInWorld(args, Yiffcraft.minecraft.theWorld);
+            ent = EntityList.createEntityInWorld(args, YCWorldProxyThirdPerson.instance);
             if(ent instanceof EntityItem) {
-                ent = new EntityItem(Yiffcraft.minecraft.theWorld, Yiffcraft.minecraft.thePlayer.posX, Yiffcraft.minecraft.thePlayer.posY, Yiffcraft.minecraft.thePlayer.posZ, new ItemStack(Block.stone));
+                ent = new EntityItem(YCWorldProxyThirdPerson.instance, Yiffcraft.minecraft.thePlayer.posX, Yiffcraft.minecraft.thePlayer.posY, Yiffcraft.minecraft.thePlayer.posZ, new ItemStack(Block.stone));
             } else if(ent instanceof EntityPainting) {
                 ((EntityPainting)ent).art = EnumArt.Alban;
             }
