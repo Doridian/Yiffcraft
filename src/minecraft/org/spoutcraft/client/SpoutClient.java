@@ -43,6 +43,7 @@ import org.spoutcraft.client.controls.SimpleKeyBindingManager;
 import org.spoutcraft.client.entity.CraftEntity;
 import org.spoutcraft.client.gui.MCRenderDelegate;
 import org.spoutcraft.client.gui.SimpleKeyManager;
+import org.spoutcraft.client.gui.SimpleWidgetManager;
 import org.spoutcraft.client.gui.server.ServerManager;
 import org.spoutcraft.client.gui.texturepacks.TexturePacksDatabaseModel;
 import org.spoutcraft.client.gui.texturepacks.TexturePacksModel;
@@ -78,6 +79,7 @@ import org.spoutcraft.spoutcraftapi.entity.ActivePlayer;
 import org.spoutcraft.spoutcraftapi.entity.Player;
 import org.spoutcraft.spoutcraftapi.gui.Keyboard;
 import org.spoutcraft.spoutcraftapi.gui.RenderDelegate;
+import org.spoutcraft.spoutcraftapi.gui.WidgetManager;
 import org.spoutcraft.spoutcraftapi.inventory.MaterialManager;
 import org.spoutcraft.spoutcraftapi.io.AddonPacket;
 import org.spoutcraft.spoutcraftapi.keyboard.KeyBindingManager;
@@ -124,6 +126,7 @@ public class SpoutClient extends PropertyObject implements Client {
 	private String addonFolder = Minecraft.getMinecraftDir() + File.separator + "addons";
 	private final ThreadGroup securityThreadGroup;
 	private final SimpleAddonStore addonStore = new SimpleAddonStore();
+	private final WidgetManager widgetManager = new SimpleWidgetManager();
 	
 	
 	
@@ -627,5 +630,9 @@ public class SpoutClient extends PropertyObject implements Client {
 	
 	public SimpleAddonStore getAddonStore() {
 		return addonStore;
+	}
+
+	public WidgetManager getWidgetManager() {
+		return widgetManager;
 	}
 }
