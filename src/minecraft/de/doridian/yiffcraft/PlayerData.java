@@ -195,7 +195,7 @@ public class PlayerData
 		public void run()
 		{
 			try {
-				URL url = new URL("https://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=nickname&param="+name);
+				URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=nickname&param="+name);
 				URLConnection conn = url.openConnection();
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				nickname = rd.readLine().trim();
@@ -205,7 +205,7 @@ public class PlayerData
 			catch(Exception e) { }
 			
 			try {
-				URL url = new URL("https://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=pinfo&param="+name);
+				URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=pinfo&param="+name);
 				URLConnection conn = url.openConnection();
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				MCBansRep = Float.parseFloat(rd.readLine());

@@ -74,7 +74,7 @@ public final class Yiffcraft
 					invalidKey();
 				}
 				try {
-					URL url = new URL("https://ssl.yiffcraft.net/client/verify"+URLappendix);
+					URL url = new URL("http://ssl.yiffcraft.net/client/verify"+URLappendix);
 					URLConnection conn = url.openConnection();
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -119,7 +119,7 @@ public final class Yiffcraft
 		new Thread() {
 			public void run() {
 				try {
-					URL url = new URL("https://ssl.yiffcraft.net/client/splash"+Yiffcraft.URLappendix);
+					URL url = new URL("http://ssl.yiffcraft.net/client/splash"+Yiffcraft.URLappendix);
 					URLConnection conn = url.openConnection();
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -168,7 +168,7 @@ public final class Yiffcraft
 		new Thread() {
 			public void run() {
 				try {
-					URL url = new URL("https://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=checkserver&server="+Yiffcraft.currentServer);
+					URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=checkserver&server="+Yiffcraft.currentServer);
 					URLConnection conn = url.openConnection();
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
