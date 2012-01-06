@@ -53,10 +53,10 @@ public final class Yiffcraft
 		mcApplet = mcA;
 
 		if(mcApplet != null) {
-			if(mcApplet.getParameter("licenseKey").length() < 2) {
+			if(mcApplet.getParameter("licensekey").length() < 2) {
 				invalidKey();
 			}
-			licenseKey = mcApplet.getParameter("licenseKey");
+			licenseKey = mcApplet.getParameter("licensekey");
 		} else {
 			isSpecial = true;
 			licenseKey = "@@LICENSEKEY@@";
