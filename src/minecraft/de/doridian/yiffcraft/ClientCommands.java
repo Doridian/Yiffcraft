@@ -66,6 +66,19 @@ public class ClientCommands {
             case -1:
                 renderAs.handleHealthUpdate((Byte)value);
                 break;
+            case -2:
+                if(renderAs instanceof EntityMinecart) {
+                    EntityMinecart minecart = (EntityMinecart)renderAs;
+                    int val = (Integer)value;
+                    switch(val) {
+                        case 10:
+                        case 11:
+                        case 12:
+                            minecart.minecartType = val - 10;
+                            break;
+                    }
+                }
+                break;
             default:
                 throw new ClientCommandException("Unknown special index: " + index);
         }
