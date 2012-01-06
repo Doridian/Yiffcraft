@@ -46,6 +46,7 @@ public class YCRenderPlayer extends RenderPlayer {
                 }
             } else {
                 renderPlayerAsLiving = null;
+                Yiffcraft.minecraft.entityRenderer.thirdPersonDistance = thirdPersonDistanceDefault;
             }
         }
     }
