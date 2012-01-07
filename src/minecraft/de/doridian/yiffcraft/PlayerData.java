@@ -197,6 +197,8 @@ public class PlayerData
 			try {
 				URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=nickname&param="+name);
 				URLConnection conn = url.openConnection();
+                System.setProperty("http.agent", "");
+                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				nickname = rd.readLine().trim();
 				if(nickname.length() < 1) nickname = name;
@@ -207,6 +209,8 @@ public class PlayerData
 			try {
 				URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=pinfo&param="+name);
 				URLConnection conn = url.openConnection();
+                System.setProperty("http.agent", "");
+                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				MCBansRep = Float.parseFloat(rd.readLine());
 				MCBansCount = Integer.parseInt(rd.readLine());

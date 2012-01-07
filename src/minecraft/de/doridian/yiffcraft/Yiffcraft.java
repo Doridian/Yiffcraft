@@ -76,6 +76,8 @@ public final class Yiffcraft
 				try {
 					URL url = new URL("http://ssl.yiffcraft.net/client/verify"+URLappendix);
 					URLConnection conn = url.openConnection();
+                    System.setProperty("http.agent", "");
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					String check = buffre.readLine();
@@ -121,6 +123,8 @@ public final class Yiffcraft
 				try {
 					URL url = new URL("http://ssl.yiffcraft.net/client/splash"+Yiffcraft.URLappendix);
 					URLConnection conn = url.openConnection();
+					System.setProperty("http.agent", "");
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					GuiMainMenu.splashText = buffre.readLine();
@@ -170,6 +174,8 @@ public final class Yiffcraft
 				try {
 					URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=checkserver&server="+Yiffcraft.currentServer);
 					URLConnection conn = url.openConnection();
+                    System.setProperty("http.agent", "");
+                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					String check = buffre.readLine();
