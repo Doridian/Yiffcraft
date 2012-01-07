@@ -45,10 +45,13 @@ public class YCRenderPlayer extends RenderPlayer {
                 } else {
                     Yiffcraft.minecraft.entityRenderer.thirdPersonDistance = thirdPersonDistanceDefault;
                 }
+                reverseYaw = false;
             } else {
                 renderPlayerAsLiving = null;
                 if(otherEnt instanceof EntityPainting) {
                     reverseYaw = true;
+                } else {
+                    reverseYaw = false;
                 }
                 Yiffcraft.minecraft.entityRenderer.thirdPersonDistance = thirdPersonDistanceDefault;
             }
