@@ -14,6 +14,7 @@ public class YCRenderPlayer extends RenderPlayer {
 
     public double yOffset;
     public float yawOffset;
+    public boolean reverseYaw;
 
     public Entity getRenderAs() {
         return renderPlayerAs;
@@ -46,6 +47,9 @@ public class YCRenderPlayer extends RenderPlayer {
                 }
             } else {
                 renderPlayerAsLiving = null;
+                if(otherEnt instanceof EntityPainting) {
+                    reverseYaw = true;
+                }
                 Yiffcraft.minecraft.entityRenderer.thirdPersonDistance = thirdPersonDistanceDefault;
             }
         }
@@ -77,6 +81,11 @@ public class YCRenderPlayer extends RenderPlayer {
         renderPlayerAs.prevRotationYaw = var1.prevRotationYaw + yawOffset;
         renderPlayerAs.rotationYaw = var1.rotationYaw + yawOffset;
 
+        if(reverseYaw) {
+            renderPlayerAs.prevRotationYaw = -renderPlayerAs.prevRotationYaw;
+            renderPlayerAs.rotationYaw = -renderPlayerAs.rotationYaw;
+        }
+
         renderPlayerAs.fire = ((Entity)var1).fire;
     }
     
@@ -94,6 +103,11 @@ public class YCRenderPlayer extends RenderPlayer {
 
         refreshVariablesStuff(var1);
 
-        renderProcessor.doRender(renderPlayerAs, var2, (var4 - var1.yOffset) + yOffset, var6, var8 + yawOffset, var9);
+        var8 += yawOffset;
+        if(reverseYaw) {
+            var8 = -var8;
+        }
+
+        renderProcessor.doRender(renderPlayerAs, var2, (var4 - var1.yOffset) + yOffset, var6, var8, var9);
     }
 }
