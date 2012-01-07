@@ -219,7 +219,7 @@ public class NetworkManager {
 		while(!this.readPackets.isEmpty() && var1-- >= 0) {
 			Packet var2 = (Packet)this.readPackets.remove(0);
 			ChunkCache.totalPacketDown.addAndGet(var2.getPacketSize()); // Spout
-            /*@DORI*/ Yiffcraft.lastPacket = System.currentTimeMillis();
+			/*@DORI*/ Yiffcraft.lastPacket = System.currentTimeMillis();
 			var2.processPacket(this.netHandler);
 		}
 

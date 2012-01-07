@@ -66,14 +66,14 @@ public class PlayerData
 		refreshYawToPlayer();
 		
 
-        if(player.isDead) color = '0';
-        else if(player.isSwinging) color = 'd';
-        else if(player.isPlayerSleeping()) color = 'b';
-        else if(player.canEntityBeSeen(Yiffcraft.minecraft.thePlayer)) color = 'f';
-        else if(((int)(System.currentTimeMillis() / 1000L) - lastAction) > 30) color = '8';
-        else if(player.isSneaking()) color = 'e';
-        else if(player.isInWater()) color = '9';
-        else color = '7';
+		if(player.isDead) color = '0';
+		else if(player.isSwinging) color = 'd';
+		else if(player.isPlayerSleeping()) color = 'b';
+		else if(player.canEntityBeSeen(Yiffcraft.minecraft.thePlayer)) color = 'f';
+		else if(((int)(System.currentTimeMillis() / 1000L) - lastAction) > 30) color = '8';
+		else if(player.isSneaking()) color = 'e';
+		else if(player.isInWater()) color = '9';
+		else color = '7';
 
 		double diffX = Math.abs(pos.posX - lastPos.posX);
 		double diffY = Math.abs(pos.posY - lastPos.posY);
@@ -197,8 +197,8 @@ public class PlayerData
 			try {
 				URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=nickname&param="+name);
 				URLConnection conn = url.openConnection();
-                System.setProperty("http.agent", "");
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
+				System.setProperty("http.agent", "");
+				conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				nickname = rd.readLine().trim();
 				if(nickname.length() < 1) nickname = name;
@@ -209,8 +209,8 @@ public class PlayerData
 			try {
 				URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=pinfo&param="+name);
 				URLConnection conn = url.openConnection();
-                System.setProperty("http.agent", "");
-                conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
+				System.setProperty("http.agent", "");
+				conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 				BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				MCBansRep = Float.parseFloat(rd.readLine());
 				MCBansCount = Integer.parseInt(rd.readLine());

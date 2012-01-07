@@ -7,31 +7,31 @@ package net.minecraft.src;
 import java.text.DecimalFormat;
 
 // Referenced classes of package net.minecraft.src:
-//            IStatType, StatBase
+//			IStatType, StatBase
 
 class StatTypeDistance
-    implements IStatType
+	implements IStatType
 {
 
-    StatTypeDistance()
-    {
-    }
+	StatTypeDistance()
+	{
+	}
 
-    public String format(int i)
-    {
-        int j = i;
-        double d = (double)j / 100D;
-        double d1 = d / 1000D;
-        if(d1 > 0.5D)
-        {
-            return (new StringBuilder()).append(StatBase.getDecimalFormat().format(d1)).append(" km").toString();
-        }
-        if(d > 0.5D)
-        {
-            return (new StringBuilder()).append(StatBase.getDecimalFormat().format(d)).append(" m").toString();
-        } else
-        {
-            return (new StringBuilder()).append(i).append(" cm").toString();
-        }
-    }
+	public String format(int i)
+	{
+		int j = i;
+		double d = (double)j / 100D;
+		double d1 = d / 1000D;
+		if(d1 > 0.5D)
+		{
+			return (new StringBuilder()).append(StatBase.getDecimalFormat().format(d1)).append(" km").toString();
+		}
+		if(d > 0.5D)
+		{
+			return (new StringBuilder()).append(StatBase.getDecimalFormat().format(d)).append(" m").toString();
+		} else
+		{
+			return (new StringBuilder()).append(i).append(" cm").toString();
+		}
+	}
 }

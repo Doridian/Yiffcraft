@@ -7,37 +7,37 @@ package net.minecraft.src;
 
 public enum EnumMovingObjectType
 {
-    TILE("TILE", 0),
-    ENTITY("ENTITY", 1);
+	TILE("TILE", 0),
+	ENTITY("ENTITY", 1);
 /*
-    public static final EnumMovingObjectType TILE;
-    public static final EnumMovingObjectType ENTITY;
+	public static final EnumMovingObjectType TILE;
+	public static final EnumMovingObjectType ENTITY;
 */
-    private static final EnumMovingObjectType allMovingObjectTypes[]; /* synthetic field */
+	private static final EnumMovingObjectType allMovingObjectTypes[]; /* synthetic field */
 /*
-    public static final EnumMovingObjectType[] values()
-    {
-        return (EnumMovingObjectType[])allMovingObjectTypes.clone();
-    }
+	public static final EnumMovingObjectType[] values()
+	{
+		return (EnumMovingObjectType[])allMovingObjectTypes.clone();
+	}
 
-    public static EnumMovingObjectType valueOf(String s)
-    {
-        return (EnumMovingObjectType)Enum.valueOf(net.minecraft.src.EnumMovingObjectType.class, s);
-    }
+	public static EnumMovingObjectType valueOf(String s)
+	{
+		return (EnumMovingObjectType)Enum.valueOf(net.minecraft.src.EnumMovingObjectType.class, s);
+	}
 */
-    private EnumMovingObjectType(String s, int i)
-    {
-//        super(s, i);
-    }
+	private EnumMovingObjectType(String s, int i)
+	{
+//		super(s, i);
+	}
 
-    static 
-    {
+	static 
+	{
 /*
-        TILE = new EnumMovingObjectType("TILE", 0);
-        ENTITY = new EnumMovingObjectType("ENTITY", 1);
+		TILE = new EnumMovingObjectType("TILE", 0);
+		ENTITY = new EnumMovingObjectType("ENTITY", 1);
 */
-        allMovingObjectTypes = (new EnumMovingObjectType[] {
-            TILE, ENTITY
-        });
-    }
+		allMovingObjectTypes = (new EnumMovingObjectType[] {
+			TILE, ENTITY
+		});
+	}
 }

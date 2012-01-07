@@ -8,16 +8,16 @@ public class Waterwalk extends BaseCommand {
 		if(args.length < 1) {
 			Yiffcraft.enableWaterwalk = !Yiffcraft.enableWaterwalk;
 		} else {
-            String arg = args[0].toLowerCase();
-            if(arg.equals("on")) {
-                Yiffcraft.enableWaterwalk = true;
-            } else if(arg.equals("off")) {
-                Yiffcraft.enableWaterwalk = false;
-            }  else {
-                return;
-            }
-        }
-        Chat.addChat("Waterwalk is now " + (Yiffcraft.enableWaterwalk ? "ON" : "OFF"));
+			String arg = args[0].toLowerCase();
+			if(arg.equals("on")) {
+				Yiffcraft.enableWaterwalk = true;
+			} else if(arg.equals("off")) {
+				Yiffcraft.enableWaterwalk = false;
+			}  else {
+				return;
+			}
+		}
+		Chat.addChat("Waterwalk is now " + (Yiffcraft.enableWaterwalk ? "ON" : "OFF"));
 	}
 	public String getHelp() {
 		return "Toggles waterwalk.";

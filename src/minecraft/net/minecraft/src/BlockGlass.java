@@ -7,23 +7,23 @@ package net.minecraft.src;
 import java.util.Random;
 
 // Referenced classes of package net.minecraft.src:
-//            BlockBreakable, Material
+//			BlockBreakable, Material
 
 public class BlockGlass extends BlockBreakable
 {
 
-    public BlockGlass(int i, int j, Material material, boolean flag)
-    {
-        super(i, j, material, flag);
-    }
+	public BlockGlass(int i, int j, Material material, boolean flag)
+	{
+		super(i, j, material, flag);
+	}
 
-    public int quantityDropped(Random random)
-    {
-        return 0;
-    }
+	public int quantityDropped(Random random)
+	{
+		return 0;
+	}
 
-    public int getRenderBlockPass()
-    {
-        return 0;
-    }
+	public int getRenderBlockPass()
+	{
+		return 0;
+	}
 }

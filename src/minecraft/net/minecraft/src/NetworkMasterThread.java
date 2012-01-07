@@ -6,44 +6,44 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            NetworkManager
+//			NetworkManager
 
 class NetworkMasterThread extends Thread
 {
 
-    final NetworkManager netManager; /* synthetic field */
+	final NetworkManager netManager; /* synthetic field */
 
-    NetworkMasterThread(NetworkManager networkmanager)
-    {
-        netManager = networkmanager;
-//        super();
-    }
+	NetworkMasterThread(NetworkManager networkmanager)
+	{
+		netManager = networkmanager;
+//		super();
+	}
 
-    public void run()
-    {
-        try
-        {
-            Thread.sleep(5000L);
-            if(NetworkManager.getReadThread(netManager).isAlive())
-            {
-                try
-                {
-                    NetworkManager.getReadThread(netManager).stop();
-                }
-                catch(Throwable throwable) { }
-            }
-            if(NetworkManager.getWriteThread(netManager).isAlive())
-            {
-                try
-                {
-                    NetworkManager.getWriteThread(netManager).stop();
-                }
-                catch(Throwable throwable1) { }
-            }
-        }
-        catch(InterruptedException interruptedexception)
-        {
-            interruptedexception.printStackTrace();
-        }
-    }
+	public void run()
+	{
+		try
+		{
+			Thread.sleep(5000L);
+			if(NetworkManager.getReadThread(netManager).isAlive())
+			{
+				try
+				{
+					NetworkManager.getReadThread(netManager).stop();
+				}
+				catch(Throwable throwable) { }
+			}
+			if(NetworkManager.getWriteThread(netManager).isAlive())
+			{
+				try
+				{
+					NetworkManager.getWriteThread(netManager).stop();
+				}
+				catch(Throwable throwable1) { }
+			}
+		}
+		catch(InterruptedException interruptedexception)
+		{
+			interruptedexception.printStackTrace();
+		}
+	}
 }

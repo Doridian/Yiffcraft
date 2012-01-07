@@ -6,43 +6,43 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            NetworkManager
+//			NetworkManager
 
 class NetworkReaderThread extends Thread
 {
 
-    final NetworkManager netManager; /* synthetic field */
+	final NetworkManager netManager; /* synthetic field */
 
-    NetworkReaderThread(NetworkManager networkmanager, String s)
-    {
-        super(s);
-        netManager = networkmanager;
-    }
+	NetworkReaderThread(NetworkManager networkmanager, String s)
+	{
+		super(s);
+		netManager = networkmanager;
+	}
 
-    public void run()
-    {
-        synchronized(NetworkManager.threadSyncObject)
-        {
-            NetworkManager.numReadThreads++;
-        }
-        try
-        {
-            while(NetworkManager.isRunning(netManager) && !NetworkManager.isServerTerminating(netManager)) 
-            {
-                while(NetworkManager.readNetworkPacket(netManager)) ;
-                try
-                {
-                    sleep(2L);
-                }
-                catch(InterruptedException interruptedexception) { }
-            }
-        }
-        finally
-        {
-            synchronized(NetworkManager.threadSyncObject)
-            {
-                NetworkManager.numReadThreads--;
-            }
-        }
-    }
+	public void run()
+	{
+		synchronized(NetworkManager.threadSyncObject)
+		{
+			NetworkManager.numReadThreads++;
+		}
+		try
+		{
+			while(NetworkManager.isRunning(netManager) && !NetworkManager.isServerTerminating(netManager)) 
+			{
+				while(NetworkManager.readNetworkPacket(netManager)) ;
+				try
+				{
+					sleep(2L);
+				}
+				catch(InterruptedException interruptedexception) { }
+			}
+		}
+		finally
+		{
+			synchronized(NetworkManager.threadSyncObject)
+			{
+				NetworkManager.numReadThreads--;
+			}
+		}
+	}
 }

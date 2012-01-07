@@ -6,21 +6,21 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            J_JsonNodeBuilder, J_JsonNodeFactories, J_JsonNode
+//			J_JsonNodeBuilder, J_JsonNodeFactories, J_JsonNode
 
 final class J_JsonNumberNodeBuilder
-    implements J_JsonNodeBuilder
+	implements J_JsonNodeBuilder
 {
 
-    private final J_JsonNode field_27239_a;
+	private final J_JsonNode field_27239_a;
 
-    J_JsonNumberNodeBuilder(String s)
-    {
-        field_27239_a = J_JsonNodeFactories.func_27311_b(s);
-    }
+	J_JsonNumberNodeBuilder(String s)
+	{
+		field_27239_a = J_JsonNodeFactories.func_27311_b(s);
+	}
 
-    public J_JsonNode buildNode()
-    {
-        return field_27239_a;
-    }
+	public J_JsonNode buildNode()
+	{
+		return field_27239_a;
+	}
 }

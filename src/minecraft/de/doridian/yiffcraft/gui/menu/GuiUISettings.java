@@ -8,11 +8,11 @@ import net.minecraft.src.GuiScreen;
 public class GuiUISettings extends GuiScreen
 {
 
-    public GuiUISettings(GuiScreen parent)
-    {
-    	parentScreen = parent;
-        screenTitle = "Yiffcraft UI Config";
-    }
+	public GuiUISettings(GuiScreen parent)
+	{
+		parentScreen = parent;
+		screenTitle = "Yiffcraft UI Config";
+	}
 	
 	private int i;
 	private int j;
@@ -33,10 +33,10 @@ public class GuiUISettings extends GuiScreen
 	GuiButton radarButton;
 	GuiButton infoButton;
 	
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public void initGui()
-    {
-        i =  (width / 2 - 100);
+	{
+		i =  (width / 2 - 100);
 		j = 0;
 		
 		guiButton = addButton("GUI",1);
@@ -60,8 +60,8 @@ public class GuiUISettings extends GuiScreen
 		infoButton = addButton("Info",7);
 		refreshInfoToggle();
 		
-        controlList.add(new GuiButton(250, i, height / 6 + 168, "Close"));
-    }
+		controlList.add(new GuiButton(250, i, height / 6 + 168, "Close"));
+	}
 	
 	private void refreshGuiToggle()
 	{
@@ -207,8 +207,8 @@ public class GuiUISettings extends GuiScreen
 		infoButton.displayString = "Info: " + setting;
 	}
 
-    protected void actionPerformed(GuiButton guibutton)
-    {
+	protected void actionPerformed(GuiButton guibutton)
+	{
 		switch(guibutton.id)
 		{
 			case 250:
@@ -258,21 +258,21 @@ public class GuiUISettings extends GuiScreen
 					Yiffcraft.infoMode = 1;
 				refreshInfoToggle();
 		}
-    }
+	}
 	
 	public void onGuiClosed()
-    {
-        Yiffcraft.saveConfig();
-    }
+	{
+		Yiffcraft.saveConfig();
+	}
 
-    public void drawScreen(int i, int j, float f)
-    {
-        drawDefaultBackground();
-        drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
+	public void drawScreen(int i, int j, float f)
+	{
+		drawDefaultBackground();
+		drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
 
-        super.drawScreen(i, j, f);
-    }
+		super.drawScreen(i, j, f);
+	}
 
-    private GuiScreen parentScreen;
-    protected String screenTitle;
+	private GuiScreen parentScreen;
+	protected String screenTitle;
 }

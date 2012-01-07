@@ -7,24 +7,24 @@ package net.minecraft.src;
 import net.minecraft.client.Minecraft;
 
 // Referenced classes of package net.minecraft.src:
-//            IStatStringFormat, GameSettings, KeyBinding
+//			IStatStringFormat, GameSettings, KeyBinding
 
 public class StatStringFormatKeyInv
-    implements IStatStringFormat
+	implements IStatStringFormat
 {
 
-    final Minecraft mc; /* synthetic field */
+	final Minecraft mc; /* synthetic field */
 
-    public StatStringFormatKeyInv(Minecraft minecraft)
-    {
-        mc = minecraft;
-//        super();
-    }
+	public StatStringFormatKeyInv(Minecraft minecraft)
+	{
+		mc = minecraft;
+//		super();
+	}
 
-    public String formatString(String s)
-    {
-        return String.format(s, new Object[] {
-            GameSettings.func_41085_c(mc.gameSettings.keyBindInventory.keyCode)
-        });
-    }
+	public String formatString(String s)
+	{
+		return String.format(s, new Object[] {
+			GameSettings.func_41085_c(mc.gameSettings.keyBindInventory.keyCode)
+		});
+	}
 }

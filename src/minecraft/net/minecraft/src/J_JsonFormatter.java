@@ -6,10 +6,10 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            J_JsonRootNode
+//			J_JsonRootNode
 
 public interface J_JsonFormatter
 {
 
-    public abstract String format(J_JsonRootNode j_jsonrootnode);
+	public abstract String format(J_JsonRootNode j_jsonrootnode);
 }

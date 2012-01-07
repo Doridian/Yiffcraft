@@ -7,36 +7,36 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet4UpdateTime extends Packet
 {
 
-    public long time;
+	public long time;
 
-    public Packet4UpdateTime()
-    {
-    }
+	public Packet4UpdateTime()
+	{
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        time = datainputstream.readLong();
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		time = datainputstream.readLong();
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        dataoutputstream.writeLong(time);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		dataoutputstream.writeLong(time);
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handleUpdateTime(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handleUpdateTime(this);
+	}
 
-    public int getPacketSize()
-    {
-        return 8;
-    }
+	public int getPacketSize()
+	{
+		return 8;
+	}
 }

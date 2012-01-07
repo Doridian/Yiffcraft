@@ -6,17 +6,17 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            ChunkCoordIntPair, NBTTagCompound
+//			ChunkCoordIntPair, NBTTagCompound
 
 class ThreadedChunkLoaderPending
 {
 
-    public final ChunkCoordIntPair field_40739_a;
-    public final NBTTagCompound field_40738_b;
+	public final ChunkCoordIntPair field_40739_a;
+	public final NBTTagCompound field_40738_b;
 
-    public ThreadedChunkLoaderPending(ChunkCoordIntPair chunkcoordintpair, NBTTagCompound nbttagcompound)
-    {
-        field_40739_a = chunkcoordintpair;
-        field_40738_b = nbttagcompound;
-    }
+	public ThreadedChunkLoaderPending(ChunkCoordIntPair chunkcoordintpair, NBTTagCompound nbttagcompound)
+	{
+		field_40739_a = chunkcoordintpair;
+		field_40738_b = nbttagcompound;
+	}
 }

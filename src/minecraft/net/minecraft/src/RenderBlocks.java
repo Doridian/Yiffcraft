@@ -203,7 +203,7 @@ public class RenderBlocks {
 		int var5 = var1.getRenderType();
 		var1.setBlockBoundsBasedOnState(this.blockAccess, var2, var3, var4);
 
-        /*@DORI*/
+		/*@DORI*/
 		Tessellator tessellator = Tessellator.instance;
 
 		if(Yiffcraft.enableWallhack) {

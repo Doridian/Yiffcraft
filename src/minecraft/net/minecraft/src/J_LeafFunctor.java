@@ -6,26 +6,26 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            J_Functor, J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException
+//			J_Functor, J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException
 
 abstract class J_LeafFunctor
-    implements J_Functor
+	implements J_Functor
 {
 
-    J_LeafFunctor()
-    {
-    }
+	J_LeafFunctor()
+	{
+	}
 
-    public final Object applyTo(Object obj)
-    {
-        if(!matchsNode(obj))
-        {
-            throw J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException.func_27322_a(this);
-        } else
-        {
-            return typeSafeApplyTo(obj);
-        }
-    }
+	public final Object applyTo(Object obj)
+	{
+		if(!matchsNode(obj))
+		{
+			throw J_JsonNodeDoesNotMatchChainedJsonNodeSelectorException.func_27322_a(this);
+		} else
+		{
+			return typeSafeApplyTo(obj);
+		}
+	}
 
-    protected abstract Object typeSafeApplyTo(Object obj);
+	protected abstract Object typeSafeApplyTo(Object obj);
 }

@@ -6,12 +6,12 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            WorldProvider
+//			WorldProvider
 
 public class WorldProviderSurface extends WorldProvider
 {
 
-    public WorldProviderSurface()
-    {
-    }
+	public WorldProviderSurface()
+	{
+	}
 }

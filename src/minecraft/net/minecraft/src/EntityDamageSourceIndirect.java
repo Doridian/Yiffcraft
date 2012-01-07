@@ -6,21 +6,21 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            EntityDamageSource, Entity
+//			EntityDamageSource, Entity
 
 public class EntityDamageSourceIndirect extends EntityDamageSource
 {
 
-    private Entity damageSourceProjectile;
+	private Entity damageSourceProjectile;
 
-    public EntityDamageSourceIndirect(String s, Entity entity, Entity entity1)
-    {
-        super(s, entity);
-        damageSourceProjectile = entity1;
-    }
+	public EntityDamageSourceIndirect(String s, Entity entity, Entity entity1)
+	{
+		super(s, entity);
+		damageSourceProjectile = entity1;
+	}
 
-    public Entity getEntity()
-    {
-        return damageSourceProjectile;
-    }
+	public Entity getEntity()
+	{
+		return damageSourceProjectile;
+	}
 }

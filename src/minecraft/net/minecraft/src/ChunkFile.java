@@ -9,63 +9,63 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // Referenced classes of package net.minecraft.src:
-//            ChunkFilePattern
+//			ChunkFilePattern
 
 class ChunkFile
-    implements Comparable
+	implements Comparable
 {
 
-    private final File chunkFile;
-    private final int xChunk;
-    private final int yChunk;
+	private final File chunkFile;
+	private final int xChunk;
+	private final int yChunk;
 
-    public ChunkFile(File file)
-    {
-        chunkFile = file;
-        Matcher matcher = ChunkFilePattern.dataFilenamePattern.matcher(file.getName());
-        if(matcher.matches())
-        {
-            xChunk = Integer.parseInt(matcher.group(1), 36);
-            yChunk = Integer.parseInt(matcher.group(2), 36);
-        } else
-        {
-            xChunk = 0;
-            yChunk = 0;
-        }
-    }
+	public ChunkFile(File file)
+	{
+		chunkFile = file;
+		Matcher matcher = ChunkFilePattern.dataFilenamePattern.matcher(file.getName());
+		if(matcher.matches())
+		{
+			xChunk = Integer.parseInt(matcher.group(1), 36);
+			yChunk = Integer.parseInt(matcher.group(2), 36);
+		} else
+		{
+			xChunk = 0;
+			yChunk = 0;
+		}
+	}
 
-    public int compareChunks(ChunkFile chunkfile)
-    {
-        int i = xChunk >> 5;
-        int j = chunkfile.xChunk >> 5;
-        if(i == j)
-        {
-            int k = yChunk >> 5;
-            int l = chunkfile.yChunk >> 5;
-            return k - l;
-        } else
-        {
-            return i - j;
-        }
-    }
+	public int compareChunks(ChunkFile chunkfile)
+	{
+		int i = xChunk >> 5;
+		int j = chunkfile.xChunk >> 5;
+		if(i == j)
+		{
+			int k = yChunk >> 5;
+			int l = chunkfile.yChunk >> 5;
+			return k - l;
+		} else
+		{
+			return i - j;
+		}
+	}
 
-    public File getChunkFile()
-    {
-        return chunkFile;
-    }
+	public File getChunkFile()
+	{
+		return chunkFile;
+	}
 
-    public int getXChunk()
-    {
-        return xChunk;
-    }
+	public int getXChunk()
+	{
+		return xChunk;
+	}
 
-    public int getYChunk()
-    {
-        return yChunk;
-    }
+	public int getYChunk()
+	{
+		return yChunk;
+	}
 
-    public int compareTo(Object obj)
-    {
-        return compareChunks((ChunkFile)obj);
-    }
+	public int compareTo(Object obj)
+	{
+		return compareChunks((ChunkFile)obj);
+	}
 }

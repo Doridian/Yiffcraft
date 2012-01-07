@@ -6,16 +6,16 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            InventoryCrafting, ItemStack
+//			InventoryCrafting, ItemStack
 
 public interface IRecipe
 {
 
-    public abstract boolean matches(InventoryCrafting inventorycrafting);
+	public abstract boolean matches(InventoryCrafting inventorycrafting);
 
-    public abstract ItemStack getCraftingResult(InventoryCrafting inventorycrafting);
+	public abstract ItemStack getCraftingResult(InventoryCrafting inventorycrafting);
 
-    public abstract int getRecipeSize();
+	public abstract int getRecipeSize();
 
-    public abstract ItemStack getRecipeOutput();
+	public abstract ItemStack getRecipeOutput();
 }

@@ -5,17 +5,17 @@ import de.doridian.yiffcraft.Yiffcraft;
 public class GuiSliderWallhackOpacity extends GuiSlider
 {
 
-    public GuiSliderWallhackOpacity(int i, int j, int k, float f, GuiWallhacks gui)
-    {
-        super(i, j, k, f);
+	public GuiSliderWallhackOpacity(int i, int j, int k, float f, GuiWallhacks gui)
+	{
+		super(i, j, k, f);
 		myGui = gui;
-    }
+	}
 	
 	public GuiSliderWallhackOpacity(int i, int j, int k, int w, int h, float f, GuiWallhacks gui)
-    {
-        super(i, j, k, w, h, f);
+	{
+		super(i, j, k, w, h, f);
 		myGui = gui;
-    }
+	}
 	
 	protected void onSliderValueChanged()
 	{

@@ -6,28 +6,28 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            WorldClient
+//			WorldClient
 
 class WorldBlockPositionType
 {
 
-    int posX;
-    int posY;
-    int posZ;
-    int acceptCountdown;
-    int blockID;
-    int metadata;
-    final WorldClient worldClient; /* synthetic field */
+	int posX;
+	int posY;
+	int posZ;
+	int acceptCountdown;
+	int blockID;
+	int metadata;
+	final WorldClient worldClient; /* synthetic field */
 
-    public WorldBlockPositionType(WorldClient worldclient, int i, int j, int k, int l, int i1)
-    {
-        worldClient = worldclient;
-//        super();
-        posX = i;
-        posY = j;
-        posZ = k;
-        acceptCountdown = 80;
-        blockID = l;
-        metadata = i1;
-    }
+	public WorldBlockPositionType(WorldClient worldclient, int i, int j, int k, int l, int i1)
+	{
+		worldClient = worldclient;
+//		super();
+		posX = i;
+		posY = j;
+		posZ = k;
+		acceptCountdown = 80;
+		blockID = l;
+		metadata = i1;
+	}
 }

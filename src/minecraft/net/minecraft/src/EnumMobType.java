@@ -7,40 +7,40 @@ package net.minecraft.src;
 
 public enum EnumMobType
 {
-    everything("everything", 0),
-    mobs("mobs", 1),
-    players("players", 2);
+	everything("everything", 0),
+	mobs("mobs", 1),
+	players("players", 2);
 /*
-    public static final EnumMobType everything;
-    public static final EnumMobType mobs;
-    public static final EnumMobType players;
+	public static final EnumMobType everything;
+	public static final EnumMobType mobs;
+	public static final EnumMobType players;
 */
-    private static final EnumMobType allMobTypes[]; /* synthetic field */
+	private static final EnumMobType allMobTypes[]; /* synthetic field */
 /*
-    public static final EnumMobType[] values()
-    {
-        return (EnumMobType[])allMobTypes.clone();
-    }
+	public static final EnumMobType[] values()
+	{
+		return (EnumMobType[])allMobTypes.clone();
+	}
 
-    public static EnumMobType valueOf(String s)
-    {
-        return (EnumMobType)Enum.valueOf(net.minecraft.src.EnumMobType.class, s);
-    }
+	public static EnumMobType valueOf(String s)
+	{
+		return (EnumMobType)Enum.valueOf(net.minecraft.src.EnumMobType.class, s);
+	}
 */
-    private EnumMobType(String s, int i)
-    {
-//        super(s, i);
-    }
+	private EnumMobType(String s, int i)
+	{
+//		super(s, i);
+	}
 
-    static 
-    {
+	static 
+	{
 /*
-        everything = new EnumMobType("everything", 0);
-        mobs = new EnumMobType("mobs", 1);
-        players = new EnumMobType("players", 2);
+		everything = new EnumMobType("everything", 0);
+		mobs = new EnumMobType("mobs", 1);
+		players = new EnumMobType("players", 2);
 */
-        allMobTypes = (new EnumMobType[] {
-            everything, mobs, players
-        });
-    }
+		allMobTypes = (new EnumMobType[] {
+			everything, mobs, players
+		});
+	}
 }

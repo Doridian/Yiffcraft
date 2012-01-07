@@ -7,41 +7,41 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet101CloseWindow extends Packet
 {
 
-    public int windowId;
+	public int windowId;
 
-    public Packet101CloseWindow()
-    {
-    }
+	public Packet101CloseWindow()
+	{
+	}
 
-    public Packet101CloseWindow(int i)
-    {
-        windowId = i;
-    }
+	public Packet101CloseWindow(int i)
+	{
+		windowId = i;
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handleCloseWindow(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handleCloseWindow(this);
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        windowId = datainputstream.readByte();
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		windowId = datainputstream.readByte();
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        dataoutputstream.writeByte(windowId);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		dataoutputstream.writeByte(windowId);
+	}
 
-    public int getPacketSize()
-    {
-        return 1;
-    }
+	public int getPacketSize()
+	{
+		return 1;
+	}
 }

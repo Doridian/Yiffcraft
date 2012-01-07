@@ -9,12 +9,12 @@ import java.net.URL;
 public class SoundPoolEntry
 {
 
-    public String soundName;
-    public URL soundUrl;
+	public String soundName;
+	public URL soundUrl;
 
-    public SoundPoolEntry(String s, URL url)
-    {
-        soundName = s;
-        soundUrl = url;
-    }
+	public SoundPoolEntry(String s, URL url)
+	{
+		soundName = s;
+		soundUrl = url;
+	}
 }

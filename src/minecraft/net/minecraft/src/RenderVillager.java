@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderVillager extends RenderLiving {
 
 	protected ModelVillager field_40295_c;
-    
+	
 
 	public RenderVillager() {
 		super(new ModelVillager(0.0F), 0.5F);
@@ -38,9 +38,9 @@ public class RenderVillager extends RenderLiving {
 
 	protected void passSpecialRender(EntityLiving var1, double var2, double var4, double var6) {
 		//Spout start
-        //this.func_40290_a((EntityVillager)var1, var2, var4, var6);
-        super.passSpecialRender(var1, var2, var4, var6);
-        //Spout end
+		//this.func_40290_a((EntityVillager)var1, var2, var4, var6);
+		super.passSpecialRender(var1, var2, var4, var6);
+		//Spout end
 	}
 
 	protected void preRenderCallback(EntityLiving var1, float var2) {

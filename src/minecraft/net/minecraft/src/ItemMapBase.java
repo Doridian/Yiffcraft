@@ -6,13 +6,13 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Item
+//			Item
 
 public class ItemMapBase extends Item
 {
 
-    protected ItemMapBase(int i)
-    {
-        super(i);
-    }
+	protected ItemMapBase(int i)
+	{
+		super(i);
+	}
 }

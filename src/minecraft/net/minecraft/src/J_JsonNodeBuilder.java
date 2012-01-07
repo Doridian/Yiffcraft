@@ -6,10 +6,10 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            J_JsonNode
+//			J_JsonNode
 
 public interface J_JsonNodeBuilder
 {
 
-    public abstract J_JsonNode buildNode();
+	public abstract J_JsonNode buildNode();
 }

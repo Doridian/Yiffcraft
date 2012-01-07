@@ -6,33 +6,33 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Slot, Item, ItemStack, ContainerBrewingStand, 
-//            IInventory
+//			Slot, Item, ItemStack, ContainerBrewingStand, 
+//			IInventory
 
 class SlotBrewingStandIngredient extends Slot
 {
 
-    final ContainerBrewingStand field_40442_a; /* synthetic field */
+	final ContainerBrewingStand field_40442_a; /* synthetic field */
 
-    public SlotBrewingStandIngredient(ContainerBrewingStand containerbrewingstand, IInventory iinventory, int i, int j, int k)
-    {
-        super(iinventory, i, j, k);
-        field_40442_a = containerbrewingstand;
-    }
+	public SlotBrewingStandIngredient(ContainerBrewingStand containerbrewingstand, IInventory iinventory, int i, int j, int k)
+	{
+		super(iinventory, i, j, k);
+		field_40442_a = containerbrewingstand;
+	}
 
-    public boolean isItemValid(ItemStack itemstack)
-    {
-        if(itemstack != null)
-        {
-            return Item.itemsList[itemstack.itemID].func_40406_n();
-        } else
-        {
-            return false;
-        }
-    }
+	public boolean isItemValid(ItemStack itemstack)
+	{
+		if(itemstack != null)
+		{
+			return Item.itemsList[itemstack.itemID].func_40406_n();
+		} else
+		{
+			return false;
+		}
+	}
 
-    public int getSlotStackLimit()
-    {
-        return 64;
-    }
+	public int getSlotStackLimit()
+	{
+		return 64;
+	}
 }

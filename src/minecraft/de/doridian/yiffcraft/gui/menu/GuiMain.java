@@ -8,11 +8,11 @@ public class GuiMain extends GuiScreen
 {
 	protected GuiScreen guiScreen;
 
-    public GuiMain(GuiScreen screen)
-    {
-    	guiScreen = screen;
-        screenTitle = "Yiffcraft Menu";
-    }
+	public GuiMain(GuiScreen screen)
+	{
+		guiScreen = screen;
+		screenTitle = "Yiffcraft Menu";
+	}
 	
 	private int i;
 	private int j;
@@ -25,23 +25,23 @@ public class GuiMain extends GuiScreen
 		return ret;
 	}
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public void initGui()
-    {
-        i =  (width / 2 - 100);
+	{
+		i =  (width / 2 - 100);
 		j = 0;
-        
+		
 		addButton("Hacks...",5);
 		addButton("Wallhack...",1);
 		addButton("GUI...",2);
 		addButton("Info...",3);
 		addButton("Macros...",6);
 		
-        controlList.add(new GuiButton(250, i, height / 6 + 168, "Close"));
-    }
+		controlList.add(new GuiButton(250, i, height / 6 + 168, "Close"));
+	}
 	
-    protected void actionPerformed(GuiButton guibutton)
-    {
+	protected void actionPerformed(GuiButton guibutton)
+	{
 		switch(guibutton.id)
 		{
 			case 250:
@@ -64,21 +64,21 @@ public class GuiMain extends GuiScreen
 				mc.displayGuiScreen(new GuiMacros(this));
 				break;
 		}
-    }
+	}
 	
 	public void onGuiClosed()
-    {
-        Yiffcraft.saveConfig();
-    }
+	{
+		Yiffcraft.saveConfig();
+	}
 
-    public void drawScreen(int i, int j, float f)
-    {
-        drawDefaultBackground();
-        drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
+	public void drawScreen(int i, int j, float f)
+	{
+		drawDefaultBackground();
+		drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
 
-        super.drawScreen(i, j, f);
-    }
+		super.drawScreen(i, j, f);
+	}
 
-    //private GuiScreen parentScreen;
-    protected String screenTitle;
+	//private GuiScreen parentScreen;
+	protected String screenTitle;
 }

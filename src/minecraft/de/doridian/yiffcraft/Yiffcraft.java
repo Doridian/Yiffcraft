@@ -27,7 +27,7 @@ public final class Yiffcraft
 	private static boolean isInited = false;
 	public static Minecraft minecraft;
 	public static final String VERSION = "2.10";
-    public static final String YCFULLVERSION = "YC (#@BUILDNUM@/@GITREV@)";
+	public static final String YCFULLVERSION = "YC (#@BUILDNUM@/@GITREV@)";
 	public static String licenseKey = "INVALID";
 	public static boolean isSpecial = false;
 	
@@ -76,8 +76,8 @@ public final class Yiffcraft
 				try {
 					URL url = new URL("http://ssl.yiffcraft.net/client/verify"+URLappendix);
 					URLConnection conn = url.openConnection();
-                    System.setProperty("http.agent", "");
-                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
+					System.setProperty("http.agent", "");
+					conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					String check = buffre.readLine();
@@ -109,13 +109,13 @@ public final class Yiffcraft
 
 		guiNotice = new GuiNotice(minecraft);
 
-        wecui = new WorldEditCUI(minecraft);
-        wecui.initialize();
+		wecui = new WorldEditCUI(minecraft);
+		wecui.initialize();
 
-        wecui.getLocalPlugin().onVersionEvent(WorldEdit.getVersion());
+		wecui.getLocalPlugin().onVersionEvent(WorldEdit.getVersion());
 	}
 
-    public static WorldEditCUI wecui;
+	public static WorldEditCUI wecui;
 
 	/*public static void getNewSplash() {
 		new Thread() {
@@ -124,7 +124,7 @@ public final class Yiffcraft
 					URL url = new URL("http://ssl.yiffcraft.net/client/splash"+Yiffcraft.URLappendix);
 					URLConnection conn = url.openConnection();
 					System.setProperty("http.agent", "");
-                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
+					conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					GuiMainMenu.splashText = buffre.readLine();
@@ -148,7 +148,7 @@ public final class Yiffcraft
 	public static boolean compass3D = false;
 	public static int radarMode = 1;
 	public static boolean enableUnpushablePlayer = false; //TODO: Add mobs, damage knockback
-    public static boolean enableWaterwalk = false;
+	public static boolean enableWaterwalk = false;
 	public static int chatMode = 1; 
 	public static float stepHeight = 0.5F;;
 	public static File configdir = null;
@@ -174,8 +174,8 @@ public final class Yiffcraft
 				try {
 					URL url = new URL("http://ssl.yiffcraft.net/client/api"+Yiffcraft.URLappendix+"&query=checkserver&server="+Yiffcraft.currentServer);
 					URLConnection conn = url.openConnection();
-                    System.setProperty("http.agent", "");
-                    conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
+					System.setProperty("http.agent", "");
+					conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100 Safari/534.30");
 					conn.connect();
 					BufferedReader buffre = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 					String check = buffre.readLine();
@@ -198,11 +198,11 @@ public final class Yiffcraft
 		Radar.reinit();
 		AutoBreak.reinit();
 
-        YCGuiChat.reloadCommands();
+		YCGuiChat.reloadCommands();
 
-        Chat.ycchatinited = false;
+		Chat.ycchatinited = false;
 
-        YCRenderPlayer.instance.setRenderAs(null);
+		YCRenderPlayer.instance.setRenderAs(null);
 
 		loadConfig();
 	}
@@ -343,15 +343,15 @@ public final class Yiffcraft
 		worldClient.removeEntityFromWorld(-1);
 	}
 
-    public static Location realLoc;
-    public static boolean realOnGround;
+	public static Location realLoc;
+	public static boolean realOnGround;
 
 	public static void RefreshOutOfBody()
 	{
 		EntityPlayerSP player = minecraft.thePlayer;
 		if(enableOutOfBody) {
 			realLoc = new Location(player);
-            realOnGround = player.onGround;
+			realOnGround = player.onGround;
 			if(minecraft.theWorld instanceof WorldClient) {
 				EntityOtherPlayerMP newply = new EntityOtherPlayerMP(minecraft.theWorld, "YOU");
 				newply.setPositionAndRotation(realLoc.posX,realLoc.posY-player.yOffset,realLoc.posZ,realLoc.rotationYaw,realLoc.rotationPitch);

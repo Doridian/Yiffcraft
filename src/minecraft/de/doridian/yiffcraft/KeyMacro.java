@@ -10,14 +10,14 @@ public class KeyMacro {
 
    public KeyMacro(String macro, int code) {
 	   this.keyMacro = macro;
-      	this.keyCode = code;
-      	this.keyRepeatable = false;
+	  	this.keyCode = code;
+	  	this.keyRepeatable = false;
    }
    
    public KeyMacro(String macro, int code, boolean repeatable) {
-	    this.keyMacro = macro;
-	    this.keyCode = code;
-	    this.keyRepeatable = repeatable;
+		this.keyMacro = macro;
+		this.keyCode = code;
+		this.keyRepeatable = repeatable;
    }
    
    public void run() {

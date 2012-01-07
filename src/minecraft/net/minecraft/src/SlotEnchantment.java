@@ -6,21 +6,21 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Slot, ContainerEnchantment, IInventory, ItemStack
+//			Slot, ContainerEnchantment, IInventory, ItemStack
 
 class SlotEnchantment extends Slot
 {
 
-    final ContainerEnchantment field_40443_a; /* synthetic field */
+	final ContainerEnchantment field_40443_a; /* synthetic field */
 
-    SlotEnchantment(ContainerEnchantment containerenchantment, IInventory iinventory, int i, int j, int k)
-    {
-        super(iinventory, i, j, k);
-        field_40443_a = containerenchantment;
-    }
+	SlotEnchantment(ContainerEnchantment containerenchantment, IInventory iinventory, int i, int j, int k)
+	{
+		super(iinventory, i, j, k);
+		field_40443_a = containerenchantment;
+	}
 
-    public boolean isItemValid(ItemStack itemstack)
-    {
-        return true;
-    }
+	public boolean isItemValid(ItemStack itemstack)
+	{
+		return true;
+	}
 }

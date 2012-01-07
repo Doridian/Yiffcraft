@@ -6,12 +6,12 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Container, ItemStack
+//			Container, ItemStack
 
 public interface ICrafting
 {
 
-    public abstract void updateCraftingInventorySlot(Container container, int i, ItemStack itemstack);
+	public abstract void updateCraftingInventorySlot(Container container, int i, ItemStack itemstack);
 
-    public abstract void updateCraftingInventoryInfo(Container container, int i, int j);
+	public abstract void updateCraftingInventoryInfo(Container container, int i, int j);
 }

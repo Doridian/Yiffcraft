@@ -9,34 +9,34 @@ import java.net.URL;
 import net.minecraft.client.Minecraft;
 
 // Referenced classes of package net.minecraft.src:
-//            Session
+//			Session
 
 public class ThreadCheckHasPaid extends Thread
 {
 
-    final Minecraft mc; /* synthetic field */
+	final Minecraft mc; /* synthetic field */
 
-    public ThreadCheckHasPaid(Minecraft minecraft)
-    {
-        mc = minecraft;
-//        super();
-    }
+	public ThreadCheckHasPaid(Minecraft minecraft)
+	{
+		mc = minecraft;
+//		super();
+	}
 
-    public void run()
-    {
-        try
-        {
-            HttpURLConnection httpurlconnection = (HttpURLConnection)(new URL((new StringBuilder()).append("https://login.minecraft.net/session?name=").append(mc.session.username).append("&session=").append(mc.session.sessionId).toString())).openConnection();
-            httpurlconnection.connect();
-            if(httpurlconnection.getResponseCode() == 400 && this == null)
-            {
-                Minecraft.hasPaidCheckTime = System.currentTimeMillis();
-            }
-            httpurlconnection.disconnect();
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
-        }
-    }
+	public void run()
+	{
+		try
+		{
+			HttpURLConnection httpurlconnection = (HttpURLConnection)(new URL((new StringBuilder()).append("https://login.minecraft.net/session?name=").append(mc.session.username).append("&session=").append(mc.session.sessionId).toString())).openConnection();
+			httpurlconnection.connect();
+			if(httpurlconnection.getResponseCode() == 400 && this == null)
+			{
+				Minecraft.hasPaidCheckTime = System.currentTimeMillis();
+			}
+			httpurlconnection.disconnect();
+		}
+		catch(Exception exception)
+		{
+			exception.printStackTrace();
+		}
+	}
 }

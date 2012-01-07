@@ -291,7 +291,7 @@ public abstract class Minecraft implements Runnable {
 		SpoutClient.getInstance().enableAddons(AddonLoadOrder.GAMESTART);
 		// Spout End
 
-        /*@DORI*/ Yiffcraft.init(this, mcApplet);
+		/*@DORI*/ Yiffcraft.init(this, mcApplet);
 	}
 
 	private void loadScreen() throws LWJGLException {

@@ -7,18 +7,18 @@ package net.minecraft.src;
 import java.text.NumberFormat;
 
 // Referenced classes of package net.minecraft.src:
-//            IStatType, StatBase
+//			IStatType, StatBase
 
 class StatTypeSimple
-    implements IStatType
+	implements IStatType
 {
 
-    StatTypeSimple()
-    {
-    }
+	StatTypeSimple()
+	{
+	}
 
-    public String format(int i)
-    {
-        return StatBase.getNumberFormat().format(i);
-    }
+	public String format(int i)
+	{
+		return StatBase.getNumberFormat().format(i);
+	}
 }

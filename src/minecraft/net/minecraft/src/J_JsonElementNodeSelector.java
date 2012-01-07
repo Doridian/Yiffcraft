@@ -7,46 +7,46 @@ package net.minecraft.src;
 import java.util.List;
 
 // Referenced classes of package net.minecraft.src:
-//            J_LeafFunctor, J_JsonNode
+//			J_LeafFunctor, J_JsonNode
 
 class J_JsonElementNodeSelector extends J_LeafFunctor
 {
 
-    final int index; /* synthetic field */
+	final int index; /* synthetic field */
 
-    J_JsonElementNodeSelector(int i)
-    {
-        index = i;
-//        super();
-    }
+	J_JsonElementNodeSelector(int i)
+	{
+		index = i;
+//		super();
+	}
 
-    public boolean matchsNode_(List list)
-    {
-        return list.size() > index;
-    }
+	public boolean matchsNode_(List list)
+	{
+		return list.size() > index;
+	}
 
-    public String shortForm()
-    {
-        return Integer.toString(index);
-    }
+	public String shortForm()
+	{
+		return Integer.toString(index);
+	}
 
-    public J_JsonNode typeSafeApplyTo_(List list)
-    {
-        return (J_JsonNode)list.get(index);
-    }
+	public J_JsonNode typeSafeApplyTo_(List list)
+	{
+		return (J_JsonNode)list.get(index);
+	}
 
-    public String toString()
-    {
-        return (new StringBuilder()).append("an element at index [").append(index).append("]").toString();
-    }
+	public String toString()
+	{
+		return (new StringBuilder()).append("an element at index [").append(index).append("]").toString();
+	}
 
-    public Object typeSafeApplyTo(Object obj)
-    {
-        return typeSafeApplyTo_((List)obj);
-    }
+	public Object typeSafeApplyTo(Object obj)
+	{
+		return typeSafeApplyTo_((List)obj);
+	}
 
-    public boolean matchsNode(Object obj)
-    {
-        return matchsNode_((List)obj);
-    }
+	public boolean matchsNode(Object obj)
+	{
+		return matchsNode_((List)obj);
+	}
 }

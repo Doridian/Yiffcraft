@@ -7,45 +7,45 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet131MapData extends Packet
 {
 
-    public short itemID;
-    public short uniqueID;
-    public byte itemData[];
+	public short itemID;
+	public short uniqueID;
+	public byte itemData[];
 
-    public Packet131MapData()
-    {
-        isChunkDataPacket = true;
-    }
+	public Packet131MapData()
+	{
+		isChunkDataPacket = true;
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        itemID = datainputstream.readShort();
-        uniqueID = datainputstream.readShort();
-        itemData = new byte[datainputstream.readByte() & 0xff];
-        datainputstream.readFully(itemData);
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		itemID = datainputstream.readShort();
+		uniqueID = datainputstream.readShort();
+		itemData = new byte[datainputstream.readByte() & 0xff];
+		datainputstream.readFully(itemData);
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        dataoutputstream.writeShort(itemID);
-        dataoutputstream.writeShort(uniqueID);
-        dataoutputstream.writeByte(itemData.length);
-        dataoutputstream.write(itemData);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		dataoutputstream.writeShort(itemID);
+		dataoutputstream.writeShort(uniqueID);
+		dataoutputstream.writeByte(itemData.length);
+		dataoutputstream.write(itemData);
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.processItemData(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.processItemData(this);
+	}
 
-    public int getPacketSize()
-    {
-        return 4 + itemData.length;
-    }
+	public int getPacketSize()
+	{
+		return 4 + itemData.length;
+	}
 }

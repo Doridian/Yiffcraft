@@ -6,10 +6,10 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            InventoryBasic
+//			InventoryBasic
 
 public interface IInvBasic
 {
 
-    public abstract void func_20134_a(InventoryBasic inventorybasic);
+	public abstract void func_20134_a(InventoryBasic inventorybasic);
 }

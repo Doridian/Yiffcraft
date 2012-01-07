@@ -32,15 +32,15 @@ public class Leash {
 	}
 	
 	public void render(Tessellator tessellator, float f) {
-	    /*if(true) return;
+		/*if(true) return;
 		update();
 		if(points == null) return;
 		
 		EntityLiving entityliving = Yiffcraft.minecraft.renderViewEntity;
 	
 		double d = entityliving.lastTickPosX + (entityliving.posX - entityliving.lastTickPosX) * (double)f;
-        double d1 = entityliving.lastTickPosY + (entityliving.posY - entityliving.lastTickPosY) * (double)f;
-        double d2 = entityliving.lastTickPosZ + (entityliving.posZ - entityliving.lastTickPosZ) * (double)f;
+		double d1 = entityliving.lastTickPosY + (entityliving.posY - entityliving.lastTickPosY) * (double)f;
+		double d2 = entityliving.lastTickPosZ + (entityliving.posZ - entityliving.lastTickPosZ) * (double)f;
 		
 		GL11.glBindTexture(3553 /*GL_TEXTURE_2D*//*,0);
 		GL11.glLineWidth(1F);

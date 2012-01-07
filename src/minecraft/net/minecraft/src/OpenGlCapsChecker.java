@@ -10,15 +10,15 @@ import org.lwjgl.opengl.GLContext;
 public class OpenGlCapsChecker
 {
 
-    private static boolean tryCheckOcclusionCapable = true;
+	private static boolean tryCheckOcclusionCapable = true;
 
-    public OpenGlCapsChecker()
-    {
-    }
+	public OpenGlCapsChecker()
+	{
+	}
 
-    public static boolean checkARBOcclusion()
-    {
-        return tryCheckOcclusionCapable && GLContext.getCapabilities().GL_ARB_occlusion_query;
-    }
+	public static boolean checkARBOcclusion()
+	{
+		return tryCheckOcclusionCapable && GLContext.getCapabilities().GL_ARB_occlusion_query;
+	}
 
 }

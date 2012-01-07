@@ -6,26 +6,26 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            IEnchantmentModifier, Enchantment, EntityLiving, Empty3
+//			IEnchantmentModifier, Enchantment, EntityLiving, Empty3
 
 final class EnchantmentModifierLiving
-    implements IEnchantmentModifier
+	implements IEnchantmentModifier
 {
 
-    public int livingModifier;
-    public EntityLiving entityLiving;
+	public int livingModifier;
+	public EntityLiving entityLiving;
 
-    private EnchantmentModifierLiving()
-    {
-    }
+	private EnchantmentModifierLiving()
+	{
+	}
 
-    public void calculateModifier(Enchantment enchantment, int i)
-    {
-        livingModifier += enchantment.calcModifierLiving(i, entityLiving);
-    }
+	public void calculateModifier(Enchantment enchantment, int i)
+	{
+		livingModifier += enchantment.calcModifierLiving(i, entityLiving);
+	}
 
-    EnchantmentModifierLiving(Empty3 empty3)
-    {
-        this();
-    }
+	EnchantmentModifierLiving(Empty3 empty3)
+	{
+		this();
+	}
 }

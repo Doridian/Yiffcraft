@@ -54,9 +54,9 @@ public class EntityDragon extends EntityDragonBase {
 		this.isImmuneToFire = true;
 		this.field_40165_b = 100.0D;
 		this.ignoreFrustumCheck = true;
-        //Spout start
-        this.spoutEntity = new CraftEnderDragon(this);
-        //Spout end
+		//Spout start
+		this.spoutEntity = new CraftEnderDragon(this);
+		//Spout end
 	}
 
 	protected void entityInit() {

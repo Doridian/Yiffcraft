@@ -67,7 +67,7 @@ public final class Radar extends IGuiIngame
 	public void renderGui(ScaledResolution res, Minecraft minecraft, FontRenderer fontrenderer)
 	{
 		if(Yiffcraft.radarMode == 5) return;
-        int scaledwidth = res.getScaledWidth();
+		int scaledwidth = res.getScaledWidth();
 		String s;
 		int i = 0;
 		TreeMap<Integer,Double> sorted = new TreeMap<Integer,Double>();

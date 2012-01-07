@@ -6,26 +6,26 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Item, ItemStack
+//			Item, ItemStack
 
 public class ItemCoal extends Item
 {
 
-    public ItemCoal(int i)
-    {
-        super(i);
-        setHasSubtypes(true);
-        setMaxDamage(0);
-    }
+	public ItemCoal(int i)
+	{
+		super(i);
+		setHasSubtypes(true);
+		setMaxDamage(0);
+	}
 
-    public String getItemNameIS(ItemStack itemstack)
-    {
-        if(itemstack.getItemDamage() == 1)
-        {
-            return "item.charcoal";
-        } else
-        {
-            return "item.coal";
-        }
-    }
+	public String getItemNameIS(ItemStack itemstack)
+	{
+		if(itemstack.getItemDamage() == 1)
+		{
+			return "item.charcoal";
+		} else
+		{
+			return "item.coal";
+		}
+	}
 }

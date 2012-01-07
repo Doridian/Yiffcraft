@@ -12,9 +12,9 @@ public class EntityMagmaCube extends EntitySlime {
 		this.texture = "/mob/lava.png";
 		this.isImmuneToFire = true;
 		this.landMovementFactor = 0.2F;
-        //Spout start
-        this.spoutEntity = new CraftMagmaCube(this);
-        //Spout end
+		//Spout start
+		this.spoutEntity = new CraftMagmaCube(this);
+		//Spout end
 	}
 
 	public boolean getCanSpawnHere() {

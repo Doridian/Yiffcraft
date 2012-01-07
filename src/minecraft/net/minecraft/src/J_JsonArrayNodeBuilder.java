@@ -7,38 +7,38 @@ package net.minecraft.src;
 import java.util.*;
 
 // Referenced classes of package net.minecraft.src:
-//            J_JsonNodeBuilder, J_JsonNodeFactories, J_JsonRootNode, J_JsonNode
+//			J_JsonNodeBuilder, J_JsonNodeFactories, J_JsonRootNode, J_JsonNode
 
 public final class J_JsonArrayNodeBuilder
-    implements J_JsonNodeBuilder
+	implements J_JsonNodeBuilder
 {
 
-    private final List elementBuilders = new LinkedList();
+	private final List elementBuilders = new LinkedList();
 
-    J_JsonArrayNodeBuilder()
-    {
-    }
+	J_JsonArrayNodeBuilder()
+	{
+	}
 
-    public J_JsonArrayNodeBuilder withElement(J_JsonNodeBuilder j_jsonnodebuilder)
-    {
-        elementBuilders.add(j_jsonnodebuilder);
-        return this;
-    }
+	public J_JsonArrayNodeBuilder withElement(J_JsonNodeBuilder j_jsonnodebuilder)
+	{
+		elementBuilders.add(j_jsonnodebuilder);
+		return this;
+	}
 
-    public J_JsonRootNode build()
-    {
-        LinkedList linkedlist = new LinkedList();
-        J_JsonNodeBuilder j_jsonnodebuilder;
-        for(Iterator iterator = elementBuilders.iterator(); iterator.hasNext(); linkedlist.add(j_jsonnodebuilder.buildNode()))
-        {
-            j_jsonnodebuilder = (J_JsonNodeBuilder)iterator.next();
-        }
+	public J_JsonRootNode build()
+	{
+		LinkedList linkedlist = new LinkedList();
+		J_JsonNodeBuilder j_jsonnodebuilder;
+		for(Iterator iterator = elementBuilders.iterator(); iterator.hasNext(); linkedlist.add(j_jsonnodebuilder.buildNode()))
+		{
+			j_jsonnodebuilder = (J_JsonNodeBuilder)iterator.next();
+		}
 
-        return J_JsonNodeFactories.func_27309_a(linkedlist);
-    }
+		return J_JsonNodeFactories.func_27309_a(linkedlist);
+	}
 
-    public J_JsonNode buildNode()
-    {
-        return build();
-    }
+	public J_JsonNode buildNode()
+	{
+		return build();
+	}
 }

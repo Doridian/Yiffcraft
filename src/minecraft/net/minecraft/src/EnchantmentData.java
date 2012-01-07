@@ -6,18 +6,18 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            WeightedRandomChoice, Enchantment
+//			WeightedRandomChoice, Enchantment
 
 public class EnchantmentData extends WeightedRandomChoice
 {
 
-    public final Enchantment field_40264_a;
-    public final int field_40263_b;
+	public final Enchantment field_40264_a;
+	public final int field_40263_b;
 
-    public EnchantmentData(Enchantment enchantment, int i)
-    {
-        super(enchantment.getWeight());
-        field_40264_a = enchantment;
-        field_40263_b = i;
-    }
+	public EnchantmentData(Enchantment enchantment, int i)
+	{
+		super(enchantment.getWeight());
+		field_40264_a = enchantment;
+		field_40263_b = i;
+	}
 }

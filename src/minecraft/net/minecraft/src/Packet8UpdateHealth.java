@@ -7,42 +7,42 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet8UpdateHealth extends Packet
 {
 
-    public int healthMP;
-    public int food;
-    public float foodSaturation;
+	public int healthMP;
+	public int food;
+	public float foodSaturation;
 
-    public Packet8UpdateHealth()
-    {
-    }
+	public Packet8UpdateHealth()
+	{
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        healthMP = datainputstream.readShort();
-        food = datainputstream.readShort();
-        foodSaturation = datainputstream.readFloat();
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		healthMP = datainputstream.readShort();
+		food = datainputstream.readShort();
+		foodSaturation = datainputstream.readFloat();
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        dataoutputstream.writeShort(healthMP);
-        dataoutputstream.writeShort(food);
-        dataoutputstream.writeFloat(foodSaturation);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		dataoutputstream.writeShort(healthMP);
+		dataoutputstream.writeShort(food);
+		dataoutputstream.writeFloat(foodSaturation);
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handleHealth(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handleHealth(this);
+	}
 
-    public int getPacketSize()
-    {
-        return 8;
-    }
+	public int getPacketSize()
+	{
+		return 8;
+	}
 }

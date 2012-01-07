@@ -945,11 +945,11 @@ public abstract class EntityLiving extends Entity {
 
 		Profiler.endSection();
 
-        this.moveStrafing *= 0.98F;
+		this.moveStrafing *= 0.98F;
 		this.moveForward *= 0.98F;
 		this.randomYawVelocity *= 0.9F;
 
-        /*@DORI*/
+		/*@DORI*/
 		if(Yiffcraft.enableFly && this == Yiffcraft.minecraft.thePlayer)
   		{
   			if(isJumping)
@@ -968,25 +968,25 @@ public abstract class EntityLiving extends Entity {
   			}
 		} else {
 		/*@DORI*/
-            boolean var14 = this.isInWater();
-            boolean var2 = this.handleLavaMovement();
-            if(this.isJumping) {
-                if(var14) {
-                    this.motionY += 0.03999999910593033D * getData().getJumpingMod(); //Spout
-                } else if(var2) {
-                    this.motionY += 0.03999999910593033D * getData().getJumpingMod(); //Spout
-                } else if(this.onGround && this.field_39003_d == 0) {
-                    this.jump();
-                    this.field_39003_d = 10;
-                }
-            } else {
-                this.field_39003_d = 0;
-            }
-            float var15 = this.landMovementFactor;
-            this.landMovementFactor *= this.func_35166_t_();
-            this.moveEntityWithHeading(this.moveStrafing, this.moveForward);
-            this.landMovementFactor = var15;
-        /*@DORI*/ }
+			boolean var14 = this.isInWater();
+			boolean var2 = this.handleLavaMovement();
+			if(this.isJumping) {
+				if(var14) {
+					this.motionY += 0.03999999910593033D * getData().getJumpingMod(); //Spout
+				} else if(var2) {
+					this.motionY += 0.03999999910593033D * getData().getJumpingMod(); //Spout
+				} else if(this.onGround && this.field_39003_d == 0) {
+					this.jump();
+					this.field_39003_d = 10;
+				}
+			} else {
+				this.field_39003_d = 0;
+			}
+			float var15 = this.landMovementFactor;
+			this.landMovementFactor *= this.func_35166_t_();
+			this.moveEntityWithHeading(this.moveStrafing, this.moveForward);
+			this.landMovementFactor = var15;
+		/*@DORI*/ }
 
 		Profiler.startSection("push");
 		List var4 = this.worldObj.getEntitiesWithinAABBExcludingEntity(this, this.boundingBox.expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
@@ -1002,7 +1002,7 @@ public abstract class EntityLiving extends Entity {
 		Profiler.endSection();
 	}
 
-    /*@DORI*/
+	/*@DORI*/
 	public void moveFlyingWithPitch(float f, float f1, float f2) {
 		float f3 = MathHelper.sqrt_float(f * f + f1 * f1);
 		if(f3 < 0.01F)

@@ -38,7 +38,7 @@ public class Aura extends BaseCommand
 				Yiffcraft.aura.destroy.enableDestroyAll = Util.toBool(args[1]);
 			}
 			Chat.addChat("Destroy aura: " + Util.toStr(Yiffcraft.aura.destroy.enableDestroyAll)); 
-	    } else if(type.equals("kill")) {
+		} else if(type.equals("kill")) {
 			if(args.length < 2) {
 				Yiffcraft.aura.kill.enableKillMobs = !(Yiffcraft.aura.kill.enableKillMobs || Yiffcraft.aura.kill.enableKillAnimals || Yiffcraft.aura.kill.enableKillPlayers);
 			} else {

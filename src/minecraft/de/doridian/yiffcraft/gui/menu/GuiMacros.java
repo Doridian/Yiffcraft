@@ -12,11 +12,11 @@ public class GuiMacros extends GuiScreen
 		return false;
 	}
 
-    public GuiMacros(GuiScreen parent)
-    {
+	public GuiMacros(GuiScreen parent)
+	{
 		parentScreen = parent;
-        screenTitle = "Yiffcraft Macros";
-    }
+		screenTitle = "Yiffcraft Macros";
+	}
 	
 	private int x1;
 	private int x2;
@@ -44,8 +44,8 @@ public class GuiMacros extends GuiScreen
 	
 	private int scrollOffset = 0;
 	
-    public void initGui()
-    {
+	public void initGui()
+	{
 		x1 = 20;
 		x2 = 270;
 		x3 = 340;
@@ -55,14 +55,14 @@ public class GuiMacros extends GuiScreen
 		scrollDown = new GuiButton(502, x3 + 35, height / 6 + 168, 25, 20, "v");
 		scrollUp = new GuiButton(501, x3, height / 6 + 168, 25, 20, "^");
 		
-        controlList.add(new GuiButton(500, x1, height / 6 + 168, 240, 20, "Close"));
+		controlList.add(new GuiButton(500, x1, height / 6 + 168, 240, 20, "Close"));
 		controlList.add(scrollDown);
 		controlList.add(scrollUp);
 		controlList.add(new GuiButton(503, x2, height / 6 + 168, 60, 20, "Add"));
 		
 		assignButtonCaps();
 		enableScrollButtons();
-    }
+	}
 	
 	public void assignButtonCaps()
 	{
@@ -95,11 +95,11 @@ public class GuiMacros extends GuiScreen
 	}
 	
 	private boolean needsRerender = false;
-    protected void actionPerformed(GuiButton guibutton)
-    {
+	protected void actionPerformed(GuiButton guibutton)
+	{
 		if(!guibutton.enabled) return;
-        if(guibutton.id >= 500)
-        {
+		if(guibutton.id >= 500)
+		{
 			switch(guibutton.id) {
 				case 500:
 					mc.displayGuiScreen(parentScreen);
@@ -129,7 +129,7 @@ public class GuiMacros extends GuiScreen
 					mc.displayGuiScreen(new GuiMacroEdit(this, macro, idx));
 					break;
 			}
-        }
+		}
 		else if(guibutton.id >= 200)
 		{
 			try {
@@ -161,32 +161,32 @@ public class GuiMacros extends GuiScreen
 			}
 			catch(Exception e) { e.printStackTrace(); }
 		}
-    }
-    
-    protected int editMacroId;
+	}
 	
-    protected void keyTyped(char var1, int var2) {
-        if(this.editMacroId >= 0) {
-           Macros.keyMacros.get(editMacroId).keyCode = var2;
-           this.editMacroId = -1;
-           Macros.saveConfig();
-           assignButtonCaps();
-        } else {
-           super.keyTyped(var1, var2);
-        }
-     }
-    
-    public void drawScreen(int i, int j, float f)
-    {
-        drawDefaultBackground();
-        drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
+	protected int editMacroId;
+	
+	protected void keyTyped(char var1, int var2) {
+		if(this.editMacroId >= 0) {
+		   Macros.keyMacros.get(editMacroId).keyCode = var2;
+		   this.editMacroId = -1;
+		   Macros.saveConfig();
+		   assignButtonCaps();
+		} else {
+		   super.keyTyped(var1, var2);
+		}
+	 }
+	
+	public void drawScreen(int i, int j, float f)
+	{
+		drawDefaultBackground();
+		drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
 
-        super.drawScreen(i, j, f);
-    }
+		super.drawScreen(i, j, f);
+	}
 
 	private GuiButton scrollDown = null;
 	private GuiButton scrollUp = null;
 	
-    private GuiScreen parentScreen;
-    protected String screenTitle;
+	private GuiScreen parentScreen;
+	protected String screenTitle;
 }

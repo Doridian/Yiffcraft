@@ -6,33 +6,33 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            NetworkManager
+//			NetworkManager
 
 class ThreadCloseConnection extends Thread
 {
 
-    final NetworkManager networkManager; /* synthetic field */
+	final NetworkManager networkManager; /* synthetic field */
 
-    ThreadCloseConnection(NetworkManager networkmanager)
-    {
-        networkManager = networkmanager;
-//        super();
-    }
+	ThreadCloseConnection(NetworkManager networkmanager)
+	{
+		networkManager = networkmanager;
+//		super();
+	}
 
-    public void run()
-    {
-        try
-        {
-            Thread.sleep(2000L);
-            if(NetworkManager.isRunning(networkManager))
-            {
-                NetworkManager.getWriteThread(networkManager).interrupt();
-                networkManager.networkShutdown("disconnect.closed", new Object[0]);
-            }
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
-        }
-    }
+	public void run()
+	{
+		try
+		{
+			Thread.sleep(2000L);
+			if(NetworkManager.isRunning(networkManager))
+			{
+				NetworkManager.getWriteThread(networkManager).interrupt();
+				networkManager.networkShutdown("disconnect.closed", new Object[0]);
+			}
+		}
+		catch(Exception exception)
+		{
+			exception.printStackTrace();
+		}
+	}
 }

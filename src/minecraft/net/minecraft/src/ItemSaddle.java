@@ -6,33 +6,33 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Item, EntityPig, ItemStack, EntityLiving
+//			Item, EntityPig, ItemStack, EntityLiving
 
 public class ItemSaddle extends Item
 {
 
-    public ItemSaddle(int i)
-    {
-        super(i);
-        maxStackSize = 1;
-    }
+	public ItemSaddle(int i)
+	{
+		super(i);
+		maxStackSize = 1;
+	}
 
-    public void useItemOnEntity(ItemStack itemstack, EntityLiving entityliving)
-    {
-        if(entityliving instanceof EntityPig)
-        {
-            EntityPig entitypig = (EntityPig)entityliving;
-            if(!entitypig.getSaddled())
-            {
-                entitypig.setSaddled(true);
-                itemstack.stackSize--;
-            }
-        }
-    }
+	public void useItemOnEntity(ItemStack itemstack, EntityLiving entityliving)
+	{
+		if(entityliving instanceof EntityPig)
+		{
+			EntityPig entitypig = (EntityPig)entityliving;
+			if(!entitypig.getSaddled())
+			{
+				entitypig.setSaddled(true);
+				itemstack.stackSize--;
+			}
+		}
+	}
 
-    public boolean hitEntity(ItemStack itemstack, EntityLiving entityliving, EntityLiving entityliving1)
-    {
-        useItemOnEntity(itemstack, entityliving);
-        return true;
-    }
+	public boolean hitEntity(ItemStack itemstack, EntityLiving entityliving, EntityLiving entityliving1)
+	{
+		useItemOnEntity(itemstack, entityliving);
+		return true;
+	}
 }

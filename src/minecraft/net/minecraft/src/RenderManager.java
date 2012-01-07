@@ -183,7 +183,7 @@ public class RenderManager {
 		this.entityRenderMap.put(EntityText.class, new RenderText());
 		this.entityRenderMap.put(EntityTexture.class, new RenderTexture());
 		//Spout End
-        /*@DORI*/ this.entityRenderMap.put(YCEntityClientPlayerMP.class, new YCRenderPlayer());
+		/*@DORI*/ this.entityRenderMap.put(YCEntityClientPlayerMP.class, new YCRenderPlayer());
 		Iterator var1 = this.entityRenderMap.values().iterator();
 
 		while(var1.hasNext()) {

@@ -7,24 +7,24 @@ package net.minecraft.src;
 import java.util.List;
 
 // Referenced classes of package net.minecraft.src:
-//            BiomeGenBase, BiomeDecorator, Block, BlockMycelium, 
-//            SpawnListEntry, EntityMooshroom
+//			BiomeGenBase, BiomeDecorator, Block, BlockMycelium, 
+//			SpawnListEntry, EntityMooshroom
 
 public class BiomeGenMushroomIsland extends BiomeGenBase
 {
 
-    public BiomeGenMushroomIsland(int i)
-    {
-        super(i);
-        biomeDecorator.treesPerChunk = -100;
-        biomeDecorator.flowersPerChunk = -100;
-        biomeDecorator.grassPerChunk = -100;
-        biomeDecorator.mushroomsPerChunk = 1;
-        biomeDecorator.field_40718_J = 1;
-        topBlock = (byte)Block.mycelium.blockID;
-        spawnableMonsterList.clear();
-        spawnableCreatureList.clear();
-        spawnableWaterCreatureList.clear();
-        spawnableCreatureList.add(new SpawnListEntry(net.minecraft.src.EntityMooshroom.class, 8, 4, 8));
-    }
+	public BiomeGenMushroomIsland(int i)
+	{
+		super(i);
+		biomeDecorator.treesPerChunk = -100;
+		biomeDecorator.flowersPerChunk = -100;
+		biomeDecorator.grassPerChunk = -100;
+		biomeDecorator.mushroomsPerChunk = 1;
+		biomeDecorator.field_40718_J = 1;
+		topBlock = (byte)Block.mycelium.blockID;
+		spawnableMonsterList.clear();
+		spawnableCreatureList.clear();
+		spawnableWaterCreatureList.clear();
+		spawnableCreatureList.add(new SpawnListEntry(net.minecraft.src.EntityMooshroom.class, 8, 4, 8));
+	}
 }

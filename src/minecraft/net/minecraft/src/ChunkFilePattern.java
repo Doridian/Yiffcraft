@@ -10,27 +10,27 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // Referenced classes of package net.minecraft.src:
-//            Empty2
+//			Empty2
 
 class ChunkFilePattern
-    implements FilenameFilter
+	implements FilenameFilter
 {
 
-    public static final Pattern dataFilenamePattern = Pattern.compile("c\\.(-?[0-9a-z]+)\\.(-?[0-9a-z]+)\\.dat");
+	public static final Pattern dataFilenamePattern = Pattern.compile("c\\.(-?[0-9a-z]+)\\.(-?[0-9a-z]+)\\.dat");
 
-    private ChunkFilePattern()
-    {
-    }
+	private ChunkFilePattern()
+	{
+	}
 
-    public boolean accept(File file, String s)
-    {
-        Matcher matcher = dataFilenamePattern.matcher(s);
-        return matcher.matches();
-    }
+	public boolean accept(File file, String s)
+	{
+		Matcher matcher = dataFilenamePattern.matcher(s);
+		return matcher.matches();
+	}
 
-    ChunkFilePattern(Empty2 empty2)
-    {
-        this();
-    }
+	ChunkFilePattern(Empty2 empty2)
+	{
+		this();
+	}
 
 }

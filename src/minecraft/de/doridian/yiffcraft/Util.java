@@ -42,18 +42,18 @@ public class Util
 
 	public static int GetDamageVS(int dmg, EntityLiving living)
 	{
-        if((float)living.heartsLife > (float)living.heartsHalvesLife / 2.0F)
-        {
-            if(dmg <= living.lastDamage)
-            {
-                return 0;
-            }
-            return (dmg - living.lastDamage);
-        }
+		if((float)living.heartsLife > (float)living.heartsHalvesLife / 2.0F)
+		{
+			if(dmg <= living.lastDamage)
+			{
+				return 0;
+			}
+			return (dmg - living.lastDamage);
+		}
 		else
-        {
-            return dmg;
-        }
+		{
+			return dmg;
+		}
 	}
 	
 	private static final Pattern ccPat = Pattern.compile("\u00a7.");
@@ -111,12 +111,12 @@ public class Util
 		throw new Exception("Block not found!");
 	}
 	public static String getCardinalDirection(double yaw) {
-        double rot = (yaw - 90) % 360;
-        if (rot < 0) {
-            rot += 360.0;
-        }
-        return getDirection(rot);
-    }
+		double rot = (yaw - 90) % 360;
+		if (rot < 0) {
+			rot += 360.0;
+		}
+		return getDirection(rot);
+	}
 	
 	public static String getCardinalDirection(double dirX, double dirY) {
 		double result;
@@ -128,67 +128,67 @@ public class Util
 	}
 	
 	public static String getTime(long time) {
-        int daytime = (int)(time % 24000), h = daytime / 1000, m = (int)((daytime % 1000) * 0.06f);
-        return (h<10 ? "0" : "") + h + (m<10 ? ":0" : ":") + m;
-    }
+		int daytime = (int)(time % 24000), h = daytime / 1000, m = (int)((daytime % 1000) * 0.06f);
+		return (h<10 ? "0" : "") + h + (m<10 ? ":0" : ":") + m;
+	}
 
-    public static String getRealTime(long time) {
-        long d = time / 1728000; time %= 1728000;
-        long h = time / 72000; time %= 72000;
-        long m = time / 1200; time %= 1200;
-        long s = time / 20; time %= 20;
-        long u = time / 2;
-        return ""+d+(h<10?":0":":")+h+(m<10?":0":":")+m+(s<10?":0":":")+s+"."+u;
-    }
+	public static String getRealTime(long time) {
+		long d = time / 1728000; time %= 1728000;
+		long h = time / 72000; time %= 72000;
+		long m = time / 1200; time %= 1200;
+		long s = time / 20; time %= 20;
+		long u = time / 2;
+		return ""+d+(h<10?":0":":")+h+(m<10?":0":":")+m+(s<10?":0":":")+s+"."+u;
+	}
 	
-    private static String getDirection(double rot) {
-        if (0 <= rot && rot < 22.5) {
-            return "N";
-        } else if (22.5 <= rot && rot < 67.5) {
-            return "NE";
-        } else if (67.5 <= rot && rot < 112.5) {
-            return "E";
-        } else if (112.5 <= rot && rot < 157.5) {
-            return "SE";
-        } else if (157.5 <= rot && rot < 202.5) {
-            return "S";
-        } else if (202.5 <= rot && rot < 247.5) {
-            return "SW";
-        } else if (247.5 <= rot && rot < 292.5) {
-            return "W";
-        } else if (292.5 <= rot && rot < 337.5) {
-            return "NW";
-        } else if (337.5 <= rot && rot < 360.0) {
-            return "N";
-        } else {
-            return null;
-        }
-    }
-    
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+	private static String getDirection(double rot) {
+		if (0 <= rot && rot < 22.5) {
+			return "N";
+		} else if (22.5 <= rot && rot < 67.5) {
+			return "NE";
+		} else if (67.5 <= rot && rot < 112.5) {
+			return "E";
+		} else if (112.5 <= rot && rot < 157.5) {
+			return "SE";
+		} else if (157.5 <= rot && rot < 202.5) {
+			return "S";
+		} else if (202.5 <= rot && rot < 247.5) {
+			return "SW";
+		} else if (247.5 <= rot && rot < 292.5) {
+			return "W";
+		} else if (292.5 <= rot && rot < 337.5) {
+			return "NW";
+		} else if (337.5 <= rot && rot < 360.0) {
+			return "N";
+		} else {
+			return null;
+		}
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static TreeMap sortTreeMap(TreeMap map)
-    {
-    	ValueComparator bvc = new ValueComparator(map);
-        TreeMap sorted_map = new TreeMap(bvc);
-        sorted_map.putAll(map);
-        return sorted_map;
-    }
+	{
+		ValueComparator bvc = new ValueComparator(map);
+		TreeMap sorted_map = new TreeMap(bvc);
+		sorted_map.putAll(map);
+		return sorted_map;
+	}
 }
 
 @SuppressWarnings("rawtypes")
 class ValueComparator implements Comparator {
 	  Map base;
 	  public ValueComparator(Map base) {
-	      this.base = base;
+		  this.base = base;
 	  }
 
 	  public int compare(Object a, Object b) {
-	    if((Double)base.get(a) < (Double)base.get(b)) {
-	      return 1;
-	    } else if((Double)base.get(a) == (Double)base.get(b)) {
-	      return 0;
-	    } else {
-	      return -1;
-	    }
+		if((Double)base.get(a) < (Double)base.get(b)) {
+		  return 1;
+		} else if((Double)base.get(a) == (Double)base.get(b)) {
+		  return 0;
+		} else {
+		  return -1;
+		}
 	  }
 }

@@ -6,45 +6,45 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Block
+//			Block
 
 public class ChunkBlockMap
 {
 
-    private static byte field_26003_a[];
+	private static byte field_26003_a[];
 
-    public ChunkBlockMap()
-    {
-    }
+	public ChunkBlockMap()
+	{
+	}
 
-    public static void func_26002_a(byte abyte0[])
-    {
-        for(int i = 0; i < abyte0.length; i++)
-        {
-            abyte0[i] = field_26003_a[abyte0[i] & 0xff];
-        }
+	public static void func_26002_a(byte abyte0[])
+	{
+		for(int i = 0; i < abyte0.length; i++)
+		{
+			abyte0[i] = field_26003_a[abyte0[i] & 0xff];
+		}
 
-    }
+	}
 
-    static 
-    {
-        field_26003_a = new byte[256];
-        try
-        {
-            for(int i = 0; i < 256; i++)
-            {
-                byte byte0 = (byte)i;
-                if(byte0 != 0 && Block.blocksList[byte0 & 0xff] == null)
-                {
-                    byte0 = 0;
-                }
-                field_26003_a[i] = byte0;
-            }
+	static 
+	{
+		field_26003_a = new byte[256];
+		try
+		{
+			for(int i = 0; i < 256; i++)
+			{
+				byte byte0 = (byte)i;
+				if(byte0 != 0 && Block.blocksList[byte0 & 0xff] == null)
+				{
+					byte0 = 0;
+				}
+				field_26003_a[i] = byte0;
+			}
 
-        }
-        catch(Exception exception)
-        {
-            exception.printStackTrace();
-        }
-    }
+		}
+		catch(Exception exception)
+		{
+			exception.printStackTrace();
+		}
+	}
 }

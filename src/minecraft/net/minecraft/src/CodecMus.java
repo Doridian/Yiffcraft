@@ -10,24 +10,24 @@ import java.net.URLConnection;
 import paulscode.sound.codecs.CodecJOrbis;
 
 // Referenced classes of package net.minecraft.src:
-//            MusInputStream
+//			MusInputStream
 
 public class CodecMus extends CodecJOrbis
 {
 
-    public CodecMus()
-    {
-    }
+	public CodecMus()
+	{
+	}
 
-    protected InputStream openInputStream()
-    {
-        try
-        {
-            return new MusInputStream(this, url, urlConnection.getInputStream());
-        }
-        catch (IOException e)
-        {
-            return null;
-        }
-    }
+	protected InputStream openInputStream()
+	{
+		try
+		{
+			return new MusInputStream(this, url, urlConnection.getInputStream());
+		}
+		catch (IOException e)
+		{
+			return null;
+		}
+	}
 }

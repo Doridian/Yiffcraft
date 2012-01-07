@@ -17,11 +17,11 @@ public class GuiWallhacks extends GuiScreen
 		return false;
 	}
 
-    public GuiWallhacks(GuiScreen parent)
-    {
+	public GuiWallhacks(GuiScreen parent)
+	{
 		parentScreen = parent;
-        screenTitle = "Yiffcraft Wallhacks";
-    }
+		screenTitle = "Yiffcraft Wallhacks";
+	}
 	
 	private String getButtonTitle(int ifid)
 	{
@@ -37,10 +37,10 @@ public class GuiWallhacks extends GuiScreen
 		j++;
 	}
 	
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public void initGui()
-    {
-        i =  (width / 2 - 175);
+	{
+		i =  (width / 2 - 175);
 		j = 0;
 		
 		addButton(73);
@@ -55,9 +55,9 @@ public class GuiWallhacks extends GuiScreen
 		addButton(16);
 		
 		controlList.add(new GuiSliderWallhackOpacity(400, width / 2 - 100, height / 6 + 24 * ((j + 3) / 2), (Yiffcraft.wallhackOpacity / 255F), this));
-        
-        controlList.add(new GuiButton(500, width / 2 - 100, height / 6 + 168, "Apply"));
-    }
+		
+		controlList.add(new GuiButton(500, width / 2 - 100, height / 6 + 168, "Apply"));
+	}
 
 	private static File getConfig()
 	{
@@ -89,13 +89,13 @@ public class GuiWallhacks extends GuiScreen
 	}
 	
 	public boolean needsRerender = false;
-    protected void actionPerformed(GuiButton guibutton)
-    {
-        if(guibutton.id == 500)
-        {
-            mc.displayGuiScreen(parentScreen);
+	protected void actionPerformed(GuiButton guibutton)
+	{
+		if(guibutton.id == 500)
+		{
+			mc.displayGuiScreen(parentScreen);
 			onGuiClosed();
-        }
+		}
 		else if(guibutton.id < 300)
 		{
 			GuiBlockButton blockButton = (GuiBlockButton)guibutton;
@@ -136,7 +136,7 @@ public class GuiWallhacks extends GuiScreen
 			blockButton.displayString = getButtonTitle(blockButton.itemID);
 			needsRerender = true;
 		}
-    }
+	}
 	
 	public void onGuiClosed()
 	{
@@ -155,14 +155,14 @@ public class GuiWallhacks extends GuiScreen
 		Yiffcraft.saveConfig();
 	}
 
-    public void drawScreen(int i, int j, float f)
-    {
-        drawDefaultBackground();
-        drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
+	public void drawScreen(int i, int j, float f)
+	{
+		drawDefaultBackground();
+		drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
 
-        super.drawScreen(i, j, f);
-    }
+		super.drawScreen(i, j, f);
+	}
 
-    private GuiScreen parentScreen;
-    protected String screenTitle;
+	private GuiScreen parentScreen;
+	protected String screenTitle;
 }

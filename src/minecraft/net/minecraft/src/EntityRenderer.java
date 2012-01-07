@@ -1003,7 +1003,7 @@ public class EntityRenderer {
 				;
 			}
 
-            /*@DORI*/ Renderer.renderEffects(var1);
+			/*@DORI*/ Renderer.renderEffects(var1);
 
 			if (this.mc.gameSettings.shouldRenderClouds()) {
 				Profiler.endStartSection("clouds");

@@ -6,10 +6,10 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Enchantment
+//			Enchantment
 
 interface IEnchantmentModifier
 {
 
-    public abstract void calculateModifier(Enchantment enchantment, int i);
+	public abstract void calculateModifier(Enchantment enchantment, int i);
 }

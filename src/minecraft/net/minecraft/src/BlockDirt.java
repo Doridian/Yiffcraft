@@ -6,13 +6,13 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Block, Material
+//			Block, Material
 
 public class BlockDirt extends Block
 {
 
-    protected BlockDirt(int i, int j)
-    {
-        super(i, j, Material.ground);
-    }
+	protected BlockDirt(int i, int j)
+	{
+		super(i, j, Material.ground);
+	}
 }

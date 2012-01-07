@@ -7,46 +7,46 @@ package net.minecraft.src;
 
 public enum EnumOS2
 {
-    linux("linux", 0),
-    solaris("solaris", 1),
-    windows("windows", 2),
-    macos("macos", 3),
-    unknown("unknown", 4);
+	linux("linux", 0),
+	solaris("solaris", 1),
+	windows("windows", 2),
+	macos("macos", 3),
+	unknown("unknown", 4);
 /*
-    public static final EnumOS2 linux;
-    public static final EnumOS2 solaris;
-    public static final EnumOS2 windows;
-    public static final EnumOS2 macos;
-    public static final EnumOS2 unknown;
+	public static final EnumOS2 linux;
+	public static final EnumOS2 solaris;
+	public static final EnumOS2 windows;
+	public static final EnumOS2 macos;
+	public static final EnumOS2 unknown;
 */
-    private static final EnumOS2 allOSes[]; /* synthetic field */
+	private static final EnumOS2 allOSes[]; /* synthetic field */
 /*
-    public static final EnumOS2[] values()
-    {
-        return (EnumOS2[])allOSes.clone();
-    }
+	public static final EnumOS2[] values()
+	{
+		return (EnumOS2[])allOSes.clone();
+	}
 
-    public static EnumOS2 valueOf(String s)
-    {
-        return (EnumOS2)Enum.valueOf(net.minecraft.src.EnumOS2.class, s);
-    }
+	public static EnumOS2 valueOf(String s)
+	{
+		return (EnumOS2)Enum.valueOf(net.minecraft.src.EnumOS2.class, s);
+	}
 */
-    private EnumOS2(String s, int i)
-    {
-//        super(s, i);
-    }
+	private EnumOS2(String s, int i)
+	{
+//		super(s, i);
+	}
 
-    static 
-    {
+	static 
+	{
 /*
-        linux = new EnumOS2("linux", 0);
-        solaris = new EnumOS2("solaris", 1);
-        windows = new EnumOS2("windows", 2);
-        macos = new EnumOS2("macos", 3);
-        unknown = new EnumOS2("unknown", 4);
+		linux = new EnumOS2("linux", 0);
+		solaris = new EnumOS2("solaris", 1);
+		windows = new EnumOS2("windows", 2);
+		macos = new EnumOS2("macos", 3);
+		unknown = new EnumOS2("unknown", 4);
 */
-        allOSes = (new EnumOS2[] {
-            linux, solaris, windows, macos, unknown
-        });
-    }
+		allOSes = (new EnumOS2[] {
+			linux, solaris, windows, macos, unknown
+		});
+	}
 }

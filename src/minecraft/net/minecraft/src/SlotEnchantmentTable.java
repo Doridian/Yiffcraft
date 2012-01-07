@@ -6,27 +6,27 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            InventoryBasic, ContainerEnchantment
+//			InventoryBasic, ContainerEnchantment
 
 class SlotEnchantmentTable extends InventoryBasic
 {
 
-    final ContainerEnchantment field_40070_a; /* synthetic field */
+	final ContainerEnchantment field_40070_a; /* synthetic field */
 
-    SlotEnchantmentTable(ContainerEnchantment containerenchantment, String s, int i)
-    {
-        super(s, i);
-        field_40070_a = containerenchantment;
-    }
+	SlotEnchantmentTable(ContainerEnchantment containerenchantment, String s, int i)
+	{
+		super(s, i);
+		field_40070_a = containerenchantment;
+	}
 
-    public int getInventoryStackLimit()
-    {
-        return 1;
-    }
+	public int getInventoryStackLimit()
+	{
+		return 1;
+	}
 
-    public void onInventoryChanged()
-    {
-        super.onInventoryChanged();
-        field_40070_a.onCraftMatrixChanged(this);
-    }
+	public void onInventoryChanged()
+	{
+		super.onInventoryChanged();
+		field_40070_a.onCraftMatrixChanged(this);
+	}
 }

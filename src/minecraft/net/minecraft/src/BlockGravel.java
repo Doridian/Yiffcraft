@@ -7,24 +7,24 @@ package net.minecraft.src;
 import java.util.Random;
 
 // Referenced classes of package net.minecraft.src:
-//            BlockSand, Item
+//			BlockSand, Item
 
 public class BlockGravel extends BlockSand
 {
 
-    public BlockGravel(int i, int j)
-    {
-        super(i, j);
-    }
+	public BlockGravel(int i, int j)
+	{
+		super(i, j);
+	}
 
-    public int idDropped(int i, Random random, int j)
-    {
-        if(random.nextInt(10 - j * 3) == 0)
-        {
-            return Item.flint.shiftedIndex;
-        } else
-        {
-            return blockID;
-        }
-    }
+	public int idDropped(int i, Random random, int j)
+	{
+		if(random.nextInt(10 - j * 3) == 0)
+		{
+			return Item.flint.shiftedIndex;
+		} else
+		{
+			return blockID;
+		}
+	}
 }

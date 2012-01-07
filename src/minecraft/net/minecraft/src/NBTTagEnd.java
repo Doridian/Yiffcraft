@@ -7,43 +7,43 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            NBTBase
+//			NBTBase
 
 public class NBTTagEnd extends NBTBase
 {
 
-    public NBTTagEnd()
-    {
-        super(null);
-    }
+	public NBTTagEnd()
+	{
+		super(null);
+	}
 
-    void readTagContents(DataInput datainput)
-        throws IOException
-    {
-    }
+	void readTagContents(DataInput datainput)
+		throws IOException
+	{
+	}
 
-    void writeTagContents(DataOutput dataoutput)
-        throws IOException
-    {
-    }
+	void writeTagContents(DataOutput dataoutput)
+		throws IOException
+	{
+	}
 
-    public byte getType()
-    {
-        return 0;
-    }
+	public byte getType()
+	{
+		return 0;
+	}
 
-    public String toString()
-    {
-        return "END";
-    }
+	public String toString()
+	{
+		return "END";
+	}
 
-    public NBTBase func_40195_b()
-    {
-        return new NBTTagEnd();
-    }
+	public NBTBase func_40195_b()
+	{
+		return new NBTTagEnd();
+	}
 
-    public boolean equals(Object obj)
-    {
-        return super.equals(obj);
-    }
+	public boolean equals(Object obj)
+	{
+		return super.equals(obj);
+	}
 }

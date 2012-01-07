@@ -20,7 +20,7 @@ public abstract class EntityThrowable extends Entity {
 	protected boolean field_40085_a = false;
 	public int field_40081_b = 0;
 	public EntityLiving field_40083_c; //Spout protected -> public
-    private int field_40087_aq;
+	private int field_40087_aq;
 	private int field_40086_ar = 0;
 
 
@@ -60,15 +60,15 @@ public abstract class EntityThrowable extends Entity {
 		this.setSize(0.25F, 0.25F);
 		this.setPosition(var2, var4, var6);
 		this.yOffset = 0.0F;
-    }
+	}
 
 	protected float func_40077_c() {
-        return 1.5F;
-    }
+		return 1.5F;
+	}
 
 	protected float func_40074_d() {
-        return 0.0F;
-    }
+		return 0.0F;
+	}
 
 	public void setThrowableHeading(double var1, double var3, double var5, float var7, float var8) {
 		float var9 = MathHelper.sqrt_double(var1 * var1 + var3 * var3 + var5 * var5);
@@ -88,7 +88,7 @@ public abstract class EntityThrowable extends Entity {
 		this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(var1, var5) * 180.0D / 3.1415927410125732D);
 		this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(var3, (double)var10) * 180.0D / 3.1415927410125732D);
 		this.field_40087_aq = 0;
-    }
+	}
 
 	public void setVelocity(double var1, double var3, double var5) {
 		this.motionX = var1;
@@ -98,18 +98,18 @@ public abstract class EntityThrowable extends Entity {
 			float var7 = MathHelper.sqrt_double(var1 * var1 + var5 * var5);
 			this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(var1, var5) * 180.0D / 3.1415927410125732D);
 			this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(var3, (double)var7) * 180.0D / 3.1415927410125732D);
-        }
+		}
 
-    }
+	}
 
 	public void onUpdate() {
 		this.lastTickPosX = this.posX;
 		this.lastTickPosY = this.posY;
 		this.lastTickPosZ = this.posZ;
-        super.onUpdate();
+		super.onUpdate();
 		if(this.field_40081_b > 0) {
 			--this.field_40081_b;
-        }
+		}
 
 		if(this.field_40085_a) {
 			int var1 = this.worldObj.getBlockId(this.field_40079_d, this.field_40080_e, this.field_40082_ao);
@@ -117,10 +117,10 @@ public abstract class EntityThrowable extends Entity {
 				++this.field_40087_aq;
 				if(this.field_40087_aq == 1200) {
 					this.setEntityDead();
-                }
+				}
 
-                return;
-            }
+				return;
+			}
 
 			this.field_40085_a = false;
 			this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
@@ -191,7 +191,7 @@ public abstract class EntityThrowable extends Entity {
 
 		while(this.rotationYaw - this.prevRotationYaw >= 180.0F) {
 			this.prevRotationYaw += 360.0F;
-        }
+		}
 
 		this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
 		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
@@ -201,7 +201,7 @@ public abstract class EntityThrowable extends Entity {
 			for(int var7 = 0; var7 < 4; ++var7) {
 				float var19 = 0.25F;
 				this.worldObj.spawnParticle("bubble", this.posX - this.motionX * (double)var19, this.posY - this.motionY * (double)var19, this.posZ - this.motionZ * (double)var19, this.motionX, this.motionY, this.motionZ);
-    }
+	}
 
 			var17 = 0.8F;
 		}
@@ -214,8 +214,8 @@ public abstract class EntityThrowable extends Entity {
 	}
 
 	protected float func_40075_e() {
-        return 0.03F;
-    }
+		return 0.03F;
+	}
 
 	protected abstract void func_40078_a(MovingObjectPosition var1);
 
@@ -226,7 +226,7 @@ public abstract class EntityThrowable extends Entity {
 		var1.setByte("inTile", (byte)this.field_40084_ap);
 		var1.setByte("shake", (byte)this.field_40081_b);
 		var1.setByte("inGround", (byte)(this.field_40085_a?1:0));
-    }
+	}
 
 	public void readEntityFromNBT(NBTTagCompound var1) {
 		this.field_40079_d = var1.getShort("xTile");
@@ -235,11 +235,11 @@ public abstract class EntityThrowable extends Entity {
 		this.field_40084_ap = var1.getByte("inTile") & 255;
 		this.field_40081_b = var1.getByte("shake") & 255;
 		this.field_40085_a = var1.getByte("inGround") == 1;
-    }
+	}
 
 	public void onCollideWithPlayer(EntityPlayer var1) {}
 
 	public float getShadowSize() {
-        return 0.0F;
-    }
+		return 0.0F;
+	}
 }

@@ -11,27 +11,27 @@ import net.minecraft.client.Minecraft;
 public class GameWindowListener extends WindowAdapter
 {
 
-    final Minecraft mc; /* synthetic field */
-    final Thread mcThread; /* synthetic field */
+	final Minecraft mc; /* synthetic field */
+	final Thread mcThread; /* synthetic field */
 
-    public GameWindowListener(Minecraft minecraft, Thread thread)
-    {
-        mc = minecraft;
-        mcThread = thread;
-//        super();
-    }
+	public GameWindowListener(Minecraft minecraft, Thread thread)
+	{
+		mc = minecraft;
+		mcThread = thread;
+//		super();
+	}
 
-    public void windowClosing(WindowEvent windowevent)
-    {
-        mc.shutdown();
-        try
-        {
-            mcThread.join();
-        }
-        catch(InterruptedException interruptedexception)
-        {
-            interruptedexception.printStackTrace();
-        }
-        System.exit(0);
-    }
+	public void windowClosing(WindowEvent windowevent)
+	{
+		mc.shutdown();
+		try
+		{
+			mcThread.join();
+		}
+		catch(InterruptedException interruptedexception)
+		{
+			interruptedexception.printStackTrace();
+		}
+		System.exit(0);
+	}
 }

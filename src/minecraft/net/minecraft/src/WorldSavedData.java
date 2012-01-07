@@ -6,35 +6,35 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            NBTTagCompound
+//			NBTTagCompound
 
 public abstract class WorldSavedData
 {
 
-    public final String mapName;
-    private boolean dirty;
+	public final String mapName;
+	private boolean dirty;
 
-    public WorldSavedData(String s)
-    {
-        mapName = s;
-    }
+	public WorldSavedData(String s)
+	{
+		mapName = s;
+	}
 
-    public abstract void readFromNBT(NBTTagCompound nbttagcompound);
+	public abstract void readFromNBT(NBTTagCompound nbttagcompound);
 
-    public abstract void writeToNBT(NBTTagCompound nbttagcompound);
+	public abstract void writeToNBT(NBTTagCompound nbttagcompound);
 
-    public void markDirty()
-    {
-        setDirty(true);
-    }
+	public void markDirty()
+	{
+		setDirty(true);
+	}
 
-    public void setDirty(boolean flag)
-    {
-        dirty = flag;
-    }
+	public void setDirty(boolean flag)
+	{
+		dirty = flag;
+	}
 
-    public boolean isDirty()
-    {
-        return dirty;
-    }
+	public boolean isDirty()
+	{
+		return dirty;
+	}
 }

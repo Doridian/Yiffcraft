@@ -20,7 +20,7 @@ public class Renderer {
 	public static ArrayList<IGuiIngame> guis = new ArrayList<IGuiIngame>();
 	
 	private static boolean openMenu = false;
-    private static WorldRenderEvent event;
+	private static WorldRenderEvent event;
 	
 	public static void openMenu() {
 		openMenu = true;
@@ -29,37 +29,37 @@ public class Renderer {
 	static {
 		guis.add(new Radar());
 		guis.add(new GuiCompass());
-        event = new WorldRenderEvent(Yiffcraft.wecui);
+		event = new WorldRenderEvent(Yiffcraft.wecui);
 	}
 	
 	public static void renderEffects(float f)
 	{
 		Yiffcraft.aura.render(f);
 
-        event.setPartialTick(f);
-        RenderObfuscation.disableLighting();
+		event.setPartialTick(f);
+		RenderObfuscation.disableLighting();
 
-        GL11.glBlendFunc(770 /*GL_SRC_ALPHA*/, 771 /*GL_ONE_MINUS_SRC_ALPHA*/);
-        GL11.glLineWidth(2F);
-        GL11.glEnable(3042 /*GL_BLEND*/);
-        GL11.glDisable(3008 /*GL_ALPHA_TEST*/);
-        GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
-        GL11.glDepthMask(false);
-        //GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
-        GL11.glDepthFunc(GL11.GL_GEQUAL);
+		GL11.glBlendFunc(770 /*GL_SRC_ALPHA*/, 771 /*GL_ONE_MINUS_SRC_ALPHA*/);
+		GL11.glLineWidth(2F);
+		GL11.glEnable(3042 /*GL_BLEND*/);
+		GL11.glDisable(3008 /*GL_ALPHA_TEST*/);
+		GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
+		GL11.glDepthMask(false);
+		//GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
+		GL11.glDepthFunc(GL11.GL_GEQUAL);
 
-        Yiffcraft.wecui.getEventManager().callEvent(event);
+		Yiffcraft.wecui.getEventManager().callEvent(event);
 
-        GL11.glDepthFunc(GL11.GL_LEQUAL);
-        GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
+		GL11.glDepthFunc(GL11.GL_LEQUAL);
+		GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
 
-        GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
-        GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
-        GL11.glDisable(3042 /*GL_BLEND*/);
-        GL11.glEnable(3008 /*GL_ALPHA_TEST*/);
+		GL11.glEnable(2929 /*GL_DEPTH_TEST*/);
+		GL11.glEnable(3553 /*GL_TEXTURE_2D*/);
+		GL11.glDisable(3042 /*GL_BLEND*/);
+		GL11.glEnable(3008 /*GL_ALPHA_TEST*/);
 
-        RenderObfuscation.enableLighting();
-    }
+		RenderObfuscation.enableLighting();
+	}
 	
 	public static void renderGui()
 	{
@@ -74,7 +74,7 @@ public class Renderer {
 		ScaledResolution scaledresolution = new ScaledResolution(Yiffcraft.minecraft.gameSettings, Yiffcraft.minecraft.displayWidth, Yiffcraft.minecraft.displayHeight);
 		for(IGuiIngame gui : guis) gui.renderGui(scaledresolution, Yiffcraft.minecraft, fontrenderer);
 
-        String ycStr = "Yiffcraft " + Yiffcraft.VERSION;
+		String ycStr = "Yiffcraft " + Yiffcraft.VERSION;
 
 		if(Yiffcraft.infoMode != 3)
 		{
@@ -105,10 +105,10 @@ public class Renderer {
 				}
 				
 				long var25 = Runtime.getRuntime().maxMemory();
-		        long var30 = Runtime.getRuntime().totalMemory();
-		        long var29 = Runtime.getRuntime().freeMemory();
-		        long var21 = var30 - var29;
-		        String meminfo = "F:(" + net.minecraft.client.Minecraft.framesPerSecond + ") M:" + var21 * 100L / var25 + "%(" + var21 / 1024L / 1024L + "/" + var25 / 1024L / 1024L + ") P:(" + Yiffcraft.clientPing + "/" + Yiffcraft.serverPing + ")";
+				long var30 = Runtime.getRuntime().totalMemory();
+				long var29 = Runtime.getRuntime().freeMemory();
+				long var21 = var30 - var29;
+				String meminfo = "F:(" + net.minecraft.client.Minecraft.framesPerSecond + ") M:" + var21 * 100L / var25 + "%(" + var21 / 1024L / 1024L + "/" + var25 / 1024L / 1024L + ") P:(" + Yiffcraft.clientPing + "/" + Yiffcraft.serverPing + ")";
 				
 				fontrenderer.drawStringWithShadow(ycStr + " " + posStr + " ["+Util.getTime(Yiffcraft.minecraft.theWorld.getWorldTime())+"] (" + Yiffcraft.minecraft.theWorld.getWorldChunkManager().getBiomeGenAt((int)(Yiffcraft.minecraft.thePlayer.posX),(int)(Yiffcraft.minecraft.thePlayer.posZ)).biomeName + ") " + meminfo + " " + itemInfo + " " + blockInfo, 0, 2, 0xe0e0e0);
 			}
@@ -117,20 +117,20 @@ public class Renderer {
 				fontrenderer.drawStringWithShadow(ycStr + " " + posStr + " ["+Util.getTime(Yiffcraft.minecraft.theWorld.getWorldTime())+"]", 0, 2, 0xe0e0e0);
 			}
 		}
-        else
-        {
-            fontrenderer.drawStringWithShadow(ycStr, 0, 2, 0xe0e0e0);
-        }
+		else
+		{
+			fontrenderer.drawStringWithShadow(ycStr, 0, 2, 0xe0e0e0);
+		}
 		
-        long curLag = System.currentTimeMillis() - Yiffcraft.lastPacket;
-        if(curLag > 1500)
-        {
-        	int scaledheight = scaledresolution.getScaledHeight();
-        	int color;
-        	if(curLag < 5000)
-        		color = 0xffff00;
-        	else
-        		color = 0xff0000;
+		long curLag = System.currentTimeMillis() - Yiffcraft.lastPacket;
+		if(curLag > 1500)
+		{
+			int scaledheight = scaledresolution.getScaledHeight();
+			int color;
+			if(curLag < 5000)
+				color = 0xffff00;
+			else
+				color = 0xff0000;
 			if(Yiffcraft.minecraft.currentScreen instanceof GuiChat)
 			{
 				fontrenderer.drawStringWithShadow("Lagging: " + curLag + "ms", 2, scaledheight - 24, color);
@@ -139,7 +139,7 @@ public class Renderer {
 			{
 				fontrenderer.drawStringWithShadow("Lagging: " + curLag + "ms", 2, scaledheight - 12, color);
 			}
-        }
+		}
 		
 		if(Yiffcraft.guiMode == 1 || Yiffcraft.minecraft.currentScreen instanceof GuiChat) return;
 		
@@ -176,7 +176,7 @@ public class Renderer {
 			fontrenderer.drawStringWithShadow("AutoRun", 2, k+=10, 0x00ff00);
 		if(Yiffcraft.stepHeight != 0.5F)
 			fontrenderer.drawStringWithShadow("Step: " + (Yiffcraft.stepHeight), 2, k+=10, 0x00ff00);
-        if(Yiffcraft.enableWaterwalk)
+		if(Yiffcraft.enableWaterwalk)
 			fontrenderer.drawStringWithShadow("Waterwalk", 2, k+=10, 0x00ff00);
 		if(Yiffcraft.enableOutOfBody)
 		{

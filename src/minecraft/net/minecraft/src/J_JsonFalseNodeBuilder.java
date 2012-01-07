@@ -6,18 +6,18 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            J_JsonNodeBuilder, J_JsonNodeFactories, J_JsonNode
+//			J_JsonNodeBuilder, J_JsonNodeFactories, J_JsonNode
 
 class J_JsonFalseNodeBuilder
-    implements J_JsonNodeBuilder
+	implements J_JsonNodeBuilder
 {
 
-    J_JsonFalseNodeBuilder()
-    {
-    }
+	J_JsonFalseNodeBuilder()
+	{
+	}
 
-    public J_JsonNode buildNode()
-    {
-        return J_JsonNodeFactories.func_27314_c();
-    }
+	public J_JsonNode buildNode()
+	{
+		return J_JsonNodeFactories.func_27314_c();
+	}
 }

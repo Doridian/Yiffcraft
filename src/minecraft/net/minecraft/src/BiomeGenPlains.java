@@ -6,16 +6,16 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            BiomeGenBase, BiomeDecorator
+//			BiomeGenBase, BiomeDecorator
 
 public class BiomeGenPlains extends BiomeGenBase
 {
 
-    protected BiomeGenPlains(int i)
-    {
-        super(i);
-        biomeDecorator.treesPerChunk = -999;
-        biomeDecorator.flowersPerChunk = 4;
-        biomeDecorator.grassPerChunk = 10;
-    }
+	protected BiomeGenPlains(int i)
+	{
+		super(i);
+		biomeDecorator.treesPerChunk = -999;
+		biomeDecorator.flowersPerChunk = 4;
+		biomeDecorator.grassPerChunk = 10;
+	}
 }

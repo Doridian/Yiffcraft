@@ -7,60 +7,60 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            NBTBase
+//			NBTBase
 
 public class NBTTagInt extends NBTBase
 {
 
-    public int intValue;
+	public int intValue;
 
-    public NBTTagInt(String s)
-    {
-        super(s);
-    }
+	public NBTTagInt(String s)
+	{
+		super(s);
+	}
 
-    public NBTTagInt(String s, int i)
-    {
-        super(s);
-        intValue = i;
-    }
+	public NBTTagInt(String s, int i)
+	{
+		super(s);
+		intValue = i;
+	}
 
-    void writeTagContents(DataOutput dataoutput)
-        throws IOException
-    {
-        dataoutput.writeInt(intValue);
-    }
+	void writeTagContents(DataOutput dataoutput)
+		throws IOException
+	{
+		dataoutput.writeInt(intValue);
+	}
 
-    void readTagContents(DataInput datainput)
-        throws IOException
-    {
-        intValue = datainput.readInt();
-    }
+	void readTagContents(DataInput datainput)
+		throws IOException
+	{
+		intValue = datainput.readInt();
+	}
 
-    public byte getType()
-    {
-        return 3;
-    }
+	public byte getType()
+	{
+		return 3;
+	}
 
-    public String toString()
-    {
-        return (new StringBuilder()).append("").append(intValue).toString();
-    }
+	public String toString()
+	{
+		return (new StringBuilder()).append("").append(intValue).toString();
+	}
 
-    public NBTBase func_40195_b()
-    {
-        return new NBTTagInt(getKey(), intValue);
-    }
+	public NBTBase func_40195_b()
+	{
+		return new NBTTagInt(getKey(), intValue);
+	}
 
-    public boolean equals(Object obj)
-    {
-        if(super.equals(obj))
-        {
-            NBTTagInt nbttagint = (NBTTagInt)obj;
-            return intValue == nbttagint.intValue;
-        } else
-        {
-            return false;
-        }
-    }
+	public boolean equals(Object obj)
+	{
+		if(super.equals(obj))
+		{
+			NBTTagInt nbttagint = (NBTTagInt)obj;
+			return intValue == nbttagint.intValue;
+		} else
+		{
+			return false;
+		}
+	}
 }

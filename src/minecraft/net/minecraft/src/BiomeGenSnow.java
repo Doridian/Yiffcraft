@@ -6,13 +6,13 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            BiomeGenBase
+//			BiomeGenBase
 
 public class BiomeGenSnow extends BiomeGenBase
 {
 
-    public BiomeGenSnow(int i)
-    {
-        super(i);
-    }
+	public BiomeGenSnow(int i)
+	{
+		super(i);
+	}
 }

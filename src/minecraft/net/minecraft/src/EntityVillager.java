@@ -13,9 +13,9 @@ public class EntityVillager extends EntityCreature {
 
 	public EntityVillager(World var1) {
 		this(var1, 0);
-        //Spout start
-        this.spoutEntity = new CraftVillager(this);
-        //Spout end
+		//Spout start
+		this.spoutEntity = new CraftVillager(this);
+		//Spout end
 	}
 
 	public EntityVillager(World var1, int var2) {

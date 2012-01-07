@@ -31,18 +31,18 @@ public class GuiMacroEdit extends GuiScreen
 		controlList.add(new GuiButton(1, width / 2 - 100, height / 4 + 120 + 12, "Cancel"));
 		
 		newrepeatable = new GuiButton(2, width / 2 - 100, (height / 4 - 10) + 80, "XREPEATED");
-        controlList.add(newrepeatable);
-        setRepeatedButtonCap();
+		controlList.add(newrepeatable);
+		setRepeatedButtonCap();
 		
 		newname = new GuiTextField(this, fontRenderer, width / 2 - 100, (height / 4 - 10) + 50, 200, 20, xOldName);
-        newname.isFocused = true;
-        newname.setMaxStringLength(32);
+		newname.isFocused = true;
+		newname.setMaxStringLength(32);
 	}
 	
 	protected void mouseClicked(int i, int j, int k)
-    {
-        super.mouseClicked(i, j, k);
-        newname.mouseClicked(i, j, k);
+	{
+		super.mouseClicked(i, j, k);
+		newname.mouseClicked(i, j, k);
 	}
 	
 	protected void setRepeatedButtonCap()
@@ -54,32 +54,32 @@ public class GuiMacroEdit extends GuiScreen
 	}
 	
 	protected void keyTyped(char c, int i)
-    {
-        newname.textboxKeyTyped(c, i);
+	{
+		newname.textboxKeyTyped(c, i);
 		((GuiButton)controlList.get(0)).enabled = newname.getText().length() > 0;
-        if(c == '\r')
-        {
-            actionPerformed((GuiButton)controlList.get(0));
-        }
-    }
+		if(c == '\r')
+		{
+			actionPerformed((GuiButton)controlList.get(0));
+		}
+	}
 	
 	public void onGuiClosed()
-    {
-        Keyboard.enableRepeatEvents(false);
-    }
+	{
+		Keyboard.enableRepeatEvents(false);
+	}
 
 	protected void actionPerformed(GuiButton guibutton)
-    {
-        if(!guibutton.enabled)
-        {
-            return;
-        }
-        if(guibutton.id == 0)
-        {
-        	Macros.keyMacros.get(index).keyMacro = newname.getText();
-        	Macros.keyMacros.get(index).keyRepeatable = xRepeatable;
-        	Macros.saveConfig();
-        	parentScreen.assignButtonCaps();
+	{
+		if(!guibutton.enabled)
+		{
+			return;
+		}
+		if(guibutton.id == 0)
+		{
+			Macros.keyMacros.get(index).keyMacro = newname.getText();
+			Macros.keyMacros.get(index).keyRepeatable = xRepeatable;
+			Macros.saveConfig();
+			parentScreen.assignButtonCaps();
 			mc.displayGuiScreen(parentScreen);
 		}
 		else if(guibutton.id == 1)
@@ -93,15 +93,15 @@ public class GuiMacroEdit extends GuiScreen
 		}
 	}
 	
-    public void drawScreen(int i, int j, float f)
-    {
-        drawDefaultBackground();
-        drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
+	public void drawScreen(int i, int j, float f)
+	{
+		drawDefaultBackground();
+		drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
 
 		newname.drawTextBox();
-        super.drawScreen(i, j, f);
-    }
+		super.drawScreen(i, j, f);
+	}
 
-    private GuiMacros parentScreen;
-    protected String screenTitle;
+	private GuiMacros parentScreen;
+	protected String screenTitle;
 }

@@ -10,23 +10,23 @@ import net.minecraft.client.MinecraftApplet;
 public class CanvasMinecraftApplet extends Canvas
 {
 
-    final MinecraftApplet mcApplet; /* synthetic field */
+	final MinecraftApplet mcApplet; /* synthetic field */
 
-    public CanvasMinecraftApplet(MinecraftApplet minecraftapplet)
-    {
-        mcApplet = minecraftapplet;
-//        super();
-    }
+	public CanvasMinecraftApplet(MinecraftApplet minecraftapplet)
+	{
+		mcApplet = minecraftapplet;
+//		super();
+	}
 
-    public synchronized void addNotify()
-    {
-        super.addNotify();
-        mcApplet.startMainThread();
-    }
+	public synchronized void addNotify()
+	{
+		super.addNotify();
+		mcApplet.startMainThread();
+	}
 
-    public synchronized void removeNotify()
-    {
-        mcApplet.shutdown();
-        super.removeNotify();
-    }
+	public synchronized void removeNotify()
+	{
+		mcApplet.shutdown();
+		super.removeNotify();
+	}
 }

@@ -6,28 +6,28 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Material, MapColor
+//			Material, MapColor
 
 public class MaterialPortal extends Material
 {
 
-    public MaterialPortal(MapColor mapcolor)
-    {
-        super(mapcolor);
-    }
+	public MaterialPortal(MapColor mapcolor)
+	{
+		super(mapcolor);
+	}
 
-    public boolean isSolid()
-    {
-        return false;
-    }
+	public boolean isSolid()
+	{
+		return false;
+	}
 
-    public boolean getCanBlockGrass()
-    {
-        return false;
-    }
+	public boolean getCanBlockGrass()
+	{
+		return false;
+	}
 
-    public boolean getIsSolid()
-    {
-        return false;
-    }
+	public boolean getIsSolid()
+	{
+		return false;
+	}
 }

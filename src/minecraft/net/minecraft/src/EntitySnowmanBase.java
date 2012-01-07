@@ -6,52 +6,52 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            EntityCreature, World, NBTTagCompound
+//			EntityCreature, World, NBTTagCompound
 
 public abstract class EntitySnowmanBase extends EntityCreature
 {
 
-    public EntitySnowmanBase(World world)
-    {
-        super(world);
-    }
+	public EntitySnowmanBase(World world)
+	{
+		super(world);
+	}
 
-    protected void fall(float f)
-    {
-    }
+	protected void fall(float f)
+	{
+	}
 
-    public void writeEntityToNBT(NBTTagCompound nbttagcompound)
-    {
-        super.writeEntityToNBT(nbttagcompound);
-    }
+	public void writeEntityToNBT(NBTTagCompound nbttagcompound)
+	{
+		super.writeEntityToNBT(nbttagcompound);
+	}
 
-    public void readEntityFromNBT(NBTTagCompound nbttagcompound)
-    {
-        super.readEntityFromNBT(nbttagcompound);
-    }
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound)
+	{
+		super.readEntityFromNBT(nbttagcompound);
+	}
 
-    protected String getLivingSound()
-    {
-        return "none";
-    }
+	protected String getLivingSound()
+	{
+		return "none";
+	}
 
-    protected String getHurtSound()
-    {
-        return "none";
-    }
+	protected String getHurtSound()
+	{
+		return "none";
+	}
 
-    protected String getDeathSound()
-    {
-        return "none";
-    }
+	protected String getDeathSound()
+	{
+		return "none";
+	}
 
-    public int getTalkInterval()
-    {
-        return 120;
-    }
+	public int getTalkInterval()
+	{
+		return 120;
+	}
 
-    protected boolean canDespawn()
-    {
-        return false;
-    }
+	protected boolean canDespawn()
+	{
+		return false;
+	}
 }

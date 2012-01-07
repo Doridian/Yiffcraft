@@ -7,45 +7,45 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet3Chat extends Packet
 {
 
-    public String message;
+	public String message;
 
-    public Packet3Chat()
-    {
-    }
+	public Packet3Chat()
+	{
+	}
 
-    public Packet3Chat(String s)
-    {
-        if(s.length() > 119)
-        {
-            s = s.substring(0, 119);
-        }
-        message = s;
-    }
+	public Packet3Chat(String s)
+	{
+		if(s.length() > 119)
+		{
+			s = s.substring(0, 119);
+		}
+		message = s;
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        message = readString(datainputstream, 119);
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		message = readString(datainputstream, 119);
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        writeString(message, dataoutputstream);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		writeString(message, dataoutputstream);
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handleChat(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handleChat(this);
+	}
 
-    public int getPacketSize()
-    {
-        return message.length();
-    }
+	public int getPacketSize()
+	{
+		return message.length();
+	}
 }

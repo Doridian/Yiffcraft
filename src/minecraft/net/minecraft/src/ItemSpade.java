@@ -6,31 +6,31 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            ItemTool, Block, EnumToolMaterial
+//			ItemTool, Block, EnumToolMaterial
 
 public class ItemSpade extends ItemTool
 {
 
-    private static Block blocksEffectiveAgainst[];
+	private static Block blocksEffectiveAgainst[];
 
-    public ItemSpade(int i, EnumToolMaterial enumtoolmaterial)
-    {
-        super(i, 1, enumtoolmaterial, blocksEffectiveAgainst);
-    }
+	public ItemSpade(int i, EnumToolMaterial enumtoolmaterial)
+	{
+		super(i, 1, enumtoolmaterial, blocksEffectiveAgainst);
+	}
 
-    public boolean canHarvestBlock(Block block)
-    {
-        if(block == Block.snow)
-        {
-            return true;
-        }
-        return block == Block.blockSnow;
-    }
+	public boolean canHarvestBlock(Block block)
+	{
+		if(block == Block.snow)
+		{
+			return true;
+		}
+		return block == Block.blockSnow;
+	}
 
-    static 
-    {
-        blocksEffectiveAgainst = (new Block[] {
-            Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium
-        });
-    }
+	static 
+	{
+		blocksEffectiveAgainst = (new Block[] {
+			Block.grass, Block.dirt, Block.sand, Block.gravel, Block.snow, Block.blockSnow, Block.blockClay, Block.tilledField, Block.slowSand, Block.mycelium
+		});
+	}
 }

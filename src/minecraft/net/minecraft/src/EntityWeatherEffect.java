@@ -6,13 +6,13 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Entity, World
+//			Entity, World
 
 public abstract class EntityWeatherEffect extends Entity
 {
 
-    public EntityWeatherEffect(World world)
-    {
-        super(world);
-    }
+	public EntityWeatherEffect(World world)
+	{
+		super(world);
+	}
 }

@@ -7,41 +7,41 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet255KickDisconnect extends Packet
 {
 
-    public String reason;
+	public String reason;
 
-    public Packet255KickDisconnect()
-    {
-    }
+	public Packet255KickDisconnect()
+	{
+	}
 
-    public Packet255KickDisconnect(String s)
-    {
-        reason = s;
-    }
+	public Packet255KickDisconnect(String s)
+	{
+		reason = s;
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        reason = readString(datainputstream, 100);
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		reason = readString(datainputstream, 100);
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        writeString(reason, dataoutputstream);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		writeString(reason, dataoutputstream);
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handleKickDisconnect(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handleKickDisconnect(this);
+	}
 
-    public int getPacketSize()
-    {
-        return reason.length();
-    }
+	public int getPacketSize()
+	{
+		return reason.length();
+	}
 }

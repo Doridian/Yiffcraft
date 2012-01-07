@@ -6,12 +6,12 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            TileEntity
+//			TileEntity
 
 public class TileEntityEndPortal extends TileEntity
 {
 
-    public TileEntityEndPortal()
-    {
-    }
+	public TileEntityEndPortal()
+	{
+	}
 }

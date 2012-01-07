@@ -8,11 +8,11 @@ import net.minecraft.src.GuiScreen;
 public class GuiInfoSettings extends GuiScreen
 {
 
-    public GuiInfoSettings(GuiScreen parent)
-    {
-    	parentScreen = parent;
-        screenTitle = "Yiffcraft Info Config";
-    }
+	public GuiInfoSettings(GuiScreen parent)
+	{
+		parentScreen = parent;
+		screenTitle = "Yiffcraft Info Config";
+	}
 	
 	private int i;
 	private int j;
@@ -28,10 +28,10 @@ public class GuiInfoSettings extends GuiScreen
 	GuiButton notifyButton;
 	GuiButton nicknamesButton;
 	
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	public void initGui()
-    {
-        i =  (width / 2 - 100);
+	{
+		i =  (width / 2 - 100);
 		j = 0;
 		
 		nicknamesButton = addButton("Nicknames",1);
@@ -40,16 +40,16 @@ public class GuiInfoSettings extends GuiScreen
 		notifyButton = addButton("Notify",3);
 		refreshNotifyToggle();
 		
-        controlList.add(new GuiButton(250, i, height / 6 + 168, "Close"));
-    }
-    
-    private void refreshNicknameToggle()
+		controlList.add(new GuiButton(250, i, height / 6 + 168, "Close"));
+	}
+	
+	private void refreshNicknameToggle()
 	{
 		String setting = Radar.useNickname ? "On" : "Off";
 		nicknamesButton.displayString = "Nicknames: " + setting;
 	}
-    
-    private void refreshNotifyToggle()
+	
+	private void refreshNotifyToggle()
 	{
 		String setting = "Unknown";
 		switch(Yiffcraft.notifyMode)
@@ -69,9 +69,9 @@ public class GuiInfoSettings extends GuiScreen
 		}
 		notifyButton.displayString = "Notify: " + setting;
 	}
-    
-    protected void actionPerformed(GuiButton guibutton)
-    {
+	
+	protected void actionPerformed(GuiButton guibutton)
+	{
 		switch(guibutton.id)
 		{
 			case 1:
@@ -89,21 +89,21 @@ public class GuiInfoSettings extends GuiScreen
 				onGuiClosed();
 				break;
 		}
-    }
+	}
 	
 	public void onGuiClosed()
-    {
-        Yiffcraft.saveConfig();
-    }
+	{
+		Yiffcraft.saveConfig();
+	}
 
-    public void drawScreen(int i, int j, float f)
-    {
-        drawDefaultBackground();
-        drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
+	public void drawScreen(int i, int j, float f)
+	{
+		drawDefaultBackground();
+		drawCenteredString(fontRenderer, screenTitle, width / 2, 20, 0xffffff);
 
-        super.drawScreen(i, j, f);
-    }
+		super.drawScreen(i, j, f);
+	}
 
-    private GuiScreen parentScreen;
-    protected String screenTitle;
+	private GuiScreen parentScreen;
+	protected String screenTitle;
 }

@@ -7,41 +7,41 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet16BlockItemSwitch extends Packet
 {
 
-    public int id;
+	public int id;
 
-    public Packet16BlockItemSwitch()
-    {
-    }
+	public Packet16BlockItemSwitch()
+	{
+	}
 
-    public Packet16BlockItemSwitch(int i)
-    {
-        id = i;
-    }
+	public Packet16BlockItemSwitch(int i)
+	{
+		id = i;
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        id = datainputstream.readShort();
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		id = datainputstream.readShort();
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        dataoutputstream.writeShort(id);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		dataoutputstream.writeShort(id);
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handleBlockItemSwitch(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handleBlockItemSwitch(this);
+	}
 
-    public int getPacketSize()
-    {
-        return 2;
-    }
+	public int getPacketSize()
+	{
+		return 2;
+	}
 }

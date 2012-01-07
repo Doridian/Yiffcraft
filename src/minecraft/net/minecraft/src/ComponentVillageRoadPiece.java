@@ -6,13 +6,13 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            ComponentVillage
+//			ComponentVillage
 
 public abstract class ComponentVillageRoadPiece extends ComponentVillage
 {
 
-    protected ComponentVillageRoadPiece(int i)
-    {
-        super(i);
-    }
+	protected ComponentVillageRoadPiece(int i)
+	{
+		super(i);
+	}
 }

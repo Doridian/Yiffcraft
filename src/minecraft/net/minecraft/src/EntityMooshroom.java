@@ -16,9 +16,9 @@ public class EntityMooshroom extends EntityCow {
 		super(var1);
 		this.texture = "/mob/redcow.png";
 		this.setSize(0.9F, 1.3F);
-        //Spout start
-        this.spoutEntity = new CraftMooshroom(this);
-        //Spout end
+		//Spout start
+		this.spoutEntity = new CraftMooshroom(this);
+		//Spout end
 	}
 
 	public boolean interact(EntityPlayer var1) {

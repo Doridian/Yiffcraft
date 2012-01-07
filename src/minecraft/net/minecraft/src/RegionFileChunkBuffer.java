@@ -7,25 +7,25 @@ package net.minecraft.src;
 import java.io.ByteArrayOutputStream;
 
 // Referenced classes of package net.minecraft.src:
-//            RegionFile
+//			RegionFile
 
 class RegionFileChunkBuffer extends ByteArrayOutputStream
 {
 
-    private int chunkX;
-    private int chunkZ;
-    final RegionFile regionFile; /* synthetic field */
+	private int chunkX;
+	private int chunkZ;
+	final RegionFile regionFile; /* synthetic field */
 
-    public RegionFileChunkBuffer(RegionFile regionfile, int i, int j)
-    {
-        super(8096);
-        regionFile = regionfile;
-        chunkX = i;
-        chunkZ = j;
-    }
+	public RegionFileChunkBuffer(RegionFile regionfile, int i, int j)
+	{
+		super(8096);
+		regionFile = regionfile;
+		chunkX = i;
+		chunkZ = j;
+	}
 
-    public void close()
-    {
-        regionFile.write(chunkX, chunkZ, buf, count);
-    }
+	public void close()
+	{
+		regionFile.write(chunkX, chunkZ, buf, count);
+	}
 }

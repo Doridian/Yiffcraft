@@ -74,12 +74,12 @@ public class AutoBreak {
 	{
 		EntityPlayerSP player = Yiffcraft.minecraft.thePlayer;
 		double dx = player.posX - ((double)x + 0.5D);
-        double dy = player.posY - ((double)y + 0.5D);
-        double dz = player.posZ - ((double)z + 0.5D);
-        double d = dx * dx + dy * dy + dz * dz;
-        if(d > 36D)
-        	return false;
-        return true;
+		double dy = player.posY - ((double)y + 0.5D);
+		double dz = player.posZ - ((double)z + 0.5D);
+		double d = dx * dx + dy * dy + dz * dz;
+		if(d > 36D)
+			return false;
+		return true;
 	}
 	
 	public static void activateStrongest(int x, int y, int z)

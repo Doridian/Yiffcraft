@@ -7,57 +7,57 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet9Respawn extends Packet
 {
 
-    public long mapSeed;
-    public int respawnDimension;
-    public int difficulty;
-    public int worldHeight;
-    public int creativeMode;
+	public long mapSeed;
+	public int respawnDimension;
+	public int difficulty;
+	public int worldHeight;
+	public int creativeMode;
 
-    public Packet9Respawn()
-    {
-    }
+	public Packet9Respawn()
+	{
+	}
 
-    public Packet9Respawn(byte byte0, byte byte1, long l, int i, int j)
-    {
-        respawnDimension = byte0;
-        difficulty = byte1;
-        mapSeed = l;
-        worldHeight = i;
-        creativeMode = j;
-    }
+	public Packet9Respawn(byte byte0, byte byte1, long l, int i, int j)
+	{
+		respawnDimension = byte0;
+		difficulty = byte1;
+		mapSeed = l;
+		worldHeight = i;
+		creativeMode = j;
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handleRespawn(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handleRespawn(this);
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        respawnDimension = datainputstream.readByte();
-        difficulty = datainputstream.readByte();
-        creativeMode = datainputstream.readByte();
-        worldHeight = datainputstream.readShort();
-        mapSeed = datainputstream.readLong();
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		respawnDimension = datainputstream.readByte();
+		difficulty = datainputstream.readByte();
+		creativeMode = datainputstream.readByte();
+		worldHeight = datainputstream.readShort();
+		mapSeed = datainputstream.readLong();
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        dataoutputstream.writeByte(respawnDimension);
-        dataoutputstream.writeByte(difficulty);
-        dataoutputstream.writeByte(creativeMode);
-        dataoutputstream.writeShort(worldHeight);
-        dataoutputstream.writeLong(mapSeed);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		dataoutputstream.writeByte(respawnDimension);
+		dataoutputstream.writeByte(difficulty);
+		dataoutputstream.writeByte(creativeMode);
+		dataoutputstream.writeShort(worldHeight);
+		dataoutputstream.writeLong(mapSeed);
+	}
 
-    public int getPacketSize()
-    {
-        return 13;
-    }
+	public int getPacketSize()
+	{
+		return 13;
+	}
 }

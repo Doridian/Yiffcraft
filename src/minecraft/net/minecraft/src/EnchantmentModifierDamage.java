@@ -6,26 +6,26 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            IEnchantmentModifier, Enchantment, DamageSource, Empty3
+//			IEnchantmentModifier, Enchantment, DamageSource, Empty3
 
 final class EnchantmentModifierDamage
-    implements IEnchantmentModifier
+	implements IEnchantmentModifier
 {
 
-    public int damageModifier;
-    public DamageSource damageSource;
+	public int damageModifier;
+	public DamageSource damageSource;
 
-    private EnchantmentModifierDamage()
-    {
-    }
+	private EnchantmentModifierDamage()
+	{
+	}
 
-    public void calculateModifier(Enchantment enchantment, int i)
-    {
-        damageModifier += enchantment.calcModifierDamage(i, damageSource);
-    }
+	public void calculateModifier(Enchantment enchantment, int i)
+	{
+		damageModifier += enchantment.calcModifierDamage(i, damageSource);
+	}
 
-    EnchantmentModifierDamage(Empty3 empty3)
-    {
-        this();
-    }
+	EnchantmentModifierDamage(Empty3 empty3)
+	{
+		this();
+	}
 }

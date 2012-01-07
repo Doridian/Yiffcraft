@@ -7,51 +7,51 @@ package net.minecraft.src;
 import java.io.*;
 
 // Referenced classes of package net.minecraft.src:
-//            Packet, NetHandler
+//			Packet, NetHandler
 
 public class Packet27Position extends Packet
 {
 
-    private float strafeMovement;
-    private float fowardMovement;
-    private boolean isSneaking;
-    private boolean isInJump;
-    private float pitchRotation;
-    private float yawRotation;
+	private float strafeMovement;
+	private float fowardMovement;
+	private boolean isSneaking;
+	private boolean isInJump;
+	private float pitchRotation;
+	private float yawRotation;
 
-    public Packet27Position()
-    {
-    }
+	public Packet27Position()
+	{
+	}
 
-    public void readPacketData(DataInputStream datainputstream)
-        throws IOException
-    {
-        strafeMovement = datainputstream.readFloat();
-        fowardMovement = datainputstream.readFloat();
-        pitchRotation = datainputstream.readFloat();
-        yawRotation = datainputstream.readFloat();
-        isSneaking = datainputstream.readBoolean();
-        isInJump = datainputstream.readBoolean();
-    }
+	public void readPacketData(DataInputStream datainputstream)
+		throws IOException
+	{
+		strafeMovement = datainputstream.readFloat();
+		fowardMovement = datainputstream.readFloat();
+		pitchRotation = datainputstream.readFloat();
+		yawRotation = datainputstream.readFloat();
+		isSneaking = datainputstream.readBoolean();
+		isInJump = datainputstream.readBoolean();
+	}
 
-    public void writePacketData(DataOutputStream dataoutputstream)
-        throws IOException
-    {
-        dataoutputstream.writeFloat(strafeMovement);
-        dataoutputstream.writeFloat(fowardMovement);
-        dataoutputstream.writeFloat(pitchRotation);
-        dataoutputstream.writeFloat(yawRotation);
-        dataoutputstream.writeBoolean(isSneaking);
-        dataoutputstream.writeBoolean(isInJump);
-    }
+	public void writePacketData(DataOutputStream dataoutputstream)
+		throws IOException
+	{
+		dataoutputstream.writeFloat(strafeMovement);
+		dataoutputstream.writeFloat(fowardMovement);
+		dataoutputstream.writeFloat(pitchRotation);
+		dataoutputstream.writeFloat(yawRotation);
+		dataoutputstream.writeBoolean(isSneaking);
+		dataoutputstream.writeBoolean(isInJump);
+	}
 
-    public void processPacket(NetHandler nethandler)
-    {
-        nethandler.handlePosition(this);
-    }
+	public void processPacket(NetHandler nethandler)
+	{
+		nethandler.handlePosition(this);
+	}
 
-    public int getPacketSize()
-    {
-        return 18;
-    }
+	public int getPacketSize()
+	{
+		return 18;
+	}
 }

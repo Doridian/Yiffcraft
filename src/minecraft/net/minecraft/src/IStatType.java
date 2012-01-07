@@ -8,5 +8,5 @@ package net.minecraft.src;
 public interface IStatType
 {
 
-    public abstract String format(int i);
+	public abstract String format(int i);
 }

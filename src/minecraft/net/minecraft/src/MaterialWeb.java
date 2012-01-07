@@ -6,18 +6,18 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Material, MapColor
+//			Material, MapColor
 
 class MaterialWeb extends Material
 {
 
-    MaterialWeb(MapColor mapcolor)
-    {
-        super(mapcolor);
-    }
+	MaterialWeb(MapColor mapcolor)
+	{
+		super(mapcolor);
+	}
 
-    public boolean getIsSolid()
-    {
-        return false;
-    }
+	public boolean getIsSolid()
+	{
+		return false;
+	}
 }

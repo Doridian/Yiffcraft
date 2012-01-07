@@ -934,12 +934,12 @@ public class RenderGlobal implements IWorldAccess {
 				}
 				double multiplier = (SpoutClient.getInstance().getSkyManager().getMoonSizePercent() / 100D);
 				int f19a = worldObj.func_40475_d(f);
-		        int l = f19a % 4;
-		        int i1 = (f19a / 4) % 2;
-		        float f25 = (float)(l + 0) / 4F;
-		        float f26 = (float)(i1 + 0) / 2.0F;
-		        float f27 = (float)(l + 1) / 4F;
-		        float f28 = (float)(i1 + 1) / 2.0F;
+				int l = f19a % 4;
+				int i1 = (f19a / 4) % 2;
+				float f25 = (float)(l + 0) / 4F;
+				float f26 = (float)(i1 + 0) / 2.0F;
+				float f27 = (float)(l + 1) / 4F;
+				float f28 = (float)(i1 + 1) / 2.0F;
 				tessellator.startDrawingQuads();
 				tessellator.addVertexWithUV(-f15, -100D / multiplier, f15, f27, f28);
 				tessellator.addVertexWithUV(f15, -100D / multiplier, f15, f25, f28);
@@ -951,11 +951,11 @@ public class RenderGlobal implements IWorldAccess {
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GL11.glDisable(3553 /*GL_TEXTURE_2D*/);
 			float f19 = worldObj.getStarBrightness(f) * var7;
-	        if(f19 > 0.0F && ConfigReader.stars) //Spout added stars condition
-	        {
-	            GL11.glColor4f(f19, f19, f19, f19);
-	            GL11.glCallList(starGLCallList);
-	        }
+			if(f19 > 0.0F && ConfigReader.stars) //Spout added stars condition
+			{
+				GL11.glColor4f(f19, f19, f19, f19);
+				GL11.glCallList(starGLCallList);
+			}
 			GL11.glDisable(3042 /* GL_BLEND */);
 			GL11.glEnable(3008 /* GL_ALPHA_TEST */);
 			GL11.glEnable(2912 /* GL_FOG */);

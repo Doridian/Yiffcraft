@@ -78,27 +78,27 @@ public class Macro extends BaseCommand
 			while(needsInput) {
 				while(Keyboard.next()) {
 					if(Keyboard.getEventKeyState()) {
-			        	if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE) {
-			        		Chat.addChat("Canceled macro command.");
-			        		return;
-			        	}
-			        	int typedKey = Keyboard.getEventKey();
-			        	if(action == 1)
-			        	{
-			        		for(int i = 0;i < Macros.keyMacros.size();i++)
+						if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE) {
+							Chat.addChat("Canceled macro command.");
+							return;
+						}
+						int typedKey = Keyboard.getEventKey();
+						if(action == 1)
+						{
+							for(int i = 0;i < Macros.keyMacros.size();i++)
 			 				{
 			 					if(typedKey == Macros.keyMacros.get(i).keyCode)
 			 						Macros.keyMacros.remove(i);
 			 				}
-			        		Macros.saveConfig();
-			        		Chat.addChat("Removed all macros for " + Keyboard.getKeyName(typedKey) + ".");
-			        	} else if(action == 2) {
-			        		Macros.keyMacros.add(new KeyMacro(actionMacro,typedKey));
-			        		Macros.saveConfig();
-			        		Chat.addChat(actionMacro + " bound to " + Keyboard.getKeyName(typedKey) + ".");
-			        	}
-			        	needsInput = false;
-			    	}
+							Macros.saveConfig();
+							Chat.addChat("Removed all macros for " + Keyboard.getKeyName(typedKey) + ".");
+						} else if(action == 2) {
+							Macros.keyMacros.add(new KeyMacro(actionMacro,typedKey));
+							Macros.saveConfig();
+							Chat.addChat(actionMacro + " bound to " + Keyboard.getKeyName(typedKey) + ".");
+						}
+						needsInput = false;
+					}
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) { needsInput = false; }

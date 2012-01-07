@@ -7,34 +7,34 @@ package net.minecraft.src;
 import java.util.Random;
 
 // Referenced classes of package net.minecraft.src:
-//            Block, Material, Item
+//			Block, Material, Item
 
 public class BlockBookshelf extends Block
 {
 
-    public BlockBookshelf(int i, int j)
-    {
-        super(i, j, Material.wood);
-    }
+	public BlockBookshelf(int i, int j)
+	{
+		super(i, j, Material.wood);
+	}
 
-    public int getBlockTextureFromSide(int i)
-    {
-        if(i <= 1)
-        {
-            return 4;
-        } else
-        {
-            return blockIndexInTexture;
-        }
-    }
+	public int getBlockTextureFromSide(int i)
+	{
+		if(i <= 1)
+		{
+			return 4;
+		} else
+		{
+			return blockIndexInTexture;
+		}
+	}
 
-    public int quantityDropped(Random random)
-    {
-        return 3;
-    }
+	public int quantityDropped(Random random)
+	{
+		return 3;
+	}
 
-    public int idDropped(int i, Random random, int j)
-    {
-        return Item.book.shiftedIndex;
-    }
+	public int idDropped(int i, Random random, int j)
+	{
+		return Item.book.shiftedIndex;
+	}
 }

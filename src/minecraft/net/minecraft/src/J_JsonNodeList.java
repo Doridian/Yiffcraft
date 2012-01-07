@@ -8,22 +8,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 // Referenced classes of package net.minecraft.src:
-//            J_JsonNode
+//			J_JsonNode
 
 class J_JsonNodeList extends ArrayList
 {
 
-    final Iterable field_27405_a; /* synthetic field */
+	final Iterable field_27405_a; /* synthetic field */
 
-    J_JsonNodeList(Iterable iterable)
-    {
-        field_27405_a = iterable;
-//        super();
-        J_JsonNode j_jsonnode;
-        for(Iterator iterator = field_27405_a.iterator(); iterator.hasNext(); add(j_jsonnode))
-        {
-            j_jsonnode = (J_JsonNode)iterator.next();
-        }
+	J_JsonNodeList(Iterable iterable)
+	{
+		field_27405_a = iterable;
+//		super();
+		J_JsonNode j_jsonnode;
+		for(Iterator iterator = field_27405_a.iterator(); iterator.hasNext(); add(j_jsonnode))
+		{
+			j_jsonnode = (J_JsonNode)iterator.next();
+		}
 
-    }
+	}
 }

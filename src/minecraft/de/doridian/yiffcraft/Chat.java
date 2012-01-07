@@ -25,42 +25,42 @@ public final class Chat
 	{
 		commands.clear();
 		
-		commands.put("help",	    new de.doridian.yiffcraft.commands.Help());
-		commands.put("menu",	    new de.doridian.yiffcraft.commands.Menu());
-		commands.put("pos",	        new de.doridian.yiffcraft.commands.GetPos());
-		commands.put("up",	        new de.doridian.yiffcraft.commands.Up());
-		commands.put("cam",		    new de.doridian.yiffcraft.commands.OOBCamTo());
-		commands.put("lookup",	    new de.doridian.yiffcraft.commands.MCBansPlayerLookup());
-		commands.put("pinfo",	    new de.doridian.yiffcraft.commands.PlayerInfo());
-		commands.put("sh",	        new de.doridian.yiffcraft.commands.SpeedHack());
-		commands.put("find",	    new de.doridian.yiffcraft.commands.FindPath());
-		commands.put("aura",        new de.doridian.yiffcraft.commands.Aura());
-		commands.put("gui",         new de.doridian.yiffcraft.commands.Overlay());
-		commands.put("oob",         new de.doridian.yiffcraft.commands.OOB());
-		commands.put("fly",         new de.doridian.yiffcraft.commands.Fly());
-		commands.put("wallh",       new de.doridian.yiffcraft.commands.Wallhack());
-		commands.put("fullbr",      new de.doridian.yiffcraft.commands.Fullbright());
-		commands.put("macro",       new de.doridian.yiffcraft.commands.Macro());
-		commands.put("clear",       new de.doridian.yiffcraft.commands.Clear());
-		commands.put("c3d",         new de.doridian.yiffcraft.commands.Compass3D());
+		commands.put("help",		new de.doridian.yiffcraft.commands.Help());
+		commands.put("menu",		new de.doridian.yiffcraft.commands.Menu());
+		commands.put("pos",			new de.doridian.yiffcraft.commands.GetPos());
+		commands.put("up",			new de.doridian.yiffcraft.commands.Up());
+		commands.put("cam",			new de.doridian.yiffcraft.commands.OOBCamTo());
+		commands.put("lookup",		new de.doridian.yiffcraft.commands.MCBansPlayerLookup());
+		commands.put("pinfo",		new de.doridian.yiffcraft.commands.PlayerInfo());
+		commands.put("sh",			new de.doridian.yiffcraft.commands.SpeedHack());
+		commands.put("find",		new de.doridian.yiffcraft.commands.FindPath());
+		commands.put("aura",		new de.doridian.yiffcraft.commands.Aura());
+		commands.put("gui",		 new de.doridian.yiffcraft.commands.Overlay());
+		commands.put("oob",		 new de.doridian.yiffcraft.commands.OOB());
+		commands.put("fly",		 new de.doridian.yiffcraft.commands.Fly());
+		commands.put("wallh",	   new de.doridian.yiffcraft.commands.Wallhack());
+		commands.put("fullbr",	  new de.doridian.yiffcraft.commands.Fullbright());
+		commands.put("macro",	   new de.doridian.yiffcraft.commands.Macro());
+		commands.put("clear",	   new de.doridian.yiffcraft.commands.Clear());
+		commands.put("c3d",		 new de.doridian.yiffcraft.commands.Compass3D());
 		commands.put("abreak",  	new de.doridian.yiffcraft.commands.ABreak());
 		commands.put("arun",   		new de.doridian.yiffcraft.commands.AutoRun());
-        commands.put("waterw",   	new de.doridian.yiffcraft.commands.Waterwalk());
+		commands.put("waterw",   	new de.doridian.yiffcraft.commands.Waterwalk());
 		if(Yiffcraft.isSpecial) commands.put("cubeshot",	new de.doridian.yiffcraft.commands.CubeShot());
 	}
 
 	public static boolean outgoing(String text)
 	{
-        ChatEvent chatevent = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.OUTGOING);
-        Yiffcraft.wecui.getEventManager().callEvent(chatevent);
-        if (!chatevent.isCancelled() && text.startsWith("/") && text.length() > 1) {
-            ChatCommandEvent commandevent = new ChatCommandEvent(Yiffcraft.wecui, text);
-            Yiffcraft.wecui.getEventManager().callEvent(commandevent);
-            if (commandevent.isHandled() || commandevent.isCancelled()) {
-                return false;
-            }
-        }
-        if(chatevent.isCancelled()) return false;
+		ChatEvent chatevent = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.OUTGOING);
+		Yiffcraft.wecui.getEventManager().callEvent(chatevent);
+		if (!chatevent.isCancelled() && text.startsWith("/") && text.length() > 1) {
+			ChatCommandEvent commandevent = new ChatCommandEvent(Yiffcraft.wecui, text);
+			Yiffcraft.wecui.getEventManager().callEvent(commandevent);
+			if (commandevent.isHandled() || commandevent.isCancelled()) {
+				return false;
+			}
+		}
+		if(chatevent.isCancelled()) return false;
 
 		if(text.charAt(0) == PREFIX)
 		{
@@ -100,28 +100,28 @@ public final class Chat
 	private static String mustMatchStart = null;
 	private static String mustMatchEnd = null;
 
-    public static boolean ycchatinited = false;
+	public static boolean ycchatinited = false;
 	
 	public static String incoming(String text)
 	{
-        ChatEvent event = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.INCOMING);
-        Yiffcraft.wecui.getEventManager().callEvent(event);
-        if(event.isCancelled()) return "";
+		ChatEvent event = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.INCOMING);
+		Yiffcraft.wecui.getEventManager().callEvent(event);
+		if(event.isCancelled()) return "";
 
-        if(!ycchatinited) {
-            ycchatinited = true;
-            Chat.emitChatMsg("/yiffcraft getcommands");
-        }
+		if(!ycchatinited) {
+			ycchatinited = true;
+			Chat.emitChatMsg("/yiffcraft getcommands");
+		}
 
-        if(text.startsWith("\u00a7f\u00a75\u00a7d") && text.length() > 6) {
-            String args = null;
-            if(text.length() > 7)
-                args = text.substring(7);
-            else
-                args = "";
-            ClientCommands.incoming(text.charAt(6), args);
-            return "";
-        }
+		if(text.startsWith("\u00a7f\u00a75\u00a7d") && text.length() > 6) {
+			String args = null;
+			if(text.length() > 7)
+				args = text.substring(7);
+			else
+				args = "";
+			ClientCommands.incoming(text.charAt(6), args);
+			return "";
+		}
 	
 		String noCC = Util.stripColorCodes(text);
 

@@ -25,9 +25,9 @@ public class EntityBlaze extends EntityMob {
 		this.isImmuneToFire = true;
 		this.attackStrength = 6;
 		this.field_35171_bJ = 10;
-        //Spout start
-        this.spoutEntity = new CraftBlaze(this);
-        //Spout end
+		//Spout start
+		this.spoutEntity = new CraftBlaze(this);
+		//Spout end
 	}
 
 	public int getMaxHealth() {

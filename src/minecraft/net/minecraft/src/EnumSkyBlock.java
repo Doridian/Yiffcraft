@@ -7,39 +7,39 @@ package net.minecraft.src;
 
 public enum EnumSkyBlock
 {
-    Sky("Sky", 0, 15),
-    Block("Block", 1, 0);
+	Sky("Sky", 0, 15),
+	Block("Block", 1, 0);
 /*
-    public static final EnumSkyBlock Sky;
-    public static final EnumSkyBlock Block;
+	public static final EnumSkyBlock Sky;
+	public static final EnumSkyBlock Block;
 */
-    public final int defaultLightValue;
-    private static final EnumSkyBlock allSkyBlocks[]; /* synthetic field */
+	public final int defaultLightValue;
+	private static final EnumSkyBlock allSkyBlocks[]; /* synthetic field */
 /*
-    public static final EnumSkyBlock[] values()
-    {
-        return (EnumSkyBlock[])allSkyBlocks.clone();
-    }
+	public static final EnumSkyBlock[] values()
+	{
+		return (EnumSkyBlock[])allSkyBlocks.clone();
+	}
 
-    public static EnumSkyBlock valueOf(String s)
-    {
-        return (EnumSkyBlock)Enum.valueOf(net.minecraft.src.EnumSkyBlock.class, s);
-    }
+	public static EnumSkyBlock valueOf(String s)
+	{
+		return (EnumSkyBlock)Enum.valueOf(net.minecraft.src.EnumSkyBlock.class, s);
+	}
 */
-    private EnumSkyBlock(String s, int i, int j)
-    {
-//        super(s, i);
-        defaultLightValue = j;
-    }
+	private EnumSkyBlock(String s, int i, int j)
+	{
+//		super(s, i);
+		defaultLightValue = j;
+	}
 
-    static 
-    {
+	static 
+	{
 /*
-        Sky = new EnumSkyBlock("Sky", 0, 15);
-        Block = new EnumSkyBlock("Block", 1, 0);
+		Sky = new EnumSkyBlock("Sky", 0, 15);
+		Block = new EnumSkyBlock("Block", 1, 0);
 */
-        allSkyBlocks = (new EnumSkyBlock[] {
-            Sky, Block
-        });
-    }
+		allSkyBlocks = (new EnumSkyBlock[] {
+			Sky, Block
+		});
+	}
 }

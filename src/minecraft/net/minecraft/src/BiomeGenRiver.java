@@ -7,14 +7,14 @@ package net.minecraft.src;
 import java.util.List;
 
 // Referenced classes of package net.minecraft.src:
-//            BiomeGenBase
+//			BiomeGenBase
 
 public class BiomeGenRiver extends BiomeGenBase
 {
 
-    public BiomeGenRiver(int i)
-    {
-        super(i);
-        spawnableCreatureList.clear();
-    }
+	public BiomeGenRiver(int i)
+	{
+		super(i);
+		spawnableCreatureList.clear();
+	}
 }

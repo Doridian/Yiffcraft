@@ -7,40 +7,40 @@ package net.minecraft.src;
 
 public enum EnumCreatureAttribute
 {
-    UNDEFINED("UNDEFINED", 0),
-    UNDEAD("UNDEAD", 1),
-    ARTHROPOD("ARTHROPOD", 2);
+	UNDEFINED("UNDEFINED", 0),
+	UNDEAD("UNDEAD", 1),
+	ARTHROPOD("ARTHROPOD", 2);
 /*
-    public static final EnumCreatureAttribute UNDEFINED;
-    public static final EnumCreatureAttribute UNDEAD;
-    public static final EnumCreatureAttribute ARTHROPOD;
+	public static final EnumCreatureAttribute UNDEFINED;
+	public static final EnumCreatureAttribute UNDEAD;
+	public static final EnumCreatureAttribute ARTHROPOD;
 */
-    private static final EnumCreatureAttribute allCreatureAttributes[]; /* synthetic field */
+	private static final EnumCreatureAttribute allCreatureAttributes[]; /* synthetic field */
 /*
-    public static final EnumCreatureAttribute[] values()
-    {
-        return (EnumCreatureAttribute[])allCreatureAttributes.clone();
-    }
+	public static final EnumCreatureAttribute[] values()
+	{
+		return (EnumCreatureAttribute[])allCreatureAttributes.clone();
+	}
 
-    public static EnumCreatureAttribute valueOf(String s)
-    {
-        return (EnumCreatureAttribute)Enum.valueOf(net.minecraft.src.EnumCreatureAttribute.class, s);
-    }
+	public static EnumCreatureAttribute valueOf(String s)
+	{
+		return (EnumCreatureAttribute)Enum.valueOf(net.minecraft.src.EnumCreatureAttribute.class, s);
+	}
 */
-    private EnumCreatureAttribute(String s, int i)
-    {
-//        super(s, i);
-    }
+	private EnumCreatureAttribute(String s, int i)
+	{
+//		super(s, i);
+	}
 
-    static 
-    {
+	static 
+	{
 /*
-        UNDEFINED = new EnumCreatureAttribute("UNDEFINED", 0);
-        UNDEAD = new EnumCreatureAttribute("UNDEAD", 1);
-        ARTHROPOD = new EnumCreatureAttribute("ARTHROPOD", 2);
+		UNDEFINED = new EnumCreatureAttribute("UNDEFINED", 0);
+		UNDEAD = new EnumCreatureAttribute("UNDEAD", 1);
+		ARTHROPOD = new EnumCreatureAttribute("ARTHROPOD", 2);
 */
-        allCreatureAttributes = (new EnumCreatureAttribute[] {
-            UNDEFINED, UNDEAD, ARTHROPOD
-        });
-    }
+		allCreatureAttributes = (new EnumCreatureAttribute[] {
+			UNDEFINED, UNDEAD, ARTHROPOD
+		});
+	}
 }

@@ -6,18 +6,18 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            StepSound
+//			StepSound
 
 class StepSoundSand extends StepSound
 {
 
-    StepSoundSand(String s, float f, float f1)
-    {
-        super(s, f, f1);
-    }
+	StepSoundSand(String s, float f, float f1)
+	{
+		super(s, f, f1);
+	}
 
-    public String stepSoundDir()
-    {
-        return "step.gravel";
-    }
+	public String stepSoundDir()
+	{
+		return "step.gravel";
+	}
 }

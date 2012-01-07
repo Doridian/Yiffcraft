@@ -10,9 +10,9 @@ import java.awt.Dimension;
 class CanvasCrashReport extends Canvas
 {
 
-    public CanvasCrashReport(int i)
-    {
-        setPreferredSize(new Dimension(i, i));
-        setMinimumSize(new Dimension(i, i));
-    }
+	public CanvasCrashReport(int i)
+	{
+		setPreferredSize(new Dimension(i, i));
+		setMinimumSize(new Dimension(i, i));
+	}
 }

@@ -6,18 +6,18 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            ItemBlock
+//			ItemBlock
 
 public class ItemPiston extends ItemBlock
 {
 
-    public ItemPiston(int i)
-    {
-        super(i);
-    }
+	public ItemPiston(int i)
+	{
+		super(i);
+	}
 
-    public int getPlacedBlockMetadata(int i)
-    {
-        return 7;
-    }
+	public int getPlacedBlockMetadata(int i)
+	{
+		return 7;
+	}
 }

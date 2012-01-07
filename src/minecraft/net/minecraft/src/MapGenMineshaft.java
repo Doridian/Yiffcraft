@@ -7,22 +7,22 @@ package net.minecraft.src;
 import java.util.Random;
 
 // Referenced classes of package net.minecraft.src:
-//            MapGenStructure, StructureMineshaftStart, StructureStart
+//			MapGenStructure, StructureMineshaftStart, StructureStart
 
 public class MapGenMineshaft extends MapGenStructure
 {
 
-    public MapGenMineshaft()
-    {
-    }
+	public MapGenMineshaft()
+	{
+	}
 
-    protected boolean canSpawnStructureAtCoords(int i, int j)
-    {
-        return rand.nextInt(100) == 0 && rand.nextInt(80) < Math.max(Math.abs(i), Math.abs(j));
-    }
+	protected boolean canSpawnStructureAtCoords(int i, int j)
+	{
+		return rand.nextInt(100) == 0 && rand.nextInt(80) < Math.max(Math.abs(i), Math.abs(j));
+	}
 
-    protected StructureStart getStructureStart(int i, int j)
-    {
-        return new StructureMineshaftStart(worldObj, rand, i, j);
-    }
+	protected StructureStart getStructureStart(int i, int j)
+	{
+		return new StructureMineshaftStart(worldObj, rand, i, j);
+	}
 }

@@ -47,7 +47,7 @@ public class Tessellator {
 	//Spout Start
 	public int textureOverride = 0;
 	//Spout End
-    /*@DORI*/ public int opaqueAlpha = 255;
+	/*@DORI*/ public int opaqueAlpha = 255;
 
 
 	private Tessellator(int size) {
@@ -218,7 +218,7 @@ public class Tessellator {
 	}
 
 	public void setColorOpaque(int r, int g, int b) {
-        /*@DORI*/ this.setColorRGBA(r, g, b, opaqueAlpha);
+		/*@DORI*/ this.setColorRGBA(r, g, b, opaqueAlpha);
 	}
 
 	public void setColorRGBA(int r, int g, int b, int a) {

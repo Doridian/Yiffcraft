@@ -7,30 +7,30 @@ package net.minecraft.src;
 import java.util.Random;
 
 // Referenced classes of package net.minecraft.src:
-//            BlockFlower, Block
+//			BlockFlower, Block
 
 public class BlockDeadBush extends BlockFlower
 {
 
-    protected BlockDeadBush(int i, int j)
-    {
-        super(i, j);
-        float f = 0.4F;
-        setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.8F, 0.5F + f);
-    }
+	protected BlockDeadBush(int i, int j)
+	{
+		super(i, j);
+		float f = 0.4F;
+		setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.8F, 0.5F + f);
+	}
 
-    protected boolean canThisPlantGrowOnThisBlockID(int i)
-    {
-        return i == Block.sand.blockID;
-    }
+	protected boolean canThisPlantGrowOnThisBlockID(int i)
+	{
+		return i == Block.sand.blockID;
+	}
 
-    public int getBlockTextureFromSideAndMetadata(int i, int j)
-    {
-        return blockIndexInTexture;
-    }
+	public int getBlockTextureFromSideAndMetadata(int i, int j)
+	{
+		return blockIndexInTexture;
+	}
 
-    public int idDropped(int i, Random random, int j)
-    {
-        return -1;
-    }
+	public int idDropped(int i, Random random, int j)
+	{
+		return -1;
+	}
 }

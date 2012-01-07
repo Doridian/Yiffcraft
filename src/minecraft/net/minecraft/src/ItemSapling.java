@@ -6,25 +6,25 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            ItemBlock, Block
+//			ItemBlock, Block
 
 public class ItemSapling extends ItemBlock
 {
 
-    public ItemSapling(int i)
-    {
-        super(i);
-        setMaxDamage(0);
-        setHasSubtypes(true);
-    }
+	public ItemSapling(int i)
+	{
+		super(i);
+		setMaxDamage(0);
+		setHasSubtypes(true);
+	}
 
-    public int getPlacedBlockMetadata(int i)
-    {
-        return i;
-    }
+	public int getPlacedBlockMetadata(int i)
+	{
+		return i;
+	}
 
-    public int getIconFromDamage(int i)
-    {
-        return Block.sapling.getBlockTextureFromSideAndMetadata(0, i);
-    }
+	public int getIconFromDamage(int i)
+	{
+		return Block.sapling.getBlockTextureFromSideAndMetadata(0, i);
+	}
 }

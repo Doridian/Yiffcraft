@@ -12,71 +12,71 @@ public class YCEntityClientPlayerMP extends EntityClientPlayerMP {
 		super(var1, var2, var3, var4);
 	}
 
-    @Override
-    public boolean handleLavaMovement() {
-        if(Yiffcraft.enableWaterwalk) return false;
-        return super.handleLavaMovement();
-    }
+	@Override
+	public boolean handleLavaMovement() {
+		if(Yiffcraft.enableWaterwalk) return false;
+		return super.handleLavaMovement();
+	}
 
-    @Override
-    public boolean handleWaterMovement() {
-        if(Yiffcraft.enableWaterwalk) return false;
-        return super.handleWaterMovement();
-    }
+	@Override
+	public boolean handleWaterMovement() {
+		if(Yiffcraft.enableWaterwalk) return false;
+		return super.handleWaterMovement();
+	}
 	
 	@Override
 	public boolean canBePushed() {
 		return !Yiffcraft.enableUnpushablePlayer;
 	}
 
-    public void setCamRoll(float roll) {
-        if(Yiffcraft.minecraft.entityRenderer.camRoll == roll) return;
-        
-        while(roll > 180F)
-            roll -= 360F;
+	public void setCamRoll(float roll) {
+		if(Yiffcraft.minecraft.entityRenderer.camRoll == roll) return;
+		
+		while(roll > 180F)
+			roll -= 360F;
 
-        while(roll < -180F)
-            roll += 360F;
+		while(roll < -180F)
+			roll += 360F;
 
-        if(roll > 90F)
-            roll = 90F;
-        else if(roll < -90F)
-            roll = -90F;
+		if(roll > 90F)
+			roll = 90F;
+		else if(roll < -90F)
+			roll = -90F;
 
-        Yiffcraft.minecraft.entityRenderer.camRoll = roll;
-    }
+		Yiffcraft.minecraft.entityRenderer.camRoll = roll;
+	}
 
-    @Override
-    public void onUpdate() {
-        super.onUpdate();
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
 
-        Entity renderAs = YCRenderPlayer.instance.renderPlayerAs;
-        if(renderAs != null) {
-            YCRenderPlayer.instance.refreshVariablesStuff(this);
-            if(YCRenderPlayer.instance.renderPlayerAsLiving != null && YCRenderPlayer.instance.renderPlayerAsLiving instanceof EntityDragon) {
-                EntityDragon dragonLiving = (EntityDragon)YCRenderPlayer.instance.renderPlayerAsLiving;
-                setCamRoll((float)(dragonLiving.func_40160_a(1, 0)[0] - dragonLiving.func_40160_a(10, 0)[0]));
-            } else {
-                setCamRoll(0.0F);
-            }
-            renderAs.onUpdate();
-        }
-    }
-    
-    @Override
-    public void onUpdate2() {
-        this.capabilities.isFlying = false;
-        this.capabilities.allowFlying = false;
+		Entity renderAs = YCRenderPlayer.instance.renderPlayerAs;
+		if(renderAs != null) {
+			YCRenderPlayer.instance.refreshVariablesStuff(this);
+			if(YCRenderPlayer.instance.renderPlayerAsLiving != null && YCRenderPlayer.instance.renderPlayerAsLiving instanceof EntityDragon) {
+				EntityDragon dragonLiving = (EntityDragon)YCRenderPlayer.instance.renderPlayerAsLiving;
+				setCamRoll((float)(dragonLiving.func_40160_a(1, 0)[0] - dragonLiving.func_40160_a(10, 0)[0]));
+			} else {
+				setCamRoll(0.0F);
+			}
+			renderAs.onUpdate();
+		}
+	}
+	
+	@Override
+	public void onUpdate2() {
+		this.capabilities.isFlying = false;
+		this.capabilities.allowFlying = false;
 
-        Radar.updateLocalPlayerPosition();
+		Radar.updateLocalPlayerPosition();
 
-        if(Yiffcraft.enableOutOfBody) {
-            this.noClip = Yiffcraft.enableFly;
-            this.sendQueue.addToSendQueue(new Packet10Flying(Yiffcraft.realOnGround));
-            return;
-        }
+		if(Yiffcraft.enableOutOfBody) {
+			this.noClip = Yiffcraft.enableFly;
+			this.sendQueue.addToSendQueue(new Packet10Flying(Yiffcraft.realOnGround));
+			return;
+		}
 
-        this.noClip = false;
-        super.onUpdate2();
-    }
+		this.noClip = false;
+		super.onUpdate2();
+	}
 }

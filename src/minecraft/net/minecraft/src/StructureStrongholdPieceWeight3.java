@@ -6,18 +6,18 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            StructureStrongholdPieceWeight
+//			StructureStrongholdPieceWeight
 
 class StructureStrongholdPieceWeight3 extends StructureStrongholdPieceWeight
 {
 
-    StructureStrongholdPieceWeight3(Class class1, int i, int j)
-    {
-        super(class1, i, j);
-    }
+	StructureStrongholdPieceWeight3(Class class1, int i, int j)
+	{
+		super(class1, i, j);
+	}
 
-    public boolean canSpawnMoreStructuresOfType(int i)
-    {
-        return super.canSpawnMoreStructuresOfType(i) && i > 5;
-    }
+	public boolean canSpawnMoreStructuresOfType(int i)
+	{
+		return super.canSpawnMoreStructuresOfType(i) && i > 5;
+	}
 }

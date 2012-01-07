@@ -6,12 +6,12 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            J_JsonNode
+//			J_JsonNode
 
 public abstract class J_JsonRootNode extends J_JsonNode
 {
 
-    J_JsonRootNode()
-    {
-    }
+	J_JsonRootNode()
+	{
+	}
 }

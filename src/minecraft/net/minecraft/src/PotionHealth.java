@@ -6,23 +6,23 @@ package net.minecraft.src;
 
 
 // Referenced classes of package net.minecraft.src:
-//            Potion
+//			Potion
 
 public class PotionHealth extends Potion
 {
 
-    public PotionHealth(int i, boolean flag, int j)
-    {
-        super(i, flag, j);
-    }
+	public PotionHealth(int i, boolean flag, int j)
+	{
+		super(i, flag, j);
+	}
 
-    public boolean func_40622_b()
-    {
-        return true;
-    }
+	public boolean func_40622_b()
+	{
+		return true;
+	}
 
-    public boolean isReady(int i, int j)
-    {
-        return i >= 1;
-    }
+	public boolean isReady(int i, int j)
+	{
+		return i >= 1;
+	}
 }

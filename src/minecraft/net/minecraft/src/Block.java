@@ -406,7 +406,7 @@ public class Block {
 	}
 
 	public int getMixedBrightnessForBlock(IBlockAccess var1, int x, int y, int z) {
-        /*@DORI*/ if(Yiffcraft.enableFullbright) return 1000;
+		/*@DORI*/ if(Yiffcraft.enableFullbright) return 1000;
 		// Spout start
 		int light = lightValue[this.blockID];
 		if (customIds != null) {
