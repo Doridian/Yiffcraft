@@ -28,6 +28,8 @@ public class Updater extends Thread {
     @Override
     @SuppressWarnings("unchecked")
     public void run() {
+        if(true) return;
+
         InputStream is = null;
         ConfigurationNode node = new ConfigurationNode(new HashMap<String, Object>());
 
