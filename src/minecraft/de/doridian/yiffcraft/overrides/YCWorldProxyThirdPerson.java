@@ -74,6 +74,7 @@ public class YCWorldProxyThirdPerson extends World {
                 return Yiffcraft.minecraft.theWorld.worldProvider.func_40469_f();
             }
         });
+        this.multiplayerWorld = true;
     }
 
 
