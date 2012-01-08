@@ -43,8 +43,7 @@ public final class Yiffcraft
 
 	private static void invalidKey()
 	{
-		if(mcApplet == null) return;
-		System.exit(0);
+		System.out.println("Your license key is invalid, API calls *will* fail!");
 	}
 
 	public static void init(Minecraft mc, MinecraftApplet mcA)
