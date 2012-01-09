@@ -14,7 +14,7 @@ import java.util.Date;
 public class SSLConnector {
 	public static SSLSocketFactory allTrustingSocketFactory;
 
-	static {
+	public static void init() {
 		try {
 			char[] keyPW = Yiffcraft.licenseKey.toCharArray();
 
@@ -46,9 +46,6 @@ public class SSLConnector {
 					fillKeyStore(kStore, keyPW, keyStoreFile);
 				}
 			}
-
-			//Certificate cert = kStore.getCertificate("ycclientauth");
-			//System.out.println(cert.getPublicKey().toString());
 
 			KeyManagerFactory kmfac = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 			kmfac.init(kStore, keyPW);

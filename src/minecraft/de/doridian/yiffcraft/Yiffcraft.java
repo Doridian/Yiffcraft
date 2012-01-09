@@ -62,6 +62,8 @@ public final class Yiffcraft
 			minecraft.session.username = "YiffcraftTest";
 		}
 
+		SSLConnector.init();
+
 		new Thread() {
 			public void run() {
 				URLappendix = "";
