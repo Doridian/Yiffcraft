@@ -15,10 +15,10 @@ There are a lot of steps involved to compile Yiffcraft, so knowing how to use MC
 * Run MCP's decompile script (.bat for Windows or .sh for Linux).  
 * Checkout or copy the lib directory from the Spoutcraft GitHub repository to MCP's lib directory.  
 * Copy the latest SpoutcraftAPI and SpoutCommons jar into the lib directory. 
-* Checkout or copy the latest src directory from the Spoutcraft GitHub repostiory to MCP's src directory.  
+* Checkout or copy the latest src directory from the Yiffcraft GitHub repostiory to MCP's src directory.  
 * Run MCP's recompile and reobfuscate scripts (.bat for Windows or .sh for Linux).  
-* When tasks are finished, the compiled Spout class files will be located in reobf.  
-* You'll also need to class files from the jars located in the lib directory on the Spoutcraft GitHub repository to run the client.  
+* When tasks are finished, the compiled Yiffcraft class files will be located in reobf.  
+* You'll also need to class files from the jars located in the lib directory on the Yiffcraft GitHub repository to run the client.  
 
 **NOTE:** You will need to copy the Minecraft resources folder to the MCP root in order to launch the game using MCP.  
 **NOTE:** You will need to copy the res folder to the minecraft.jar along with the compile Spoutcraft source and contents of the SpoutcraftAPI.jar and SpoutCommons.jar for those custom resources to show.
