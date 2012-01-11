@@ -2832,11 +2832,9 @@ public class RenderBlocks {
 
 		if (var1.maxZ >= 1.0D) {
 			var25 = var1.getMixedBrightnessForBlock(this.blockAccess, var2, var3, var4 + 1);
-		}*/
-		//Spout end
+		}
 
-		Tessellator var26 = Tessellator.instance;
-		var26.setBrightness(983055);
+
 		this.aoGrassXYZPPC = Block.canBlockGrass[this.blockAccess.getBlockId(var2 + 1, var3 + 1, var4)];
 		this.aoGrassXYZPNC = Block.canBlockGrass[this.blockAccess.getBlockId(var2 + 1, var3 - 1, var4)];
 		this.aoGrassXYZPCP = Block.canBlockGrass[this.blockAccess.getBlockId(var2 + 1, var3, var4 + 1)];
@@ -2849,6 +2847,13 @@ public class RenderBlocks {
 		this.aoGrassXYZCPN = Block.canBlockGrass[this.blockAccess.getBlockId(var2, var3 + 1, var4 - 1)];
 		this.aoGrassXYZCNP = Block.canBlockGrass[this.blockAccess.getBlockId(var2, var3 - 1, var4 + 1)];
 		this.aoGrassXYZCNN = Block.canBlockGrass[this.blockAccess.getBlockId(var2, var3 - 1, var4 - 1)];
+
+		*/
+
+		//Spout end
+
+		Tessellator var26 = Tessellator.instance;
+		var26.setBrightness(983055);
 		if (var1.blockIndexInTexture == 3) {
 			var18 = false;
 			var17 = false;
