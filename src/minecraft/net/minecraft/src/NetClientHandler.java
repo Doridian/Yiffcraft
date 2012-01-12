@@ -579,7 +579,7 @@ public class NetClientHandler extends NetHandler {
 
 	public void handleChat(Packet3Chat var1) {
 		/*@DORI*/
-		String msg = Chat.incoming(var1.message);
+		String msg = Chat.incoming(var1.message, this);
 		if(msg == null || msg.length() < 1) return;
 		this.mc.ingameGUI.addChatMessage(msg);
 		/*@DORI*/

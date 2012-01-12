@@ -2,6 +2,8 @@ package de.doridian.yiffcraft;
 
 import de.doridian.yiffcraft.commands.BaseCommand;
 import de.doridian.yiffcraft.overrides.YCGuiChat;
+import de.doridian.yiffcraft.overrides.YCPlayerControllerMP;
+import net.minecraft.src.NetClientHandler;
 import net.minecraft.src.Packet3Chat;
 import org.spoutcraft.client.SpoutClient;
 import wecui.event.ChatCommandEvent;
@@ -101,9 +103,12 @@ public final class Chat
 	private static String mustMatchEnd = null;
 
 	public static boolean ycchatinited = false;
+
+	private static NetClientHandler lastClientHandler = null;
 	
-	public static String incoming(String text)
+	public static String incoming(String text, NetClientHandler handler)
 	{
+		lastClientHandler = handler;
 		ChatEvent event = new ChatEvent(Yiffcraft.wecui, text, ChatEvent.Direction.INCOMING);
 		Yiffcraft.wecui.getEventManager().callEvent(event);
 		if(event.isCancelled()) return "";
@@ -146,7 +151,11 @@ public final class Chat
 	public static void emitChatMsg(String msg)
 	{
 		if (!SpoutClient.getInstance().getChatManager().handleCommand(msg)) {
-			SpoutClient.getInstance().getChatManager().sendChat(msg);
+			if(Yiffcraft.minecraft.thePlayer != null) {
+				SpoutClient.getInstance().getChatManager().sendChat(msg);
+			} else if(lastClientHandler != null) {
+				lastClientHandler.addToSendQueue(new Packet3Chat(msg));
+			}
 		}
 	}
 	
