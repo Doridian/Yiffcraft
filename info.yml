@@ -1,3 +1,3 @@
-minecraft: 1.0.0
+minecraft: 1.1
 libraries: {commons-io: 2.1, commons-lang3: 3.1, guava: 11.0, joda-time: 2.0, slick: 0.3, snakeyaml: 1.9, trove4j: 3.0.2}
-builds: {scommons: 41, scapi: 281, worldedit: 362}
+builds: {scommons: 41, scapi: 282, worldedit: 363}
