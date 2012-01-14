@@ -45,7 +45,6 @@ import org.spoutcraft.spoutcraftapi.event.screen.ScreenOpenEvent;
 import org.spoutcraft.spoutcraftapi.gui.PopupScreen;
 import org.spoutcraft.spoutcraftapi.gui.Screen;
 import org.spoutcraft.spoutcraftapi.gui.ScreenType;
-import wecui.gui.WorldEditScreen;
 
 //Spout End
 
