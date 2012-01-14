@@ -116,6 +116,7 @@ public final class Chat
 
 		if(!ycchatinited) {
 			ycchatinited = true;
+			ClientCommands.register(handler);
 			ClientCommands.outgoing("getcommands", handler);
 		}
 	
