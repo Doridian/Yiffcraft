@@ -1,136 +1,152 @@
 package net.minecraft.src;
 
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
+import net.minecraft.src.TexturePackBase;
 import org.lwjgl.opengl.GL11;
 
-public class TexturePackCustom extends TexturePackBase
-{
-    private ZipFile texturePackZipFile;
-    private int texturePackName;
-    private BufferedImage texturePackThumbnail;
-    private File texturePackFile;
+import com.pclewis.mcpatcher.mod.TextureUtils;
 
-    public TexturePackCustom(File file)
-    {
-        texturePackName = -1;
-        texturePackFileName = file.getName();
-        texturePackFile = file;
-    }
+public class TexturePackCustom extends TexturePackBase {
+	public ZipFile texturePackZipFile; //Spout private -> public
+	private int texturePackName = -1;
+	private BufferedImage texturePackThumbnail;
+//Spout start
+	public File texturePackFile;
+	public ZipFile origZip;
+	public File tmpFile;
+	public long lastModified;
+//Spout end
 
-    private String truncateString(String s)
-    {
-        if (s != null && s.length() > 34)
-        {
-            s = s.substring(0, 34);
-        }
-        return s;
-    }
+	public TexturePackCustom(File var1) {
+		this.texturePackFileName = var1.getName();
+		this.texturePackFile = var1;
+	}
 
-    public void func_6485_a(Minecraft minecraft)
-    throws IOException
-    {
-        ZipFile zipfile = null;
-        InputStream inputstream = null;
-        try
-        {
-            zipfile = new ZipFile(texturePackFile);
-            try
-            {
-                inputstream = zipfile.getInputStream(zipfile.getEntry("pack.txt"));
-                BufferedReader bufferedreader = new BufferedReader(new InputStreamReader(inputstream));
-                firstDescriptionLine = truncateString(bufferedreader.readLine());
-                secondDescriptionLine = truncateString(bufferedreader.readLine());
-                bufferedreader.close();
-                inputstream.close();
-            }
-            catch (Exception exception) { }
-            try
-            {
-                inputstream = zipfile.getInputStream(zipfile.getEntry("pack.png"));
-                texturePackThumbnail = ImageIO.read(inputstream);
-                inputstream.close();
-            }
-            catch (Exception exception1) { }
-            zipfile.close();
-        }
-        catch (Exception exception2)
-        {
-            exception2.printStackTrace();
-        }
-        finally
-        {
-            try
-            {
-                inputstream.close();
-            }
-            catch (Exception exception4) { }
-            try
-            {
-                zipfile.close();
-            }
-            catch (Exception exception5) { }
-        }
-    }
+	private String truncateString(String var1) {
+		if (var1 != null && var1.length() > 34) {
+			var1 = var1.substring(0, 34);
+		}
 
-    public void func_6484_b(Minecraft minecraft)
-    {
-        if (texturePackThumbnail != null)
-        {
-            minecraft.renderEngine.deleteTexture(texturePackName);
-        }
-        closeTexturePackFile();
-    }
+		return var1;
+	}
 
-    public void bindThumbnailTexture(Minecraft minecraft)
-    {
-        if (texturePackThumbnail != null && texturePackName < 0)
-        {
-            texturePackName = minecraft.renderEngine.allocateAndSetupTexture(texturePackThumbnail);
-        }
-        if (texturePackThumbnail != null)
-        {
-            minecraft.renderEngine.bindTexture(texturePackName);
-        }
-        else
-        {
-            GL11.glBindTexture(3553 /*GL_TEXTURE_2D*/, minecraft.renderEngine.getTexture("/gui/unknown_pack.png"));
-        }
-    }
+	public void func_6485_a(Minecraft var1) throws IOException {
+		ZipFile var2 = null;
+		InputStream var3 = null;
 
-    public void func_6482_a()
-    {
-        try
-        {
-            texturePackZipFile = new ZipFile(texturePackFile);
-        }
-        catch (Exception exception) { }
-    }
+		try {
+			var2 = new ZipFile(this.texturePackFile);
 
-    public void closeTexturePackFile()
-    {
-        try
-        {
-            texturePackZipFile.close();
-        }
-        catch (Exception exception) { }
-        texturePackZipFile = null;
-    }
+			try {
+				var3 = var2.getInputStream(var2.getEntry("pack.txt"));
+				BufferedReader var4 = new BufferedReader(new InputStreamReader(var3));
+				this.firstDescriptionLine = this.truncateString(var4.readLine());
+				this.secondDescriptionLine = this.truncateString(var4.readLine());
+				var4.close();
+				var3.close();
+			}
+			catch (Exception var20) {
+				;
+			}
 
-    public InputStream getResourceAsStream(String s)
-    {
-        try
-        {
-            java.util.zip.ZipEntry zipentry = texturePackZipFile.getEntry(s.substring(1));
-            if (zipentry != null)
-            {
-                return texturePackZipFile.getInputStream(zipentry);
-            }
-        }
-        catch (Exception exception) { }
-        return (net.minecraft.src.TexturePackBase.class).getResourceAsStream(s);
-    }
+			try {
+				var3 = var2.getInputStream(var2.getEntry("pack.png"));
+				this.texturePackThumbnail = ImageIO.read(var3);
+				var3.close();
+			}
+			catch (Exception var19) {
+				;
+			}
+
+			var2.close();
+		}
+		catch (Exception var21) {
+			var21.printStackTrace();
+		}
+		finally {
+			try {
+				var3.close();
+			}
+			catch (Exception var18) {
+				;
+			}
+
+			try {
+				var2.close();
+			}
+			catch (Exception var17) {
+				;
+			}
+
+		}
+
+	}
+
+	public void func_6484_b(Minecraft var1) {
+		if (this.texturePackThumbnail != null) {
+			var1.renderEngine.deleteTexture(this.texturePackName);
+		}
+
+		this.closeTexturePackFile();
+	}
+
+	public void bindThumbnailTexture(Minecraft var1) {
+		if (this.texturePackThumbnail != null && this.texturePackName < 0) {
+			this.texturePackName = var1.renderEngine.allocateAndSetupTexture(this.texturePackThumbnail);
+		}
+
+		if (this.texturePackThumbnail != null) {
+			var1.renderEngine.bindTexture(this.texturePackName);
+		}
+		else {
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, var1.renderEngine.getTexture("/gui/unknown_pack.png"));
+		}
+
+	}
+
+	public void func_6482_a() {
+		try {
+			this.texturePackZipFile = new ZipFile(this.texturePackFile);
+		}
+		catch (Exception var2) {
+			;
+		}
+		
+		//TextureUtils.openTexturePackFile(this);//Spout
+	}
+
+	public void closeTexturePackFile() {
+		try {
+			//TextureUtils.closeTexturePackFile(this);//Spout
+			this.texturePackZipFile.close();
+		}
+		catch (Exception var2) {
+			;
+		}
+
+		this.texturePackZipFile = null;
+	}
+
+	public InputStream getResourceAsStream(String var1) {
+		try {
+			ZipEntry var2 = this.texturePackZipFile.getEntry(var1.substring(1));
+			if (var2 != null) {
+				return this.texturePackZipFile.getInputStream(var2);
+			}
+		}
+		catch (Exception var3) {
+			;
+		}
+
+		return TexturePackBase.class.getResourceAsStream(var1);
+	}
 }

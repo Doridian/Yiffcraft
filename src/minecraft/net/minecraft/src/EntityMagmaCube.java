@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.src.EntitySlime;
+import net.minecraft.src.Item;
 import net.minecraft.src.World;
 
 import org.spoutcraft.client.entity.CraftMagmaCube; //Spout
@@ -21,7 +22,7 @@ public class EntityMagmaCube extends EntitySlime {
 		return this.worldObj.difficultySetting > 0 && this.worldObj.checkIfAABBIsClear(this.boundingBox) && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox).size() == 0 && !this.worldObj.getIsAnyLiquid(this.boundingBox);
 	}
 
-	protected int func_40119_ar() {
+	public int getTotalArmorValue() {
 		return this.getSlimeSize() * 3;
 	}
 
@@ -42,7 +43,35 @@ public class EntityMagmaCube extends EntitySlime {
 	}
 
 	protected int getDropItemId() {
-		return 0;
+		return Item.magmaCream.shiftedIndex;
+
+	}
+
+
+
+	protected void dropFewItems(boolean var1, int var2) {
+
+		int var3 = this.getDropItemId();
+
+		if(var3 > 0 && this.getSlimeSize() > 1) {
+
+			int var4 = this.rand.nextInt(4) - 2;
+
+			if(var2 > 0) {
+
+				var4 += this.rand.nextInt(var2 + 1);
+
+			}
+
+
+			for(int var5 = 0; var5 < var4; ++var5) {
+
+				this.dropItem(var3, 1);
+
+			}
+
+		}
+
 	}
 
 	public boolean isBurning() {

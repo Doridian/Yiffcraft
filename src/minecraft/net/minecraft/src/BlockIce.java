@@ -2,56 +2,57 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class BlockIce extends BlockBreakable
-{
-    public BlockIce(int i, int j)
-    {
-        super(i, j, Material.ice, false);
-        slipperiness = 0.98F;
-        setTickOnLoad(true);
-    }
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockBreakable;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EnumSkyBlock;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraft.src.World;
 
-    public int getRenderBlockPass()
-    {
-        return 1;
-    }
+public class BlockIce extends BlockBreakable {
 
-    public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l)
-    {
-        return super.shouldSideBeRendered(iblockaccess, i, j, k, 1 - l);
-    }
+	public BlockIce(int var1, int var2) {
+		super(var1, var2, Material.ice, false);
+		this.slipperiness = 0.98F;
+		this.setTickOnLoad(true);
+	}
 
-    public void harvestBlock(World world, EntityPlayer entityplayer, int i, int j, int k, int l)
-    {
-        super.harvestBlock(world, entityplayer, i, j, k, l);
-        Material material = world.getBlockMaterial(i, j - 1, k);
-        if (material.getIsSolid() || material.getIsLiquid())
-        {
-            world.setBlockWithNotify(i, j, k, Block.waterMoving.blockID);
-        }
-    }
+	public int getRenderBlockPass() {
+		return 1;
+	}
 
-    public int quantityDropped(Random random)
-    {
-        return 0;
-    }
+	public boolean shouldSideBeRendered(IBlockAccess var1, int var2, int var3, int var4, int var5) {
+		return super.shouldSideBeRendered(var1, var2, var3, var4, 1 - var5);
+	}
 
-    public void updateTick(World world, int i, int j, int k, Random random)
-    {
-        if (world.getSavedLightValue(EnumSkyBlock.Block, i, j, k) > 11 - Block.lightOpacity[blockID])
-        {
-            dropBlockAsItem(world, i, j, k, world.getBlockMetadata(i, j, k), 0);
-            world.setBlockWithNotify(i, j, k, Block.waterStill.blockID);
-        }
-    }
+	public void harvestBlock(World var1, EntityPlayer var2, int var3, int var4, int var5, int var6) {
+		super.harvestBlock(var1, var2, var3, var4, var5, var6);
+		Material var7 = var1.getBlockMaterial(var3, var4 - 1, var5);
+		if (var7.getIsSolid() || var7.getIsLiquid()) {
+			var1.setBlockWithNotify(var3, var4, var5, Block.waterMoving.blockID);
+		}
 
-    public int getMobilityFlag()
-    {
-        return 0;
-    }
+	}
 
-    protected ItemStack createStackedBlock(int i)
-    {
-        return null;
-    }
+	public int quantityDropped(Random var1) {
+		return 0;
+	}
+
+	public void updateTick(World var1, int var2, int var3, int var4, Random var5) {
+		if (var1.getSavedLightValue(EnumSkyBlock.Block, var2, var3, var4) > 11 - Block.lightOpacity[this.blockID]) {
+			this.dropBlockAsItem(var1, var2, var3, var4, var1.getBlockMetadata(var2, var3, var4), 0);
+			var1.setBlockWithNotify(var2, var3, var4, Block.waterStill.blockID);
+		}
+
+	}
+
+	public int getMobilityFlag() {
+		return 0;
+	}
+
+	protected ItemStack createStackedBlock(int var1) {
+		return null;
+	}
 }

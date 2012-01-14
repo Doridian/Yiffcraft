@@ -314,10 +314,10 @@ public final class Yiffcraft
 
 		ItemStack itemstack1 = minecraft.thePlayer.inventory.getCurrentItem();
 		int j1 = itemstack1 == null ? 0 : itemstack1.stackSize;
-		if(minecraft.playerController.sendPlaceBlock(minecraft.thePlayer, minecraft.theWorld, itemstack1, (int)Math.ceil(loc.posX) - 1, (int)Math.floor(loc.posY) - 2, (int)Math.ceil(loc.posZ) - 1, 0))
+		/*if(minecraft.playerController.sendPlaceBlock(minecraft.thePlayer, minecraft.theWorld, itemstack1, (int)Math.ceil(loc.posX) - 1, (int)Math.floor(loc.posY) - 2, (int)Math.ceil(loc.posZ) - 1, 0))
 		{
 			flag = false;
-		}
+		}*/
 		if(itemstack1 == null)
 		{
 			return;
@@ -357,7 +357,7 @@ public final class Yiffcraft
 				EntityOtherPlayerMP newply = new EntityOtherPlayerMP(minecraft.theWorld, "YOU");
 				newply.setPositionAndRotation(realLoc.posX,realLoc.posY-player.yOffset,realLoc.posZ,realLoc.rotationYaw,realLoc.rotationPitch);
 				WorldClient worldClient = (WorldClient)minecraft.theWorld;
-				worldClient.func_712_a(-1,newply);
+				worldClient.addEntityToWorld(-1,newply);
 			}
 		} else {
 			DespawnFake();

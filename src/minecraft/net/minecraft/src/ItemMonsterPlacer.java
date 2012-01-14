@@ -1,83 +1,66 @@
 package net.minecraft.src;
 
-import java.util.HashMap;
+import com.pclewis.mcpatcher.mod.Colorizer;  //Spout HD
+import net.minecraft.src.Entity;
+import net.minecraft.src.EntityEggInfo;
+import net.minecraft.src.EntityList;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.Facing;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.StatCollector;
+import net.minecraft.src.World;
 
-public class ItemMonsterPlacer extends Item
-{
-    public ItemMonsterPlacer(int i)
-    {
-        super(i);
-        setMaxStackSize(1);
-        setHasSubtypes(true);
-    }
+public class ItemMonsterPlacer extends Item {
 
-    public String getItemDisplayName(ItemStack itemstack)
-    {
-        String s = (new StringBuilder()).append("").append(StatCollector.translateToLocal((new StringBuilder()).append(getItemName()).append(".name").toString())).toString().trim();
-        String s1 = EntityList.func_44040_a(itemstack.getItemDamage());
-        if (s1 != null)
-        {
-            s = (new StringBuilder()).append(s).append(" ").append(StatCollector.translateToLocal((new StringBuilder()).append("entity.").append(s1).append(".name").toString())).toString();
-        }
-        return s;
-    }
+	public ItemMonsterPlacer(int var1) {
+		super(var1);
+		this.setMaxStackSize(1);
+		this.setHasSubtypes(true);
+	}
 
-    public int getColorFromDamage(int i, int j)
-    {
-        EntityEggInfo entityegginfo = (EntityEggInfo)EntityList.field_44041_a.get(Integer.valueOf(i));
-        if (entityegginfo != null)
-        {
-            if (j == 0)
-            {
-                return entityegginfo.field_46061_b;
-            }
-            else
-            {
-                return entityegginfo.field_46062_c;
-            }
-        }
-        else
-        {
-            return 0xffffff;
-        }
-    }
+	public String getItemDisplayName(ItemStack var1) {
+		String var2 = ("" + StatCollector.translateToLocal(this.getItemName() + ".name")).trim();
+		String var3 = EntityList.func_44040_a(var1.getItemDamage());
+		if (var3 != null) {
+			var2 = var2 + " " + StatCollector.translateToLocal("entity." + var3 + ".name");
+		}
 
-    public boolean func_46058_c()
-    {
-        return true;
-    }
+		return var2;
+	}
 
-    public int func_46057_a(int i, int j)
-    {
-        if (j > 0)
-        {
-            return super.func_46057_a(i, j) + 16;
-        }
-        else
-        {
-            return super.func_46057_a(i, j);
-        }
-    }
+	public int getColorFromDamage(int var1, int var2) {
+		EntityEggInfo var3 = (EntityEggInfo)EntityList.field_44041_a.get(Integer.valueOf(var1));
+		return var3 != null ? (var2 == 0 ? Colorizer.colorizeSpawnerEgg(var3.field_46061_b, var1, var2) : Colorizer.colorizeSpawnerEgg(var3.field_46062_c, var1, var2)) : Colorizer.colorizeSpawnerEgg(16777215, var1, var2); //Spout HD
+	}
 
-    public boolean onItemUse(ItemStack itemstack, EntityPlayer entityplayer, World world, int i, int j, int k, int l)
-    {
-        if (world.multiplayerWorld)
-        {
-            return true;
-        }
-        i += Facing.offsetsXForSide[l];
-        j += Facing.offsetsYForSide[l];
-        k += Facing.offsetsZForSide[l];
-        Entity entity = EntityList.createEntity(itemstack.getItemDamage(), world);
-        if (entity != null)
-        {
-            if (!entityplayer.capabilities.depleteBuckets)
-            {
-                itemstack.stackSize--;
-            }
-            entity.setLocationAndAngles((double)i + 0.5D, j, (double)k + 0.5D, 0.0F, 0.0F);
-            world.spawnEntityInWorld(entity);
-        }
-        return true;
-    }
+	public boolean func_46058_c() {
+		return true;
+	}
+
+	public int func_46057_a(int var1, int var2) {
+		return var2 > 0 ? super.func_46057_a(var1, var2) + 16 : super.func_46057_a(var1, var2);
+	}
+
+	public boolean onItemUse(ItemStack var1, EntityPlayer var2, World var3, int var4, int var5, int var6, int var7) {
+		if (var3.multiplayerWorld) {
+			return true;
+		}
+		else {
+			var4 += Facing.offsetsXForSide[var7];
+			var5 += Facing.offsetsYForSide[var7];
+			var6 += Facing.offsetsZForSide[var7];
+			Entity var8 = EntityList.createEntity(var1.getItemDamage(), var3);
+			if (var8 != null) {
+				if (!var2.capabilities.depleteBuckets) {
+					--var1.stackSize;
+				}
+
+				var8.setLocationAndAngles((double)var4 + 0.5D, (double)var5, (double)var6 + 0.5D, 0.0F, 0.0F);
+				var3.spawnEntityInWorld(var8);
+			}
+
+			return true;
+		}
+	}
 }

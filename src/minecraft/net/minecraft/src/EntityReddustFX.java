@@ -1,76 +1,82 @@
 package net.minecraft.src;
 
-public class EntityReddustFX extends EntityFX
-{
-    float reddustParticleScale;
+import com.pclewis.mcpatcher.mod.Colorizer;//Spout
+import net.minecraft.src.EntityFX;
+import net.minecraft.src.Tessellator;
+import net.minecraft.src.World;
 
-    public EntityReddustFX(World world, double d, double d1, double d2,
-            float f, float f1, float f2)
-    {
-        this(world, d, d1, d2, 1.0F, f, f1, f2);
-    }
+public class EntityReddustFX extends EntityFX {
 
-    public EntityReddustFX(World world, double d, double d1, double d2,
-            float f, float f1, float f2, float f3)
-    {
-        super(world, d, d1, d2, 0.0D, 0.0D, 0.0D);
-        motionX *= 0.10000000149011612D;
-        motionY *= 0.10000000149011612D;
-        motionZ *= 0.10000000149011612D;
-        if (f1 == 0.0F)
-        {
-            f1 = 1.0F;
-        }
-        float f4 = (float)Math.random() * 0.4F + 0.6F;
-        particleRed = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * f1 * f4;
-        particleGreen = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * f2 * f4;
-        particleBlue = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * f3 * f4;
-        particleScale *= 0.75F;
-        particleScale *= f;
-        reddustParticleScale = particleScale;
-        particleMaxAge = (int)(8D / (Math.random() * 0.80000000000000004D + 0.20000000000000001D));
-        particleMaxAge *= f;
-        noClip = false;
-    }
+	float reddustParticleScale;
 
-    public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5)
-    {
-        float f6 = (((float)particleAge + f) / (float)particleMaxAge) * 32F;
-        if (f6 < 0.0F)
-        {
-            f6 = 0.0F;
-        }
-        if (f6 > 1.0F)
-        {
-            f6 = 1.0F;
-        }
-        particleScale = reddustParticleScale * f6;
-        super.renderParticle(tessellator, f, f1, f2, f3, f4, f5);
-    }
+	public EntityReddustFX(World var1, double var2, double var4, double var6, float var8, float var9, float var10) {
+		this(var1, var2, var4, var6, 1.0F, var8, var9, var10);
+	}
 
-    public void onUpdate()
-    {
-        prevPosX = posX;
-        prevPosY = posY;
-        prevPosZ = posZ;
-        if (particleAge++ >= particleMaxAge)
-        {
-            setEntityDead();
-        }
-        setParticleTextureIndex(7 - (particleAge * 8) / particleMaxAge);
-        moveEntity(motionX, motionY, motionZ);
-        if (posY == prevPosY)
-        {
-            motionX *= 1.1000000000000001D;
-            motionZ *= 1.1000000000000001D;
-        }
-        motionX *= 0.95999997854232788D;
-        motionY *= 0.95999997854232788D;
-        motionZ *= 0.95999997854232788D;
-        if (onGround)
-        {
-            motionX *= 0.69999998807907104D;
-            motionZ *= 0.69999998807907104D;
-        }
-    }
+	public EntityReddustFX(World var1, double var2, double var4, double var6, float var8, float var9, float var10, float var11) {
+		super(var1, var2, var4, var6, 0.0D, 0.0D, 0.0D);
+		this.motionX *= 0.10000000149011612D;
+		this.motionY *= 0.10000000149011612D;
+		this.motionZ *= 0.10000000149011612D;
+		if (var9 == 0.0F) {
+			var9 = 1.0F;
+//Spout HD start
+			if (Colorizer.computeRedstoneWireColor(15)) {
+				var9 = Colorizer.redstoneWireRed;
+				var10 = Colorizer.redstoneWireGreen;
+				var11 = Colorizer.redstoneWireBlue;
+			}
+//Spout HD end
+		}
+
+		float var12 = (float)Math.random() * 0.4F + 0.6F;
+		this.particleRed = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * var9 * var12;
+		this.particleGreen = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * var10 * var12;
+		this.particleBlue = ((float)(Math.random() * 0.20000000298023224D) + 0.8F) * var11 * var12;
+		this.particleScale *= 0.75F;
+		this.particleScale *= var8;
+		this.reddustParticleScale = this.particleScale;
+		this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
+		this.particleMaxAge = (int)((float)this.particleMaxAge * var8);
+		this.noClip = false;
+	}
+
+	public void renderParticle(Tessellator var1, float var2, float var3, float var4, float var5, float var6, float var7) {
+		float var8 = ((float)this.particleAge + var2) / (float)this.particleMaxAge * 32.0F;
+		if (var8 < 0.0F) {
+			var8 = 0.0F;
+		}
+
+		if (var8 > 1.0F) {
+			var8 = 1.0F;
+		}
+
+		this.particleScale = this.reddustParticleScale * var8;
+		super.renderParticle(var1, var2, var3, var4, var5, var6, var7);
+	}
+
+	public void onUpdate() {
+		this.prevPosX = this.posX;
+		this.prevPosY = this.posY;
+		this.prevPosZ = this.posZ;
+		if (this.particleAge++ >= this.particleMaxAge) {
+			this.setEntityDead();
+		}
+
+		this.setParticleTextureIndex(7 - this.particleAge * 8 / this.particleMaxAge);
+		this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		if (this.posY == this.prevPosY) {
+			this.motionX *= 1.1D;
+			this.motionZ *= 1.1D;
+		}
+
+		this.motionX *= 0.9599999785423279D;
+		this.motionY *= 0.9599999785423279D;
+		this.motionZ *= 0.9599999785423279D;
+		if (this.onGround) {
+			this.motionX *= 0.699999988079071D;
+			this.motionZ *= 0.699999988079071D;
+		}
+
+	}
 }

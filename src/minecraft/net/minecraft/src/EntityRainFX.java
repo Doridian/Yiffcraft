@@ -1,60 +1,72 @@
 package net.minecraft.src;
 
-import java.util.Random;
+import com.pclewis.mcpatcher.mod.Colorizer; //Spout
+import net.minecraft.src.BlockFluid;
+import net.minecraft.src.EntityFX;
+import net.minecraft.src.Material;
+import net.minecraft.src.MathHelper;
+import net.minecraft.src.Tessellator;
+import net.minecraft.src.World;
 
-public class EntityRainFX extends EntityFX
-{
-    public EntityRainFX(World world, double d, double d1, double d2)
-    {
-        super(world, d, d1, d2, 0.0D, 0.0D, 0.0D);
-        motionX *= 0.30000001192092896D;
-        motionY = (float)Math.random() * 0.2F + 0.1F;
-        motionZ *= 0.30000001192092896D;
-        particleRed = 1.0F;
-        particleGreen = 1.0F;
-        particleBlue = 1.0F;
-        setParticleTextureIndex(19 + rand.nextInt(4));
-        setSize(0.01F, 0.01F);
-        particleGravity = 0.06F;
-        particleMaxAge = (int)(8D / (Math.random() * 0.80000000000000004D + 0.20000000000000001D));
-    }
+public class EntityRainFX extends EntityFX {
 
-    public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5)
-    {
-        super.renderParticle(tessellator, f, f1, f2, f3, f4, f5);
-    }
+	public EntityRainFX(World var1, double var2, double var4, double var6) {
+		super(var1, var2, var4, var6, 0.0D, 0.0D, 0.0D);
+		this.motionX *= 0.30000001192092896D;
+		this.motionY = (double)((float)Math.random() * 0.2F + 0.1F);
+		this.motionZ *= 0.30000001192092896D;
+		//Spout HD end
+		if (Colorizer.computeWaterColor(this.worldObj.getWorldChunkManager(), this.posX, this.posY, this.posZ)) {
+			this.particleRed = Colorizer.waterColor[0];
+			this.particleGreen = Colorizer.waterColor[1];
+			this.particleBlue = Colorizer.waterColor[2];
+		}
+		else {
+			this.particleRed = 0.2F;
+			this.particleGreen = 0.3F;
+			this.particleBlue = 1.0F;
+		}
+		//Spout HD start
 
-    public void onUpdate()
-    {
-        prevPosX = posX;
-        prevPosY = posY;
-        prevPosZ = posZ;
-        motionY -= particleGravity;
-        moveEntity(motionX, motionY, motionZ);
-        motionX *= 0.98000001907348633D;
-        motionY *= 0.98000001907348633D;
-        motionZ *= 0.98000001907348633D;
-        if (particleMaxAge-- <= 0)
-        {
-            setEntityDead();
-        }
-        if (onGround)
-        {
-            if (Math.random() < 0.5D)
-            {
-                setEntityDead();
-            }
-            motionX *= 0.69999998807907104D;
-            motionZ *= 0.69999998807907104D;
-        }
-        Material material = worldObj.getBlockMaterial(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ));
-        if (material.getIsLiquid() || material.isSolid())
-        {
-            double d = (float)(MathHelper.floor_double(posY) + 1) - BlockFluid.getFluidHeightPercent(worldObj.getBlockMetadata(MathHelper.floor_double(posX), MathHelper.floor_double(posY), MathHelper.floor_double(posZ)));
-            if (posY < d)
-            {
-                setEntityDead();
-            }
-        }
-    }
+		this.setParticleTextureIndex(19 + this.rand.nextInt(4));
+		this.setSize(0.01F, 0.01F);
+		this.particleGravity = 0.06F;
+		this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
+	}
+
+	public void renderParticle(Tessellator var1, float var2, float var3, float var4, float var5, float var6, float var7) {
+		super.renderParticle(var1, var2, var3, var4, var5, var6, var7);
+	}
+
+	public void onUpdate() {
+		this.prevPosX = this.posX;
+		this.prevPosY = this.posY;
+		this.prevPosZ = this.posZ;
+		this.motionY -= (double)this.particleGravity;
+		this.moveEntity(this.motionX, this.motionY, this.motionZ);
+		this.motionX *= 0.9800000190734863D;
+		this.motionY *= 0.9800000190734863D;
+		this.motionZ *= 0.9800000190734863D;
+		if (this.particleMaxAge-- <= 0) {
+			this.setEntityDead();
+		}
+
+		if (this.onGround) {
+			if (Math.random() < 0.5D) {
+				this.setEntityDead();
+			}
+
+			this.motionX *= 0.699999988079071D;
+			this.motionZ *= 0.699999988079071D;
+		}
+
+		Material var1 = this.worldObj.getBlockMaterial(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ));
+		if (var1.getIsLiquid() || var1.isSolid()) {
+			double var2 = (double)((float)(MathHelper.floor_double(this.posY) + 1) - BlockFluid.getFluidHeightPercent(this.worldObj.getBlockMetadata(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY), MathHelper.floor_double(this.posZ))));
+			if (this.posY < var2) {
+				this.setEntityDead();
+			}
+		}
+
+	}
 }

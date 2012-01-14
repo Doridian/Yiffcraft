@@ -70,8 +70,8 @@ public class YCWorldProxyThirdPerson extends World {
 			}
 
 			@Override
-			public ChunkCoordinates func_40469_f() {
-				return Yiffcraft.minecraft.theWorld.worldProvider.func_40469_f();
+			public ChunkCoordinates getEntrancePortalLocation() {
+				return Yiffcraft.minecraft.theWorld.worldProvider.getEntrancePortalLocation();
 			}
 		});
 		this.multiplayerWorld = true;
@@ -84,8 +84,8 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public ChunkCoordinates func_40472_j() {
-		return Yiffcraft.minecraft.theWorld.func_40472_j();
+	public ChunkCoordinates getEntrancePortalLocation() {
+		return Yiffcraft.minecraft.theWorld.getEntrancePortalLocation();
 	}
 
 	@Override
@@ -114,8 +114,8 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public boolean func_650_a(int var1) {
-		return Yiffcraft.minecraft.theWorld.func_650_a(var1);
+	public boolean quickSaveWorld(int var1) {
+		return Yiffcraft.minecraft.theWorld.quickSaveWorld(var1);
 	}
 
 	@Override
@@ -320,8 +320,8 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public boolean entityJoinedWorld(Entity var1) {
-		return Yiffcraft.minecraft.theWorld.entityJoinedWorld(var1);
+	public boolean spawnEntityInWorld(Entity var1) {
+		return super.spawnEntityInWorld(var1);	//To change body of overridden methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -395,8 +395,8 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public int func_35461_e(int var1, int var2) {
-		return Yiffcraft.minecraft.theWorld.func_35461_e(var1, var2);
+	public int getPrecipitationHeight(int var1, int var2) {
+		return super.getPrecipitationHeight(var1, var2);	//To change body of overridden methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -525,8 +525,8 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public void func_35455_a(TileEntity var1) {
-		Yiffcraft.minecraft.theWorld.func_35455_a(var1);
+	public void markEntityForDespawn(TileEntity var1) {
+		super.markEntityForDespawn(var1);	//To change body of overridden methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -565,6 +565,16 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
+	protected void updateWeather() {
+		super.updateWeather();	//To change body of overridden methods use File | Settings | File Templates.
+	}
+
+	@Override
+	protected void updateBlocksAndPlayCaveSounds() {
+		super.updateBlocksAndPlayCaveSounds();	//To change body of overridden methods use File | Settings | File Templates.
+	}
+
+	@Override
 	public boolean func_40471_p(int var1, int var2, int var3) {
 		return Yiffcraft.minecraft.theWorld.func_40471_p(var1, var2, var3);
 	}
@@ -575,13 +585,13 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public boolean func_40476_b(int var1, int var2, int var3, boolean var4) {
-		return Yiffcraft.minecraft.theWorld.func_40476_b(var1, var2, var3, var4);
+	public boolean isBlockHydrated(int var1, int var2, int var3, boolean var4) {
+		return super.isBlockHydrated(var1, var2, var3, var4);	//To change body of overridden methods use File | Settings | File Templates.
 	}
 
 	@Override
-	public boolean func_40478_r(int var1, int var2, int var3) {
-		return Yiffcraft.minecraft.theWorld.func_40478_r(var1, var2, var3);
+	public boolean canSnowAt(int var1, int var2, int var3) {
+		return super.canSnowAt(var1, var2, var3);	//To change body of overridden methods use File | Settings | File Templates.
 	}
 
 	@Override
@@ -780,8 +790,8 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public ISaveHandler func_40479_y() {
-		return Yiffcraft.minecraft.theWorld.func_40479_y();
+	public ISaveHandler getSaveHandler() {
+		return Yiffcraft.minecraft.theWorld.getSaveHandler();
 	}
 
 	@Override
@@ -855,8 +865,8 @@ public class YCWorldProxyThirdPerson extends World {
 	}
 
 	@Override
-	public int func_35452_b() {
-		return Yiffcraft.minecraft.theWorld.func_35452_b();
+	public int getWorldHeight() {
+		return Yiffcraft.minecraft.theWorld.getWorldHeight();
 	}
 
 	@Override
@@ -882,6 +892,11 @@ public class YCWorldProxyThirdPerson extends World {
 	@Override
 	public ChunkPosition func_40477_b(String var1, int var2, int var3, int var4) {
 		return Yiffcraft.minecraft.theWorld.func_40477_b(var1, var2, var3, var4);
+	}
+
+	@Override
+	public double func_46068_G() {
+		return Yiffcraft.minecraft.theWorld.func_46068_G();
 	}
 
 	@Override

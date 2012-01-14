@@ -1,488 +1,448 @@
 package net.minecraft.src;
 
-import java.util.*;
+import com.pclewis.mcpatcher.mod.Colorizer; //Spout HD
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import net.minecraft.src.Potion;
+import net.minecraft.src.PotionEffect;
 
-public class PotionHelper
-{
-    public static final String field_40367_a = null;
-    public static final String sugarEffect = "-0+1-2-3&4-4+13";
-    public static final String ghastTearEffect = "+0-1-2-3&4-4+13";
-    public static final String spiderEyeEffect = "-0-1+2-3&4-4+13";
-    public static final String fermentedSpiderEyeEffect = "-0+3-4+13";
-    public static final String speckledMelonEffect = "+0-1+2-3&4-4+13";
-    public static final String blazePowderEffect = "+0-1-2+3&4-4+13";
-    public static final String magmaCreamEffect = "+0+1-2-3&4-4+13";
-    public static final String redstoneEffect = "-5+6-7";
-    public static final String glowstoneEffect = "+5-6-7";
-    public static final String gunpowderEffect = "+14&13-13";
-    private static final HashMap field_40370_l;
-    private static final HashMap field_40371_m;
-    private static final HashMap field_40368_n = new HashMap();
-    private static final String potionPrefixes[] =
-    {
-        "potion.prefix.mundane", "potion.prefix.uninteresting", "potion.prefix.bland", "potion.prefix.clear", "potion.prefix.milky", "potion.prefix.diffuse", "potion.prefix.artless", "potion.prefix.thin", "potion.prefix.awkward", "potion.prefix.flat",
-        "potion.prefix.bulky", "potion.prefix.bungling", "potion.prefix.buttered", "potion.prefix.smooth", "potion.prefix.suave", "potion.prefix.debonair", "potion.prefix.thick", "potion.prefix.elegant", "potion.prefix.fancy", "potion.prefix.charming",
-        "potion.prefix.dashing", "potion.prefix.refined", "potion.prefix.cordial", "potion.prefix.sparkling", "potion.prefix.potent", "potion.prefix.foul", "potion.prefix.odorless", "potion.prefix.rank", "potion.prefix.harsh", "potion.prefix.acrid",
-        "potion.prefix.gross", "potion.prefix.stinky"
-    };
+public class PotionHelper {
 
-    public PotionHelper()
-    {
-    }
+	public static final String field_40367_a = null;
+	public static final String sugarEffect;
+	public static final String ghastTearEffect = "+0-1-2-3&4-4+13";
+	public static final String spiderEyeEffect;
+	public static final String fermentedSpiderEyeEffect;
+	public static final String speckledMelonEffect;
+	public static final String blazePowderEffect;
+	public static final String magmaCreamEffect;
+	public static final String redstoneEffect;
+	public static final String glowstoneEffect;
+	public static final String gunpowderEffect;
+	private static final HashMap field_40370_l = new HashMap();
+	private static final HashMap field_40371_m = new HashMap();
+	private static final HashMap field_40368_n;
+	private static final String[] potionPrefixes;
 
-    public static boolean isBitOn(int i, int j)
-    {
-        return (i & 1 << j) != 0;
-    }
+	public static boolean isBitOn(int var0, int var1) {
+		return (var0 & 1 << var1) != 0;
+	}
 
-    private static int isFlagSet(int i, int j)
-    {
-        return isBitOn(i, j) ? 1 : 0;
-    }
+	private static int isFlagSet(int var0, int var1) {
+		return isBitOn(var0, var1) ? 1 : 0;
+	}
 
-    private static int isFlagUnset(int i, int j)
-    {
-        return isBitOn(i, j) ? 0 : 1;
-    }
+	private static int isFlagUnset(int var0, int var1) {
+		return isBitOn(var0, var1) ? 0 : 1;
+	}
 
-    public static int func_40352_a(int i)
-    {
-        return func_40351_a(i, 5, 4, 3, 2, 1);
-    }
+	public static int func_40352_a(int var0) {
+		return func_40351_a(var0, 5, 4, 3, 2, 1);
+	}
 
-    public static int func_40354_a(Collection collection)
-    {
-        int i = 0x385dc6;
-        if (collection == null || collection.isEmpty())
-        {
-            return i;
-        }
-        float f = 0.0F;
-        float f1 = 0.0F;
-        float f2 = 0.0F;
-        float f3 = 0.0F;
-        for (Iterator iterator = collection.iterator(); iterator.hasNext();)
-        {
-            PotionEffect potioneffect = (PotionEffect)iterator.next();
-            int j = Potion.potionTypes[potioneffect.getPotionID()].getLiquidColor();
-            int k = 0;
-            while (k <= potioneffect.getAmplifier())
-            {
-                f += (float)(j >> 16 & 0xff) / 255F;
-                f1 += (float)(j >> 8 & 0xff) / 255F;
-                f2 += (float)(j >> 0 & 0xff) / 255F;
-                f3++;
-                k++;
-            }
-        }
+	public static int func_40354_a(Collection var0) {
+		int var1 = Colorizer.getWaterBottleColor(); //Spout HD
+		if (var0 != null && !var0.isEmpty()) {
+			float var2 = 0.0F;
+			float var3 = 0.0F;
+			float var4 = 0.0F;
+			float var5 = 0.0F;
+			Iterator var6 = var0.iterator();
 
-        f = (f / f3) * 255F;
-        f1 = (f1 / f3) * 255F;
-        f2 = (f2 / f3) * 255F;
-        return (int)f << 16 | (int)f1 << 8 | (int)f2;
-    }
+			while (var6.hasNext()) {
+				PotionEffect var7 = (PotionEffect)var6.next();
+				int var8 = Potion.potionTypes[var7.getPotionID()].getLiquidColor();
 
-    public static int func_40358_a(int i, boolean flag)
-    {
-        if (!flag)
-        {
-            if (field_40368_n.containsKey(Integer.valueOf(i)))
-            {
-                return ((Integer)field_40368_n.get(Integer.valueOf(i))).intValue();
-            }
-            else
-            {
-                int j = func_40354_a(getPotionEffects(i, false));
-                field_40368_n.put(Integer.valueOf(i), Integer.valueOf(j));
-                return j;
-            }
-        }
-        else
-        {
-            return func_40354_a(getPotionEffects(i, flag));
-        }
-    }
+				for (int var9 = 0; var9 <= var7.getAmplifier(); ++var9) {
+					var2 += (float)(var8 >> 16 & 255) / 255.0F;
+					var3 += (float)(var8 >> 8 & 255) / 255.0F;
+					var4 += (float)(var8 >> 0 & 255) / 255.0F;
+					++var5;
+				}
+			}
 
-    public static String func_40359_b(int i)
-    {
-        int j = func_40352_a(i);
-        return potionPrefixes[j];
-    }
+			var2 = var2 / var5 * 255.0F;
+			var3 = var3 / var5 * 255.0F;
+			var4 = var4 / var5 * 255.0F;
+			return (int)var2 << 16 | (int)var3 << 8 | (int)var4;
+		}
+		else {
+			return var1;
+		}
+	}
 
-    private static int func_40347_a(boolean flag, boolean flag1, boolean flag2, int i, int j, int k, int l)
-    {
-        int i1 = 0;
-        if (flag)
-        {
-            i1 = isFlagUnset(l, j);
-        }
-        else if (i != -1)
-        {
-            if (i == 0 && getOnBitCount(l) == j)
-            {
-                i1 = 1;
-            }
-            else if (i == 1 && getOnBitCount(l) > j)
-            {
-                i1 = 1;
-            }
-            else if (i == 2 && getOnBitCount(l) < j)
-            {
-                i1 = 1;
-            }
-        }
-        else
-        {
-            i1 = isFlagSet(l, j);
-        }
-        if (flag1)
-        {
-            i1 *= k;
-        }
-        if (flag2)
-        {
-            i1 *= -1;
-        }
-        return i1;
-    }
+	public static int func_40358_a(int var0, boolean var1) {
+		if (!var1) {
+			if (field_40368_n.containsKey(Integer.valueOf(var0))) {
+				return ((Integer)field_40368_n.get(Integer.valueOf(var0))).intValue();
+			}
+			else {
+				int var2 = func_40354_a(getPotionEffects(var0, false));
+				field_40368_n.put(Integer.valueOf(var0), Integer.valueOf(var2));
+				return var2;
+			}
+		}
+		else {
+			return func_40354_a(getPotionEffects(var0, var1));
+		}
+	}
 
-    private static int getOnBitCount(int i)
-    {
-        int j;
-        for (j = 0; i > 0; j++)
-        {
-            i &= i - 1;
-        }
+	public static String func_40359_b(int var0) {
+		int var1 = func_40352_a(var0);
+		return potionPrefixes[var1];
+	}
 
-        return j;
-    }
+	private static int func_40347_a(boolean var0, boolean var1, boolean var2, int var3, int var4, int var5, int var6) {
+		int var7 = 0;
+		if (var0) {
+			var7 = isFlagUnset(var6, var4);
+		}
+		else if (var3 != -1) {
+			if (var3 == 0 && getOnBitCount(var6) == var4) {
+				var7 = 1;
+			}
+			else if (var3 == 1 && getOnBitCount(var6) > var4) {
+				var7 = 1;
+			}
+			else if (var3 == 2 && getOnBitCount(var6) < var4) {
+				var7 = 1;
+			}
+		}
+		else {
+			var7 = isFlagSet(var6, var4);
+		}
 
-    private static int func_40355_a(String s, int i, int j, int k)
-    {
-        if (i >= s.length() || j < 0 || i >= j)
-        {
-            return 0;
-        }
-        int l = s.indexOf('|', i);
-        if (l >= 0 && l < j)
-        {
-            int i1 = func_40355_a(s, i, l - 1, k);
-            if (i1 > 0)
-            {
-                return i1;
-            }
-            int k1 = func_40355_a(s, l + 1, j, k);
-            if (k1 > 0)
-            {
-                return k1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        int j1 = s.indexOf('&', i);
-        if (j1 >= 0 && j1 < j)
-        {
-            int l1 = func_40355_a(s, i, j1 - 1, k);
-            if (l1 <= 0)
-            {
-                return 0;
-            }
-            int i2 = func_40355_a(s, j1 + 1, j, k);
-            if (i2 <= 0)
-            {
-                return 0;
-            }
-            if (l1 > i2)
-            {
-                return l1;
-            }
-            else
-            {
-                return i2;
-            }
-        }
-        boolean flag = false;
-        boolean flag1 = false;
-        boolean flag2 = false;
-        boolean flag3 = false;
-        boolean flag4 = false;
-        byte byte0 = -1;
-        int j2 = 0;
-        int k2 = 0;
-        int l2 = 0;
-        for (int i3 = i; i3 < j; i3++)
-        {
-            char c = s.charAt(i3);
-            if (c >= '0' && c <= '9')
-            {
-                if (flag)
-                {
-                    k2 = c - 48;
-                    flag1 = true;
-                }
-                else
-                {
-                    j2 *= 10;
-                    j2 += c - 48;
-                    flag2 = true;
-                }
-                continue;
-            }
-            if (c == '*')
-            {
-                flag = true;
-                continue;
-            }
-            if (c == '!')
-            {
-                if (flag2)
-                {
-                    l2 += func_40347_a(flag3, flag1, flag4, byte0, j2, k2, k);
-                    flag2 = flag1 = flag = flag4 = flag3 = false;
-                    j2 = k2 = 0;
-                    byte0 = -1;
-                }
-                flag3 = true;
-                continue;
-            }
-            if (c == '-')
-            {
-                if (flag2)
-                {
-                    l2 += func_40347_a(flag3, flag1, flag4, byte0, j2, k2, k);
-                    flag2 = flag1 = flag = flag4 = flag3 = false;
-                    j2 = k2 = 0;
-                    byte0 = -1;
-                }
-                flag4 = true;
-                continue;
-            }
-            if (c == '=' || c == '<' || c == '>')
-            {
-                if (flag2)
-                {
-                    l2 += func_40347_a(flag3, flag1, flag4, byte0, j2, k2, k);
-                    flag2 = flag1 = flag = flag4 = flag3 = false;
-                    j2 = k2 = 0;
-                    byte0 = -1;
-                }
-                if (c == '=')
-                {
-                    byte0 = 0;
-                    continue;
-                }
-                if (c == '<')
-                {
-                    byte0 = 2;
-                    continue;
-                }
-                if (c == '>')
-                {
-                    byte0 = 1;
-                }
-                continue;
-            }
-            if (c == '+' && flag2)
-            {
-                l2 += func_40347_a(flag3, flag1, flag4, byte0, j2, k2, k);
-                flag2 = flag1 = flag = flag4 = flag3 = false;
-                j2 = k2 = 0;
-                byte0 = -1;
-            }
-        }
+		if (var1) {
+			var7 *= var5;
+		}
 
-        if (flag2)
-        {
-            l2 += func_40347_a(flag3, flag1, flag4, byte0, j2, k2, k);
-        }
-        return l2;
-    }
+		if (var2) {
+			var7 *= -1;
+		}
 
-    public static List getPotionEffects(int i, boolean flag)
-    {
-        ArrayList arraylist = null;
-        Potion apotion[] = Potion.potionTypes;
-        int j = apotion.length;
-        for (int k = 0; k < j; k++)
-        {
-            Potion potion = apotion[k];
-            if (potion == null || potion.func_40612_i() && !flag)
-            {
-                continue;
-            }
-            String s = (String)field_40370_l.get(Integer.valueOf(potion.getId()));
-            if (s == null)
-            {
-                continue;
-            }
-            int l = func_40355_a(s, 0, s.length(), i);
-            if (l <= 0)
-            {
-                continue;
-            }
-            int i1 = 0;
-            String s1 = (String)field_40371_m.get(Integer.valueOf(potion.getId()));
-            if (s1 != null)
-            {
-                i1 = func_40355_a(s1, 0, s1.length(), i);
-                if (i1 < 0)
-                {
-                    i1 = 0;
-                }
-            }
-            if (potion.isInstant())
-            {
-                l = 1;
-            }
-            else
-            {
-                l = 1200 * (l * 3 + (l - 1) * 2);
-                l >>= i1;
-                l = (int)Math.round((double)l * potion.func_40610_g());
-                if ((i & 0x4000) != 0)
-                {
-                    l = (int)Math.round((double)l * 0.75D + 0.5D);
-                }
-            }
-            if (arraylist == null)
-            {
-                arraylist = new ArrayList();
-            }
-            arraylist.add(new PotionEffect(potion.getId(), l, i1));
-        }
+		return var7;
+	}
 
-        return arraylist;
-    }
+	private static int getOnBitCount(int var0) {
+		int var1;
+		for (var1 = 0; var0 > 0; ++var1) {
+			var0 &= var0 - 1;
+		}
 
-    private static int brewBitOperations(int i, int j, boolean flag, boolean flag1, boolean flag2)
-    {
-        if (flag2)
-        {
-            if (!isBitOn(i, j))
-            {
-                return 0;
-            }
-        }
-        else if (flag)
-        {
-            i &= ~(1 << j);
-        }
-        else if (flag1)
-        {
-            if ((i & 1 << j) != 0)
-            {
-                i &= ~(1 << j);
-            }
-            else
-            {
-                i |= 1 << j;
-            }
-        }
-        else
-        {
-            i |= 1 << j;
-        }
-        return i;
-    }
+		return var1;
+	}
 
-    public static int brewPotionData(int i, String s)
-    {
-        boolean flag = false;
-        int j = s.length();
-        boolean flag1 = false;
-        boolean flag2 = false;
-        boolean flag3 = false;
-        boolean flag4 = false;
-        int k = 0;
-        for (int l = ((flag) ? 1 : 0); l < j; l++)
-        {
-            char c = s.charAt(l);
-            if (c >= '0' && c <= '9')
-            {
-                k *= 10;
-                k += c - 48;
-                flag1 = true;
-                continue;
-            }
-            if (c == '!')
-            {
-                if (flag1)
-                {
-                    i = brewBitOperations(i, k, flag3, flag2, flag4);
-                    flag1 = flag3 = flag2 = flag4 = false;
-                    k = 0;
-                }
-                flag2 = true;
-                continue;
-            }
-            if (c == '-')
-            {
-                if (flag1)
-                {
-                    i = brewBitOperations(i, k, flag3, flag2, flag4);
-                    flag1 = flag3 = flag2 = flag4 = false;
-                    k = 0;
-                }
-                flag3 = true;
-                continue;
-            }
-            if (c == '+')
-            {
-                if (flag1)
-                {
-                    i = brewBitOperations(i, k, flag3, flag2, flag4);
-                    flag1 = flag3 = flag2 = flag4 = false;
-                    k = 0;
-                }
-                continue;
-            }
-            if (c != '&')
-            {
-                continue;
-            }
-            if (flag1)
-            {
-                i = brewBitOperations(i, k, flag3, flag2, flag4);
-                flag1 = flag3 = flag2 = flag4 = false;
-                k = 0;
-            }
-            flag4 = true;
-        }
+	private static int func_40355_a(String var0, int var1, int var2, int var3) {
+		if (var1 < var0.length() && var2 >= 0 && var1 < var2) {
+			int var4 = var0.indexOf(124, var1);
+			int var5;
+			int var17;
+			if (var4 >= 0 && var4 < var2) {
+				var5 = func_40355_a(var0, var1, var4 - 1, var3);
+				if (var5 > 0) {
+					return var5;
+				}
+				else {
+					var17 = func_40355_a(var0, var4 + 1, var2, var3);
+					return var17 > 0 ? var17 : 0;
+				}
+			}
+			else {
+				var5 = var0.indexOf(38, var1);
+				if (var5 >= 0 && var5 < var2) {
+					var17 = func_40355_a(var0, var1, var5 - 1, var3);
+					if (var17 <= 0) {
+						return 0;
+					}
+					else {
+						int var18 = func_40355_a(var0, var5 + 1, var2, var3);
+						return var18 <= 0 ? 0 : (var17 > var18 ? var17 : var18);
+					}
+				}
+				else {
+					boolean var6 = false;
+					boolean var7 = false;
+					boolean var8 = false;
+					boolean var9 = false;
+					boolean var10 = false;
+					byte var11 = -1;
+					int var12 = 0;
+					int var13 = 0;
+					int var14 = 0;
 
-        if (flag1)
-        {
-            i = brewBitOperations(i, k, flag3, flag2, flag4);
-        }
-        return i & 0x7fff;
-    }
+					for (int var15 = var1; var15 < var2; ++var15) {
+						char var16 = var0.charAt(var15);
+						if (var16 >= 48 && var16 <= 57) {
+							if (var6) {
+								var13 = var16 - 48;
+								var7 = true;
+							}
+							else {
+								var12 *= 10;
+								var12 += var16 - 48;
+								var8 = true;
+							}
+						}
+						else if (var16 == 42) {
+							var6 = true;
+						}
+						else if (var16 == 33) {
+							if (var8) {
+								var14 += func_40347_a(var9, var7, var10, var11, var12, var13, var3);
+								var9 = false;
+								var10 = false;
+								var6 = false;
+								var7 = false;
+								var8 = false;
+								var13 = 0;
+								var12 = 0;
+								var11 = -1;
+							}
 
-    public static int func_40351_a(int i, int j, int k, int l, int i1, int j1)
-    {
-        return (isBitOn(i, j) ? 0x10 : 0) | (isBitOn(i, k) ? 8 : 0) | (isBitOn(i, l) ? 4 : 0) | (isBitOn(i, i1) ? 2 : 0) | (isBitOn(i, j1) ? 1 : 0);
-    }
+							var9 = true;
+						}
+						else if (var16 == 45) {
+							if (var8) {
+								var14 += func_40347_a(var9, var7, var10, var11, var12, var13, var3);
+								var9 = false;
+								var10 = false;
+								var6 = false;
+								var7 = false;
+								var8 = false;
+								var13 = 0;
+								var12 = 0;
+								var11 = -1;
+							}
 
-    static
-    {
-        field_40370_l = new HashMap();
-        field_40371_m = new HashMap();
-        field_40370_l.put(Integer.valueOf(Potion.regeneration.getId()), "0 & !1 & !2 & !3 & 0+6");
-        field_40370_l.put(Integer.valueOf(Potion.moveSpeed.getId()), "!0 & 1 & !2 & !3 & 1+6");
-        field_40370_l.put(Integer.valueOf(Potion.fireResistance.getId()), "0 & 1 & !2 & !3 & 0+6");
-        field_40370_l.put(Integer.valueOf(Potion.heal.getId()), "0 & !1 & 2 & !3");
-        field_40370_l.put(Integer.valueOf(Potion.poison.getId()), "!0 & !1 & 2 & !3 & 2+6");
-        field_40370_l.put(Integer.valueOf(Potion.weakness.getId()), "!0 & !1 & !2 & 3 & 3+6");
-        field_40370_l.put(Integer.valueOf(Potion.harm.getId()), "!0 & !1 & 2 & 3");
-        field_40370_l.put(Integer.valueOf(Potion.moveSlowdown.getId()), "!0 & 1 & !2 & 3 & 3+6");
-        field_40370_l.put(Integer.valueOf(Potion.damageBoost.getId()), "0 & !1 & !2 & 3 & 3+6");
-        field_40371_m.put(Integer.valueOf(Potion.moveSpeed.getId()), "5");
-        field_40371_m.put(Integer.valueOf(Potion.digSpeed.getId()), "5");
-        field_40371_m.put(Integer.valueOf(Potion.damageBoost.getId()), "5");
-        field_40371_m.put(Integer.valueOf(Potion.regeneration.getId()), "5");
-        field_40371_m.put(Integer.valueOf(Potion.harm.getId()), "5");
-        field_40371_m.put(Integer.valueOf(Potion.heal.getId()), "5");
-        field_40371_m.put(Integer.valueOf(Potion.resistance.getId()), "5");
-        field_40371_m.put(Integer.valueOf(Potion.poison.getId()), "5");
-    }
+							var10 = true;
+						}
+						else if (var16 != 61 && var16 != 60 && var16 != 62) {
+							if (var16 == 43 && var8) {
+								var14 += func_40347_a(var9, var7, var10, var11, var12, var13, var3);
+								var9 = false;
+								var10 = false;
+								var6 = false;
+								var7 = false;
+								var8 = false;
+								var13 = 0;
+								var12 = 0;
+								var11 = -1;
+							}
+						}
+						else {
+							if (var8) {
+								var14 += func_40347_a(var9, var7, var10, var11, var12, var13, var3);
+								var9 = false;
+								var10 = false;
+								var6 = false;
+								var7 = false;
+								var8 = false;
+								var13 = 0;
+								var12 = 0;
+								var11 = -1;
+							}
+
+							if (var16 == 61) {
+								var11 = 0;
+							}
+							else if (var16 == 60) {
+								var11 = 2;
+							}
+							else if (var16 == 62) {
+								var11 = 1;
+							}
+						}
+					}
+
+					if (var8) {
+						var14 += func_40347_a(var9, var7, var10, var11, var12, var13, var3);
+					}
+
+					return var14;
+				}
+			}
+		}
+		else {
+			return 0;
+		}
+	}
+
+	public static List getPotionEffects(int var0, boolean var1) {
+		ArrayList var2 = null;
+		Potion[] var3 = Potion.potionTypes;
+		int var4 = var3.length;
+
+		for (int var5 = 0; var5 < var4; ++var5) {
+			Potion var6 = var3[var5];
+			if (var6 != null && (!var6.func_40612_i() || var1)) {
+				String var7 = (String)field_40370_l.get(Integer.valueOf(var6.getId()));
+				if (var7 != null) {
+					int var8 = func_40355_a(var7, 0, var7.length(), var0);
+					if (var8 > 0) {
+						int var9 = 0;
+						String var10 = (String)field_40371_m.get(Integer.valueOf(var6.getId()));
+						if (var10 != null) {
+							var9 = func_40355_a(var10, 0, var10.length(), var0);
+							if (var9 < 0) {
+								var9 = 0;
+							}
+						}
+
+						if (var6.isInstant()) {
+							var8 = 1;
+						}
+						else {
+							var8 = 1200 * (var8 * 3 + (var8 - 1) * 2);
+							var8 >>= var9;
+							var8 = (int)Math.round((double)var8 * var6.func_40610_g());
+							if ((var0 & 16384) != 0) {
+								var8 = (int)Math.round((double)var8 * 0.75D + 0.5D);
+							}
+						}
+
+						if (var2 == null) {
+							var2 = new ArrayList();
+						}
+
+						var2.add(new PotionEffect(var6.getId(), var8, var9));
+					}
+				}
+			}
+		}
+
+		return var2;
+	}
+
+	private static int brewBitOperations(int var0, int var1, boolean var2, boolean var3, boolean var4) {
+		if (var4) {
+			if (!isBitOn(var0, var1)) {
+				return 0;
+			}
+		}
+		else if (var2) {
+			var0 &= ~(1 << var1);
+		}
+		else if (var3) {
+			if ((var0 & 1 << var1) != 0) {
+				var0 &= ~(1 << var1);
+			}
+			else {
+				var0 |= 1 << var1;
+			}
+		}
+		else {
+			var0 |= 1 << var1;
+		}
+
+		return var0;
+	}
+
+	public static int brewPotionData(int var0, String var1) {
+		byte var2 = 0;
+		int var3 = var1.length();
+		boolean var4 = false;
+		boolean var5 = false;
+		boolean var6 = false;
+		boolean var7 = false;
+		int var8 = 0;
+
+		for (int var9 = var2; var9 < var3; ++var9) {
+			char var10 = var1.charAt(var9);
+			if (var10 >= 48 && var10 <= 57) {
+				var8 *= 10;
+				var8 += var10 - 48;
+				var4 = true;
+			}
+			else if (var10 == 33) {
+				if (var4) {
+					var0 = brewBitOperations(var0, var8, var6, var5, var7);
+					var7 = false;
+					var5 = false;
+					var6 = false;
+					var4 = false;
+					var8 = 0;
+				}
+
+				var5 = true;
+			}
+			else if (var10 == 45) {
+				if (var4) {
+					var0 = brewBitOperations(var0, var8, var6, var5, var7);
+					var7 = false;
+					var5 = false;
+					var6 = false;
+					var4 = false;
+					var8 = 0;
+				}
+
+				var6 = true;
+			}
+			else if (var10 == 43) {
+				if (var4) {
+					var0 = brewBitOperations(var0, var8, var6, var5, var7);
+					var7 = false;
+					var5 = false;
+					var6 = false;
+					var4 = false;
+					var8 = 0;
+				}
+			}
+			else if (var10 == 38) {
+				if (var4) {
+					var0 = brewBitOperations(var0, var8, var6, var5, var7);
+					var7 = false;
+					var5 = false;
+					var6 = false;
+					var4 = false;
+					var8 = 0;
+				}
+
+				var7 = true;
+			}
+		}
+
+		if (var4) {
+			var0 = brewBitOperations(var0, var8, var6, var5, var7);
+		}
+
+		return var0 & 32767;
+	}
+
+	public static int func_40351_a(int var0, int var1, int var2, int var3, int var4, int var5) {
+		return (isBitOn(var0, var1) ? 16 : 0) | (isBitOn(var0, var2) ? 8 : 0) | (isBitOn(var0, var3) ? 4 : 0) | (isBitOn(var0, var4) ? 2 : 0) | (isBitOn(var0, var5) ? 1 : 0);
+	}
+
+	static {
+		field_40370_l.put(Integer.valueOf(Potion.regeneration.getId()), "0 & !1 & !2 & !3 & 0+6");
+		sugarEffect = "-0+1-2-3&4-4+13";
+		field_40370_l.put(Integer.valueOf(Potion.moveSpeed.getId()), "!0 & 1 & !2 & !3 & 1+6");
+		magmaCreamEffect = "+0+1-2-3&4-4+13";
+		field_40370_l.put(Integer.valueOf(Potion.fireResistance.getId()), "0 & 1 & !2 & !3 & 0+6");
+		speckledMelonEffect = "+0-1+2-3&4-4+13";
+		field_40370_l.put(Integer.valueOf(Potion.heal.getId()), "0 & !1 & 2 & !3");
+		spiderEyeEffect = "-0-1+2-3&4-4+13";
+		field_40370_l.put(Integer.valueOf(Potion.poison.getId()), "!0 & !1 & 2 & !3 & 2+6");
+		fermentedSpiderEyeEffect = "-0+3-4+13";
+		field_40370_l.put(Integer.valueOf(Potion.weakness.getId()), "!0 & !1 & !2 & 3 & 3+6");
+		field_40370_l.put(Integer.valueOf(Potion.harm.getId()), "!0 & !1 & 2 & 3");
+		field_40370_l.put(Integer.valueOf(Potion.moveSlowdown.getId()), "!0 & 1 & !2 & 3 & 3+6");
+		blazePowderEffect = "+0-1-2+3&4-4+13";
+		field_40370_l.put(Integer.valueOf(Potion.damageBoost.getId()), "0 & !1 & !2 & 3 & 3+6");
+		glowstoneEffect = "+5-6-7";
+		field_40371_m.put(Integer.valueOf(Potion.moveSpeed.getId()), "5");
+		field_40371_m.put(Integer.valueOf(Potion.digSpeed.getId()), "5");
+		field_40371_m.put(Integer.valueOf(Potion.damageBoost.getId()), "5");
+		field_40371_m.put(Integer.valueOf(Potion.regeneration.getId()), "5");
+		field_40371_m.put(Integer.valueOf(Potion.harm.getId()), "5");
+		field_40371_m.put(Integer.valueOf(Potion.heal.getId()), "5");
+		field_40371_m.put(Integer.valueOf(Potion.resistance.getId()), "5");
+		field_40371_m.put(Integer.valueOf(Potion.poison.getId()), "5");
+		redstoneEffect = "-5+6-7";
+		gunpowderEffect = "+14&13-13";
+		field_40368_n = new HashMap();
+		potionPrefixes = new String[] {"potion.prefix.mundane", "potion.prefix.uninteresting", "potion.prefix.bland", "potion.prefix.clear", "potion.prefix.milky", "potion.prefix.diffuse", "potion.prefix.artless", "potion.prefix.thin", "potion.prefix.awkward", "potion.prefix.flat", "potion.prefix.bulky", "potion.prefix.bungling", "potion.prefix.buttered", "potion.prefix.smooth", "potion.prefix.suave", "potion.prefix.debonair", "potion.prefix.thick", "potion.prefix.elegant", "potion.prefix.fancy", "potion.prefix.charming", "potion.prefix.dashing", "potion.prefix.refined", "potion.prefix.cordial", "potion.prefix.sparkling", "potion.prefix.potent", "potion.prefix.foul", "potion.prefix.odorless", "potion.prefix.rank", "potion.prefix.harsh", "potion.prefix.acrid", "potion.prefix.gross", "potion.prefix.stinky"};
+	}
 }

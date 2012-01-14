@@ -1,231 +1,202 @@
 package net.minecraft.src;
 
+import com.pclewis.mcpatcher.mod.Colorizer; //Spout HD
 import java.util.Random;
+import net.minecraft.src.Block;
+import net.minecraft.src.BlockFlower;
+import net.minecraft.src.EntityItem;
+import net.minecraft.src.IBlockAccess;
+import net.minecraft.src.Item;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.World;
 
-public class BlockStem extends BlockFlower
-{
-    private Block fruitType;
+public class BlockStem extends BlockFlower {
 
-    protected BlockStem(int i, Block block)
-    {
-        super(i, 111);
-        fruitType = block;
-        setTickOnLoad(true);
-        float f = 0.125F;
-        setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
-    }
+	private Block fruitType;
 
-    protected boolean canThisPlantGrowOnThisBlockID(int i)
-    {
-        return i == Block.tilledField.blockID;
-    }
+	protected BlockStem(int var1, Block var2) {
+		super(var1, 111);
+		this.fruitType = var2;
+		this.setTickOnLoad(true);
+		float var3 = 0.125F;
+		this.setBlockBounds(0.5F - var3, 0.0F, 0.5F - var3, 0.5F + var3, 0.25F, 0.5F + var3);
+	}
 
-    public void updateTick(World world, int i, int j, int k, Random random)
-    {
-        super.updateTick(world, i, j, k, random);
-        if (world.getBlockLightValue(i, j + 1, k) >= 9)
-        {
-            float f = func_35295_j(world, i, j, k);
-            if (random.nextInt((int)(25F / f) + 1) == 0)
-            {
-                int l = world.getBlockMetadata(i, j, k);
-                if (l < 7)
-                {
-                    l++;
-                    world.setBlockMetadataWithNotify(i, j, k, l);
-                }
-                else
-                {
-                    if (world.getBlockId(i - 1, j, k) == fruitType.blockID)
-                    {
-                        return;
-                    }
-                    if (world.getBlockId(i + 1, j, k) == fruitType.blockID)
-                    {
-                        return;
-                    }
-                    if (world.getBlockId(i, j, k - 1) == fruitType.blockID)
-                    {
-                        return;
-                    }
-                    if (world.getBlockId(i, j, k + 1) == fruitType.blockID)
-                    {
-                        return;
-                    }
-                    int i1 = random.nextInt(4);
-                    int j1 = i;
-                    int k1 = k;
-                    if (i1 == 0)
-                    {
-                        j1--;
-                    }
-                    if (i1 == 1)
-                    {
-                        j1++;
-                    }
-                    if (i1 == 2)
-                    {
-                        k1--;
-                    }
-                    if (i1 == 3)
-                    {
-                        k1++;
-                    }
-                    int l1 = world.getBlockId(j1, j - 1, k1);
-                    if (world.getBlockId(j1, j, k1) == 0 && (l1 == Block.tilledField.blockID || l1 == Block.dirt.blockID || l1 == Block.grass.blockID))
-                    {
-                        world.setBlockWithNotify(j1, j, k1, fruitType.blockID);
-                    }
-                }
-            }
-        }
-    }
+	protected boolean canThisPlantGrowOnThisBlockID(int var1) {
+		return var1 == Block.tilledField.blockID;
+	}
 
-    public void fertilizeStem(World world, int i, int j, int k)
-    {
-        world.setBlockMetadataWithNotify(i, j, k, 7);
-    }
+	public void updateTick(World var1, int var2, int var3, int var4, Random var5) {
+		super.updateTick(var1, var2, var3, var4, var5);
+		if (var1.getBlockLightValue(var2, var3 + 1, var4) >= 9) {
+			float var6 = this.func_35295_j(var1, var2, var3, var4);
+			if (var5.nextInt((int)(25.0F / var6) + 1) == 0) {
+				int var7 = var1.getBlockMetadata(var2, var3, var4);
+				if (var7 < 7) {
+					++var7;
+					var1.setBlockMetadataWithNotify(var2, var3, var4, var7);
+				}
+				else {
+					if (var1.getBlockId(var2 - 1, var3, var4) == this.fruitType.blockID) {
+						return;
+					}
 
-    private float func_35295_j(World world, int i, int j, int k)
-    {
-        float f = 1.0F;
-        int l = world.getBlockId(i, j, k - 1);
-        int i1 = world.getBlockId(i, j, k + 1);
-        int j1 = world.getBlockId(i - 1, j, k);
-        int k1 = world.getBlockId(i + 1, j, k);
-        int l1 = world.getBlockId(i - 1, j, k - 1);
-        int i2 = world.getBlockId(i + 1, j, k - 1);
-        int j2 = world.getBlockId(i + 1, j, k + 1);
-        int k2 = world.getBlockId(i - 1, j, k + 1);
-        boolean flag = j1 == blockID || k1 == blockID;
-        boolean flag1 = l == blockID || i1 == blockID;
-        boolean flag2 = l1 == blockID || i2 == blockID || j2 == blockID || k2 == blockID;
-        for (int l2 = i - 1; l2 <= i + 1; l2++)
-        {
-            for (int i3 = k - 1; i3 <= k + 1; i3++)
-            {
-                int j3 = world.getBlockId(l2, j - 1, i3);
-                float f1 = 0.0F;
-                if (j3 == Block.tilledField.blockID)
-                {
-                    f1 = 1.0F;
-                    if (world.getBlockMetadata(l2, j - 1, i3) > 0)
-                    {
-                        f1 = 3F;
-                    }
-                }
-                if (l2 != i || i3 != k)
-                {
-                    f1 /= 4F;
-                }
-                f += f1;
-            }
-        }
+					if (var1.getBlockId(var2 + 1, var3, var4) == this.fruitType.blockID) {
+						return;
+					}
 
-        if (flag2 || flag && flag1)
-        {
-            f /= 2.0F;
-        }
-        return f;
-    }
+					if (var1.getBlockId(var2, var3, var4 - 1) == this.fruitType.blockID) {
+						return;
+					}
 
-    public int getRenderColor(int i)
-    {
-        int j = i * 32;
-        int k = 255 - i * 8;
-        int l = i * 4;
-        return j << 16 | k << 8 | l;
-    }
+					if (var1.getBlockId(var2, var3, var4 + 1) == this.fruitType.blockID) {
+						return;
+					}
 
-    public int colorMultiplier(IBlockAccess iblockaccess, int i, int j, int k)
-    {
-        return getRenderColor(iblockaccess.getBlockMetadata(i, j, k));
-    }
+					int var8 = var5.nextInt(4);
+					int var9 = var2;
+					int var10 = var4;
+					if (var8 == 0) {
+						var9 = var2 - 1;
+					}
 
-    public int getBlockTextureFromSideAndMetadata(int i, int j)
-    {
-        return blockIndexInTexture;
-    }
+					if (var8 == 1) {
+						++var9;
+					}
 
-    public void setBlockBoundsForItemRender()
-    {
-        float f = 0.125F;
-        setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, 0.25F, 0.5F + f);
-    }
+					if (var8 == 2) {
+						var10 = var4 - 1;
+					}
 
-    public void setBlockBoundsBasedOnState(IBlockAccess iblockaccess, int i, int j, int k)
-    {
-        maxY = (float)(iblockaccess.getBlockMetadata(i, j, k) * 2 + 2) / 16F;
-        float f = 0.125F;
-        setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, (float)maxY, 0.5F + f);
-    }
+					if (var8 == 3) {
+						++var10;
+					}
 
-    public int getRenderType()
-    {
-        return 19;
-    }
+					int var11 = var1.getBlockId(var9, var3 - 1, var10);
+					if (var1.getBlockId(var9, var3, var10) == 0 && (var11 == Block.tilledField.blockID || var11 == Block.dirt.blockID || var11 == Block.grass.blockID)) {
+						var1.setBlockWithNotify(var9, var3, var10, this.fruitType.blockID);
+					}
+				}
+			}
+		}
 
-    public int func_35296_f(IBlockAccess iblockaccess, int i, int j, int k)
-    {
-        int l = iblockaccess.getBlockMetadata(i, j, k);
-        if (l < 7)
-        {
-            return -1;
-        }
-        if (iblockaccess.getBlockId(i - 1, j, k) == fruitType.blockID)
-        {
-            return 0;
-        }
-        if (iblockaccess.getBlockId(i + 1, j, k) == fruitType.blockID)
-        {
-            return 1;
-        }
-        if (iblockaccess.getBlockId(i, j, k - 1) == fruitType.blockID)
-        {
-            return 2;
-        }
-        return iblockaccess.getBlockId(i, j, k + 1) != fruitType.blockID ? -1 : 3;
-    }
+	}
 
-    public void dropBlockAsItemWithChance(World world, int i, int j, int k, int l, float f, int i1)
-    {
-        super.dropBlockAsItemWithChance(world, i, j, k, l, f, i1);
-        if (world.multiplayerWorld)
-        {
-            return;
-        }
-        Item item = null;
-        if (fruitType == Block.pumpkin)
-        {
-            item = Item.pumpkinSeeds;
-        }
-        if (fruitType == Block.melon)
-        {
-            item = Item.melonSeeds;
-        }
-        for (int j1 = 0; j1 < 3; j1++)
-        {
-            if (world.rand.nextInt(15) <= l)
-            {
-                float f1 = 0.7F;
-                float f2 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
-                float f3 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
-                float f4 = world.rand.nextFloat() * f1 + (1.0F - f1) * 0.5F;
-                EntityItem entityitem = new EntityItem(world, (float)i + f2, (float)j + f3, (float)k + f4, new ItemStack(item));
-                entityitem.delayBeforeCanPickup = 10;
-                world.spawnEntityInWorld(entityitem);
-            }
-        }
-    }
+	public void fertilizeStem(World var1, int var2, int var3, int var4) {
+		var1.setBlockMetadataWithNotify(var2, var3, var4, 7);
+	}
 
-    public int idDropped(int i, Random random, int j)
-    {
-        if (i != 7);
-        return -1;
-    }
+	private float func_35295_j(World var1, int var2, int var3, int var4) {
+		float var5 = 1.0F;
+		int var6 = var1.getBlockId(var2, var3, var4 - 1);
+		int var7 = var1.getBlockId(var2, var3, var4 + 1);
+		int var8 = var1.getBlockId(var2 - 1, var3, var4);
+		int var9 = var1.getBlockId(var2 + 1, var3, var4);
+		int var10 = var1.getBlockId(var2 - 1, var3, var4 - 1);
+		int var11 = var1.getBlockId(var2 + 1, var3, var4 - 1);
+		int var12 = var1.getBlockId(var2 + 1, var3, var4 + 1);
+		int var13 = var1.getBlockId(var2 - 1, var3, var4 + 1);
+		boolean var14 = var8 == this.blockID || var9 == this.blockID;
+		boolean var15 = var6 == this.blockID || var7 == this.blockID;
+		boolean var16 = var10 == this.blockID || var11 == this.blockID || var12 == this.blockID || var13 == this.blockID;
 
-    public int quantityDropped(Random random)
-    {
-        return 1;
-    }
+		for (int var17 = var2 - 1; var17 <= var2 + 1; ++var17) {
+			for (int var18 = var4 - 1; var18 <= var4 + 1; ++var18) {
+				int var19 = var1.getBlockId(var17, var3 - 1, var18);
+				float var20 = 0.0F;
+				if (var19 == Block.tilledField.blockID) {
+					var20 = 1.0F;
+					if (var1.getBlockMetadata(var17, var3 - 1, var18) > 0) {
+						var20 = 3.0F;
+					}
+				}
+
+				if (var17 != var2 || var18 != var4) {
+					var20 /= 4.0F;
+				}
+
+				var5 += var20;
+			}
+		}
+
+		if (var16 || var14 && var15) {
+			var5 /= 2.0F;
+		}
+
+		return var5;
+	}
+
+	public int getRenderColor(int var1) {
+		int var2 = var1 * 32;
+		int var3 = 255 - var1 * 8;
+		int var4 = var1 * 4;
+		return Colorizer.colorizeStem(var2 << 16 | var3 << 8 | var4, var1);  //Spout HD
+	}
+
+	public int colorMultiplier(IBlockAccess var1, int var2, int var3, int var4) {
+		return this.getRenderColor(var1.getBlockMetadata(var2, var3, var4));
+	}
+
+	public int getBlockTextureFromSideAndMetadata(int var1, int var2) {
+		return this.blockIndexInTexture;
+	}
+
+	public void setBlockBoundsForItemRender() {
+		float var1 = 0.125F;
+		this.setBlockBounds(0.5F - var1, 0.0F, 0.5F - var1, 0.5F + var1, 0.25F, 0.5F + var1);
+	}
+
+	public void setBlockBoundsBasedOnState(IBlockAccess var1, int var2, int var3, int var4) {
+		this.maxY = (double)((float)(var1.getBlockMetadata(var2, var3, var4) * 2 + 2) / 16.0F);
+		float var5 = 0.125F;
+		this.setBlockBounds(0.5F - var5, 0.0F, 0.5F - var5, 0.5F + var5, (float)this.maxY, 0.5F + var5);
+	}
+
+	public int getRenderType() {
+		return 19;
+	}
+
+	public int func_35296_f(IBlockAccess var1, int var2, int var3, int var4) {
+		int var5 = var1.getBlockMetadata(var2, var3, var4);
+		return var5 < 7 ? -1 : (var1.getBlockId(var2 - 1, var3, var4) == this.fruitType.blockID ? 0 : (var1.getBlockId(var2 + 1, var3, var4) == this.fruitType.blockID ? 1 : (var1.getBlockId(var2, var3, var4 - 1) == this.fruitType.blockID ? 2 : (var1.getBlockId(var2, var3, var4 + 1) == this.fruitType.blockID ? 3 : -1))));
+	}
+
+	public void dropBlockAsItemWithChance(World var1, int var2, int var3, int var4, int var5, float var6, int var7) {
+		super.dropBlockAsItemWithChance(var1, var2, var3, var4, var5, var6, var7);
+		if (!var1.multiplayerWorld) {
+			Item var8 = null;
+			if (this.fruitType == Block.pumpkin) {
+				var8 = Item.pumpkinSeeds;
+			}
+
+			if (this.fruitType == Block.melon) {
+				var8 = Item.melonSeeds;
+			}
+
+			for (int var9 = 0; var9 < 3; ++var9) {
+				if (var1.rand.nextInt(15) <= var5) {
+					float var10 = 0.7F;
+					float var11 = var1.rand.nextFloat() * var10 + (1.0F - var10) * 0.5F;
+					float var12 = var1.rand.nextFloat() * var10 + (1.0F - var10) * 0.5F;
+					float var13 = var1.rand.nextFloat() * var10 + (1.0F - var10) * 0.5F;
+					EntityItem var14 = new EntityItem(var1, (double)((float)var2 + var11), (double)((float)var3 + var12), (double)((float)var4 + var13), new ItemStack(var8));
+					var14.delayBeforeCanPickup = 10;
+					var1.spawnEntityInWorld(var14);
+				}
+			}
+
+		}
+	}
+
+	public int idDropped(int var1, Random var2, int var3) {
+		if (var1 == 7) {
+			;
+		}
+
+		return -1;
+	}
+
+	public int quantityDropped(Random var1) {
+		return 1;
+	}
 }

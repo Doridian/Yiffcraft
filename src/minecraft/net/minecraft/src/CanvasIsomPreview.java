@@ -2,7 +2,6 @@ package net.minecraft.src;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -12,451 +11,380 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferStrategy;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import net.minecraft.src.ChunkCoordinates;
+import net.minecraft.src.EnumOS1;
+import net.minecraft.src.EnumWorldType;
+import net.minecraft.src.IsoImageBuffer;
+import net.minecraft.src.OsMap;
+import net.minecraft.src.SaveHandler;
+import net.minecraft.src.TerrainTextureManager;
+import net.minecraft.src.ThreadRunIsoClient;
+import net.minecraft.src.World;
+import net.minecraft.src.WorldSettings;
 
-public class CanvasIsomPreview extends Canvas
-    implements KeyListener, MouseListener, MouseMotionListener, Runnable
-{
-    private int field_1793_a;
-    private int field_1792_b;
-    private boolean field_1791_c;
-    private World field_1790_d;
-    private File field_1789_e;
-    private boolean field_1788_f;
-    private java.util.List field_1787_g;
-    private IsoImageBuffer field_1786_h[][];
-    private int field_1785_i;
-    private int field_1784_j;
-    private int field_1783_k;
-    private int field_1782_l;
+public class CanvasIsomPreview extends Canvas implements KeyListener, MouseListener, MouseMotionListener, Runnable {
 
-    public File func_1263_a()
-    {
-        if (field_1789_e == null)
-        {
-            field_1789_e = func_1264_a("minecraft");
-        }
-        return field_1789_e;
-    }
+	private int field_1793_a = 0;
+	private int field_1792_b = 2;
+	private boolean field_1791_c = true;
+	private World field_1790_d;
+	private File field_1789_e = this.func_1263_a();
+	private boolean field_1788_f = true;
+	private List field_1787_g = Collections.synchronizedList(new LinkedList());
+	private IsoImageBuffer[][] field_1786_h = new IsoImageBuffer[64][64];
+	private int field_1785_i;
+	private int field_1784_j;
+	private int field_1783_k;
+	private int field_1782_l;
 
-    public File func_1264_a(String s)
-    {
-        String s1 = System.getProperty("user.home", ".");
-        File file;
-        switch (OsMap.field_1193_a[func_1269_e().ordinal()])
-        {
-            case 1:
-            case 2:
-                file = new File(s1, (new StringBuilder()).append('.').append(s).append('/').toString());
-                break;
+	public File func_1263_a() {
+		if (this.field_1789_e == null) {
+			this.field_1789_e = this.func_1264_a("minecraft");
+		}
 
-            case 3:
-                String s2 = System.getenv("APPDATA");
-                if (s2 != null)
-                {
-                    file = new File(s2, (new StringBuilder()).append(".").append(s).append('/').toString());
-                }
-                else
-                {
-                    file = new File(s1, (new StringBuilder()).append('.').append(s).append('/').toString());
-                }
-                break;
+		return this.field_1789_e;
+	}
 
-            case 4:
-                file = new File(s1, (new StringBuilder()).append("Library/Application Support/").append(s).toString());
-                break;
+	public File func_1264_a(String var1) {
+		String var2 = System.getProperty("user.home", ".");
+		File var3;
+		switch (OsMap.field_1193_a[func_1269_e().ordinal()]) {
+			case 1:
+			case 2:
+				var3 = new File(var2, '.' + var1 + '/');
+				break;
+			case 3:
+				String var4 = System.getenv("APPDATA");
+				if (var4 != null) {
+					var3 = new File(var4, "." + var1 + '/');
+				}
+				else {
+					var3 = new File(var2, '.' + var1 + '/');
+				}
+				break;
+			case 4:
+				var3 = new File(var2, "Library/Application Support/" + var1);
+				break;
+			default:
+				var3 = new File(var2, var1 + '/');
+		}
 
-            default:
-                file = new File(s1, (new StringBuilder()).append(s).append('/').toString());
-                break;
-        }
-        if (!file.exists() && !file.mkdirs())
-        {
-            throw new RuntimeException((new StringBuilder()).append("The working directory could not be created: ").append(file).toString());
-        }
-        else
-        {
-            return file;
-        }
-    }
+		if (!var3.exists() && !var3.mkdirs()) {
+			throw new RuntimeException("The working directory could not be created: " + var3);
+		}
+		else {
+			return var3;
+		}
+	}
 
-    private static EnumOS1 func_1269_e()
-    {
-        String s = System.getProperty("os.name").toLowerCase();
-        if (s.contains("win"))
-        {
-            return EnumOS1.windows;
-        }
-        if (s.contains("mac"))
-        {
-            return EnumOS1.macos;
-        }
-        if (s.contains("solaris"))
-        {
-            return EnumOS1.solaris;
-        }
-        if (s.contains("sunos"))
-        {
-            return EnumOS1.solaris;
-        }
-        if (s.contains("linux"))
-        {
-            return EnumOS1.linux;
-        }
-        if (s.contains("unix"))
-        {
-            return EnumOS1.linux;
-        }
-        else
-        {
-            return EnumOS1.unknown;
-        }
-    }
+	private static EnumOS1 func_1269_e() {
+		String var0 = System.getProperty("os.name").toLowerCase();
+		return var0.contains("win") ? EnumOS1.windows : (var0.contains("mac") ? EnumOS1.macos : (var0.contains("solaris") ? EnumOS1.solaris : (var0.contains("sunos") ? EnumOS1.solaris : (var0.contains("linux") ? EnumOS1.linux : (var0.contains("unix") ? EnumOS1.linux : EnumOS1.unknown)))));
+	}
 
-    public CanvasIsomPreview()
-    {
-        field_1793_a = 0;
-        field_1792_b = 2;
-        field_1791_c = true;
-        field_1788_f = true;
-        field_1787_g = Collections.synchronizedList(new LinkedList());
-        field_1786_h = new IsoImageBuffer[64][64];
-        field_1789_e = func_1263_a();
-        for (int i = 0; i < 64; i++)
-        {
-            for (int j = 0; j < 64; j++)
-            {
-                field_1786_h[i][j] = new IsoImageBuffer(null, i, j);
-            }
-        }
+	public CanvasIsomPreview() {
+		for (int var1 = 0; var1 < 64; ++var1) {
+			for (int var2 = 0; var2 < 64; ++var2) {
+				this.field_1786_h[var1][var2] = new IsoImageBuffer((World)null, var1, var2);
+			}
+		}
 
-        addMouseListener(this);
-        addMouseMotionListener(this);
-        addKeyListener(this);
-        setFocusable(true);
-        requestFocus();
-        setBackground(Color.red);
-    }
+		this.addMouseListener(this);
+		this.addMouseMotionListener(this);
+		this.addKeyListener(this);
+		this.setFocusable(true);
+		this.requestFocus();
+		this.setBackground(Color.red);
+	}
 
-    public void func_1270_b(String s)
-    {
-        field_1785_i = field_1784_j = 0;
-        field_1790_d = new World(new SaveHandler(new File(field_1789_e, "saves"), s, false), s, new WorldSettings((new Random()).nextLong(), 0, true, false, EnumWorldType.DEFAULT));
-        field_1790_d.skylightSubtracted = 0;
-        synchronized (field_1787_g)
-        {
-            field_1787_g.clear();
-            for (int i = 0; i < 64; i++)
-            {
-                for (int j = 0; j < 64; j++)
-                {
-                    field_1786_h[i][j].func_888_a(field_1790_d, i, j);
-                }
-            }
-        }
-    }
+	public void func_1270_b(String var1) {
+		this.field_1785_i = this.field_1784_j = 0;
+		this.field_1790_d = new World(new SaveHandler(new File(this.field_1789_e, "saves"), var1, false), var1, new WorldSettings((new Random()).nextLong(), 0, true, false, EnumWorldType.DEFAULT), 128); //Spout added 128 arg
+		this.field_1790_d.skylightSubtracted = 0;
+		List var2 = this.field_1787_g;
+		synchronized (this.field_1787_g) {
+			this.field_1787_g.clear();
 
-    private void func_1266_a(int i)
-    {
-        synchronized (field_1787_g)
-        {
-            field_1790_d.skylightSubtracted = i;
-            field_1787_g.clear();
-            for (int j = 0; j < 64; j++)
-            {
-                for (int k = 0; k < 64; k++)
-                {
-                    field_1786_h[j][k].func_888_a(field_1790_d, j, k);
-                }
-            }
-        }
-    }
+			for (int var3 = 0; var3 < 64; ++var3) {
+				for (int var4 = 0; var4 < 64; ++var4) {
+					this.field_1786_h[var3][var4].func_888_a(this.field_1790_d, var3, var4);
+				}
+			}
 
-    public void func_1272_b()
-    {
-        (new ThreadRunIsoClient(this)).start();
-        for (int i = 0; i < 8; i++)
-        {
-            (new Thread(this)).start();
-        }
-    }
+		}
+	}
 
-    public void func_1273_c()
-    {
-        field_1788_f = false;
-    }
+	private void func_1266_a(int var1) {
+		List var2 = this.field_1787_g;
+		synchronized (this.field_1787_g) {
+			this.field_1790_d.skylightSubtracted = var1;
+			this.field_1787_g.clear();
 
-    private IsoImageBuffer func_1267_a(int i, int j)
-    {
-        int k = i & 0x3f;
-        int l = j & 0x3f;
-        IsoImageBuffer isoimagebuffer = field_1786_h[k][l];
-        if (isoimagebuffer.field_1354_c == i && isoimagebuffer.field_1353_d == j)
-        {
-            return isoimagebuffer;
-        }
-        synchronized (field_1787_g)
-        {
-            field_1787_g.remove(isoimagebuffer);
-        }
-        isoimagebuffer.func_889_a(i, j);
-        return isoimagebuffer;
-    }
+			for (int var3 = 0; var3 < 64; ++var3) {
+				for (int var4 = 0; var4 < 64; ++var4) {
+					this.field_1786_h[var3][var4].func_888_a(this.field_1790_d, var3, var4);
+				}
+			}
 
-    public void run()
-    {
-        TerrainTextureManager terraintexturemanager = new TerrainTextureManager();
-        while (field_1788_f)
-        {
-            IsoImageBuffer isoimagebuffer = null;
-            synchronized (field_1787_g)
-            {
-                if (field_1787_g.size() > 0)
-                {
-                    isoimagebuffer = (IsoImageBuffer)field_1787_g.remove(0);
-                }
-            }
-            if (isoimagebuffer != null)
-            {
-                if (field_1793_a - isoimagebuffer.field_1350_g < 2)
-                {
-                    terraintexturemanager.func_799_a(isoimagebuffer);
-                    repaint();
-                }
-                else
-                {
-                    isoimagebuffer.field_1349_h = false;
-                }
-            }
-            try
-            {
-                Thread.sleep(2L);
-            }
-            catch (InterruptedException interruptedexception)
-            {
-                interruptedexception.printStackTrace();
-            }
-        }
-    }
+		}
+	}
 
-    public void update(Graphics g)
-    {
-    }
+	public void func_1272_b() {
+		(new ThreadRunIsoClient(this)).start();
 
-    public void paint(Graphics g)
-    {
-    }
+		for (int var1 = 0; var1 < 8; ++var1) {
+			(new Thread(this)).start();
+		}
 
-    public void func_1265_d()
-    {
-        BufferStrategy bufferstrategy = getBufferStrategy();
-        if (bufferstrategy == null)
-        {
-            createBufferStrategy(2);
-            return;
-        }
-        else
-        {
-            func_1268_a((Graphics2D)bufferstrategy.getDrawGraphics());
-            bufferstrategy.show();
-            return;
-        }
-    }
+	}
 
-    public void func_1268_a(Graphics2D graphics2d)
-    {
-        field_1793_a++;
-        java.awt.geom.AffineTransform affinetransform = graphics2d.getTransform();
-        graphics2d.setClip(0, 0, getWidth(), getHeight());
-        graphics2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-        graphics2d.translate(getWidth() / 2, getHeight() / 2);
-        graphics2d.scale(field_1792_b, field_1792_b);
-        graphics2d.translate(field_1785_i, field_1784_j);
-        if (field_1790_d != null)
-        {
-            ChunkCoordinates chunkcoordinates = field_1790_d.getSpawnPoint();
-            graphics2d.translate(-(chunkcoordinates.posX + chunkcoordinates.posZ), -(-chunkcoordinates.posX + chunkcoordinates.posZ) + 64);
-        }
-        Rectangle rectangle = graphics2d.getClipBounds();
-        graphics2d.setColor(new Color(0xff101020));
-        graphics2d.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
-        byte byte0 = 16;
-        byte byte1 = 3;
-        int i = rectangle.x / byte0 / 2 - 2 - byte1;
-        int j = (rectangle.x + rectangle.width) / byte0 / 2 + 1 + byte1;
-        int k = rectangle.y / byte0 - 1 - byte1 * 2;
-        int l = (rectangle.y + rectangle.height + 16 + field_1790_d.worldHeight) / byte0 + 1 + byte1 * 2;
-        for (int i1 = k; i1 <= l; i1++)
-        {
-            for (int k1 = i; k1 <= j; k1++)
-            {
-                int l1 = k1 - (i1 >> 1);
-                int i2 = k1 + (i1 + 1 >> 1);
-                IsoImageBuffer isoimagebuffer = func_1267_a(l1, i2);
-                isoimagebuffer.field_1350_g = field_1793_a;
-                if (!isoimagebuffer.field_1352_e)
-                {
-                    if (!isoimagebuffer.field_1349_h)
-                    {
-                        isoimagebuffer.field_1349_h = true;
-                        field_1787_g.add(isoimagebuffer);
-                    }
-                    continue;
-                }
-                isoimagebuffer.field_1349_h = false;
-                if (!isoimagebuffer.field_1351_f)
-                {
-                    int j2 = k1 * byte0 * 2 + (i1 & 1) * byte0;
-                    int k2 = i1 * byte0 - field_1790_d.worldHeight - 16;
-                    graphics2d.drawImage(isoimagebuffer.field_1348_a, j2, k2, null);
-                }
-            }
-        }
+	public void func_1273_c() {
+		this.field_1788_f = false;
+	}
 
-        if (field_1791_c)
-        {
-            graphics2d.setTransform(affinetransform);
-            int j1 = getHeight() - 32 - 4;
-            graphics2d.setColor(new Color(0x80000000, true));
-            graphics2d.fillRect(4, getHeight() - 32 - 4, getWidth() - 8, 32);
-            graphics2d.setColor(Color.WHITE);
-            String s = "F1 - F5: load levels   |   0-9: Set time of day   |   Space: return to spawn   |   Double click: zoom   |   Escape: hide this text";
-            graphics2d.drawString(s, getWidth() / 2 - graphics2d.getFontMetrics().stringWidth(s) / 2, j1 + 20);
-        }
-        graphics2d.dispose();
-    }
+	private IsoImageBuffer func_1267_a(int var1, int var2) {
+		int var3 = var1 & 63;
+		int var4 = var2 & 63;
+		IsoImageBuffer var5 = this.field_1786_h[var3][var4];
+		if (var5.field_1354_c == var1 && var5.field_1353_d == var2) {
+			return var5;
+		}
+		else {
+			List var6 = this.field_1787_g;
+			synchronized (this.field_1787_g) {
+				this.field_1787_g.remove(var5);
+			}
 
-    public void mouseDragged(MouseEvent mouseevent)
-    {
-        int i = mouseevent.getX() / field_1792_b;
-        int j = mouseevent.getY() / field_1792_b;
-        field_1785_i += i - field_1783_k;
-        field_1784_j += j - field_1782_l;
-        field_1783_k = i;
-        field_1782_l = j;
-        repaint();
-    }
+			var5.func_889_a(var1, var2);
+			return var5;
+		}
+	}
 
-    public void mouseMoved(MouseEvent mouseevent)
-    {
-    }
+	public void run() {
+		TerrainTextureManager var1 = new TerrainTextureManager();
 
-    public void mouseClicked(MouseEvent mouseevent)
-    {
-        if (mouseevent.getClickCount() == 2)
-        {
-            field_1792_b = 3 - field_1792_b;
-            repaint();
-        }
-    }
+		while (this.field_1788_f) {
+			IsoImageBuffer var2 = null;
+			List var3 = this.field_1787_g;
+			synchronized (this.field_1787_g) {
+				if (this.field_1787_g.size() > 0) {
+					var2 = (IsoImageBuffer)this.field_1787_g.remove(0);
+				}
+			}
 
-    public void mouseEntered(MouseEvent mouseevent)
-    {
-    }
+			if (var2 != null) {
+				if (this.field_1793_a - var2.field_1350_g < 2) {
+					var1.func_799_a(var2);
+					this.repaint();
+				}
+				else {
+					var2.field_1349_h = false;
+				}
+			}
 
-    public void mouseExited(MouseEvent mouseevent)
-    {
-    }
+			try {
+				Thread.sleep(2L);
+			}
+			catch (InterruptedException var5) {
+				var5.printStackTrace();
+			}
+		}
 
-    public void mousePressed(MouseEvent mouseevent)
-    {
-        int i = mouseevent.getX() / field_1792_b;
-        int j = mouseevent.getY() / field_1792_b;
-        field_1783_k = i;
-        field_1782_l = j;
-    }
+	}
 
-    public void mouseReleased(MouseEvent mouseevent)
-    {
-    }
+	public void update(Graphics var1) {}
 
-    public void keyPressed(KeyEvent keyevent)
-    {
-        if (keyevent.getKeyCode() == 48)
-        {
-            func_1266_a(11);
-        }
-        if (keyevent.getKeyCode() == 49)
-        {
-            func_1266_a(10);
-        }
-        if (keyevent.getKeyCode() == 50)
-        {
-            func_1266_a(9);
-        }
-        if (keyevent.getKeyCode() == 51)
-        {
-            func_1266_a(7);
-        }
-        if (keyevent.getKeyCode() == 52)
-        {
-            func_1266_a(6);
-        }
-        if (keyevent.getKeyCode() == 53)
-        {
-            func_1266_a(5);
-        }
-        if (keyevent.getKeyCode() == 54)
-        {
-            func_1266_a(3);
-        }
-        if (keyevent.getKeyCode() == 55)
-        {
-            func_1266_a(2);
-        }
-        if (keyevent.getKeyCode() == 56)
-        {
-            func_1266_a(1);
-        }
-        if (keyevent.getKeyCode() == 57)
-        {
-            func_1266_a(0);
-        }
-        if (keyevent.getKeyCode() == 112)
-        {
-            func_1270_b("World1");
-        }
-        if (keyevent.getKeyCode() == 113)
-        {
-            func_1270_b("World2");
-        }
-        if (keyevent.getKeyCode() == 114)
-        {
-            func_1270_b("World3");
-        }
-        if (keyevent.getKeyCode() == 115)
-        {
-            func_1270_b("World4");
-        }
-        if (keyevent.getKeyCode() == 116)
-        {
-            func_1270_b("World5");
-        }
-        if (keyevent.getKeyCode() == 32)
-        {
-            field_1785_i = field_1784_j = 0;
-        }
-        if (keyevent.getKeyCode() == 27)
-        {
-            field_1791_c = !field_1791_c;
-        }
-        repaint();
-    }
+	public void paint(Graphics var1) {}
 
-    public void keyReleased(KeyEvent keyevent)
-    {
-    }
+	public void func_1265_d() {
+		BufferStrategy var1 = this.getBufferStrategy();
+		if (var1 == null) {
+			this.createBufferStrategy(2);
+		}
+		else {
+			this.func_1268_a((Graphics2D)var1.getDrawGraphics());
+			var1.show();
+		}
+	}
 
-    public void keyTyped(KeyEvent keyevent)
-    {
-    }
+	public void func_1268_a(Graphics2D var1) {
+		++this.field_1793_a;
+		AffineTransform var2 = var1.getTransform();
+		var1.setClip(0, 0, this.getWidth(), this.getHeight());
+		var1.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+		var1.translate(this.getWidth() / 2, this.getHeight() / 2);
+		var1.scale((double)this.field_1792_b, (double)this.field_1792_b);
+		var1.translate(this.field_1785_i, this.field_1784_j);
+		if (this.field_1790_d != null) {
+			ChunkCoordinates var3 = this.field_1790_d.getSpawnPoint();
+			var1.translate(-(var3.posX + var3.posZ), -(-var3.posX + var3.posZ) + 64);
+		}
 
-    static boolean func_1271_a(CanvasIsomPreview canvasisompreview)
-    {
-        return canvasisompreview.field_1788_f;
-    }
+		Rectangle var17 = var1.getClipBounds();
+		var1.setColor(new Color(-15724512));
+		var1.fillRect(var17.x, var17.y, var17.width, var17.height);
+		byte var4 = 16;
+		byte var5 = 3;
+		int var6 = var17.x / var4 / 2 - 2 - var5;
+		int var7 = (var17.x + var17.width) / var4 / 2 + 1 + var5;
+		int var8 = var17.y / var4 - 1 - var5 * 2;
+		int var9 = (var17.y + var17.height + 16 + this.field_1790_d.worldHeight) / var4 + 1 + var5 * 2;
+
+		int var10;
+		for (var10 = var8; var10 <= var9; ++var10) {
+			for (int var11 = var6; var11 <= var7; ++var11) {
+				int var12 = var11 - (var10 >> 1);
+				int var13 = var11 + (var10 + 1 >> 1);
+				IsoImageBuffer var14 = this.func_1267_a(var12, var13);
+				var14.field_1350_g = this.field_1793_a;
+				if (!var14.field_1352_e) {
+					if (!var14.field_1349_h) {
+						var14.field_1349_h = true;
+						this.field_1787_g.add(var14);
+					}
+				}
+				else {
+					var14.field_1349_h = false;
+					if (!var14.field_1351_f) {
+						int var15 = var11 * var4 * 2 + (var10 & 1) * var4;
+						int var16 = var10 * var4 - this.field_1790_d.worldHeight - 16;
+						var1.drawImage(var14.field_1348_a, var15, var16, (ImageObserver)null);
+					}
+				}
+			}
+		}
+
+		if (this.field_1791_c) {
+			var1.setTransform(var2);
+			var10 = this.getHeight() - 32 - 4;
+			var1.setColor(new Color(Integer.MIN_VALUE, true));
+			var1.fillRect(4, this.getHeight() - 32 - 4, this.getWidth() - 8, 32);
+			var1.setColor(Color.WHITE);
+			String var18 = "F1 - F5: load levels   |   0-9: Set time of day   |   Space: return to spawn   |   Double click: zoom   |   Escape: hide this text";
+			var1.drawString(var18, this.getWidth() / 2 - var1.getFontMetrics().stringWidth(var18) / 2, var10 + 20);
+		}
+
+		var1.dispose();
+	}
+
+	public void mouseDragged(MouseEvent var1) {
+		int var2 = var1.getX() / this.field_1792_b;
+		int var3 = var1.getY() / this.field_1792_b;
+		this.field_1785_i += var2 - this.field_1783_k;
+		this.field_1784_j += var3 - this.field_1782_l;
+		this.field_1783_k = var2;
+		this.field_1782_l = var3;
+		this.repaint();
+	}
+
+	public void mouseMoved(MouseEvent var1) {}
+
+	public void mouseClicked(MouseEvent var1) {
+		if (var1.getClickCount() == 2) {
+			this.field_1792_b = 3 - this.field_1792_b;
+			this.repaint();
+		}
+
+	}
+
+	public void mouseEntered(MouseEvent var1) {}
+
+	public void mouseExited(MouseEvent var1) {}
+
+	public void mousePressed(MouseEvent var1) {
+		int var2 = var1.getX() / this.field_1792_b;
+		int var3 = var1.getY() / this.field_1792_b;
+		this.field_1783_k = var2;
+		this.field_1782_l = var3;
+	}
+
+	public void mouseReleased(MouseEvent var1) {}
+
+	public void keyPressed(KeyEvent var1) {
+		if (var1.getKeyCode() == 48) {
+			this.func_1266_a(11);
+		}
+
+		if (var1.getKeyCode() == 49) {
+			this.func_1266_a(10);
+		}
+
+		if (var1.getKeyCode() == 50) {
+			this.func_1266_a(9);
+		}
+
+		if (var1.getKeyCode() == 51) {
+			this.func_1266_a(7);
+		}
+
+		if (var1.getKeyCode() == 52) {
+			this.func_1266_a(6);
+		}
+
+		if (var1.getKeyCode() == 53) {
+			this.func_1266_a(5);
+		}
+
+		if (var1.getKeyCode() == 54) {
+			this.func_1266_a(3);
+		}
+
+		if (var1.getKeyCode() == 55) {
+			this.func_1266_a(2);
+		}
+
+		if (var1.getKeyCode() == 56) {
+			this.func_1266_a(1);
+		}
+
+		if (var1.getKeyCode() == 57) {
+			this.func_1266_a(0);
+		}
+
+		if (var1.getKeyCode() == 112) {
+			this.func_1270_b("World1");
+		}
+
+		if (var1.getKeyCode() == 113) {
+			this.func_1270_b("World2");
+		}
+
+		if (var1.getKeyCode() == 114) {
+			this.func_1270_b("World3");
+		}
+
+		if (var1.getKeyCode() == 115) {
+			this.func_1270_b("World4");
+		}
+
+		if (var1.getKeyCode() == 116) {
+			this.func_1270_b("World5");
+		}
+
+		if (var1.getKeyCode() == 32) {
+			this.field_1785_i = this.field_1784_j = 0;
+		}
+
+		if (var1.getKeyCode() == 27) {
+			this.field_1791_c = !this.field_1791_c;
+		}
+
+		this.repaint();
+	}
+
+	public void keyReleased(KeyEvent var1) {}
+
+	public void keyTyped(KeyEvent var1) {}
+
+	static boolean func_1271_a(CanvasIsomPreview var0) {
+		return var0.field_1788_f;
+	}
 }

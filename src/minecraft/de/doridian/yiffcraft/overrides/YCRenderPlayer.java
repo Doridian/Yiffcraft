@@ -37,7 +37,7 @@ public class YCRenderPlayer extends RenderPlayer {
 			renderPlayerAs = otherEnt;
 			if(otherEnt instanceof EntityLiving) {
 				renderPlayerAsLiving = (EntityLiving)renderPlayerAs;
-				renderPlayerAsLiving.isMultiplayerEntity = true;
+				//renderPlayerAsLiving.isMultiplayerEntity = true;
 				if(otherEnt instanceof EntityDragon) {
 					Yiffcraft.minecraft.entityRenderer.thirdPersonDistance = 14.0F;
 				} else if(otherEnt instanceof EntityGhast) {
