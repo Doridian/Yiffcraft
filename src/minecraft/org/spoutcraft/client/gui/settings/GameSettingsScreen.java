@@ -22,61 +22,53 @@ import java.util.UUID;
 import net.minecraft.src.GuiScreen;
 
 import org.spoutcraft.client.SpoutClient;
+import org.spoutcraft.client.config.ConfigReader;
 import org.spoutcraft.spoutcraftapi.Spoutcraft;
 import org.spoutcraft.spoutcraftapi.addon.Addon;
 import org.spoutcraft.spoutcraftapi.gui.*;
 
-public class VideoSettings extends GuiScreen{
+public class GameSettingsScreen extends GuiScreen{
 	private Button doneButton = null;
 	public final GuiScreen parent;
 	
-	public VideoSettings(GuiScreen parent) {
+	public GameSettingsScreen(GuiScreen parent) {
 		this.parent = parent;
 	}
 	
 	public void initGui() {
+		
 		Addon spoutcraft = Spoutcraft.getAddonManager().getAddon("Spoutcraft");
 		Control control;
 		
 		GenericScrollArea screen = new GenericScrollArea();
-		screen.setHeight(height - 16 - 24 - 40).setWidth(width).setY(16+24).setX(0);
+		screen.setHeight(height - 16 - 24 - 40).setWidth(width).setY(24).setX(0);
 		getScreen().attachWidget(spoutcraft, screen);
 		
-		GenericLabel label = new GenericLabel("Video Settings");
+		GenericLabel label = new GenericLabel("Game Settings");
 		int size = Spoutcraft.getMinecraftFont().getTextWidth(label.getText());
-		label.setX((int) (width / 2 - size / 2)).setY(16);
+		label.setX((int) (width / 2 - size / 2)).setY(10);
 		label.setFixed(true).setPriority(RenderPriority.Lowest);
 		getScreen().attachWidget(spoutcraft, label);
 		
-		int totalWidth = Math.min(width - 9, 200*3+10);
-		int cellWidth = (totalWidth - 10)/3;
-		int left = width / 2 - totalWidth / 2;
-		int center = left + cellWidth + 5;
-		int right = center + cellWidth + 5;
+		int left = (int)(width / 2  - 155);
+		int right = (int)(width / 2 + 5);
 		
 		control = new ResetButton(this).setAlign(WidgetAnchor.TOP_CENTER);
-		control.setWidth(cellWidth).setHeight(20).setX(left).setY(height - 30);
+		control.setWidth(150).setHeight(20).setX(left).setY(height - 30);
 		getScreen().attachWidget(spoutcraft, control);
 		
 		doneButton = new GenericButton("Done");
 		doneButton.setAlign(WidgetAnchor.CENTER_CENTER);
-		doneButton.setX(center).setY(height - 30);
-		doneButton.setHeight(20).setWidth(cellWidth);
+		doneButton.setX(right).setY(height - 30);
+		doneButton.setHeight(20).setWidth(150);
 		getScreen().attachWidget(spoutcraft, doneButton);
 		
-		control = new OptimizeButton().setAlign(WidgetAnchor.TOP_CENTER);
-		control.setWidth(cellWidth).setHeight(20).setX(right).setY(height - 30);
-		getScreen().attachWidget(spoutcraft, control);
-		
-		
-		
-		left = (int)(width / 2  - 155);
-		right = (int)(width / 2 + 5);
 		int top = 5;
 		
 		Color grey = new Color(0.80F, 0.80F, 0.80F, 0.65F);
 		
-		label = new GenericLabel("Graphical Settings");
+		//Controls + Audio
+		label = new GenericLabel("Controls and Audio Settings");
 		size = Spoutcraft.getMinecraftFont().getTextWidth(label.getText());
 		label.setX((int) (width / 2 - size / 2)).setY(top);
 		label.setTextColor(grey);
@@ -90,6 +82,102 @@ public class VideoSettings extends GuiScreen{
 		screen.attachWidget(spoutcraft, linebreak);
 		top += 6;
 		
+		control = new MusicSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(left).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		
+		control = new SoundEffectsSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(right).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		top += 22;
+		
+		control = new FieldOfViewSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(left).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		
+		control = new SensitivitySlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(right).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		top += 22;
+		
+		control = new InvertMouseButton().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(left).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		
+		control = new DifficultyButton().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(right).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		top += 22;
+		
+		control = new ControlsButton(this).setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(left).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		
+		control = new LanguagesButton().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(right).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		top += 22;
+		
+		
+		//Graphics
+		label = new GenericLabel("Graphical Settings");
+		size = Spoutcraft.getMinecraftFont().getTextWidth(label.getText());
+		label.setX((int) (width / 2 - size / 2)).setY(top);
+		label.setTextColor(grey);
+		screen.attachWidget(spoutcraft, label);
+		top += 11;
+		
+		linebreak = new GenericGradient();
+		linebreak.setBottomColor(grey);
+		linebreak.setTopColor(grey);
+		linebreak.setX(width/2 - 318 / 2).setY(top).setHeight(3).setWidth(318);
+		screen.attachWidget(spoutcraft, linebreak);
+		top += 6;
+		
+		Label message = new GenericLabel("SpoutWorth here, your loyal butler and assistant. Can I be of \n" +
+										"assistance? Yes? Excellent. I will be to managing your graphical and\n" +
+										"performance settings to maximize framerate and quality. You can\n" +
+										"adjust his priorities, or dismiss him and manually select settings.");
+		message.setWidth(150).setHeight(20).setX(left).setY(top);
+		screen.attachWidget(spoutcraft, message);
+		
+		top += 47;
+		
+		RadioButton button;
+		button = (RadioButton) new FavorPerformanceButton("Favor Performance", message).setGroup(1).setAlign(WidgetAnchor.TOP_CENTER);
+		button.setWidth(150).setHeight(20).setX(left).setY(top);
+		button.setTooltip("SpoutWorth will attempt to provide smooth framerates, potentially at the cost of appearance.");
+		screen.attachWidget(spoutcraft, button);
+		button.setSelected(ConfigReader.automatePerformance && ConfigReader.automateMode == 0);
+		
+		button = (RadioButton) new OptimalGameplayButton("Balanced Gameplay", message).setGroup(1).setAlign(WidgetAnchor.TOP_CENTER);
+		button.setWidth(150).setHeight(20).setX(right).setY(top);
+		button.setTooltip("SpoutWorth will attempt to provide reasonable framerates and appearance.");
+		screen.attachWidget(spoutcraft, button);
+		button.setSelected(ConfigReader.automatePerformance && ConfigReader.automateMode == 1);
+		
+		top += 22;
+		
+		button = (RadioButton) new FavorAppearanceButton("Favor Appearance", message).setGroup(1).setAlign(WidgetAnchor.TOP_CENTER);
+		button.setWidth(150).setHeight(20).setX(left).setY(top);
+		button.setTooltip("SpoutWorth will attempt to provide the best appearance, but potentially at the cost of framerates.");
+		screen.attachWidget(spoutcraft, button);
+		button.setSelected(ConfigReader.automatePerformance && ConfigReader.automateMode == 2);
+		
+		button = (RadioButton) new ManualSelectionButton("Manual Selection", message).setGroup(1).setAlign(WidgetAnchor.TOP_CENTER);
+		button.setWidth(150).setHeight(20).setX(right).setY(top);
+		button.setTooltip("Dismiss SpoutWorth and adjust the settings manually yourself.");
+		screen.attachWidget(spoutcraft, button);
+		button.setSelected(!ConfigReader.automatePerformance);
+		
+		top += 22;
+		
+		linebreak = new GenericGradient();
+		linebreak.setBottomColor(grey);
+		linebreak.setTopColor(grey);
+		linebreak.setX(width/2 - 318 / 2).setY(top).setHeight(3).setWidth(318);
+		screen.attachWidget(spoutcraft, linebreak);
+		top += 6;
 		
 		ArrayList<CheckBox> graphicCheckboxes = new ArrayList<CheckBox>();
 		control = new FancyGraphicsButton().setAlign(WidgetAnchor.TOP_CENTER);
@@ -154,28 +242,25 @@ public class VideoSettings extends GuiScreen{
 		
 		top += 22;
 		
-		control = new Anaglyph3DButton().setAlign(WidgetAnchor.TOP_CENTER);
-		control.setWidth(150).setHeight(20).setX(left).setY(top);
-		screen.attachWidget(spoutcraft, control);
-		
 		control = new SmoothFPSButton().setAlign(WidgetAnchor.TOP_CENTER);
-		control.setWidth(150).setHeight(20).setX(right).setY(top);
+		control.setWidth(150).setHeight(20).setX(left).setY(top);
 		screen.attachWidget(spoutcraft, control);
 		
 		top += 22;
 		
-		control = new SmoothLightingSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		
+		control = new RenderDistanceButton().setAlign(WidgetAnchor.TOP_CENTER);
 		control.setWidth(150).setHeight(20).setX(left).setY(top);
 		screen.attachWidget(spoutcraft, control);
 		
-		control = new BrightnessSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control = new BetterGrassButton().setAlign(WidgetAnchor.TOP_CENTER);
 		control.setWidth(150).setHeight(20).setX(right).setY(top);
 		screen.attachWidget(spoutcraft, control);
-		
 		top += 22;
 		
 		top += 5;
 		
+		//Performance
 		label = new GenericLabel("Performance Settings");
 		size = Spoutcraft.getMinecraftFont().getTextWidth(label.getText());
 		label.setX((int) (width / 2 - size / 2)).setY(top);
@@ -189,11 +274,7 @@ public class VideoSettings extends GuiScreen{
 		linebreak.setX(width/2 - 318 / 2).setY(top).setHeight(3).setWidth(318);
 		screen.attachWidget(spoutcraft, linebreak);
 		top += 6;
-		
-		
-		
-		
-		
+
 		control = new DynamicUpdatesButton().setAlign(WidgetAnchor.TOP_CENTER).setAuto(false);
 		control.setWidth(150).setHeight(20).setX(left).setY(top);
 		screen.attachWidget(spoutcraft, control);
@@ -227,20 +308,15 @@ public class VideoSettings extends GuiScreen{
 		control.setWidth(150).setHeight(20).setX(left).setY(top);
 		screen.attachWidget(spoutcraft, control);
 		
-		control = new GuiScaleButton(this).setAlign(WidgetAnchor.TOP_CENTER);
+		control = new SignDistanceButton().setAlign(WidgetAnchor.TOP_CENTER);
 		control.setWidth(150).setHeight(20).setX(right).setY(top);
 		screen.attachWidget(spoutcraft, control);
-		top += 22;
 		
-		control = new SignDistanceButton().setAlign(WidgetAnchor.TOP_CENTER);
-		control.setWidth(150).setHeight(20).setX(left).setY(top);
-		screen.attachWidget(spoutcraft, control);
 		top += 22;
-		
 		
 		top += 5;
 		
-		label = new GenericLabel("Gameplay Settings");
+		label = new GenericLabel("Appearance Settings");
 		size = Spoutcraft.getMinecraftFont().getTextWidth(label.getText());
 		label.setX((int) (width / 2 - size / 2)).setY(top);
 		label.setTextColor(grey);
@@ -253,16 +329,6 @@ public class VideoSettings extends GuiScreen{
 		linebreak.setX(width/2 - 318 / 2).setY(top).setHeight(3).setWidth(318);
 		screen.attachWidget(spoutcraft, linebreak);
 		top += 6;
-		
-		
-		control = new RenderDistanceButton().setAlign(WidgetAnchor.TOP_CENTER);
-		control.setWidth(150).setHeight(20).setX(left).setY(top);
-		screen.attachWidget(spoutcraft, control);
-		
-		control = new BetterGrassButton().setAlign(WidgetAnchor.TOP_CENTER);
-		control.setWidth(150).setHeight(20).setX(right).setY(top);
-		screen.attachWidget(spoutcraft, control);
-		top += 22;
 		
 		control = new TimeButton().setAlign(WidgetAnchor.TOP_CENTER);
 		control.setWidth(150).setHeight(20).setX(left).setY(top);
@@ -310,11 +376,29 @@ public class VideoSettings extends GuiScreen{
 		
 		top += 22;
 		
-		control = new MipMapSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control = new Anaglyph3DButton().setAlign(WidgetAnchor.TOP_CENTER);
 		control.setWidth(150).setHeight(20).setX(left).setY(top);
 		screen.attachWidget(spoutcraft, control);
 		
+		control = new GuiScaleButton(this).setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(right).setY(top);
+		screen.attachWidget(spoutcraft, control);
+
 		top += 22;
+		
+		control = new SmoothLightingSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(left).setY(top);
+		screen.attachWidget(spoutcraft, control);
+		
+		control = new BrightnessSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(right).setY(top);
+		screen.attachWidget(spoutcraft, control);
+
+		top += 22;
+		
+		control = new MipMapSlider().setAlign(WidgetAnchor.TOP_CENTER);
+		control.setWidth(150).setHeight(20).setX(left).setY(top);
+		screen.attachWidget(spoutcraft, control);
 	}
 
 	@Override
