@@ -2,6 +2,7 @@
 ###################
 bin
 target
+out
 *.com
 *.class
 *.dll
@@ -53,6 +54,7 @@ build.xml
 # Minecraft Coder Pack #
 ########################
 CHANGELOG
+LICENSE
 cleanup.bat
 cleanup.sh
 decompile.bat
@@ -78,8 +80,23 @@ updatemd5.bat
 updatemd5.sh
 updatenames.bat
 updatenames.sh
+getmodsource.bat
+getmodsource.sh
 
 # IntelliJ #
 ############
 .idea
 *.iml
+
+# Random other files #
+######################
+stats
+saves
+resources
+config
+spoutcraft
+spout
+screenshots
+chunkcache
+options.txt
+client.keystore
