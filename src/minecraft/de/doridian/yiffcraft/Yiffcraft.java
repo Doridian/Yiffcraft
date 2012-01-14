@@ -428,11 +428,12 @@ public final class Yiffcraft
 		}
 	}
 
-	public static void SendPacket(Packet pack)
+	public static boolean SendPacket(Packet pack)
 	{
 		EntityPlayerSP ply = minecraft.thePlayer;
-		if(!(ply instanceof EntityClientPlayerMP)) return;
+		if(ply == null || !(ply instanceof EntityClientPlayerMP)) return false;
 		((EntityClientPlayerMP)ply).sendQueue.addToSendQueue(pack);
+		return true;
 	}
 
 	public static void displayMainMenu(GuiScreen screen)

@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import de.doridian.yiffcraft.Yiffcraft;
+
 import java.io.*;
 
 public class Packet10Flying extends Packet
@@ -37,6 +39,12 @@ public class Packet10Flying extends Packet
     public void writePacketData(DataOutputStream dataoutputstream)
     throws IOException
     {
+		/*@DORI*/
+		if(Yiffcraft.enableFly && !Yiffcraft.enableOutOfBody) {
+			dataoutputstream.write(1);
+			return;
+		}
+		/*@DORI*/
         dataoutputstream.write(onGround ? 1 : 0);
     }
 

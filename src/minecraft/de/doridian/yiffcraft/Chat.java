@@ -4,6 +4,7 @@ import de.doridian.yiffcraft.commands.BaseCommand;
 import de.doridian.yiffcraft.overrides.YCGuiChat;
 import de.doridian.yiffcraft.overrides.YCPlayerControllerMP;
 import net.minecraft.src.NetClientHandler;
+import net.minecraft.src.Packet250CustomPayload;
 import net.minecraft.src.Packet3Chat;
 import org.spoutcraft.client.SpoutClient;
 import wecui.event.ChatCommandEvent;
@@ -115,17 +116,7 @@ public final class Chat
 
 		if(!ycchatinited) {
 			ycchatinited = true;
-			Chat.emitChatMsg("/yiffcraft getcommands");
-		}
-
-		if(text.startsWith("\u00a7f\u00a75\u00a7d") && text.length() > 6) {
-			String args = null;
-			if(text.length() > 7)
-				args = text.substring(7);
-			else
-				args = "";
-			ClientCommands.incoming(text.charAt(6), args);
-			return "";
+			ClientCommands.outgoing("getcommands", handler);
 		}
 	
 		String noCC = Util.stripColorCodes(text);

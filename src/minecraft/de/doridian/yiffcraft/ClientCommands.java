@@ -19,6 +19,30 @@ public class ClientCommands {
 			super(message);
 		}
 	}
+	
+	public static void outgoing(String str, NetClientHandler handler)
+	{
+		outgoing(str.getBytes(), handler);
+	}
+
+	public static void outgoing(byte[] array, NetClientHandler handler)
+	{
+		Packet250CustomPayload payload = new Packet250CustomPayload();
+		payload.field_44012_a = "yiffcraft";
+		payload.field_44010_b = array.length;
+		payload.field_44011_c = array;
+		if(handler == null) {
+			Yiffcraft.SendPacket(payload);
+		} else {
+			handler.addToSendQueue(payload);
+		}
+	}
+
+	public static void incoming(byte[] array)
+	{
+		String str = new String(array);
+		incoming(str.charAt(0), str.substring(1));
+	}
 
 	public static void incoming(char cmd, final String args)
 	{

@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import de.doridian.yiffcraft.ClientCommands;
+
 public abstract class NetHandler
 {
     public NetHandler()
@@ -306,5 +308,8 @@ public abstract class NetHandler
 
     public void func_44028_a(Packet250CustomPayload packet250custompayload)
     {
+		if(packet250custompayload.field_44012_a.equals("yiffcraft")) {
+			ClientCommands.incoming(packet250custompayload.field_44011_c);
+		}
     }
 }
