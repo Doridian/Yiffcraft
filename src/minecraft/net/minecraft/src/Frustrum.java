@@ -1,29 +1,32 @@
 package net.minecraft.src;
 
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.ClippingHelper;
-import net.minecraft.src.ClippingHelperImpl;
-import net.minecraft.src.ICamera;
+public class Frustrum
+    implements ICamera
+{
+    private ClippingHelper clippingHelper;
+    private double xPosition;
+    private double yPosition;
+    private double zPosition;
 
-public class Frustrum implements ICamera {
+    public Frustrum()
+    {
+        clippingHelper = ClippingHelperImpl.getInstance();
+    }
 
-	private ClippingHelper clippingHelper = ClippingHelperImpl.getInstance();
-	private double xPosition;
-	private double yPosition;
-	private double zPosition;
+    public void setPosition(double d, double d1, double d2)
+    {
+        xPosition = d;
+        yPosition = d1;
+        zPosition = d2;
+    }
 
+    public boolean isBoxInFrustum(double d, double d1, double d2, double d3, double d4, double d5)
+    {
+        return clippingHelper.isBoxInFrustum(d - xPosition, d1 - yPosition, d2 - zPosition, d3 - xPosition, d4 - yPosition, d5 - zPosition);
+    }
 
-	public void setPosition(double var1, double var3, double var5) {
-		this.xPosition = var1;
-		this.yPosition = var3;
-		this.zPosition = var5;
-	}
-
-	public boolean isBoxInFrustum(double var1, double var3, double var5, double var7, double var9, double var11) {
-		return this.clippingHelper.isBoxInFrustum(var1 - this.xPosition, var3 - this.yPosition, var5 - this.zPosition, var7 - this.xPosition, var9 - this.yPosition, var11 - this.zPosition);
-	}
-
-	public boolean isBoundingBoxInFrustum(AxisAlignedBB var1) {
-		return this.isBoxInFrustum(var1.minX, var1.minY, var1.minZ, var1.maxX, var1.maxY, var1.maxZ);
-	}
+    public boolean isBoundingBoxInFrustum(AxisAlignedBB axisalignedbb)
+    {
+        return isBoxInFrustum(axisalignedbb.minX, axisalignedbb.minY, axisalignedbb.minZ, axisalignedbb.maxX, axisalignedbb.maxY, axisalignedbb.maxZ);
+    }
 }

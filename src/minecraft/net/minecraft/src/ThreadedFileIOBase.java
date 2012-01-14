@@ -1,105 +1,99 @@
-// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://www.kpdus.com/jad.html
-// Decompiler options: packimports(3) braces deadcode fieldsfirst 
-
 package net.minecraft.src;
 
 import java.util.*;
 
-// Referenced classes of package net.minecraft.src:
-//			IThreadedFileIO
-
 public class ThreadedFileIOBase
-	implements Runnable
+    implements Runnable
 {
+    public static final ThreadedFileIOBase threadedIOInstance = new ThreadedFileIOBase();
+    private List threadedIOQueue;
+    private volatile long writeQueuedCounter;
+    private volatile long savedIOCounter;
+    private volatile boolean isThreadWaiting;
 
-	public static final ThreadedFileIOBase field_40573_a = new ThreadedFileIOBase();
-	private List field_40571_b;
-	private volatile long field_40572_c;
-	private volatile long field_40569_d;
-	private volatile boolean field_40570_e;
+    private ThreadedFileIOBase()
+    {
+        threadedIOQueue = Collections.synchronizedList(new ArrayList());
+        writeQueuedCounter = 0L;
+        savedIOCounter = 0L;
+        isThreadWaiting = false;
+        Thread thread = new Thread(this, "File IO Thread");
+        thread.setPriority(1);
+        thread.start();
+    }
 
-	private ThreadedFileIOBase()
-	{
-		field_40571_b = Collections.synchronizedList(new ArrayList());
-		field_40572_c = 0L;
-		field_40569_d = 0L;
-		field_40570_e = false;
-		Thread thread = new Thread(this, "File IO Thread");
-		thread.setPriority(1);
-		thread.start();
-	}
+    public void run()
+    {
+        do
+        {
+            func_40568_b();
+        }
+        while (true);
+    }
 
-	public void run()
-	{
-		do
-		{
-			func_40568_b();
-		} while(true);
-	}
+    private void func_40568_b()
+    {
+        for (int i = 0; i < threadedIOQueue.size(); i++)
+        {
+            IThreadedFileIO ithreadedfileio = (IThreadedFileIO)threadedIOQueue.get(i);
+            boolean flag = ithreadedfileio.writeNextIO();
+            if (!flag)
+            {
+                threadedIOQueue.remove(i--);
+                savedIOCounter++;
+            }
+            try
+            {
+                if (!isThreadWaiting)
+                {
+                    Thread.sleep(10L);
+                }
+                else
+                {
+                    Thread.sleep(0L);
+                }
+            }
+            catch (InterruptedException interruptedexception1)
+            {
+                interruptedexception1.printStackTrace();
+            }
+        }
 
-	private void func_40568_b()
-	{
-		for(int i = 0; i < field_40571_b.size(); i++)
-		{
-			IThreadedFileIO ithreadedfileio = (IThreadedFileIO)field_40571_b.get(i);
-			boolean flag = ithreadedfileio.func_40550_A_();
-			if(!flag)
-			{
-				field_40571_b.remove(i--);
-				field_40569_d++;
-			}
-			try
-			{
-				if(!field_40570_e)
-				{
-					Thread.sleep(10L);
-				} else
-				{
-					Thread.sleep(0L);
-				}
-			}
-			catch(InterruptedException interruptedexception1)
-			{
-				interruptedexception1.printStackTrace();
-			}
-		}
+        if (threadedIOQueue.isEmpty())
+        {
+            try
+            {
+                Thread.sleep(25L);
+            }
+            catch (InterruptedException interruptedexception)
+            {
+                interruptedexception.printStackTrace();
+            }
+        }
+    }
 
-		if(field_40571_b.isEmpty())
-		{
-			try
-			{
-				Thread.sleep(25L);
-			}
-			catch(InterruptedException interruptedexception)
-			{
-				interruptedexception.printStackTrace();
-			}
-		}
-	}
+    public void queueIO(IThreadedFileIO ithreadedfileio)
+    {
+        if (threadedIOQueue.contains(ithreadedfileio))
+        {
+            return;
+        }
+        else
+        {
+            writeQueuedCounter++;
+            threadedIOQueue.add(ithreadedfileio);
+            return;
+        }
+    }
 
-	public void func_40567_a(IThreadedFileIO ithreadedfileio)
-	{
-		if(field_40571_b.contains(ithreadedfileio))
-		{
-			return;
-		} else
-		{
-			field_40572_c++;
-			field_40571_b.add(ithreadedfileio);
-			return;
-		}
-	}
-
-	public void func_40566_a()
-		throws InterruptedException
-	{
-		field_40570_e = true;
-		while(field_40572_c != field_40569_d) 
-		{
-			Thread.sleep(10L);
-		}
-		field_40570_e = false;
-	}
-
+    public void waitForFinish()
+    throws InterruptedException
+    {
+        isThreadWaiting = true;
+        while (writeQueuedCounter != savedIOCounter)
+        {
+            Thread.sleep(10L);
+        }
+        isThreadWaiting = false;
+    }
 }

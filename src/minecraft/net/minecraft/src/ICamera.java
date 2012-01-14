@@ -1,10 +1,8 @@
 package net.minecraft.src;
 
-import net.minecraft.src.AxisAlignedBB;
+public interface ICamera
+{
+    public abstract boolean isBoundingBoxInFrustum(AxisAlignedBB axisalignedbb);
 
-public interface ICamera {
-
-	boolean isBoundingBoxInFrustum(AxisAlignedBB var1);
-	
-	void setPosition(double var1, double var3, double var5);
+    public abstract void setPosition(double d, double d1, double d2);
 }

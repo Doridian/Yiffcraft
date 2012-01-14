@@ -1,114 +1,126 @@
 package net.minecraft.src;
 
-import net.minecraft.src.Entity;
-import net.minecraft.src.EntityArrow;
-import net.minecraft.src.EntityDamageSource;
-import net.minecraft.src.EntityDamageSourceIndirect;
-import net.minecraft.src.EntityFireball;
-import net.minecraft.src.EntityLiving;
-import net.minecraft.src.EntityPlayer;
+public class DamageSource
+{
+    public static DamageSource inFire = (new DamageSource("inFire")).setFireDamage();
+    public static DamageSource onFire = (new DamageSource("onFire")).setDamageBypassesArmor().setFireDamage();
+    public static DamageSource lava = (new DamageSource("lava")).setFireDamage();
+    public static DamageSource inWall = (new DamageSource("inWall")).setDamageBypassesArmor();
+    public static DamageSource drown = (new DamageSource("drown")).setDamageBypassesArmor();
+    public static DamageSource starve = (new DamageSource("starve")).setDamageBypassesArmor();
+    public static DamageSource cactus = new DamageSource("cactus");
+    public static DamageSource fall = (new DamageSource("fall")).setDamageBypassesArmor();
+    public static DamageSource outOfWorld = (new DamageSource("outOfWorld")).setDamageBypassesArmor().setDamageAllowedInCreativeMode();
+    public static DamageSource generic = (new DamageSource("generic")).setDamageBypassesArmor();
+    public static DamageSource explosion = new DamageSource("explosion");
+    public static DamageSource magic = (new DamageSource("magic")).setDamageBypassesArmor();
+    private boolean isUnblockable;
+    private boolean isDamageAllowedInCreativeMode;
+    private float hungerDamage;
+    private boolean fireDamage;
+    private boolean projectile;
+    public String damageType;
 
-public class DamageSource {
+    public static DamageSource causeMobDamage(EntityLiving entityliving)
+    {
+        return new EntityDamageSource("mob", entityliving);
+    }
 
-	public static DamageSource inFire = (new DamageSource("inFire")).func_40546_j();
-	public static DamageSource onFire = (new DamageSource("onFire")).setDamageBypassesArmor().func_40546_j();
-	public static DamageSource lava = (new DamageSource("lava")).func_40546_j();
-	public static DamageSource inWall = (new DamageSource("inWall")).setDamageBypassesArmor();
-	public static DamageSource drown = (new DamageSource("drown")).setDamageBypassesArmor();
-	public static DamageSource starve = (new DamageSource("starve")).setDamageBypassesArmor();
-	public static DamageSource cactus = new DamageSource("cactus");
-	public static DamageSource fall = (new DamageSource("fall")).setDamageBypassesArmor();
-	public static DamageSource outOfWorld = (new DamageSource("outOfWorld")).setDamageBypassesArmor().setDamageAllowedInCreativeMode();
-	public static DamageSource generic = (new DamageSource("generic")).setDamageBypassesArmor();
-	public static DamageSource explosion = new DamageSource("explosion");
-	public static DamageSource magic = (new DamageSource("magic")).setDamageBypassesArmor();
-	private boolean isBlockable = false;
-	private boolean isDamageAllowedInCreativeMode = false;
-	private float hungerDamage = 0.3F;
-	private boolean field_40549_q;
-	private boolean field_40548_r;
-	public String damageType;
+    public static DamageSource causePlayerDamage(EntityPlayer entityplayer)
+    {
+        return new EntityDamageSource("player", entityplayer);
+    }
 
+    public static DamageSource causeArrowDamage(EntityArrow entityarrow, Entity entity)
+    {
+        return (new EntityDamageSourceIndirect("arrow", entityarrow, entity)).setProjectile();
+    }
 
-	public static DamageSource causeMobDamage(EntityLiving var0) {
-		return new EntityDamageSource("mob", var0);
-	}
+    public static DamageSource causeFireballDamage(EntityFireball entityfireball, Entity entity)
+    {
+        return (new EntityDamageSourceIndirect("fireball", entityfireball, entity)).setFireDamage().setProjectile();
+    }
 
-	public static DamageSource causePlayerDamage(EntityPlayer var0) {
-		return new EntityDamageSource("player", var0);
-	}
+    public static DamageSource causeThrownDamage(Entity entity, Entity entity1)
+    {
+        return (new EntityDamageSourceIndirect("thrown", entity, entity1)).setProjectile();
+    }
 
-	public static DamageSource causeArrowDamage(EntityArrow var0, Entity var1) {
-		return (new EntityDamageSourceIndirect("arrow", var0, var1)).func_40544_c();
-	}
+    public static DamageSource causeIndirectMagicDamage(Entity entity, Entity entity1)
+    {
+        return (new EntityDamageSourceIndirect("indirectMagic", entity, entity1)).setDamageBypassesArmor();
+    }
 
-	public static DamageSource causeFireballDamage(EntityFireball var0, Entity var1) {
-		return (new EntityDamageSourceIndirect("fireball", var0, var1)).func_40546_j().func_40544_c();
-	}
+    public boolean isProjectile()
+    {
+        return projectile;
+    }
 
-	public static DamageSource causeThrownDamage(Entity var0, Entity var1) {
-		return (new EntityDamageSourceIndirect("thrown", var0, var1)).func_40544_c();
-	}
+    public DamageSource setProjectile()
+    {
+        projectile = true;
+        return this;
+    }
 
-	public static DamageSource func_40542_b(Entity var0, Entity var1) {
-		return (new EntityDamageSourceIndirect("indirectMagic", var0, var1)).setDamageBypassesArmor();
-	}
+    public boolean isUnblockable()
+    {
+        return isUnblockable;
+    }
 
-	public boolean func_40547_b() {
-		return this.field_40548_r;
-	}
+    public float getHungerDamage()
+    {
+        return hungerDamage;
+    }
 
-	public DamageSource func_40544_c() {
-		this.field_40548_r = true;
-		return this;
-	}
+    public boolean canHarmInCreative()
+    {
+        return isDamageAllowedInCreativeMode;
+    }
 
-	public boolean unblockable() {
-		return this.isBlockable;
-	}
+    protected DamageSource(String s)
+    {
+        isUnblockable = false;
+        isDamageAllowedInCreativeMode = false;
+        hungerDamage = 0.3F;
+        damageType = s;
+    }
 
-	public float getHungerDamage() {
-		return this.hungerDamage;
-	}
+    public Entity getSourceOfDamage()
+    {
+        return getEntity();
+    }
 
-	public boolean canHarmInCreative() {
-		return this.isDamageAllowedInCreativeMode;
-	}
+    public Entity getEntity()
+    {
+        return null;
+    }
 
-	protected DamageSource(String var1) {
-		this.damageType = var1;
-	}
+    protected DamageSource setDamageBypassesArmor()
+    {
+        isUnblockable = true;
+        hungerDamage = 0.0F;
+        return this;
+    }
 
-	public Entity getSourceOfDamage() {
-		return this.getEntity();
-	}
+    protected DamageSource setDamageAllowedInCreativeMode()
+    {
+        isDamageAllowedInCreativeMode = true;
+        return this;
+    }
 
-	public Entity getEntity() {
-		return null;
-	}
+    protected DamageSource setFireDamage()
+    {
+        fireDamage = true;
+        return this;
+    }
 
-	protected DamageSource setDamageBypassesArmor() {
-		this.isBlockable = true;
-		this.hungerDamage = 0.0F;
-		return this;
-	}
+    public boolean fireDamage()
+    {
+        return fireDamage;
+    }
 
-	protected DamageSource setDamageAllowedInCreativeMode() {
-		this.isDamageAllowedInCreativeMode = true;
-		return this;
-	}
-
-	protected DamageSource func_40546_j() {
-		this.field_40549_q = true;
-		return this;
-	}
-
-	public boolean func_40543_k() {
-		return this.field_40549_q;
-	}
-
-	public String func_40545_l() {
-		return this.damageType;
-	}
-
+    public String getDamageType()
+    {
+        return damageType;
+    }
 }
