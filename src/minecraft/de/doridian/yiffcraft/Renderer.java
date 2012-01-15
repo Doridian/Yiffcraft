@@ -74,8 +74,6 @@ public class Renderer {
 		ScaledResolution scaledresolution = new ScaledResolution(Yiffcraft.minecraft.gameSettings, Yiffcraft.minecraft.displayWidth, Yiffcraft.minecraft.displayHeight);
 		for(IGuiIngame gui : guis) gui.renderGui(scaledresolution, Yiffcraft.minecraft, fontrenderer);
 
-		String ycStr = "Yiffcraft " + Yiffcraft.VERSION;
-
 		if(Yiffcraft.infoMode != 3)
 		{
 			String posStr;
@@ -110,16 +108,16 @@ public class Renderer {
 				long var21 = var30 - var29;
 				String meminfo = "F:(" + net.minecraft.client.Minecraft.framesPerSecond + ") M:" + var21 * 100L / var25 + "%(" + var21 / 1024L / 1024L + "/" + var25 / 1024L / 1024L + ") P:(" + Yiffcraft.clientPing + "/" + Yiffcraft.serverPing + ")";
 				
-				fontrenderer.drawStringWithShadow(ycStr + " " + posStr + " ["+Util.getTime(Yiffcraft.minecraft.theWorld.getWorldTime())+"] (" + Yiffcraft.minecraft.theWorld.getWorldChunkManager().getBiomeGenAt((int)(Yiffcraft.minecraft.thePlayer.posX),(int)(Yiffcraft.minecraft.thePlayer.posZ)).biomeName + ") " + meminfo + " " + itemInfo + " " + blockInfo, 0, 2, 0xe0e0e0);
+				fontrenderer.drawStringWithShadow("Yiffcraft " + posStr + " ["+Util.getTime(Yiffcraft.minecraft.theWorld.getWorldTime())+"] (" + Yiffcraft.minecraft.theWorld.getWorldChunkManager().getBiomeGenAt((int)(Yiffcraft.minecraft.thePlayer.posX),(int)(Yiffcraft.minecraft.thePlayer.posZ)).biomeName + ") " + meminfo + " " + itemInfo + " " + blockInfo, 0, 2, 0xe0e0e0);
 			}
 			else
 			{
-				fontrenderer.drawStringWithShadow(ycStr + " " + posStr + " ["+Util.getTime(Yiffcraft.minecraft.theWorld.getWorldTime())+"]", 0, 2, 0xe0e0e0);
+				fontrenderer.drawStringWithShadow("Yiffcraft " + posStr + " ["+Util.getTime(Yiffcraft.minecraft.theWorld.getWorldTime())+"]", 0, 2, 0xe0e0e0);
 			}
 		}
 		else
 		{
-			fontrenderer.drawStringWithShadow(ycStr, 0, 2, 0xe0e0e0);
+			fontrenderer.drawStringWithShadow("Yiffcraft", 0, 2, 0xe0e0e0);
 		}
 		
 		long curLag = System.currentTimeMillis() - Yiffcraft.lastPacket;
@@ -141,7 +139,7 @@ public class Renderer {
 			}
 		}
 		
-		if(Yiffcraft.guiMode == 1 || Yiffcraft.minecraft.currentScreen instanceof GuiChat) return;
+		if(Yiffcraft.guiMode == 1 || Yiffcraft.minecraft.currentScreen instanceof GuiChat || Yiffcraft.minecraft.gameSettings.showDebugInfo) return;
 		
 		int k = 2;
 		

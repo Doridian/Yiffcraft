@@ -26,7 +26,6 @@ public final class Yiffcraft
 	public static boolean[] valuableBlocks = new boolean[256];
 	private static boolean isInited = false;
 	public static Minecraft minecraft;
-	public static final String VERSION = "2.10";
 	public static final String YCFULLVERSION = "YC (#@BUILDNUM@/@GITREV@)";
 	public static String licenseKey = "INVALID";
 	public static boolean isSpecial = false;
@@ -68,7 +67,7 @@ public final class Yiffcraft
 			public void run() {
 				URLappendix = "";
 				try {
-					URLappendix = "?user=" + URLEncoder.encode(minecraft.session.username, "UTF-8") + "&key=" + URLEncoder.encode(licenseKey, "UTF-8") + "&version=" + URLEncoder.encode(VERSION, "UTF-8");
+					URLappendix = "?user=" + URLEncoder.encode(minecraft.session.username, "UTF-8") + "&key=" + URLEncoder.encode(licenseKey, "UTF-8") + "&version=" + URLEncoder.encode(YCFULLVERSION, "UTF-8");
 				}
 				catch(Exception e) {
 					e.printStackTrace(); 
