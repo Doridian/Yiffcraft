@@ -86,7 +86,7 @@ public class GuiAbout extends GuiScreen {
 			browseUrl = "http://spout.in/spoutcraft";
 		}
 		else if (this.isInBoundingRect(this.width / 2 + 30, getScaledHeight(sourceY), 10, sourceWidth, mouseX, mouseY)) {
-			browseUrl = "https://github.com/SpoutDev";
+			browseUrl = "https://github.com/Doridian/Yiffcraft";
 		}
 		if (browseUrl != null) {
 			try {
@@ -183,14 +183,16 @@ public class GuiAbout extends GuiScreen {
 		
 		//Right half
 		int top = 0;
-		drawScaledString("What is Spoutcraft?", this.width / 2 - 200, top, 0xffffff); top += 10;
-		drawScaledString("Spoutcraft is a modification for the", this.width / 2 - 200, top, 0x808080); top += 10;
+		drawScaledString("What is Yiffcraft?", this.width / 2 - 200, top, 0xffffff); top += 10;
+		drawScaledString("Yiffcraft is a modification of the", this.width / 2 - 200, top, 0x808080); top += 10;
+		drawScaledString("Spoutcraft client for admins", this.width / 2 - 200, top, 0x808080); top += 10;
+		drawScaledString("(which is a modification of the", this.width / 2 - 200, top, 0x808080); top += 10;
 		drawScaledString("Minecraft client that plays exactly", this.width / 2 - 200, top, 0x808080); top += 10;
 		drawScaledString("like the official game. Its goal is", this.width / 2 - 200, top, 0x808080); top += 10;
 		drawScaledString("to give developers an easy to use", this.width / 2 - 200, top, 0x808080); top += 10;
 		drawScaledString("platform for building and distributing", this.width / 2 - 200, top, 0x808080); top += 10;
 		drawScaledString("mods, while providing a rich", this.width / 2 - 200, top, 0x808080); top += 10;
-		drawScaledString("gameplay experience for users.", this.width / 2 - 200, top, 0x808080); top += 10;
+		drawScaledString("gameplay experience for users)", this.width / 2 - 200, top, 0x808080); top += 10;
 		
 		top += 20;
 		
@@ -230,6 +232,7 @@ public class GuiAbout extends GuiScreen {
 		top = 130;
 		
 		drawScaledString("Team", this.width / 2 + 30, top, 0xffffff); top += 10;
+		drawScaledString("Doridian - Lead YC Developer", this.width / 2 + 30, top, 0x800080); top += 10;
 		drawScaledString("Afforess - Lead Developer", this.width / 2 + 30, top, 0x808080); top += 10;
 		drawScaledString("Wulfspider - Co-Lead & Support", this.width / 2 + 30, top, 0x808080); top += 10;
 		drawScaledString("alta189 - Co-Lead & Developer", this.width / 2 + 30, top, 0x808080); top += 10;
@@ -244,9 +247,9 @@ public class GuiAbout extends GuiScreen {
 		top += 20;
 		
 		drawScaledString("Contact", this.width / 2 + 30, top, 0xffffff); top += 10;
-		drawScaledString("Email: dev@getspout.org", this.width / 2 + 30, top, 0x808080); top += 10;
-		drawScaledString("Website: getspout.org", this.width / 2 + 30, top, 0x808080); top += 10;
-		drawScaledString("#spout on irc.esper.net", this.width / 2 + 30, top, 0x808080); top += 10;
+		drawScaledString("Email: mriq91@gmail.com", this.width / 2 + 30, top, 0x808080); top += 10;
+		drawScaledString("Website: mc.doridian.de", this.width / 2 + 30, top, 0x808080); top += 10;
+		drawScaledString("#minecraft on irc.doridian.de", this.width / 2 + 30, top, 0x808080); top += 10;
 		
 		top += 20;
 		
@@ -255,8 +258,8 @@ public class GuiAbout extends GuiScreen {
 		drawScaledString("projects are open source. You", this.width / 2 + 30, top, 0x808080); top += 10;
 		drawScaledString("can browse the source code at", this.width / 2 + 30, top, 0x808080);  top += 10;
 		sourceY = top;
-		sourceWidth = this.fontRenderer.getStringWidth("https://github.com/SpoutDev");
-		drawScaledString("https://github.com/SpoutDev", this.width / 2 + 30, sourceY, hoveringLink ? 0x65A5D1 : 0x176093); top += 10;
+		sourceWidth = this.fontRenderer.getStringWidth("https://github.com/Doridian/Yiffcraft");
+		drawScaledString("https://github.com/Doridian/Yiffcraft", this.width / 2 + 30, sourceY, hoveringLink ? 0x65A5D1 : 0x176093); top += 10;
 		
 		top += 20;
 		
@@ -403,10 +406,10 @@ public class GuiAbout extends GuiScreen {
 		}
 				
 		drawString(this.fontRenderer, "1.1.0", (int)(this.width * 0.034f), this.height - 20, 0xffffff);
-		drawString(this.fontRenderer, "Copyright Mojang AB", (int)(this.width * 0.034f), this.height - 10, 0x808080);
+		drawString(this.fontRenderer, "MC Copyright Mojang AB", (int)(this.width * 0.034f), this.height - 10, 0x808080);
 		
 		String version = Long.toString(SpoutClient.getClientVersion());
-		drawString(this.fontRenderer, "Build " + version, (int)(this.width - 45) - fontRenderer.getStringWidth(version) + fontRenderer.getStringWidth("0"), this.height - 20, 0xffffff);
+		drawString(this.fontRenderer, "YC licensed under BSD", (int)(this.width - 15) - fontRenderer.getStringWidth("YC licensed under BSD"), this.height - 20, 0xffffff);
 		drawString(this.fontRenderer, "Licensed under LGPLv3", (int)(this.width - 129), this.height - 10, 0x808080);
 		
 		getControlList().get(0).xPosition = this.width / 2 - 50;

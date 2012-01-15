@@ -1,8 +1,8 @@
 # Compiled source #
 ###################
-bin
-target
-out
+bin/
+target/
+out/
 *.com
 *.class
 *.dll
@@ -12,7 +12,7 @@ out
 
 # Git #
 #######
-.git
+.git/
 
 # Packages #
 ############
@@ -39,16 +39,16 @@ Thumbs.db
 
 # Project files #
 #################
-.classpath
-.project
-.settings
+.classpath/
+.project/
+.settings/
 MANIFEST.MF
 
 # Netbeans files #
 ##################
-build
-dist
-nbproject
+build/
+dist/
+nbproject/
 build.xml
 
 # Minecraft Coder Pack #
@@ -59,21 +59,21 @@ cleanup.bat
 cleanup.sh
 decompile.bat
 decompile.sh
-docs
-eclipse
-jars
-logs
+docs/
+eclipse/
+jars/
+logs/
 recompile.bat
 recompile.sh
-reobf
+reobf/
 reobfuscate.bat
 reobfuscate.sh
-runtime
+runtime/
 startclient.bat
 startclient.sh
 startserver.bat
 startserver.sh
-temp
+temp/
 updatemcp.bat
 updatemcp.sh
 updatemd5.bat
@@ -85,18 +85,18 @@ getmodsource.sh
 
 # IntelliJ #
 ############
-.idea
+.idea/
 *.iml
 
 # Random other files #
 ######################
-stats
-saves
-resources
-config
-spoutcraft
-spout
-screenshots
-chunkcache
+stats/
+saves/
+resources/
+config/
+/spoutcraft/
+/spout/
+screenshots/
+chunkcache/
 options.txt
 client.keystore
