@@ -254,7 +254,7 @@ public class GuiAbout extends GuiScreen {
 		top += 20;
 		
 		drawScaledString("Note", this.width / 2 + 30, top, 0xffffff); top += 10;
-		drawScaledString("Spoutcraft, Spout, and related", this.width / 2 + 30, top, 0x808080); top += 10;
+		drawScaledString("Yiffcraft and related", this.width / 2 + 30, top, 0x808080); top += 10;
 		drawScaledString("projects are open source. You", this.width / 2 + 30, top, 0x808080); top += 10;
 		drawScaledString("can browse the source code at", this.width / 2 + 30, top, 0x808080);  top += 10;
 		sourceY = top;

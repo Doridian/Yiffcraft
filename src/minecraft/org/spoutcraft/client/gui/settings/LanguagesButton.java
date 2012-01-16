@@ -1,5 +1,5 @@
 /*
- * This file is part of Spoutcraft (http://wiki.getspout.org/).
+ * This file is part of Spoutcraft (http://spout.org).
  * 
  * Spoutcraft is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -27,7 +27,7 @@ public class LanguagesButton extends GenericButton{
 	GuiScreen parent;
 	public LanguagesButton(GuiScreen parent) {
 		super("Languages");
-		setTooltip("Languages\nChange the language of the game.\nNOT YET IMPLEMENTED!");
+		setTooltip("Languages\nChange the language of the game.");
 		this.parent = parent;
 	}
 
