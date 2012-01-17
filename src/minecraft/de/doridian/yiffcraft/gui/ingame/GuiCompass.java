@@ -63,7 +63,7 @@ public class GuiCompass extends IGuiIngame {
 		localpos.posY = localpos.posY * 32D;
 		localpos.posZ = localpos.posZ * 32D;
 		
-		for(PlayerData pdata : Radar.players.values()) {
+		for(PlayerData pdata : Radar.players.valueCollection()) {
 			if(Yiffcraft.compassMode == 2)
 				drawCompassPlayer(pdata.getDispName() + pdata.getExtendedInfo(1), normalizeRotation(pdata.yawToPlayer), localYaw, localPitch, cx, cwidth, y2, fontrenderer, 0xffffffff, pdata.pos.distance2D(localpos) / 32D, pdata.pos.distanceY(localpos) / 32D);
 			else

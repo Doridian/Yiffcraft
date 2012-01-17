@@ -1,10 +1,10 @@
 package de.doridian.yiffcraft.gui.ingame;
 
 import de.doridian.yiffcraft.*;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -46,9 +46,8 @@ public final class Radar extends IGuiIngame
 	{
 		name = name.toLowerCase();
 		PlayerData pdat = null;
-		for(Map.Entry<Integer,PlayerData> xobj : players.entrySet()) {
-			PlayerData pdata = xobj.getValue();
-			if(Util.stripColorCodes(pdata.getName()).toLowerCase().indexOf(name) >= 0) {
+		for(PlayerData pdata : players.valueCollection()) {
+			if(Util.stripColorCodes(pdata.getName()).toLowerCase().contains(name)) {
 				if(pdat != null) throw new Exception("Multiple players found!");
 				pdat = pdata;
 			}
@@ -57,7 +56,7 @@ public final class Radar extends IGuiIngame
 		return pdat;
 	}
 	
-	public static HashMap<Integer,PlayerData> players = new HashMap<Integer,PlayerData>();
+	public static TIntObjectHashMap<PlayerData> players = new TIntObjectHashMap<PlayerData>();
 	public static void reinit()
 	{
 		players.clear();
@@ -71,8 +70,7 @@ public final class Radar extends IGuiIngame
 		String s;
 		int i = 0;
 		TreeMap<Integer,Double> sorted = new TreeMap<Integer,Double>();
-		for(Map.Entry<Integer,PlayerData> xobj : players.entrySet()) {
-			PlayerData pdata = xobj.getValue();
+		for(PlayerData pdata : players.valueCollection()) {
 			int id = pdata.entityID;
 			double dist = pdata.getDistance();
 			sorted.put(id, dist);
@@ -135,7 +133,7 @@ public final class Radar extends IGuiIngame
 	
 	public static void updateLocalPlayerPosition()
 	{
-		for(PlayerData pdata : Radar.players.values()) {
+		for(PlayerData pdata : Radar.players.valueCollection()) {
 			pdata.refreshYawToPlayer();
 		}
 	}

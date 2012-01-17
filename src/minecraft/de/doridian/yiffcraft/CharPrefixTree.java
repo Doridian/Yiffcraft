@@ -1,15 +1,16 @@
 package de.doridian.yiffcraft;
 
+import gnu.trove.iterator.TCharObjectIterator;
+import gnu.trove.map.hash.TCharObjectHashMap;
+
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 public class CharPrefixTree {
 	public static class Node {
 		public String value;
 		public String desc;
-		public HashMap<Character, Node> children = new HashMap<Character, Node>();
+		public TCharObjectHashMap<Node> children = new TCharObjectHashMap<Node>();
 	}
 
 	Node root = null;
@@ -68,9 +69,10 @@ public class CharPrefixTree {
 		if(node == null) return null;
 
 		while(node.value == null) {
-			final Iterator<Node> iterator = node.children.values().iterator();
+			final TCharObjectIterator<Node> iterator = node.children.iterator();
 			if(!iterator.hasNext()) return null;
-			node = iterator.next();
+			iterator.advance();
+			node = iterator.value();
 		}
 
 		return node;
