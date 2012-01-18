@@ -1,6 +1,6 @@
 # Compiled source #
 ###################
-/bin/
+<<<<<<< HEA/bin/
 /target/
 /out/
 *.com
@@ -50,6 +50,11 @@ MANIFEST.MF
 /dist/
 /nbproject/
 build.xml
+
+# IntelliJ IDEA files #
+#######################
+.idea
+.iml
 
 # Minecraft Coder Pack #
 ########################
